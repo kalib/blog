@@ -1,4 +1,4 @@
-baseurl         = ""
+baseurl         = "https://elated-torvalds-264633.netlify.com"
 theme           = "hugo-casper-two"
 languageCode    = "en-US"
 disqusShortname = "marcelokalib"
