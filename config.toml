@@ -1,7 +1,7 @@
 baseurl         = "https://elated-torvalds-264633.netlify.com"
 theme           = "hugo-casper-two"
 languageCode    = "en-US"
-disqusShortname = "marcelokalib"
+disqusShortname = "blog-knoeafb6mt"
 paginate        = 6
 #SectionPagesMenu = "main"
 
