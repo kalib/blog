@@ -12,7 +12,7 @@ paginate        = 6
   cover       = "defimg/backgroundbw.jpg"
   description = "Marcelo Cavalcante Rocha - Blog Pessoal"
   metaDescription = "Marcelo Cavalcante Rocha - Kalib. Devops, Linux, Automação e Programação"
-  googleAnalytics = "42903485"
+  googleAnalytics = "UA-42903485-2"
   customCSS = []
   RSSLink = ""
 
