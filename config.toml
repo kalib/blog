@@ -26,7 +26,7 @@ paginate        = 6
   logo = "/logo/logo-edited-branca-3.png"
   #logo = "hugo-logo.png"
   logo2 = "/logo/bash.png"
-  orgName = "MC"
+  orgName = "Marcelo Cavalcante"
   orgWebsite = "https://blog.marcelocavalcante.net"
   orgDescription = "Marcelo Cavalcante - Automation is fun..."
 
