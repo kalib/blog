@@ -23,11 +23,11 @@ description: "Como muitos de vocês já devem saber, estamos nos aproximando do 
 
 **D**esde sua primeira edição em 2006, Fortaleza conta com seu festival composto por um público maior a cada ano. Em nossa edição, sempre contamos com palestras além do já tradicional Install Fest.
 
-**As inscrições** para o evento já começaram através do seguinte link: [https://www.flisolce.com.br/inscricao.html](https://www.flisolce.com.br/inscricao.html)
+**As inscrições** para o evento já começaram através do seguinte link: <a href="https://www.flisolce.com.br/inscricao.html" target="_blank">FlisolCE - Inscrições</a>.
 
 **É** importante que as inscrições sejam realizadas para posterior entrega de certificados bem como dados estatísticos que geramos a cada ano juntamente com as demais cidades e países que também sediam o evento.
 
-**As submissões de palestras** também já se iniciaram e vão até o dia 20/03 através do seguinte link: [https://www.flisolce.com.br/submissao-de-palestras.html](https://www.flisolce.com.br/submissao-de-palestras.html)
+**As submissões de palestras** também já se iniciaram e vão até o dia 20/03 através do seguinte link: <a href="https://www.flisolce.com.br/submissao-de-palestras.html" target="_blank">FlisolCE - Submissão de Palestras</a>.
 
 **P**ara maiores informações sobre o evento e novidades, acompanhe o site do evento ou siga no twitter @flisolceara.
 

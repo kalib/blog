@@ -18,11 +18,11 @@ description: "Bom, para quem não conhece nada sobre Brute-Force ou apenas ouviu
 ---
 **B**om, para quem não conhece nada sobre Brute-Force ou apenas ouviu falar vagamente mas não tem certeza sobre o que realmente é um ataque deste tipo, sugiro dar uma lida em meu último post, onde apresentei algumas informações sobre brute-force bem como uma ferramenta que podemos utilizar para testar nossos sites e verificar o quão vulneráveis eles estão a este tipo de ataque. Segue link para o mesmo:
 
-[Brute-Force? O Dirb lhe ajuda a identificar vulnerabilidade em seu site!](https://marcelocavalcante.net/portal/2011/01/31/brute-force-o-dirb-lhe-ajuda-a-identificar-vulnerabilidades-em-seu-site/)
+<a href="/brute-force-o-dirb-lhe-ajuda-a-identificar-vulnerabilidades-em-seu-site/" target="_blank">Brute-Force? O Dirb lhe ajuda a identificar vulnerabilidade em seu site!</a>.
 
 **A**gora que já conhecemos um pouco sobre as técnicas de brute-force e a ferramenta Dirb, que tal conhecer outra mais apresentável?
 
-**M**e refiro ao [DirBuster](https://www.owasp.org/index.php/DirBuster). Uma aplicação multithread desenvolvida pelo [OWASP](https://www.owasp.org/) (The Open Web Application Security Project) que tem como objetivo realizar brute-force em diretórios e nomes de arquivos na web. Assim como o Dirb, o DirBuster trabalha em cima de dicionários ou listas. Ao todo ele trás 9 listas que podem ser utilizadas para nossas varreduras e testes. Como todas as suas listas foram criadas na unha, após exaustívas pesquisas e buscas na web por nomes mais utilizados para arquivos e diretórios em servidores web, o DirBuster mostra-se extremamente efetivo para este tipo de atividade conseguindo encontrar até mesmo os arquivos mais ocultos e escondidos.
+**M**e refiro ao <a href="https://www.owasp.org/index.php/DirBuster" target="_blank">DirBuster</a>. Uma aplicação multithread desenvolvida pelo <a href="https://www.owasp.org/" target="_blank">OWASP</a> (The Open Web Application Security Project) que tem como objetivo realizar brute-force em diretórios e nomes de arquivos na web. Assim como o Dirb, o DirBuster trabalha em cima de dicionários ou listas. Ao todo ele trás 9 listas que podem ser utilizadas para nossas varreduras e testes. Como todas as suas listas foram criadas na unha, após exaustívas pesquisas e buscas na web por nomes mais utilizados para arquivos e diretórios em servidores web, o DirBuster mostra-se extremamente efetivo para este tipo de atividade conseguindo encontrar até mesmo os arquivos mais ocultos e escondidos.
 
 **M**as se você não ficar satisfeito, <del>nós garantimos a devolução do seu dinheiro</del>, com apenas utilizar o modelo de dicionários, o DirBuster ainda lhe possibilita o ataque de brute-force mais purista. Tentativa e erro com combinações possíveis de caracteres. Claro, se você tem muito poder de processamento e tempo sobrando, boa sorte. ;]
 
@@ -39,7 +39,7 @@ description: "Bom, para quem não conhece nada sobre Brute-Force ou apenas ouviu
 ![Arch Linux](/img/archlinux.png)
 Bom, se você utiliza [Arch Linux](https://archlinux.org), pode pegar o pacote no AUR através do seguinte link(Lembrem-se de votar nele):
 
-[https://aur.archlinux.org/packages.php?ID=20809](https://aur.archlinux.org/packages.php?ID=20809)
+<a href="https://aur.archlinux.org/packages.php?ID=20809" target="_blank">AUR - Dirbuster</a>.
 
 **F**eito isto, basta seguir o procedimento padrão para pacotes do AUR.
 
@@ -57,7 +57,7 @@ Bom, se você utiliza [Arch Linux](https://archlinux.org), pode pegar o pacote n
 
 **P**ortanto se você não utiliza o Arch, segue link para download da ferramenta:
 
-[https://www.owasp.org/index.php/DirBuster#tab=Download](https://www.owasp.org/index.php/DirBuster#tab=Download)
+<a href="https://www.owasp.org/index.php/DirBuster#tab=Download" target="_blank">Dirbuster</a>.
 
 **M**as qual a cara do bicho?
 

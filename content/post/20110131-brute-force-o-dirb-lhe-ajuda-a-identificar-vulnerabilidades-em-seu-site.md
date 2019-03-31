@@ -101,9 +101,9 @@ _* setar diferentes cookies;
 
 **M**as, chega de falatório.. vamos ao teclado...
 
-**A** ferramenta pode ser baixada através do site do projeto: [https://sourceforge.net/projects/dirb/](https://sourceforge.net/projects/dirb/)
+**A** ferramenta pode ser baixada através do site do projeto: <a href="https://sourceforge.net/projects/dirb/" target="_blank">Dirb</a>.
 
-[](https://sourceforge.net/projects/dirb/)**A** compilação é simples e sem grandes mistérios.
+**A** compilação é simples e sem grandes mistérios.
 
 **D**escompacte o arquivo e compile seguindo os seguintes comandos:
 

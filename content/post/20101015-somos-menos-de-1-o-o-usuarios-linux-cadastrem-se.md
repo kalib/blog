@@ -20,7 +20,7 @@ description: "Pessoal, recentemente surgiram algumas notícias de fontes suspeit
 
 **O** Linux está ficando mais forte a cada dia entre os usuários domésticos.
 
-**C**omeçaram um projeto web para tentar quebrar este mito: [https://www.dudalibre.com/gnulinuxcounter?lang=en](https://www.dudalibre.com/gnulinuxcounter?lang=en)
+**C**omeçaram um projeto web para tentar quebrar este mito: <a href="https://www.dudalibre.com/gnulinuxcounter?lang=en" target="_blank">DudaLibre</a>.
 
 **S**e você possui um desktop, ou mais, com linux, talvez você queira contabilizar o seu voto.
 

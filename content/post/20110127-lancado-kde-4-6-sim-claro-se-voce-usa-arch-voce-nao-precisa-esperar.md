@@ -39,6 +39,6 @@ description: "É isso aí pessoal, ontem o projeto KDE liberou o KDE 4.6 com mui
 ![KDE 46](/img/kde46_1.png)
 
 
-**V**árias modificações no dolphin, correções de bugs e aparência também foram implementadas, mas... se eu for realmente listar todas as modificações, posso acabar perdendo meu emprego, portanto vou apenas lhes deixar o link do site oficial onde podem ser encontradas todas as mudanças desta release: [https://kde.org/announcements/4.6/](https://kde.org/announcements/4.6/)
+**V**árias modificações no dolphin, correções de bugs e aparência também foram implementadas, mas... se eu for realmente listar todas as modificações, posso acabar perdendo meu emprego, portanto vou apenas lhes deixar o link do site oficial onde podem ser encontradas todas as mudanças desta release: <a href="https://kde.org/announcements/4.6/" target="_blank">KDE 4.6 Release Notes</a>.
 
 **A**braços!

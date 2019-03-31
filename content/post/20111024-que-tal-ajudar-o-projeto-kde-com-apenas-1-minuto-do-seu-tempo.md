@@ -25,7 +25,7 @@ description: "Bom, aparentemente um banco alemão acredita que alguns projetos/i
 
 **Como fazer para ajudar?**
 
-_1- Acesse **[https://verein.ing-diba.de/sonstiges/10115/kde-ev](https://verein.ing-diba.de/sonstiges/10115/kde-ev)** e clique em **"Stimme abgeben"**._
+_1- Acesse **<a href="https://verein.ing-diba.de/sonstiges/10115/kde-ev" target="_blank">KDE Ajuda</a>** e clique em **"Stimme abgeben"**._
 
 _2- Preencha seu email e o código captcha, clicando em seguida em **"absenden"**._
 
