@@ -10,7 +10,7 @@ paginate        = 6
   title       = "Marcelo Cavalcante Rocha"
   #subtitle    = "Because Automation is Fun"
 
-  cover       = "defimg/backgroundbw.jpg"
+  cover       = "defimg/kalib_n2.jpg"
   description = "Marcelo Cavalcante Rocha - Blog Pessoal"
   metaDescription = "Marcelo Cavalcante Rocha - Kalib. Devops, Linux, Automação e Programação"
   googleAnalytics = "UA-42903485-2"
