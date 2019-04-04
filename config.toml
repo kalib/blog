@@ -2,7 +2,7 @@
 baseUrl         = "/"
 theme           = "hugo-casper-two"
 languageCode    = "en-US"
-disqusShortname = "blog-knoeafb6mt"
+disqusShortname = "blog2-7"
 paginate        = 6
 #SectionPagesMenu = "main"
 

@@ -13,7 +13,7 @@ weight = 111
 <img src="/about/me_debora.png" alt="Marcelo" align="right">
 Me chamo **Marcelo Cavalcante Rocha**, também conhecido como **Kalib**. Engenheiro DevOps dinâmico, escrupulosamente curioso, reservadamente convencional, multitarefa, command line heavy-user, estudante e pesquisador, surfista por prazer, leitor inquieto e aspirante a ser humano. Sempre acreditei na ideia de que bons profissionais de tecnologia são preguiçosos, no sentido de que se algo pode ser automatizado com o fim de evitar tarefas repetitivas, automatizado será.
 
-Atualmente trabalho como Engenheiro DevOps Sênior na empresa **<a href="https://www.symantec.com" target="_blank">Symantec</a>**, em Toronto, Canadá, trabalhando mais especificamente na equipe responsável pelos produtos de VPN, privacidade de anonimato, <a href="https://www.surfeasy.com" target="_blank">SurfEasy VPN</a> e <a href="https://ca.norton.com" target="_blank">Norton</a>. Sou formado em **Sistemas de Informação** e pós-graduado em **Governança de Tecnologia da Informação**.
+Atualmente trabalho como Engenheiro DevOps Sênior na empresa **<a href="https://www.symantec.com" target="_blank">Symantec</a>**, em Toronto, Canadá, mais especificamente na equipe responsável pelos produtos de VPN, privacidade e anonimato: <a href="https://www.surfeasy.com" target="_blank">SurfEasy VPN</a> e <a href="https://ca.norton.com" target="_blank">Norton</a>. Sou formado em **Sistemas de Informação** e pós-graduado em **Governança de Tecnologia da Informação**.
 
 Apaixonado por bons vinhos e cervejas mas, acima de tudo, por minha linda companheira que insiste em transformar meu mundinho em algo mais alegre e atrativo.
 
