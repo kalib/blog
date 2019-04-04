@@ -1,8 +1,8 @@
 #baseurl         = "https://elated-torvalds-264633.netlify.com/"
-baseUrl         = "https://blog2.marcelocavalcante.net/"
+baseUrl         = "https://blog.marcelocavalcante.net/"
 theme           = "hugo-casper-two"
 languageCode    = "en-US"
-disqusShortname = "blog2-7"
+disqusShortname = "marcelocavalcante"
 paginate        = 6
 #SectionPagesMenu = "main"
 
