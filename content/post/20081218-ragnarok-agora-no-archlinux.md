@@ -1,5 +1,5 @@
 ---
-title: "20081218 Ragnarok Agora No Archlinux"
+title: "Ragnarok Agora No Archlinux"
 date: 2008-12-18T11:25:11-04:00
 draft: false
 image: "/img/ragnaroklogo.jpg"
