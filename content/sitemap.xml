@@ -1,0 +1,1802 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://blog.marcelocavalcante.net/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/about/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/de-volta-%C3%A0-ativa-e-com-novo-visual/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/terraform-criando-uma-infraestrutura-no-google-cloud/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/terraform-vari%C3%A1veis-e-outputs/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/introdu%C3%A7%C3%A3o-ao-terraform/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/infraestrutura-como-c%C3%B3digo-com-terraform/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/criando-uma-imagem-aws-ec2-com-packer-e-puppet/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/2/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/segurn%C3%A7a/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/chromium-no-testing-do-arch-linux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/sobre-mim-tarda-mas-n%C3%A3o-falha/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tornando-seu-ssh-mais-seguro/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/pydev-preparando-o-eclipse-para-o-python/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/devops/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/terraform/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/brute-force-o-dirb-lhe-ajuda-a-identificar-vulnerabilidades-em-seu-site/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/chaveamento-de-interfaces-de-rede-placas-broadcom/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/reposit%C3%B3rio-brasileiro-arch-linux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/porqu%C3%AA-escolhi-python-python-para-sysadmins/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-do-v%C3%B4o...-o-pistoleiro/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/porqu%C3%AA-python/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/dica-r%C3%A1pida-linux-informa%C3%A7%C3%B5es-sobre-arquivos-com-o-comando-stat/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/kernel-2.6.28-j%C3%A1-dispon%C3%ADvel-para-os-archers/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/automatizando-a-criacao-de-imagens-com-packer/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/alterando-o-endere%C3%A7o-mac-de-uma-interface-no-linux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-a-torre-negra-vol-iii-as-terras-devastadas/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/software-livre-dar-ou-servir/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/rails-girls-em-fortaleza-um-palco-para-a-criatividade-feminina/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/rootkit-esse-bicho-morde-proteja-se/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/resolvendo-alguns-problemas-causados-pelo-novo-xorg-no-arch/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/kde-4.4.4-liberado-atualize-seu-arch-linux-cheers/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/3-dia-livre-inscric%C3%B5es-abertas/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/packer/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/fotos-do-v-campeonato-intergal%C3%A1tico-de-boliche-da-tux-ce/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/por-que-usar-a-plataforma-livre/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/10-anos-de-blog/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/chef-uso-de-condicionais-not_if-e-only_if/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/chef-aautoma%C3%A7%C3%A3o-e-gerenciamento-de-configura%C3%A7%C3%A3o/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/conhecendo-o-kubernetes-clusters-de-containers/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recebendo-alarmes-do-aws-diretamente-no-slack/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/3/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/dica-assista-star-wars-em-um-console-ou-terminal/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/navega%C3%A7%C3%A3o-an%C3%B4nima-atrav%C3%A9s-da-rede-tor/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/kde-4.11-lan%C3%A7ado-e-dispon%C3%ADvel-no-arch-linux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/dica-r%C3%A1pida-linux-melhorando-a-pol%C3%ADtica-de-senhas/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/2/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/arch-linux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/chromium/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/flisol-fortaleza-2008/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/corrigindo-incompatibilidade-do-kdemod-ap%C3%B3s-o-nascimento-do-kde4.1-no-arch/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/dia-livre-inscri%C3%A7%C3%B5es-e-grade-do-evento/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/o-tux-agora-%C3%A9-oficialmente-um-membro-da-fam%C3%ADlia/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-o-vampiro-rei-vol-ii/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/cultura-hacker-tenha-%C3%A9tica-e-ganhar%C3%A1s-respeito/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/executando-comandos-remotos-em-x-servidores-com-o-konsole/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/criatura-estranha-morta-por-adolescentes/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/dica-r%C3%A1pida-linux-troubleshooting-em-tempo-de-execu%C3%A7%C3%A3o-com-strace/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/dica-r%C3%A1pida-linux-efeito-de-texto-sendo-digitado-o-pv-resolve/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/casa-nova-em-todos-os-sentidos/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/flisol-fortaleza-2010/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/corre%C3%A7%C3%A3o-do-bug-entre-kernel-linux-e-placas-broadcom/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/dica-r%C3%A1pida-linux-como-deletar-todos-os-arquivos-exceto-alguns-com-extens%C3%B5es-espec%C3%ADficas/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/s%C3%B3-faltava-essa-microsoft-agora-tenta-fragmentar-o-odf/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/dica-apostila-disponibilizada-gratuitamente-pfsense/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/hora-do-planeta-2009/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/bug-day-do-archlinux-21/03/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/devops/page/2/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/cultura-hacker/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/ajude-a-sustentar-a-wikipedia-e-concorra-a-um-eee-pc/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/chromium-pronto-para-o-arch/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-do-m%C3%AAs-o-jardim-de-ossos/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/brute-force-o-dirb...-dirbuster-lhe-ajuda-a-identificar-vulnerabilidades-em-seu-site/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/lan%C3%A7ado-kde-4.6-sim-claro-se-voc%C3%AA-usa-arch-n%C3%A3o-precisa-esperar/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/somos-menos-de-1-usu%C3%A1rios-linux-cadastrem-se/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/asterisknow-solu%C3%A7%C3%A3o-eficiente-para-voip/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-as-brumas-de-avalon-vol-i-a-senhora-da-magia/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/kde-4.2-liberado-no-testing-do-archlinux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/ajude-o-firefox-a-estabelecer-um-recorde-mundial/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/lan%C3%A7ada-a-primeira-edi%C3%A7%C3%A3o-da-revista-seguran%C3%A7a-digital/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/dica-de-seguran%C3%A7a-previna-ataques-bloqueando-pacotes-icmp-indesejados/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/archlinux-um-sistema-operacional-para-hackers/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/python/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/santa-catarina-precisa-de-voc%C3%AA/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/feliz-dia-do-programador/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/python-no-cear%C3%A1-pythonceara/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/literatura/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-gravidade/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/go-ou-go-linguagem-do-google-cria-primeira-intriga/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/meme-inf%C3%A2ncia-conta-tudo-pra-tua-m%C3%A3e-kiko/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-grimpow-o-eleito-dos-templ%C3%A1rios/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/lula-no-fisl-adeus-liberdade/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/fisl-2009-i-encontro-de-usu%C3%A1rios-brasileiros-do-arch-linux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/asterisk-counter-seja-contado/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-as-treze-rel%C3%ADquias/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/the-zen-of-python/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/cear%C3%A1-on-rails-a%C3%AD-vou-eu/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/dica-r%C3%A1pida-linux-for%C3%A7ar-usu%C3%A1rio-a-trocar-senha-ap%C3%B3s-primeiro-login/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/navegador-anti-censura-do-pirate-bay-supera-100.000-downloads/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-do-m%C3%AAs-a-saga-de-will/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/dica-r%C3%A1pida-linux-como-n%C3%A3o-deixar-rastros-no-history/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/kde-4.2.1-j%C3%A1-no-arch/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/o-software-livre-precisa-de-voc%C3%AA/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/dica-escondendo-seu-endere%C3%A7o-de-email-ao-divulgar-seu-endere%C3%A7o-de-email/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/java-no-arch-come%C3%A7a-a-ser-mais-livre/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-do-m%C3%AAs-atlantis/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/kde-4.2-liberado-e-os-archers-j%C3%A1-est%C3%A3o-armados/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/redes/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/como-download-de-webcasts-mms-e-rtmp/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/ragnarok-agora-no-archlinux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-as-brumas-de-avalon-vol-ii-a-grande-rainha/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/comunidade-arch-linux-portugal/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/habilitando-plugins-no-chromium/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/amanh%C3%A3-ii-pylestras-python-user-group-cear%C3%A1/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/arch-iso-2009.02-liberada-celebrem/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/eventos/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/ruby/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/parab%C3%A9ns-kde-brasil-100-traduzido/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/renascimento...-de-cara-nova/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-do-m%C3%AAs-a-bruxa-de-portobello/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/simples-solucao-de-backup-sbackup/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/iii-pylestras-neste-s%C3%A1bado/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/flisol-fortaleza-2011-inscri%C3%A7%C3%B5es-e-chamada-de-trabalhos/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/wicd-kde-tornando-seu-wicd-no-kde-mais-amigavel/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/lixo-eletr%C3%B4nico-n%C3%A3o-sabe-o-que-fazer-o-flisol-sabe/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/deixando-seu-kde4-um-pouco-mais-arch-kdm/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/%C3%A9-hora-de-ser-brasileiro-novamente-comecem-a-rir-falsos-reis/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/dia-livre/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/flisol-2009-fortaleza-obrigado-tux-ce/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/alterando-os-par%C3%A2metros-do-kernel-em-tempo-real-com-o-systcl/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/3-dia-livre-programacao-definida/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/pol%C3%ADtica-de-senhas-no-linux-senhas-com-data-para-expirar/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/tux-ce/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/arch-linux-schwag-uma-loja-para-o-arch-linux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/resultado-quais-distribuic%C3%B5es-o-br-linux-deve-indicar/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/incompatibilidade-kernel-linux-3.10.6-e-placa-wireless-broadcom/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/limpando-o-cache-de-forma-r%C3%A1pida/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-o-s%C3%ADmbolo-perdido/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/de-onde-v%C3%AAm-o-conceito-de-software-livre/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/lynis-seguran%C3%A7a-e-auditoria-de-sistemas-linux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/retornando-das-f%C3%A9rias-novo-planeta-do-archlinux-brasil/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/netstat-saiba-o-que-esta-rolando-em-seu-ambiente/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/bleachbit-limpeza-de-disco-no-linux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/chef/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/o-que-vem-agora-proibi%C3%A7%C3%A3o-do-uso-de-criptografia/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/kde-4.3.2-lan%C3%A7ado-sim-o-arch-j%C3%A1-disponibilizou/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/vantagem-do-aptitude-sobre-o-apt-get/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/docker/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/seguranca/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/internet/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/problemas-de-infra-do-fedora-servidores-hackeados/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/gespeak-empacotado-hoje-para-o-arch/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/docker-uma-alternativa-elegante-para-containers-no-linux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/assista-ao-document%C3%A1rio-sobre-aaron-swartz-o-menino-da-internet/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/blackarch-linux-uma-nova-distribui%C3%A7%C3%A3o-para-pentesters/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/4/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/kde-4.6.2-lan%C3%A7ado-parab%C3%A9ns-ao-gnome/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/que-tal-um-pequeno-filme-para-descontrair/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/seguran%C3%A7a/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/chromium-ganha-suporte-ao-flash-por-completo/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/criptografando-sua-parti%C3%A7%C3%A3o-swap-com-o-ecryptfs/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/vulnerabilidade-no-firefox-descobrindo-senhas-salvas/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-do-m%C3%AAs-o-vampiro-rei-vol-i/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/dica-r%C3%A1pida-linux-como-limpar-o-conte%C3%BAdo-de-um-arquivo-texto-sem-abrir-o-mesmo/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-mago-e-vidro-a-torre-negra-iv/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/que-tal-ajudar-o-projeto-kde-com-apenas-1-minuto-do-seu-tempo/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/3/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/arch-linux/page/2/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/chromium-suportando-java-agora/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/flisol/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/kubuntu-8.04-minhas-primeiras-impress%C3%B5es/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/procura-se-seguran%C3%A7a-particular/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/kde/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/instala%C3%A7%C3%A3o-do-kdemod-4.1-no-arch-linux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/1-m%C3%AAs-de-arch-linux-meu-resultado-obtido/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-a-passagem/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/procura-se-usu%C3%A1rios-de-arch-linux-no-cear%C3%A1/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/porque-lembrar-n%C3%A3o-custa-nada/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/2/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/ii-mangue-beat/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-sementes-no-gelo/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/meio-ambiente/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-a-escolha-dos-tr%C3%AAs-a-torre-negra-vol-ii/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/2/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/inaugurando-oficialmente-fotos-no-blog/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-a-guerra-dos-tronos-as-cr%C3%B4nicas-de-gelo-e-fogo-vol-i/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/minhas-primeiras-impress%C3%B5es-com-o-arch-linux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/flisol-fortaleza-tux-ce-dar%C3%A1-3-livros/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/xbmc-para-manipular-multimedia/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/parab%C3%A9ns-dia-do-administrador-de-redes-e-sistemas/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/hacking-roll-fortaleza/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/entrando-para-a-comiss%C3%A3o-do-archlinux-brasil/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-do-m%C3%AAs-mr-x/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/nossos-problemas-com-flash-acabaram-flash-10-no-extra/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/dia-livre-lan%C3%A7amento-oficial-do-site/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/vulnerabilidade-ios7-hack-na-tela-de-bloqueio-permite-burlar-seguran%C3%A7a/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/cultura-hacker/page/2/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/erro-com-a-libjpeg-resolvendo-no-archlinux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/asterisk/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/firefox/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/fisl-2009-foi-que-foi/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/convite-ao-dia-livre/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/flisol-quixad%C3%A1-relato-e-parab%C3%A9ns/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/chrome-o-navegador-web-do-google/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/encontros-sobre-software-livre-escolha-um-nome/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/um-feliz-natal-e-um-pr%C3%B3spero-ano-novo/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/python/page/2/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/java/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/flisol-cear%C3%A1-fortaleza-quixad%C3%A1-e-russas/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/2-dia-livre-%C3%BAltimos-dias-para-inscri%C3%A7%C3%B5es-site-da-tux-ce-em-obras/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/inscri%C3%A7%C3%B5es-abertas-para-o-flisol-fortaleza-2010/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-filhos-do-%C3%A9den-herdeiros-de-atl%C3%A2ntida/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/literatura/page/2/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/google/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/parte-ii-limpando-mem%C3%B3ria-cache-de-forma-automatizada/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/cear%C3%A1-on-rails-2010/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/escondendo-informa%C3%A7%C3%B5es-em-arquivos-bin%C3%A1rios/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/cultura/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/de-volta-e-com-kde-4.3/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/liberdade/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/novas-camisas-da-tux-ce-solicite-a-sua/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/de-cara-nova/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/v-competi%C3%A7%C3%A3o-de-boliche-da-tux-ce/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/redes/page/2/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/jogos/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/configurando-a-jre-para-funcionar-no-buntu-8.04-com-firefox-3/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/produtos-arch-linux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/primeiro-encontro-cear%C3%A1onrails/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/jogos-porque-nem-tudo-%C3%A9-tela-preta/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/que-tal-testar-o-android-em-seu-linux/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/tux-ce/page/2/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/vivo-chega-em-fortaleza-finalmente/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/hora-de-votar-em-nossos-falsos-reis/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/aptitude/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/debian/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/fedora/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/recomenda%C3%A7%C3%A3o-bibliogr%C3%A1fica-a-batalha-do-apocalipse/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/5/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/seguran%C3%A7a/page/2/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/seguran%C3%A7/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/mudan%C3%A7a-em-meu-notebook-e-n%C3%A3o-vou-twittar/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/4/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/arch-linux/page/3/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/flisol/page/2/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/kubuntu/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/kde/page/2/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/3/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/3/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/assalto-no-cinema-do-iguatemi/fortaleza/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/ios/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/cultura-hacker/page/3/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/java/page/2/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/literatura/page/3/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/redes/page/3/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/android/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/tux-ce/page/3/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/6/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/seguran%C3%A7a/page/3/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.26</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/5/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.26</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/arch-linux/page/4/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.26</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/kde/page/3/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.26</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/4/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.26</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/4/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.26</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/cultura-hacker/page/4/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.26</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/literatura/page/4/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.26</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/redes/page/4/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.26</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/7/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.26</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/seguran%C3%A7a/page/4/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.21</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/6/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.21</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/arch-linux/page/5/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.21</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/5/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.21</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/5/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.21</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/cultura-hacker/page/5/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.21</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/literatura/page/5/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.21</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/8/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.21</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/seguran%C3%A7a/page/5/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.17</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/7/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.17</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/arch-linux/page/6/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.17</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/6/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.17</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/6/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.17</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/cultura-hacker/page/6/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.17</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/9/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.17</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/seguran%C3%A7a/page/6/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.13</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/8/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.13</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/arch-linux/page/7/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.13</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/7/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.13</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/7/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.13</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/cultura-hacker/page/7/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.13</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/10/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.13</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/9/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.11</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/arch-linux/page/8/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.11</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/8/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.11</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/8/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.11</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/cultura-hacker/page/8/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.11</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/11/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.11</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/10/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.09</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/arch-linux/page/9/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.09</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/9/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.09</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/9/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.09</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/12/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.09</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/11/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.07</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/arch-linux/page/10/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.07</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/10/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.07</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/10/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.07</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/13/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.07</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/12/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.05</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/11/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.05</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/11/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.05</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/14/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.05</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/13/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.04</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/12/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.04</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/12/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.04</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/15/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.04</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/14/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.04</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/13/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.04</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/13/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.04</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/16/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.04</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/15/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.03</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/14/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.03</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/14/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.03</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/17/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.03</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/16/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.02</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/15/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.02</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/15/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.02</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/18/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.02</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/17/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.02</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/16/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.02</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/16/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.02</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/19/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.02</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/18/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/17/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/17/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/20/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/19/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/linux/page/18/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/18/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/21/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/20/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/19/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/22/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/21/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/20/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/23/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/22/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/software-livre/page/21/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/24/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.01</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/tags/impress%C3%B5es/page/23/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.00</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/25/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.00</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/26/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.00</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/27/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.00</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/28/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.00</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/29/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.00</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/30/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.00</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/31/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.00</priority>
+</url>
+<url>
+  <loc>https://blog.marcelocavalcante.net/page/32/</loc>
+  <lastmod>2019-04-13T16:04:31+00:00</lastmod>
+  <priority>0.00</priority>
+</url>
+
+
+</urlset>
