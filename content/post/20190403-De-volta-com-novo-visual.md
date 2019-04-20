@@ -4,8 +4,9 @@ date: 2019-04-03T19:25:00-04:00
 draft: false
 image: "/img/tech4.jpg"
 tags: [
+"Golang",
 "Impressões",
-"Segurnça",
+"Segurança",
 ]
 description: "Após alguns meses o blog está de volta, com diversas mudanças que facilitarão as coisas em termos de manutenção. Cara nova, estrutura nova... tudo novo."
 ---

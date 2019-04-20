@@ -4,6 +4,7 @@ date: 2009-11-12T10:36:48-04:00
 draft: false
 image: "/img/go.png"
 tags: [
+"Golang",
 "Cultura Hacker",
 "Google",
 "Impressões",
