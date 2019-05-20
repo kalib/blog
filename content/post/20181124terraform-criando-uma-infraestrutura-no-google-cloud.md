@@ -7,6 +7,7 @@ tags: [
 "Devops",
 "Terraform",
 "Cloud",
+"GCP",
 "Docker",
 "Kubernetes",
 ]
