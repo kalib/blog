@@ -47,7 +47,7 @@ paginate        = 6
 [[menu.main]]
   identifier = "Home"
   name = "Home"
-  url = "/"
+  url = "/post"
   weight = 200
 
 #[[menu.main]]
