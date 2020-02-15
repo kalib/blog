@@ -1,5 +1,5 @@
 ---
-title: "Terraform Modules Porque E Como Trabalhar Com Modulos No Terraform - PARTE 2"
+title: "Terraform Modules: Porquê E Como Trabalhar Com Módulos No Terraform - PARTE 2"
 date: 2019-05-20T14:09:21-04:00
 draft: false
 image: "/img/terraform-modules.jpg"
