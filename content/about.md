@@ -11,7 +11,7 @@ weight = 111
 
 +++
 <img src="/about/me_debora.png" alt="Marcelo" align="right">
-Me chamo **Marcelo Cavalcante Rocha**, também conhecido como **Kalib**. Engenheiro DevOps dinâmico, escrupulosamente curioso, reservadamente convencional, multitarefa, command line heavy-user, estudante e pesquisador, surfista por prazer, leitor inquieto e aspirante a ser humano. Sempre acreditei na ideia de que bons profissionais de tecnologia são preguiçosos, no sentido de que se algo pode ser automatizado com o fim de evitar tarefas repetitivas, automatizado será.
+Me chamo **Marcelo Cavalcante Rocha**, também conhecido como **Kalib**. Dinâmico, escrupulosamente curioso, reservadamente convencional, multitarefa, command line heavy-user, estudante e pesquisador, surfista por prazer, leitor inquieto e aspirante a ser humano. Sempre acreditei na ideia de que bons profissionais de tecnologia são preguiçosos, no sentido de que se algo pode ser automatizado com o fim de evitar tarefas repetitivas, automatizado será.
 
 Atualmente trabalho como Engenheiro SRE/DevOps Sênior na empresa **<a href="https://www.flipp.com" target="_blank">Flipp</a>**, em Toronto, Canadá. Sou formado em **Sistemas de Informação** e pós-graduado em **Governança de Tecnologia da Informação**.
 
