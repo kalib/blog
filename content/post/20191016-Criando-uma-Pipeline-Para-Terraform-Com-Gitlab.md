@@ -1,7 +1,7 @@
 ---
 title: "Criando Uma Pipeline Para Terraform Com o Gitlab"
 date: 2019-11-06T19:47:52-04:00
-draft: true
+draft: false
 image: "/img/gitlab_terraform.png"
 tags: [
 "Devops",
@@ -18,16 +18,16 @@ description: "Integração contínua (CI) e entrega contínua (CD) são termos b
 
 ## Integração Contínua (CI) e Entrega Contínua (CD) ##
 
-**M**uito se fala em **Integração Contínua** (*Continuous Integration - CI*) e **Entrega Contínua** (*Continuous Delivery - CD*) em equipes ágeis e de alta performance e que seguem uma f qilosofia ágil ou DevOps.
+**M**uito se fala em **Integração Contínua** (*Continuous Integration - CI*) e **Entrega Contínua** (*Continuous Delivery - CD*) em equipes ágeis e de alta performance e que seguem uma filosofia ágil ou DevOps.
 
 **R**esumidamente, são metodologias que buscam a utilização de processos e ferramentas específicas com o intuito de realizar uma entrega rápida de novas versões de software ou mesmo infraestrutura, porque não?
 
-**S**upondo que sua equipe de desenvolvimento de software segue alguns passos em seu ciclo diário de desenvolvimento de código até a entrega final da aplicação ou deployment.
+**S**upondo que sua equipe de desenvolvimento de software segue alguns passos em seu ciclo diário de desenvolvimento de código até a entrega final da aplicação ou deployment, você poderia ter um ciclo similar ao seguinte:
 
 1.  Submeter o código atualizado para um repositório Git;
 2.  Compilação ou build do código;
 3.  Rodar alguns testes neste código em um ambiente qualquer para validação das alterações realizadas;
-4.  Execução de alguns testes de segurancá com uma ferramenta terceira em cima de seu código;
+4.  Execução de alguns testes de segurança com uma ferramenta terceira em cima de seu código;
 5.  Realizar a entrega ou deployment do código em si.
 
 ![CI/CD](/img/cicd.png)
@@ -40,13 +40,13 @@ description: "Integração contínua (CI) e entrega contínua (CD) são termos b
 
 ![Gitlab](/img/gitlab.png)
 
-**G**itLab é uma ferramenta que busca ser uma espécie de "tudo em um" quando o assunto são ciclos de desenvolvimento ágeis. Basicamente é uma ferramenta web para o ciclo de vida de projetos DevOps que, embora originalmente fosse bem mais limitada, atuando apenas como uma opcão para repositórios Git, hoje a ferramenta é robusta e engloba diversas soluções como repositórios, tarefas/tickets, wiki, pipelines CI/CD, etc.
+**G**itLab é uma ferramenta que busca ser uma espécie de "tudo em um" quando o assunto são ciclos de desenvolvimento ágeis. Basicamente é uma ferramenta web para o ciclo de vida de projetos DevOps que, embora originalmente fosse bem mais limitada, atuando apenas como uma opcão para repositórios Git, hoje é uma ferramenta robusta e engloba diversas soluções como repositórios, tarefas/tickets, wiki, pipelines CI/CD, etc.
 
-**E**mbora tenha sido originalmente desenvolvido em Ruby, alguns de seus componentes foram re-escritos em Go.
+**E**mbora tenha sido originalmente desenvolvida em Ruby, alguns de seus componentes foram re-escritos em Go.
 
 **P**ermitindo o controle e gerenciamento de todo o seu ciclo de desenvolvimento de forma colaborativa, GitLab é considerado o primeiro Unicórnio da Ucrânia, ou seja, uma startup avaliada em mais de 1 bilhão de dólares.
 
-**A**lém de grandes empresas e organizações como Alibaba, Trivago, Ticketmaster, Cloud Native Foundation, AVG, Siemens, Avast, BlackBerry, Broadcom, Capgemini, Citrix, EA Sports, Ericsoon, Expedia, Nasa, Nasdaq, Governo do Canadá, Interpol, Telus, Nutanix, RedHat, SanDisk, Sony, Trend Micro, Uber, Verizon e muitas outras, o GItLab também é muito popular entre projetos de software livre ou mesmo profissionais independentes e estudantes.
+**A**lém de grandes empresas e organizações como Alibaba, Trivago, Ticketmaster, Cloud Native Foundation, AVG, Siemens, Avast, BlackBerry, Broadcom, Capgemini, Citrix, EA Sports, Ericsoon, Expedia, Nasa, Nasdaq, Governo do Canadá, Interpol, Telus, Nutanix, RedHat, SanDisk, Sony, Trend Micro, Uber, Verizon e muitas outras, o GitLab também é muito popular entre projetos de software livre ou mesmo profissionais independentes e estudantes.
 
 **S**im, existem diversas outras soluções para criação de pipelines CI/CD, como Jenkins, Circle CI, Bitbucket, etc. Mas, como mencionei mais acima, o GitLab trás muito mais do que apenas a ferramenta de pipelines.
 
@@ -76,11 +76,11 @@ description: "Integração contínua (CI) e entrega contínua (CD) são termos b
 1.  Já possui alguma familiaridade com o Terraform (conforme citei acima);
 2.  Já possui o git instalado e também possui alguma familiaridade com o mesmo;
 3.  Já possui uma conta AWS caso queira utilizar exatamente este código que utilizarei ou que possua familiaridade suficiente com o Terraform para criar  seu próprio código sem utilizar o AWS como *provider*;
-4.  Além de possuir uma conta AWS, estou assumindo que você já configurou seu ambiente exportando as variáveis de ambiente de sua chave e senha do AWS para que seu Terraform consiga se comunicar com sua conta AWS (Se também não faz ideia de o que e como isto é feito, volte um pouco: <a href="/terraform-modules-porqu%C3%AA-e-como-trabalhar-com-m%C3%B3dulos-no-terraform-parte-1/" target="_blank">Terraform Modules: Porquê E Como Trabalhar Com Módulos No Terraform - PARTE 1</a>)
+4.  Além de possuir uma conta AWS, estou assumindo que você já configurou seu ambiente exportando as variáveis de ambiente de sua chave e senha do AWS para que seu Terraform consiga se comunicar com sua conta AWS (Se também não faz ideia de o que é ou como isto é feito, volte um pouco: <a href="/terraform-modules-porqu%C3%AA-e-como-trabalhar-com-m%C3%B3dulos-no-terraform-parte-1/" target="_blank">Terraform Modules: Porquê E Como Trabalhar Com Módulos No Terraform - PARTE 1</a>)
 
 ### Criando um repositório para nosso código ###
 
-**O** primeiro passo é criar uma conta gratuita em <a href="https://www.gitlab.com" target="_blank"></a>.
+**O** primeiro passo é criar uma conta gratuita em <a href="https://www.gitlab.com" target="_blank">Gitlab.com</a>.
 
 **A**o criar sua conta, um email lhe será enviado para confirmação de endereço. Valide seu email clicando no link que lhe será enviado.
 
@@ -94,13 +94,13 @@ description: "Integração contínua (CI) e entrega contínua (CD) são termos b
 
 ![Gitlab](/img/gitlab_2.png)
 
-**E**mbora você pode escolher entre privado ou público, sugiro que defina seu repositório como privado inicialmente, apenas para evitar algum erro. Se você ainda não possui familiaridade com o Terraform e com o GitLab, não queremos correr o risco de deixar senhas ou dados confidenciais (como chaves do AWS) em seu código publicamente acessível, certo?!
+**E**mbora você possa escolher entre privado ou público, sugiro que defina seu repositório como privado inicialmente, apenas para evitar algum erro. Se você ainda não possui familiaridade com o Terraform e com o GitLab, não queremos correr o risco de deixar senhas ou dados confidenciais (como chaves do AWS) em seu código publicamente acessível, certo?!
 
 **A**o preencher tudo e clicar em *Create project* ou Criar projeto você será levado para a seguinte tela:
 
 ![Gitlab](/img/gitlab_3.png)
 
-**O** alerta que o GitLab nos dá acima é justamente nos informando que ainda não temos nenhuma **chave ssh** cadastrada em nossa conta. A chave é utilizada para que possamos interagir com nosso repositório de forma segura, via ssh. Começaremos então resolvendo esta "pendência". Você pode fazê-lo de duas formas:
+**O** alerta que o GitLab nos dá acima é justamente nos informando que ainda não possuímos uma **chave ssh** cadastrada em nossa conta. A chave é utilizada para que possamos interagir com nosso repositório de forma segura, via ssh. Começaremos então resolvendo esta "pendência". Você pode fazê-lo de duas formas:
 
 1- Clicando diretamente no alerta, em **add an SSH key* (adicionar uma chave ssh);
 
@@ -136,9 +136,9 @@ $ git clone git@gitlab.com:marcelokalibtest/terraform-gitlab-kalib.git
 
 **A**gora que temos nossa conta no Gitlab funcionando com nossa chave SSH e nosso repositório clonado localmente, nosso próximo passo será criar de fato algum código em nosso repositorio local para que possamos em seguida enviá-lo para o Gitlab.
 
-**C**onforme dito anteriormente, o foco deste post não é em hipótese alguma ensinar Terraform, para isto citei no início deste post alguns links para posts anteriores.
+**C**onforme dito anteriormente, o foco deste post não é, em hipótese alguma, ensinar Terraform. Para isto citei no início deste post alguns links para posts anteriores.
 
-**U**tilizaremos aqui um código extremamente simplista  visto que nosso objetivo aqui é conhecer melhor como podemos utilizar pipelines para nossa infraestrutura.
+**U**tilizaremos aqui um código extremamente simplista  visto que nosso objetivo aqui é apenas conhecer melhor como podemos utilizar pipelines para nossa infraestrutura. Mas, uma vez que você entenda o conceito e a técnica, o procedimento seria o mesmo, independente de quão complexo seja o código de sua infraestrutura.
 
 **E**m seu repositório local, crie o arquivo *main.tf* com o seguinte conteúdo:
 
@@ -165,7 +165,7 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "web" {
-  ami           = "${data.aws_ami.ubuntu.id}"
+  ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
 
   tags = {
@@ -174,7 +174,7 @@ resource "aws_instance" "web" {
 }
 {{< / highlight >}}
 
-**E**m seguida, criaremos o arquivo *.gitignore* para que possamos fazer com que nossos arquivos de configuração e estado do Terraform não sejam enviados para o Gitlab. O arquivo deverá conter uma única linha:
+**E**m seguida, criaremos o arquivo *.gitignore* para que possamos fazer com que nossos arquivos de configuração e estado do Terraform não sejam enviados para o Gitlab. O arquivo deverá conter uma única linha: (Sim, precisamos ter um "." no início do nome do arquivo.)
 
 {{< highlight py "linenos=table, linenostart=0" >}}
 .terraform
@@ -182,7 +182,7 @@ resource "aws_instance" "web" {
 
 **C**om nosso código Terraform concluído, chegou a hora de iniciarmos nossa pipeline.
 
-**A**ntes de definirmos o código de nossa pipeline, vamos criar duas variáveis de ambiente em nosso projeto no Gitlab. Na página principal de seu projeto no Gitlab, clique no botão de engrenagem (*Settings* ou Configurações) no mendu da lateral esquerda, em seguida clique em *CI / CD*, conforme imagem abaixo:
+**A**ntes de definirmos o código de nossa pipeline, vamos criar duas variáveis de ambiente em nosso projeto no Gitlab. Na página principal de seu projeto no Gitlab, clique no botão de engrenagem (*Settings* ou Configurações) no menu da lateral esquerda, em seguida clique em *CI / CD*, conforme imagem abaixo:
 
 ![Gitlab](/img/gitlab_8.png)
 
@@ -195,13 +195,13 @@ resource "aws_instance" "web" {
 
 ![Gitlab](/img/gitlab_9.png)
 
-**E**stas variáveis serão utilizadas pelos *nodes*, ou *workers* criados pelo Github para executar nossa pipeline.
+**E**stas variáveis serão utilizadas pelos *nodes*, ou *workers* criados pelo Gitlab para executar nossa pipeline.
 
 **O** que acontecerá na verdade é que sempre que nossa pipeline for iniciada, o Gitlab criará um container, em sua própria infraestrutura/nuvem, e este container irá clonar nosso repositório para executar os passos de nossa pipeline. Este container terá as variáveis de ambiente que definirmos aqui. Assim como em nossa máquina local precisamos ter estas variáveis de ambiente para que possamos nos comunicar com o AWS via Terraform, o container que irá rodar nossa pipeline também precisará.
 
 **U**ma vez que tenhamos nossas variáveis definidas, podemos voltar ao nosso código para iniciarmos a criação de nossa pipeline.
 
-**P**rimeiramente, criaremos um arquivo chamado *.gitlab-ci.yml*. Por padrão, o Gitlab reconhece a existência deste arquivo em seu repositório e o executará como sendo a definição de sua pipeline.
+**P**rimeiramente, criaremos um arquivo chamado *.gitlab-ci.yml*. Sim, devemos ter um "." no início do nome do arquivo. Isto fará com que ele seja tratado como um arquivo oculto. Por padrão, o Gitlab reconhece a existência deste arquivo em seu repositório e o executará como sendo a definição de sua pipeline.
 
 **C**omecemos incluindo o seguinte neste arquivo:
 
@@ -331,7 +331,7 @@ $ git push origin codigo-inicial
 
 ![Gitlab](/img/gitlab_15.png)
 
-**S**e de fato clicarmos nesta pipeline que foi iniciada veremos que a mesma não executou o *stage* plan, afinal a nossa restrição dizia que o *plan* só deveria ser executado quando houvesse um Merge Request (ou Pull Request, como prefira chamar). É importante lembrar que isto não é uma regra, mas sim uma opção minha. Você poderia muito bem dizer que quer o plan executado a cada branch e não apenas quando houver um Merge Request. A opção aqui foi apenas ilustativa, para que conheceçamos alguns recursos a mais do Gitlab.
+**S**e de fato clicarmos nesta pipeline que foi iniciada veremos que a mesma não executou o *stage* plan, afinal a nossa restrição dizia que o *plan* só deveria ser executado quando houvesse um Merge Request (ou Pull Request, como prefira chamar). É importante lembrar que isto não é uma regra, mas sim uma opção minha. Você poderia muito bem dizer que quer o plan executado a cada branch e não apenas quando houver um Merge Request. A opção aqui foi apenas ilustrativa, para que conheceçamos alguns recursos do Gitlab.
 
 ![Gitlab](/img/gitlab_16.png)
 
@@ -403,7 +403,7 @@ build:
 apply:
   stage: apply
   script:
-    - terraform apply
+    - terraform apply -auto-approve
   dependencies:
     - build
   only:
@@ -421,21 +421,52 @@ apply:
 
 **A**gora que tenho a certeza de não possuir nenhuma instância rodando, é hora de testar nossa pipeline completa.
 
-**N**ovamente, de volta ao nosso terminal, vamos voltar ao nosso branch master, realizar um pull para receber as mudanças do merge que fizemos anteriormente e em seguida criaremos um novo branch para a versão final de nossa pipeline:
-
-não preciso disso no master pois não fiz merge ainda.. rever... e acima..
-
+**D**e volta ao nosso terminal, faremos um novo commit no branch que criamos anteriormente, desta vez incluindo estas últimas alterações.
 
 ```
-$ git checkout master
-
-$ git pull
-
-$ git checkout -b pipeline-final
+$ git checkout codigo-inicial
 
 $ git add .
 
 $ git commit -m "Finalizando a pipeline"
 
-$ git push origin pipeline-final
+$ git push origin codigo-inicial
 ```
+
+**C**omo podemos notar no Gitlab, na janela de pipelines, o stage de plan será executado devido ao nosso novo commit no branch.
+
+![Gitlab](/img/gitlab_22.png)
+
+**S**e não cometemos nenhum erro, nossa pipeline executará com sucesso.
+
+**A**gora, de volta ao nosso Merge Request (Ou PR), vamos realizar o nosso merge de fato, para que possamos ver o nosso código ser aplicado em nossa conta do AWS. Na interface do Gitlab, clique no botão de Merge Requests que se encontra na lateral esquerda. Em seguida, clique no seu Merge Request que estará listado, conforme imagem a seguir:
+
+![Gitlab](/img/gitlab_23.png)
+
+**R**epare que ele lista a pipeline que foi bem sucedida para este Merge Request e nos apresenta logo abaixo a opção de realizarmos o Merge. Clique em *Merge*.
+
+![Gitlab](/img/gitlab_24.png)
+
+**R**epare que imediatamente após clicarmos em *Merge*, uma pipeline é iniciada automaticamente. Clique nela:
+
+![Gitlab](/img/gitlab_25.png)
+
+**C**omo podemos ver, esta é nossa pipeline final, a qual executa os 3 stages definidos: Validar, Plan e Apply.
+
+![Gitlab](/img/gitlab_26.png)
+
+**S**e clicarmos no stage *apply* poderemos ver a execução do nosso código sendo aplicado de fato para a criação de nossa infraestrutura no AWS:
+
+![Gitlab](/img/gitlab_27.png)
+![Gitlab](/img/gitlab_28.png)
+
+**A**o checarmos nossa conta do AWS, também podemos ver que nossa instância foi criada conforme especificado em nosso código.
+
+![Gitlab](/img/gitlab_29.png)
+
+**C**onsiderações finais:
+
+-  Apesar de esta infraestrutura ser extremamente simplista, criando apenas uma instância ou VM, o seu código poderia criar coisas muito mais complexas, como VPCs, subnets, múltiplas instâncias, clusters, lambda functions, security groups, etc. O objetivo deste artigo não era a criação de infraestrutura com terraform, mas sim a possibilidade e utilização de uma pipeline para sua infraestrutura;
+-  Não esqueça sempre de deletar os recursos criados por você durante estes testes, para evitar desperdiçar dinheiro. Neste exemplo, lembre-se de destruir no AWS a instância criada.
+
+**H**ave fun!
