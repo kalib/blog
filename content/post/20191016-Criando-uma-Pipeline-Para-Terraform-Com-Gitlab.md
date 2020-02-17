@@ -1,6 +1,6 @@
 ---
 title: "Criando Uma Pipeline Para Terraform Com o Gitlab"
-date: 2019-11-06T19:47:52-04:00
+date: 2020-02-17T12:50:52-04:00
 draft: false
 image: "/img/gitlab_terraform.png"
 tags: [
