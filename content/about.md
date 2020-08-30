@@ -10,6 +10,7 @@ type = "page"
 weight = 111
 
 +++
+
 <img src="/about/me_debora.png" alt="Marcelo" align="right">
 Me chamo **Marcelo Cavalcante Rocha**, também conhecido como **Kalib**. Dinâmico, escrupulosamente curioso, reservadamente convencional, multitarefa, command line heavy-user, estudante e pesquisador, surfista por prazer, leitor inquieto e aspirante a ser humano. Sempre acreditei na ideia de que bons profissionais de tecnologia são preguiçosos, no sentido de que se algo pode ser automatizado com o fim de evitar tarefas repetitivas, automatizado será.
 
@@ -21,8 +22,8 @@ Caso deseje me contactar, sinta-se livre e envie um **email** para <a href="mail
 
 Para maiores detalhes profissionais, acesse meu perfil no <a href="https://ca.linkedin.com/in/marcelocrocha">linkedin clicando aqui</a>.
 
-Lado geek
------------
+## Lado geek
+
 <img src="/about/me_geek.png" alt="Shot time" align="left">
 Apaixonado por tecnologia em geral dificilmente me contento com o **porque** das coisas, buscando sempre entender o **porque do porque**.
 Sempre gostei de **computadores**. Os primeiros contatos começaram ainda na infância, quando as **telas pretas** reinavam de maneira absoluta entre os computadores. Gostei dos antigos tutoriais que baixava para praticar alguns comandos e decidi instalar **Linux** <font color="gray">(Slackware, na ocasião)</font> em minha primeira máquina.  Me impressionei (e continuo) quando descobri como a Comunidade **Open Source** <font color="gray">(Código Aberto)</font> trabalhava compartilhando códigos, documentações, ajuda online, etc. Não muito tempo depois passei a buscar maior aprendizado para também contribuir e compartilhar.
@@ -31,22 +32,22 @@ Aprender a ciência da computação é, de certa maneira, muito **único** e **o
 
 Diferentemente da maioria dos geeks, nunca gostei muito de jogos, seja em vídeo-games ou em PCs, pois acreditava que a parte mais **divertida** destes sempre se encontrava por baixo dos personagens e cenários. Apesar de não trabalhar profissionalmente e unicamente com programação, sempre gostei desta área para automatizar tarefas no meu dia-a-dia. Dentre minhas linguagens favoritas destaco: <a href="https://golang.org" target="_blank">Go</a>, <a hrek="https://www.cplusplus.com/" target="_blank">C++</a>, <a href="https://www.python.org" target="_blank">Python</a> e <a href="https://www.ruby-lang.org" target="_blank">Ruby</a>. Em meu dia a dia profissional, prefiro atuar na parte de automação, aplicando conceitos e práticas **DevOps**.
 
-Possuo algumas **certificações** internacionais como <a href="https://www.lpi.org/linux-certifications/programs/lpic-3" target="_blank">LPI-C3</a>, <a href="https://www.suse.com/training/linux-certification/cla/" target="_blank">Novell CLA</a>, <a href="https://www.itil-officialsite.com/" target="_blank">ITIL V3</a> e <a href="https://www.scrumalliance.org/certifications/practitioners/certified-scrummaster-%28csm%29" target="_blank">CSM</a>. Pretendo aumentar esta lista em breve.
+Possuo algumas **certificações** internacionais como <a href="https://www.cncf.io/certification/cka/" target="_blank">Kubernetes CKA</a></a>, <a href="https://aws.amazon.com/certification/certified-solutions-architect-associate/" target="_blank">AWS-CSA</a>,<a href="https://www.lpi.org/linux-certifications/programs/lpic-3" target="_blank">LPI-C3</a>, <a href="https://www.suse.com/training/linux-certification/cla/" target="_blank">Novell CLA</a>, <a href="https://www.itil-officialsite.com/" target="_blank">ITIL V3</a> e <a href="https://www.scrumalliance.org/certifications/practitioners/certified-scrummaster-%28csm%29" target="_blank">CSM</a>. Pretendo aumentar esta lista em breve.
 
 Como militante do movimento de Software Livre, sempre busquei participar de, ou mesmo criar, diversos **projetos** do ramo. Dentre estes projetos, destaco: Tux-CE, MLUG, TLUG, KDE-BR, Archlinux-BR, Python-CE, Guru-CE, Debian, etc.
 
-Esportes
----------
-> **Esportes não formam o caráter. Revelam-no.** *(Heywood Broun)*
+## Esportes
+
+> **Esportes não formam o caráter. Revelam-no.** _(Heywood Broun)_
 
 <img src="/about/me_surf.png" alt="Surf's up" align="right">
 Desde a infância um tanto quanto hiperativo, fui *encorajado* <font color="gray">(para não dizer obrigado)</font> desde cedo por meus pais a **gastar energia** fora de casa. Ainda muito novo comecei a praticar **natação**. Após alguns anos e algumas competições, passei para o **futebol**, **voleibol**, **basquete**, etc. Ainda pratico, apesar de que com menor frequência, todos estes e os acompanho pela televisão.
 
 Minhas equipes favoritas são o <a href="https://www.cearasc.com">Ceará</a> no futebol e os <a href="https://www.raptors.com">Raptors</a> no basquete. Andei de skate durante alguns anos e foi quando, influenciado por primos, troquei a prancha do asfalto pela prancha do mar. <font color="gray">Sou grato a eles até hoje por terem apresentado-me à uma das maiores paixões de minha vida.</font> Comecei a **surfar** ainda no início da adolescência e o esporte me cativa e apaixona até os dias atuais. Mais que um simples passatempo, o mar e as ondas são meus terapeutas enquanto que minhas pranchas são como minhas amantes. Neste meio tempo pratiquei algumas lutas e artes-marciais, inclusive lutei em algumas competições. Dentre elas destaco Taekwondo, Kung-Fu, Capoeira e Boxe.
 
-Livros
-------
-> **Os verdadeiros analfabetos são os que aprenderam a ler e não lêem.** *(Mario Qintana)*
+## Livros
+
+> **Os verdadeiros analfabetos são os que aprenderam a ler e não lêem.** _(Mario Qintana)_
 
 Livros... Livros... Livros...
 
@@ -59,7 +60,7 @@ o.O E **Tolkien**? O fato de eu não ter incluído **John Ronald Reuel Tolkien**
 
 Para os que ficaram curiosos com a foto, trata-se do Tux, cão labrador de minha família.
 
-Música
-------
+## Música
+
 <img src="/about/music.png" alt="Music" align=right>
 Em termos de música, não sei bem como definir meu estilo, visto que escuto diversos estilos distintos mas, para mim, **Pink Floyd** continua incomparável, entre qualquer banda de qualquer estilo. Eu também sou um grande fã de Metallica e escuto clássicos como Bob Marley, Led Zeppelin, Black Sabbath, The Doors, Jimi Hendrix, Chico Buarque, Raul Seixas, etc. Nos dias atuais eu poderia listar Kamelot, Angra, Sonata Arctica, Megadeath, Blind Guardian, Chevelle, Epica, Foo Fighters, Fenix TX, Hammerfall, Korn, Mae, Millencolin, NOFX, Over It, Papa Roach, POD, etc.
