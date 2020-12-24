@@ -16,6 +16,8 @@ Me chamo **Marcelo Cavalcante Rocha**, também conhecido como **Kalib**. Dinâmi
 
 Atualmente trabalho como Engenheiro SRE/DevOps Sênior na empresa **<a href="https://www.flipp.com" target="_blank">Flipp</a>**, em Toronto, Canadá. Sou formado em **Sistemas de Informação** e pós-graduado em **Governança de Tecnologia da Informação**.
 
+Embora trabalhe para uma empresa em Toronto, atualmente resido em Barrie, uma pequena e pacata cidade em Ontario que fica a cerca de 90km de Toronto. Trabalho em regime de home office, o que me permite desfrutar de uma vida mais calma em uma cidade menor, mais próximo da natureza e dos esportes que gosto de praticar.
+
 Apaixonado por bons vinhos e cervejas mas, acima de tudo, por minha linda companheira que insiste em transformar meu mundinho em algo mais alegre e atrativo.
 
 Caso deseje me contactar, sinta-se livre e envie um **email** para <a href="mailto:marcelo@marcelocavalcante.net">marcelo</a> neste(@) mesmo domínio. Também estou constantemente online no **IRC** como kalib, através da rede Freenode, nos canais #archlinux, #archlinux-br, #linux, etc. Além disto, você pode simplesmente deixar um **comentário** aqui mesmo no site/blog.
@@ -44,6 +46,8 @@ Como militante do movimento de Software Livre, sempre busquei participar de, ou 
 Desde a infância um tanto quanto hiperativo, fui *encorajado* <font color="gray">(para não dizer obrigado)</font> desde cedo por meus pais a **gastar energia** fora de casa. Ainda muito novo comecei a praticar **natação**. Após alguns anos e algumas competições, passei para o **futebol**, **voleibol**, **basquete**, etc. Ainda pratico, apesar de que com menor frequência, todos estes e os acompanho pela televisão.
 
 Minhas equipes favoritas são o <a href="https://www.cearasc.com">Ceará</a> no futebol e os <a href="https://www.raptors.com">Raptors</a> no basquete. Andei de skate durante alguns anos e foi quando, influenciado por primos, troquei a prancha do asfalto pela prancha do mar. <font color="gray">Sou grato a eles até hoje por terem apresentado-me à uma das maiores paixões de minha vida.</font> Comecei a **surfar** ainda no início da adolescência e o esporte me cativa e apaixona até os dias atuais. Mais que um simples passatempo, o mar e as ondas são meus terapeutas enquanto que minhas pranchas são como minhas amantes. Neste meio tempo pratiquei algumas lutas e artes-marciais, inclusive lutei em algumas competições. Dentre elas destaco Taekwondo, Kung-Fu, Capoeira e Boxe.
+
+Hoje, distante do mar, tenho de me adaptar e passei a praticar snowboard, o que não deixa de ser parecido com surf ou skate, porém na neve.
 
 ## Livros
 
