@@ -40,7 +40,7 @@ description: "Cansado de digitar tantos comandos com o kubectl para saber como a
 
 O processo de instalação será um pouco diferente em cada plataforma.
 
-### OS X
+**OS X**
 
 **P**or sorte temos o pacote disponível via homebrew:
 
@@ -48,7 +48,7 @@ O processo de instalação será um pouco diferente em cada plataforma.
 $ brew cask install lens
 ```
 
-### Linux e Windows
+**Linux e Windows**
 
 **O**s instaladores específicos para cada sistema operacional podem ser baixados diretamente aqui: https://github.com/lensapp/lens/releases/tag/v4.2.2
 
