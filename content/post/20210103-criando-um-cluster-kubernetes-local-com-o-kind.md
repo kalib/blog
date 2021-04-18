@@ -25,7 +25,7 @@ description: "Rodar um cluster kubernetes local muitas vezes facilita e acelera 
 
 **D**entre estas alternativas, algumas das mais comuns são o Docker em si, que agora trás uma versão simplificada do Kubernetes com apenas um node (master), o kubeadm, minikube, kind, etc.
 
-**N**este post falaremos um pouco mais sobre o <a href="https://kind.sigs.k8s.io/">Kind</a>. Kind, que na verdade é uma palavra em inglês que significa gentil, também é uma abreviação para *Kubernetes in Docker* (Kubernetes em Docker).
+**N**este post falaremos um pouco mais sobre o <a href="https://kind.sigs.k8s.io/" target="_blank">Kind</a>. Kind, que na verdade é uma palavra em inglês que significa gentil, também é uma abreviação para *Kubernetes in Docker* (Kubernetes em Docker).
 
 **D**e acordo com sua página oficial, o Kind é uma ferramenta que lhe permite rodar clusters Kubernetes utilizando-se de Docker containers como nodes. Isso mesmo, cada node do seu cluster, será na verdade um container Docker em sua máquina, o que resultará na verdade em um cluster de containers rodando dentro de outros containers. Parece engraçado e estranho, rodar containers dentro de outros containers, mas lembre-se, o objetivo aqui não é um cluster de produção, e sim uma forma simples e eficiente para testes, desenvolvimento, CI, etc.
 

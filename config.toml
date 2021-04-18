@@ -3,7 +3,7 @@ baseUrl         = "https://blog.marcelocavalcante.net/"
 theme           = "hugo-casper-two"
 languageCode    = "en-US"
 disqusShortname = "marcelocavalcante"
-paginate        = 6
+paginate        = 7
 #SectionPagesMenu = "main"
 
 [params]
@@ -56,7 +56,7 @@ paginate        = 6
 #  weight = 100
 
 #[[menu.main]]
-#  name = "|"
+#  name = "| DevOps"
 #  url = "/tags/Devops/"
 #  weight = 100
 #
@@ -66,7 +66,7 @@ paginate        = 6
 #  weight = 99
 
 #[[menu.main]]
-#  name = "Linux"
+#  name = "Kubernetes"
 #  url = "/tags/linux/"
 #  weight = 99
 
