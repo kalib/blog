@@ -26,7 +26,7 @@ description: "Cansado de digitar tantos comandos com o kubectl para saber como a
 
 ## Lens - A magnífica IDE para Kubernetes
 
-**Q**uer uma solução open source e gratuita que entrega tudo o que mencionei acima e muito mais? Lhe apresento o Lens, uma IDE para Kubernetes originalmente desenvolvida pela Mirantis e disponibilizada como um projeto Open Source.
+**Q**uer uma solução open source e gratuita que entrega tudo o que mencionei acima e muito mais? Lhes apresento o Lens, uma IDE para Kubernetes originalmente desenvolvida pela Mirantis e disponibilizada como um projeto Open Source.
 
 **O** Lens é hoje a IDE mais robusta para quem precisa gerenciar clusters Kubernetes diariamente. É uma aplicação única, disponível para Linux, MacOS e Windows, e não possui quaisquer requisitos específicos quanto ao cluster, podendo funcionar perfeitamente bem em qualquer cluster que você possua, seja em um provedor de cloud como o Google Cloud ou AWS, clusters locais ou mesmo soluções simples e de desenvolvimento como o kind, minikube ou o Docker para Desktop.
 
