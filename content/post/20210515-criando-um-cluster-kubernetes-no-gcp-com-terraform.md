@@ -680,7 +680,7 @@ gke-balbalbalbalb-222-fbfe4d87-fqfv   Ready    <none>   14m   v1.18.17-gke.100
 
 **O** GCP nos permite trabalhar com clusters simples, os quais são chamados clusters de Zona, mas também nos permite optar por clusters Regionais, ou multi-zonas. Quando definimos uma zona para a criação do nosso cluster, significa que o cluster será criado apenas naquela zona específica, tanto o control plane quanto os nossos nodes.
 
-**N**o nosso caso, se voltarmos ao código Terraform, podemos ver que definimos uma região, e não uma zona, certo?! Repare nas linhas destacas a seguir, onde especificamos que queremos 2 nodes, porém de forma **regional** ou em uma **region**:
+**N**o nosso caso, se voltarmos ao código Terraform, podemos ver que definimos uma região, e não uma zona, certo?! Repare nas linhas destacadas a seguir, onde especificamos que queremos 2 nodes, porém de forma **regional** ou em uma **region**:
 
 {{< highlight go "linenos=table,hl_lines=5-6 13 21, linenostart=0" >}}
 # Algumas variáveis extras
