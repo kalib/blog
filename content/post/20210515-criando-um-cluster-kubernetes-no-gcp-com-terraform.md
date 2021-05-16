@@ -790,7 +790,7 @@ replicaset.apps/meuapp-deployment-67b6798d7d   3         3         3       14s
 
 ![Terraform - GKE](/img/terraform-gke5.png)
 
-**S**cesso!
+**S**ucesso!
 
 **A**gora que confirmamos que tudo roda, não esqueça de deletar seu cluster após terminar de se divertir com ele para evitar gastar dinheiro desnecessariamente.
 
