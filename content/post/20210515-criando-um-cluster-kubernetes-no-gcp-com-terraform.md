@@ -18,7 +18,7 @@ description: "O GKE é a plataforma Kubernetes do GCP. Um ambiente simplificado 
 
 **O** GKE, ou Google Kubernetes Engine, é a plataforma gerenciada do Kubernetes no Google Cloud Platform, ou GCP. Embora o Kubernetes funcione de forma muito parecida em qualquer provedor ou mesmo em instalações locais, cada plataforma possui suas próprias customizações ou capacidades.
 
-**A** a solução de Kubernetes oferecida no GCP é segura e completamente gerenciada pelo Google, oferendo a você a opção de preocupar-se em gerenciar apenas seus nodes, assim como acontece em todos os demais provedores de Cloud tais como AWS, IBM e Azure. Além disto, você também possui a opção de gerenciar unicamente as suas aplicações, de forma que o Google passe a cuidar e gerenciar também os seus nodes, o que torna a vida de desenvolvedores e engenheiros ainda mais fácil. Esta opção se chama Auto Pilot e foi disponibilizada recentemente no GCP.
+**A** solução de Kubernetes oferecida no GCP é segura e completamente gerenciada pelo Google, oferendo a você a opção de preocupar-se em gerenciar apenas seus nodes, assim como acontece em todos os demais provedores de Cloud tais como AWS, IBM e Azure. Além disto, você também possui a opção de gerenciar unicamente as suas aplicações, de forma que o Google passe a cuidar e gerenciar também os seus nodes, o que torna a vida de desenvolvedores e engenheiros ainda mais fácil. Esta opção se chama Auto Pilot e foi disponibilizada recentemente no GCP.
 
 ![GKE Auto Pilot](/img/terraform-gke1.png)
 
