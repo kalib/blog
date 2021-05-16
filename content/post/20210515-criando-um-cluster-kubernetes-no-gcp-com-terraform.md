@@ -639,7 +639,7 @@ project_id = <sensitive>
 region = "us-central1"
 ```
 
-**A**ssumindo que voc&e já possui a cli do google cloud instalada e autenticada, você poderá agora configurar seu *kubectl* para utilizar o seu novo cluster utilizando o seguinte comando:
+**A**ssumindo que você já possui a cli do google cloud instalada e autenticada, você poderá agora configurar seu *kubectl* para utilizar o seu novo cluster utilizando o seguinte comando:
 
 ```yml
 ➜ gcloud container clusters get-credentials $(terraform output -raw kubernetes_cluster_name) --region $(terraform output -raw region)
