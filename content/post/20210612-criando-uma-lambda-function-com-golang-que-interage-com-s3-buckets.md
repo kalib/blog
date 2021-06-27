@@ -52,9 +52,9 @@ description: "Criando uma lambda function com golang que interage com s3 buckets
 
 **O**utro aspecto que gosto de selecionar é a região. Repare que no canto superior direito estou utilizando a região Canada Central 1 (*Central*). Por residir no Canada, esta é a região mais próxima de mim, portanto possuirá melhor performance. Embora para o exercício não vá fazer muita diferença, sinta-se livre para escolher qualquer região ou a que seja mais próxima de você.
 
-**N**as configurações abaixo podemos optar por uma Role, caso já saibamos que Role utilizaremos, mas podemos ignorar isto e deixar o padrão, para que o AWS crie uma automaticamente para nós.
+**N**as configurações abaixo podemos optar por uma Role caso já saibamos que Role utilizaremos, mas podemos ignorar isto e deixar o padrão, para que o AWS crie uma automaticamente para nós.
 
-**A**gora apenas nos resta clicar em **Criar função** (*Create function*), no botão laranja no canto inferior direito.
+**A**gora nos resta apenas clicar em **Criar função** (*Create function*), no botão laranja no canto inferior direito.
 
 **A**pós alguns segundos veremos a tela de configuração e administração de nossa função (*function*).
 
@@ -157,7 +157,7 @@ func handler(bucket MeuBucket) (*s3.CreateBucketOutput, error) {
 
 **R**epare que nosso struct MeuBucket está em formato padrão json, tal como invocaríamos em uma API qualquer.
 
-**C**om nosso struc devidamente criado é hora de darmos corpo ao nosso código e inciarmos a nossa lógica. A ideia é criar um bucket no s3, portanto vamos criar uma função chamada *criarBucket*. Nossa função receberá nosso struct bucket e iniciará a sessão aws para o s3.
+**C**om nosso struct devidamente criado é hora de darmos corpo ao nosso código e inciarmos a nossa lógica. A ideia é criar um bucket no s3, portanto vamos criar uma função chamada *criarBucket*. Nossa função receberá nosso struct bucket e iniciará a sessão aws para o s3.
 
 **A** nossa função *criarBucket* deverá receber os dados fornecidos em nosso struct a criar o bucket com o nome que foi passado, obviamente que validando a existência do bucket pois o AWS não permite que dois buckets existam com o mesmo nome globalmente.
 
@@ -373,7 +373,7 @@ go get -u github.com/aws/aws-lambda-go/cmd/build-lambda-zip
 
 ![Golang Lambda](/img/golang-lambda-9.png)
 
-**S**e o seu código estava exatamente igual ao meu, você provavelmente receberá um resultado com status *200*, o que significa que sua função executou com sucesso. (Caso você tenha recebido um **erro** significa que o seu código contém algo errado OU um bucket com o nome que você indicou já existe.)
+**S**e o seu código está exatamente igual ao meu, você provavelmente receberá um resultado com status *200*, o que significa que sua função executou com sucesso. (Caso você tenha recebido um **erro** significa que o seu código contém algo errado OU um bucket com o nome que você indicou já existe.)
 
 ![Golang Lambda](/img/golang-lambda-10.png)
 
