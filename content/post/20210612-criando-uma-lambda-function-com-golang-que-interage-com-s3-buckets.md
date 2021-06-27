@@ -100,7 +100,7 @@ func handler(bucket MeuBucket) (*s3.CreateBucketOutput, error) {
 
 **I**ndicamos que nosso handler retorna um CreateBucketOutput, o qual é padrão fornecido pela sdk Go do AWS. Mais detalhes podem ser encontrados <a href="https://docs.aws.amazon.com/sdk-for-go/api/service/s3/" target="_blank">aqui</a>.
 
-**J**á que pretendemos utilizar o pacote *S3* fornecido pelo AWs, devemos também importá-lo em nosso código. Além disso, para trabalharmos com o AWS devemos iniciar uma sessão, portanto criaremos uma variável para nossa sessão também.
+**J**á que pretendemos utilizar o pacote *S3* fornecido pelo AWS, devemos também importá-lo em nosso código. Além disso, para trabalharmos com o AWS devemos iniciar uma sessão, portanto criaremos uma variável para nossa sessão também.
 
 {{< highlight go "linenos=table,hl_lines=5-7 10-12, linenostart=0" >}}
 package main
@@ -157,9 +157,9 @@ func handler(bucket MeuBucket) (*s3.CreateBucketOutput, error) {
 
 **R**epare que nosso struct MeuBucket está em formato padrão json, tal como invocaríamos em uma API qualquer.
 
-**C**om nosso struct devidamente criado é hora de darmos corpo ao nosso código e inciarmos a nossa lógica. A ideia é criar um bucket no s3, portanto vamos criar uma função chamada *criarBucket*. Nossa função receberá nosso struct bucket e iniciará a sessão aws para o s3.
+**C**om nosso struct devidamente criado é hora de darmos corpo ao nosso código e inciarmos a nossa lógica. A ideia é criar um bucket no s3, portanto vamos criar uma função chamada *criarBucket*. Nossa função receberá nosso struct bucket e iniciará a sessão AWS para o s3.
 
-**A** nossa função *criarBucket* deverá receber os dados fornecidos em nosso struct a criar o bucket com o nome que foi passado, obviamente que validando a existência do bucket pois o AWS não permite que dois buckets existam com o mesmo nome globalmente.
+**A** nossa função *criarBucket* deverá receber os dados fornecidos em nosso struct para criar o bucket com o nome que foi passado, obviamente que validando a existência do bucket pois o AWS não permite que dois buckets existam com o mesmo nome globalmente.
 
 **P**ara que possamos fazer estes tratamentos de erros, importaremos também os pacotes *errors* e *awserr*, que também faz parte da SDK do AWS.
 
@@ -223,7 +223,7 @@ func handler(bucket MeuBucket) (*s3.CreateBucketOutput, error) {
 
 **E**ste bloco de código foi um pouco maior. Aqui, além de iniciarmos nossa sessão s3 também tratamos possíveis erros caso já exista um bucket com o nome que escolhemos.
 
-**N**osso código está se utilizando da própria SDK do aws para tratar os erros, de forma que receberemos a mensagem *Bucket com este nome já existe!* caso já exista globalmente (em alguma outra conta do AWS que não seja a sua) um bucket utilizando o nome fornecido, ou *Bucket com este nome já existe, e é seu!* caso o bucket já exista e tenha sido criado em sua conta.
+**N**osso código está se utilizando da própria SDK do AWS para tratar os erros, de forma que receberemos a mensagem *Bucket com este nome já existe!* caso já exista globalmente (em alguma outra conta do AWS que não seja a sua) um bucket utilizando o nome fornecido, ou *Bucket com este nome já existe, e é seu!* caso o bucket já exista e tenha sido criado em sua conta.
 
 **A** única coisa que nos falta é tratar nosso handler para que ele traga os devidos retornos ou resultados gerados pela nossão função *criarBucket*.
 
