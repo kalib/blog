@@ -1,6 +1,6 @@
 ---
 title: "Criando Uma Lambda Function Com Golang Que Interage Com S3 Buckets"
-date: 2021-06-27T14:39:00-04:00
+date: 2021-06-27T14:38:00-04:00
 draft: false
 image: "/img/golang-lambda.png"
 tags: [
