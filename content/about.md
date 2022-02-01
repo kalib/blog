@@ -14,11 +14,11 @@ weight = 111
 <img src="/about/me_debora.png" alt="Marcelo" align="right">
 Me chamo **Marcelo Cavalcante Rocha**, também conhecido como **Kalib**. Dinâmico, escrupulosamente curioso, reservadamente convencional, multitarefa, command line heavy-user, estudante e pesquisador, surfista por prazer, leitor inquieto e aspirante a ser humano. Sempre acreditei na ideia de que bons profissionais de tecnologia são preguiçosos, no sentido de que se algo pode ser automatizado com o fim de evitar tarefas repetitivas, automatizado será.
 
-Atualmente trabalho como Engenheiro SRE/DevOps Sênior na empresa **<a href="https://www.flipp.com" target="_blank">Flipp</a>**, em Toronto, Canadá. Sou formado em **Sistemas de Informação** e pós-graduado em **Governança de Tecnologia da Informação**.
+Atualmente trabalho como Engenheiro de Sistemas DevOps Sênior na empresa **<a href="https://www.dragos.com" target="_blank">Dragos</a>**, sediada em Hanover, Estados Unidos. Sou formado em **Sistemas de Informação** e pós-graduado em **Governança de Tecnologia da Informação**.
 
-Embora trabalhe para uma empresa em Toronto, atualmente resido em Barrie, uma pequena e pacata cidade em Ontario que fica a cerca de 90km de Toronto. Trabalho em regime de home office, o que me permite desfrutar de uma vida mais calma em uma cidade menor, mais próximo da natureza e dos esportes que gosto de praticar.
+Embora trabalhe para uma empresa de Hanover, atualmente resido em Barrie, uma pequena e pacata cidade em Ontario, no Canada,  que fica a cerca de 90km de Toronto. Trabalho em regime de home office, o que me permite desfrutar de uma vida mais calma em uma cidade menor, mais próximo da natureza e dos esportes que gosto de praticar.
 
-Apaixonado por bons vinhos e cervejas mas, acima de tudo, por minha linda companheira que insiste em transformar meu mundinho em algo mais alegre e atrativo.
+Apaixonado por bons vinhos e cervejas mas, acima de tudo, por minha linda companheira que insiste em transformar meu mundo em algo mais alegre e atrativo.
 
 Caso deseje me contactar, sinta-se livre e envie um **email** para <a href="mailto:marcelo@marcelocavalcante.net">marcelo</a> neste(@) mesmo domínio. Também estou constantemente online no **IRC** como kalib, através da rede Freenode, nos canais #archlinux, #archlinux-br, #linux, etc. Além disto, você pode simplesmente deixar um **comentário** aqui mesmo no site/blog.
 
