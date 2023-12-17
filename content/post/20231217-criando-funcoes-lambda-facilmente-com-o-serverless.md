@@ -24,7 +24,7 @@ description: "Que tal criar a infraesturtura e sua função lambda de forma simp
 
 **N**ão estou menosprezando a infraestrutura, obviamente. Sempre trabalhei com infraestrutura e entendo bem a importância de uma infraestrutura bem projetada e configurada, mas quando falamos em um mundo moderno e na nuvem, principalmente em soluções serverless como é o caso de *lambda functions* ou funções *lambda*, está claro que o nosso objetivo principal é o código da aplicação em si, e não a infraestrutura.
 
-**O** Serverless nos ajuda justamente neste propósito, abstraindo e automatizando toda a infraestutrura que é necessária para rodarmos nossa lambda: IAM, cloudformation, Labmda em si, etc. Desta forma podemos dedicar a maior parte do nosso tempo de fato em nosso código. E a melhor parte, isto não compromete a segurança ou estabilidade da infraestrutura, já que o framework Serverless estará sempre seguindo as melhores práticas ao abstrair esta camada.
+**O** Serverless nos ajuda justamente neste propósito, abstraindo e automatizando toda a infraestutrura que é necessária para rodarmos nossa lambda: IAM, cloudformation, Lambda em si, etc. Desta forma podemos dedicar a maior parte do nosso tempo de fato em nosso código. E a melhor parte, isto não compromete a segurança ou estabilidade da infraestrutura, já que o framework Serverless estará sempre seguindo as melhores práticas ao abstrair esta camada.
 
 **A**lém de facilitar o processo de desenvolvimento e entrega ou *deployment* de nossa função lambda, o Serverless framework possui suporte à diversas linguagens, assim como o AWS Lambda: *Node.js*, *Python*, *Java*, *Go*, *C#*, *Ruby*, *Swift*, *Kotlin*, *PHP*, *Scala* e *F#*.
 
