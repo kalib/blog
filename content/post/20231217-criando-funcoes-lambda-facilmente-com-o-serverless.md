@@ -155,7 +155,7 @@ README.md      handler.py     serverless.yml
 
 **V**amos verificar os arquivos *handler.py* e *serverless.yml*.
 
-**O** handler.py é o arquivo principal de nossa função lambda em python. De forma resumida, para quem nunca utilizou lambda, o handler é o método no código da nossa função que processa eventos. Quando nossa função é invocada, Lambda executa o método handler. A função continuará rodando até que o handler retorne uma resposta, finalize ou expire (*time out*).
+**O** handler.py é o arquivo principal de nossa função lambda em python. De forma resumida, para quem nunca utilizou lambda, o handler é o método no código da nossa função que processa eventos. Quando nossa função é invocada, Lambda executa o método handler. A função continuará rodando até que o handler retorne uma resposta, finalize ou caso expire a sessão (*time out*).
 
 **O** conteúdo padrão que o Serverless adiciona ao nosso *handler.py* será algo similar ao seguinte:
 
