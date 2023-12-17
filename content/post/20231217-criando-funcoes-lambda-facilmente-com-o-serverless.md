@@ -119,7 +119,7 @@ Creating a new serverless project
 ? Register or Login to Serverless Framework (Y/n)
 ```
 
-**E**le lhe perguntará se você deseja se cadastrar ou logar no serviço Serverless. Por hora você não precisar fazer isso, portanto apenas selecionei *n* e segui em frente. A pergunta seguinte será se você deseja efetuar o deployment de seu projeto. Mas vamos selecionar *n* por enquanto para que possamos verificar nosso projeto antes de fazermos o primeiro deployment.
+**E**le lhe perguntará se você deseja se cadastrar ou logar no serviço Serverless. Por hora você não precisa fazer isso, portanto apenas selecionei *n* e segui em frente. A pergunta seguinte será se você deseja efetuar o deployment de seu projeto. Vamos selecionar *n* por enquanto para que possamos verificar nosso projeto antes de fazermos o primeiro deployment.
 
 ```bash
 ➜ serverless
@@ -153,11 +153,11 @@ serverless --help    Discover more commands
 README.md      handler.py     serverless.yml
 ```
 
-**V**amos verificar os arquivos *handelr.py* e *serverless.yml*.
+**V**amos verificar os arquivos *handler.py* e *serverless.yml*.
 
 **O** handler.py é o arquivo principal de nossa função lambda em python. De forma resumida, para quem nunca utilizou lambda, o handler é o método no código da nossa função que processa eventos. Quando nossa função é invocada, Lambda executa o método handler. A função continuará rodando até que o handler retorne uma resposta, finalize ou expire (*time out*).
 
-**O** conteúdo padrão que o Serverless adiciona ao nosso *handler.pY* será algo similar ao seguinte:
+**O** conteúdo padrão que o Serverless adiciona ao nosso *handler.py* será algo similar ao seguinte:
 
 *handler.py*
 {{< highlight python "linenos=table, linenostart=0">}}
