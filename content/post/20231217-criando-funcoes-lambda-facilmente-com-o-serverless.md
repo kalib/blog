@@ -48,7 +48,7 @@ description: "Que tal criar a infraesturtura e sua função lambda de forma simp
 
 ## Uso básico do Serverless Framework
 
-**U**ma vez que o Serverless já esteja instalado e disponível, a primeira coisa que precisamos fazer é definir as credenciais com as quais trabalharemos com ele em nosso projeto.
+**U**ma vez que o Serverless já esteja instalado e disponível, a primeira coisa que precisamos fazer é definir as credenciais com as quais trabalharemos em nosso projeto.
 
 **N**o console *IAM* do AWS, crie um novo usuário e, apenas para facilitar seu estudo inicial, inclua Acesso de Administrador ao seu novo usário. (Não entrarei em detalhes aqui sobre como criar um usuário no IAM pois assumo que se você está criando funções lambda, provavelmente já sabe fazer isso. Caso não, siga as instruções da <a href="https://docs.aws.amazon.com/pt_br/IAM/latest/UserGuide/id_users_create.html" target="_blank">Amazon aqui</a>.)
 
