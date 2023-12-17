@@ -330,4 +330,4 @@ END Duration: 1.24 ms Memory Used: 41 MB
 
 **P**odemos ver claramente que nosso cumprimento foi impresso no body e também nossa frase *Minha primeira função AWS Lambda com Python!* foi retornada ao final.
 
-**O** céu é o limite quanto ao que você pode fazer com isto. Como qualquer código Python, voc6e pode utilizar lambdas para múltiplas tarefas e automações, interações. Realmente as possibilidades são infinitas. 
+**O** céu é o limite quanto ao que você pode fazer com isto. Como qualquer código Python, voc6e pode utilizar lambdas para múltiplas tarefas e automações, interações. Realmente as possibilidades são infinitas.
