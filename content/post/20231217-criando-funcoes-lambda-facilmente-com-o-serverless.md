@@ -174,7 +174,7 @@ def hello(event, context):
 
 **C**omo podevemos ver, nada de absurdo. Um template padrão com uma função que cria um body que retorna uma mensagem dizendo que a função foi executada com sucesso no AWS Lambda.
 
-**E** aqui está o conteúdo de nosso *serverless.yml*:
+**E**ste é o conteúdo de nosso *serverless.yml*:
 
 *serverless.yml*
 {{< highlight yml "linenos=table, linenostart=0">}}
@@ -213,16 +213,17 @@ functions:
 
 Need a faster logging experience than CloudWatch? Try our Dev Mode in Console: run "serverless dev"
 ```
+
 **C**omo podemos ver, o Serverless cuidou de todo o deployment, criando a stack do CLoudformation, lambda function, etc. E nos informou que tudo foi criado com sucesso.
 
-**R**epare que o Serverless também lhe retornou o nome da sua função: *hello*
+**R**epare que o Serverless também retornou o nome da sua função: *hello*
 
 **S**e verificarmos novamente em nosso console da AWS, em *Lambda* e em *Cloudformation*, veremos que agora nosso projeto estará lá:
 ![AWS](/img/serverless-05.png)
 ![AWS](/img/serverless-04.png)
-**P**odemos clicar em nossa função no console *Lambda* para vermos os detalhes de nossa função caso queiramos:
+**P**odemos clicar em nossa função no console *Lambda* para vermos os detalhes da mesma:
 ![AWS](/img/serverless-06.png)
-**E** simples assim, em questão de 2 ou 3 minutos, temos nossa primeira função Lambda já funcional, bem como primeiro deployment feito com sucesso no AWS, incluindo todos os componentes de infraestrutura, com o quais não precisamos nos preocupar.
+**E** simples assim, em questão de 2 ou 3 minutos, temos nossa primeira função Lambda já funcional, bem como primeiro deployment feito com sucesso no AWS, incluindo todos os componentes de infraestrutura, com os quais não precisamos nos preocupar.
 ![AWS](/img/serverless-07.png)
 
 **A**lém de deployment, o Serverless nos permite também executar nosta função diretamente de nossa linha de comando, bastando apenas executarmos *sls invoke* e informar o nome de nossa função:
@@ -238,7 +239,7 @@ START
 END Duration: 1.49 ms (init: 122.58 ms) Memory Used: 37 MB
 ```
 
-**C**omo podemos ver, nossa função Lambda funcionou como esperado e nos retornou exatamente a mensagem que esperávamos: *Go Serverless v3.0! Your function executed successfully!* bem como o *statusCode* 200, que significa sucesso.
+**C**omo podemos ver, nossa função Lambda funcionou como esperado e retornou exatamente a mensagem que esperávamos: *Go Serverless v3.0! Your function executed successfully!* bem como o *statusCode* 200, que significa sucesso.
 
 **S**imples e rápido, certo?!
 
