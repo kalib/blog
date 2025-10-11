@@ -14,9 +14,11 @@ weight = 111
 <img src="/about/me_debora.png" alt="Marcelo" align="right">
 Me chamo **Marcelo Cavalcante Rocha**, também conhecido como **Kalib**. Dinâmico, escrupulosamente curioso, reservadamente convencional, multitarefa, command line heavy-user, estudante e pesquisador, surfista por prazer, leitor inquieto e aspirante a ser humano. Sempre acreditei na ideia de que bons profissionais de tecnologia são preguiçosos, no sentido de que se algo pode ser automatizado com o fim de evitar tarefas repetitivas, automatizado será.
 
-Atualmente trabalho como Engenheiro de Sistemas DevOps Sênior na empresa **<a href="https://www.dragos.com" target="_blank">Dragos</a>**, sediada em Hanover, Estados Unidos. Sou formado em **Sistemas de Informação** e pós-graduado em **Governança de Tecnologia da Informação**.
+Atualmente trabalho como Principal Site Reliability Engineer (SRE) na empresa **<a href="https://www.dragos.com" target="_blank">Dragos</a>**, sediada em Hanover, Estados Unidos. A Dragos é uma empresa líder em segurança cibernética industrial (ICS/OT), focada em proteger os sistemas de tecnologia operacional (OT) que controlam infraestruturas críticas, como energia, manufatura e serviços públicos. Sua principal missão é defender o mundo contra ameaças cibernéticas que visam sistemas industriais, que são vitais para a economia e a vida cotidiana. A Dragos fornece uma plataforma de tecnologia e serviços de inteligência de ameaças que permite às organizações ter visibilidade, identificar vulnerabilidades e responder a incidentes em seus ambientes industriais.
 
-Embora trabalhe para uma empresa de Hanover, atualmente resido em Barrie, uma pequena e pacata cidade em Ontario, no Canada,  que fica a cerca de 90km de Toronto. Trabalho em regime de home office, o que me permite desfrutar de uma vida mais calma em uma cidade menor, mais próximo da natureza e dos esportes que gosto de praticar.
+Sou formado em **Sistemas de Informação** e pós-graduado em **Governança de Tecnologia da Informação**, com MBA em Governança de TI.
+
+Embora trabalhe para uma empresa de Hanover, atualmente resido em Barrie, uma pequena e pacata cidade em Ontario, no Canada, que fica a cerca de 90km de Toronto. Trabalho em regime de home office, o que me permite desfrutar de uma vida mais calma em uma cidade menor, mais próximo da natureza e dos esportes que gosto de praticar.
 
 Apaixonado por bons vinhos e cervejas mas, acima de tudo, por minha linda companheira que insiste em transformar meu mundo em algo mais alegre e atrativo.
 
