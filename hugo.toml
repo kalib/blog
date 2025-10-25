@@ -60,7 +60,7 @@ disqusShortname = "marcelokalib"
     enable = true
     [params.page.comment.disqus]
       enable = true
-      shortname = "marcelokalib"
+      shortname = "marcelocavalcante"
 
 # Search config
 [params.search]
