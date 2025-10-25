@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Introdução ao Terraform - Marcelo Cavalcante Rocha</title><meta name="Description" content="Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código."><meta property="og:url" content="//blog.marcelocavalcante.net:1313/posts/introducao-ao-terraform/">
+  <meta property="og:site_name" content="Marcelo Cavalcante Rocha">
+  <meta property="og:title" content="Introdução ao Terraform">
+  <meta property="og:description" content="Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2018-10-29T22:34:06-05:00">
+    <meta property="article:modified_time" content="2018-10-29T22:34:06-05:00">
+    <meta property="article:tag" content="Devops">
+    <meta property="article:tag" content="Terraform">
+    <meta property="article:tag" content="Cloud">
+    <meta property="article:tag" content="GCP">
+    <meta property="article:tag" content="Docker">
+    <meta property="og:image" content="//blog.marcelocavalcante.net:1313/posts/introducao-ao-terraform/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="//blog.marcelocavalcante.net:1313/posts/introducao-ao-terraform/featured-image.png">
+  <meta name="twitter:title" content="Introdução ao Terraform">
+  <meta name="twitter:description" content="Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código.">
+<meta name="application-name" content="Marcelo Cavalcante">
+<meta name="apple-mobile-web-app-title" content="Marcelo Cavalcante">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="//blog.marcelocavalcante.net:1313/posts/introducao-ao-terraform/" /><link rel="prev" href="//blog.marcelocavalcante.net:1313/posts/infraestrutura-como-codigo-com-terraform/" /><link rel="next" href="//blog.marcelocavalcante.net:1313/posts/terraform-variaveis-e-outputs/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Introdução ao Terraform",
+        "inLanguage": "pt-BR",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/\/blog.marcelocavalcante.net:1313\/posts\/introducao-ao-terraform\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/introducao-ao-terraform\/featured-image.png",
+                            "width":  480 ,
+                            "height":  480 
+                        }],"genre": "posts","keywords": "Devops, Terraform, Cloud, GCP, Docker","wordcount":  4987 ,
+        "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/introducao-ao-terraform\/","datePublished": "2018-10-29T22:34:06-05:00","dateModified": "2018-10-29T22:34:06-05:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Marcelo Cavalcante"
+            },"description": "Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'auto';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categorias </a><a class="menu-item" href="/sobre/"> Quem Sou </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancelar
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categorias</a><a class="menu-item" href="/sobre/" title="">Quem Sou</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Conteúdos</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Introdução ao Terraform</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://blog.marcelocavalcante.net" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Marcelo Cavalcante</a></span>&nbsp;<span class="post-category">incluido em <a href="/categories/tutoriais/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutoriais</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2018-10-29">2018-10-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4987 palavras&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;24 minutos&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/introducao-ao-terraform/featured-image.png"
+        data-srcset="/posts/introducao-ao-terraform/featured-image.png, /posts/introducao-ao-terraform/featured-image.png 1.5x, /posts/introducao-ao-terraform/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/posts/introducao-ao-terraform/featured-image.png"
+        title="Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código." /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Conteúdos</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#terraform---uma-robusta-opção-para-infraestrutura-como-código">Terraform - Uma robusta opção para Infraestrutura como Código</a></li>
+    <li><a href="#instalação">Instalação</a>
+      <ul>
+        <li><a href="#docker">Docker</a></li>
+        <li><a href="#terraform">Terraform</a></li>
+      </ul>
+    </li>
+    <li><a href="#verificando-a-instalação">Verificando a instalação</a></li>
+    <li><a href="#iniciando-nosso-projeto">Iniciando nosso projeto</a>
+      <ul>
+        <li><a href="#escopo">Escopo</a></li>
+        <li><a href="#projeto">Projeto</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código.</p>
+<h2 id="terraform---uma-robusta-opção-para-infraestrutura-como-código">Terraform - Uma robusta opção para Infraestrutura como Código</h2>
+<p><strong>A</strong> Hashicorp é uma empresa de bastante destaque no meio DevOps por ter criado várias soluções de automação, que englobam uma série de funcionalidades, como o <a href="https://packer.io" target="_blank" rel="noopener noreffer ">Packer</a> para criação de imagens de forma automatizada, conforme apresentado nestes dois posts  do blog <a href="posts/automatizando-a-criacao-de-imagens/" rel="">1</a>, <a href="/posts/criando-uma-imagem-aws-ec2/" rel="">2</a>, <a href="https://vagrant.io" target="_blank" rel="noopener noreffer ">Vagrant</a>, para provisionamento simples e rápido de máquinas, <a href="https://vaultproject.io" target="_blank" rel="noopener noreffer ">Vault</a>, para gerenciamento de senhas/segredos (<em>secrets</em>), <a href="https://consul.io" target="_blank" rel="noopener noreffer ">Consul</a>, para descoberta de serviços, <a href="https://nomadproject.io" target="_blank" rel="noopener noreffer ">Nomad</a>, para agendamento e automação de deployments, e o [Terraform](<a href="https://terraform.io" target="_blank" rel="noopener noreffer ">https://terraform.io</a>, foco principal deste post, uma robusta ferramenta para criação de infraestrutura como código, ou <em>infrastructure as cdode</em>.</p>
+<p><strong>C</strong>aso você não possua uma ideia muito clara de qual a idea por trás do conceito de infraestrutura como código, ou mesmo quais as vantagens de se utilizar esta metodologia de gerenciamento/criação de infraestrutura, sugiro que leia meu <a href="/posts/infraestrutura-como-codigo-com-terraform/" rel="">post anterior</a>, no qual explico alguns dos principais benefícios desta prática, bem como uma breve apresentação do Terraform.</p>
+<p><strong>D</strong>e forma resumida, o Terraform é uma ferramenta disponível em formatos Open Source ou Enterprise, cujo intuito é permitir a criação de infraestrutura como código, possibilitando o controle de versões. Suporta diversos provedores tais como AWS, OpenStack, Azure, GCP, etc.</p>
+<p><strong>U</strong>ma de suas principais características é a idempotência, termo muito utilizado na matemática ou em ciência da computação para indicar a propriedade que algumas operações têm de poderem ser aplicadas várias vezes sem que o valor do resultado se altere após a aplicação inicial. Ou seja, uma vez aplicado o seu código terraform, você poderá aplicá-lo quantas vezes desejar e nenhuma alteração será feita em sua infraestrutura, a menos que você tenha de fato alterado algo em seu código.</p>
+<p><strong>O</strong> Terraform utiliza uma linguagem de alto nível e fácil de se reutilizar, uma vez que podemos criar módulos e utilizar estes módulos em diversos projetos distintos, mesmo que tenhamos módulos em repositórios também distintos.</p>
+<p><strong>A</strong> ideia de possuir um &ldquo;plano&rdquo; de execução nos ajuda a identificar falhas em nosso código mais rapidamente, bem como prevenir problemas em nossa infraestrutura, visto que podemos ter uma visão geral de tudo o que será aplicado em nossa infra antes mesmo da execução real de nosso código, nos permitindo ter a certeza de que todas as alterações serão de fato intencionais.</p>
+<p><strong>S</strong>empre digo que a melhor forma de se aprender uma nova tecnologia é colocando a mão na massa, portanto vamos escrever algumas linhas de código para entendermos as funcionalidades básicas bem como a sintaxe de código utilizada pelo Terraform.</p>
+<p><strong>A</strong>ntes de pensarmos em cenários mais complexos devemos entender o básico, no entanto eu sempre gostei de ver algum resultado como forma de ter uma motivação real para meus estudos. Nunca gostei de apenas ler e escrever códigos que não resultam em nada, e acredito que todos devam sentir a mesma insatisfação ao não ter um uso real e prático para o que quer que esteja estudando.</p>
+<p><strong>S</strong>eguindo esta ideia, antes de pensarmos em cenários mais complexos, vamos iniciar pelo básico, porém com algum resultado prático. A ideia para este post é termos um jogo clássico do Mario rodando em um container Docker que seja acessível através de nosso browser.</p>
+<h2 id="instalação">Instalação</h2>
+<p><strong>P</strong>ara este post precisaremos ter três aplicativos instalados:</p>
+<ol>
+<li>Um navegador ou browser qualquer; (Imagino que você já tenha algum&hellip;)</li>
+<li>Docker;</li>
+<li>Terraform</li>
+</ol>
+<h3 id="docker">Docker</h3>
+<p><strong>O</strong> processo de instalação do Docker varia de acordo com o seu sistema operacional. Caso queira maiores detalhes sobre sua instalação, bem como uma explicação introdutória de como ele funciona, você pode visitar <a href="/posts/docker-uma-alternativa-elegante-para/" rel="">este outro post</a>, embora você não precise ter nenhum conhecimento sobre Docker para seguir as instruções deste tutorial, visto que utilizaremos o Terraform para criar nosso container.</p>
+<p><strong>N</strong>o <em>Archlinux</em> a instalação pode ser feita através do pacman:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># pacman install docker</span></span></span></code></pre></div></div>
+<p><strong>N</strong>o <em>Windows</em> a instalação pode ser feita através do binário disponível no site oficial: <a href="https://store.docker.com/editions/community/docker-ce-desktop-windows" target="_blank" rel="noopener noreffer ">Binário Windows</a>.</p>
+<p><strong>N</strong>o <em>OS X</em>, você também pode baixar o binário diretamente no site oficial, <a href="https://store.docker.com/editions/community/docker-ce-desktop-mac" target="_blank" rel="noopener noreffer ">Binário OS X</a> ou através do brew:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install docker</span></span></code></pre></div></div>
+<h3 id="terraform">Terraform</h3>
+<p><strong>A</strong> instalação do Terraform é tão simples quanto a do Docker.</p>
+<p><strong>N</strong>o <em>Archlinux</em> a instalação pode ser feita através do pacman:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># pacman -S terraform</span></span></span></code></pre></div></div>
+<p><strong>N</strong>o <em>Windows</em> e no <em>OS X</em> a instalação pode ser feita através do binário disponível no site oficial do Terraform: <a href="https://www.terraform.io/downloads.html" target="_blank" rel="noopener noreffer ">Binários Terraform</a>.</p>
+<p><strong>O</strong>utra opção para OS X é através do brew:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install terraform</span></span></code></pre></div></div>
+<h2 id="verificando-a-instalação">Verificando a instalação</h2>
+<p><strong>U</strong>ma vez que você tenha instalado ambos, certifique-se de que a instalação foi bem sucedida e de que o serviço Docker esteja rodando em seu sistema. Para isto, abra algum terminal, console ou prompt do CMD (para usuários Windows) e digite o seguinte:</p>
+<p>1- Para termos certeza de que o Terraform está instalado e funcionando:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">terraform -version</span></span></code></pre></div></div>
+<p>Você deverá receber algum resultado com a versão do seu Terraform, similar a este:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Terraform v0.11.10</span></span></code></pre></div></div>
+<p>2- Para termos certeza de que o Docker está devidamente instalado e rodando, digite:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker ps</span></span></code></pre></div></div>
+<p>Você deverá receber algum resultado parecido com o seguinte:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span></span></code></pre></div></div>
+<p><strong>N</strong>ão se assuste ou dê importância para este resultado do comando Docker, ele apenas indica o status atual de seu Docker, informando se você possui algum container rodando ou não. Caso você tenha acabado de instalar o mesmo ou iniciado o serviço do Docker, você provavelmente não terá nenhum container rodando.</p>
+<p><strong>C</strong>aso o retorno de seu Docker ou Terraform não seja similar aos que apresentei acima, verifique se a instalação foi realmente bem sucedida ou, no caso do Docker, verifique se o mesmo está rodando, afinal ele não apenas precisa ser instalado, mas precisa estar rodando, diferentemente do Terraform que apenas precisa ser instalado.</p>
+<h2 id="iniciando-nosso-projeto">Iniciando nosso projeto</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/introducao-ao-terraform/mariodocker.png"
+        data-srcset="/posts/introducao-ao-terraform/mariodocker.png, /posts/introducao-ao-terraform/mariodocker.png 1.5x, /posts/introducao-ao-terraform/mariodocker.png 2x"
+        data-sizes="auto"
+        alt="/posts/introducao-ao-terraform/mariodocker.png"
+        title="Super Mario" width="656" height="536" /></p>
+<h3 id="escopo">Escopo</h3>
+<p><strong>O</strong> primeiro passo de qualquer projeto é identificar alguma espécie de esboço ou escopo para o mesmo.</p>
+<p><strong>O</strong> que queremos para o nosso projeto é:</p>
+<ol>
+<li>Ter um jogo web do Mario;</li>
+<li>Queremos que ele rode em um container, pois queremos uma aplicação em uma infraestrutura moderna e que possa ser capaz de rodar em qualquer local, seja em um servidor físico local, uma VM ou mesmo um provedor na nuvem, como AWS, GCP, Azure, etc.;</li>
+<li>Como não sabemos onde ou como iremos fazer o deployment deste container, queremos fazer com que seja algo automatizado e portável para facilitar futuros planos, portanto queremos criar este container com o Terraform, para que possamos gerenciar nosso código, versionar, etc.</li>
+<li>Não escreveremos a aplicação em si. O jogo do Mario já existe e uma imagem para Docker já está disponível para o mesmo através do seguinte link: <a href="https://hub.docker.com/r/pengbai/docker-supermario" target="_blank" rel="noopener noreffer ">Imagem Mario</a> (Mas nós não precisamos nos precoupar com isto agora, pois o Terraform vai cuidar de baixar a imagem para nós. ;])</li>
+<li>A aplicação deverá estar acessível via browser local para que possamos ao menos garantir que o jogo está de fato funcionando.</li>
+</ol>
+<p><strong>E</strong>ste será o nosso escopo básico, portanto vamos começar nosso código.</p>
+<h3 id="projeto">Projeto</h3>
+<p><strong>O</strong> recurso mais básico em um código ou módulo Terraform é o <em>resource</em>, ou recurso. O Terraform suporta centenas de recursos diferentes, dentre eles o <em>docker_image</em>, que será o recurso de que precisaremos inicialmente.</p>
+<p><strong>A</strong> partir deste momento não mais utilizarei a palavra recurso. Uma vez que o Terraform chama os recursos de <em>resources</em>, devemos nos acostumar com sua nomenclatura.</p>
+<p><strong>A</strong>ntes de mais nada, vamos criar um diretório para nosso projeto. Chamaremos nosso projeto de Marioweb, visto que se trata de uma versao open source do jogo Mario.</p>
+<p><strong>A</strong>qui estarei criando o diretório via linha de comando, mas sinta-se livre para criar um diretório da forma que você preferir. Após criar o diretório, com algum terminal ou console aberto (ou prompt do CMD para usuários do Windows), navegue até este diretório recém criado:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ mkdir marioweb
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> marioweb</span></span></code></pre></div></div>
+<p><strong>D</strong>entro do diretório <em>marioweb</em> crie um novo arquivo chamado <em>main.tf</em>.</p>
+<p><strong>P</strong>ara manter um padrão, os arquivos de código do Terraform costumam utilizar o sufixo/extensão .tf e o principal arquivo em módulos ou projetos Terraform costuma se chamar <em>main.tf</em>, por se tratar do arquivo principal do módulo ou projeto.</p>
+<p><strong>P</strong>ara criar este arquivo você poderá utilizar qualquer editor de textos de sua escolha: vim, emacs, vi, notepad, notepad++, sublime, atom, etc.</p>
+<p><strong>E</strong>m nosso arquivo <em>main.tf</em> insira o seguinte conteúdo por enquanto:</p>
+<p><strong>main.tf</strong></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-yaml">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># Baixar a imagem do Projeto Docker-SuperMario</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">resource &#34;docker_image&#34; &#34;image_id&#34; {</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">name = &#34;pengbai/docker-supermario:latest&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>}</span></span></code></pre></div></div>
+<p><strong>O</strong> que temos no bloco de código acima:</p>
+<ol>
+<li>A primeira linha é apenas um comentário. Como boa prática, é importante termos comentários ao longo de nosso código para descrever o que pretendemos com aquele determinado trecho de código. E por hora, o que pretendemos é exatamente apenas isso: <em>Baixar a imagem do Projeto Docker-SuperMario</em> para nosso ambiente.</li>
+<li>Na linha 2 estamos especificando que queremos utilizar um <em>resource</em>. Cada <em>resource</em> no Terraform leva dois parâmetros, sendo um deles o <em>tipo de resource</em> e o outro um <em>nome qualquer</em> para este resource. Como dito antes, este trecho de código pretende baixar a imagem do projeto SuperMario, portanto precisamos do tipo de <em>resource</em> chamado <em>docker_image</em>. Este é apenas um dos milhares de <em>resources</em> existentes para o Terraform. Em seguida estamos dando o nome <em>image_id</em> para nosso <em>resource</em> de tipo <em>docker_image</em>. O nome poderia ser qualquer um, até mesmo <em>minha_imagem_do_coracao</em>, mas para ficar mais descritiva e mantendo boas práticas, utilizarei <em>image_id</em>. Uma vez que identificamos o tipo de <em>resource</em> e o nome que queremos dar para ele, devemos encerrar a linha abrindo o bloco de código no qual listaremos os atributos deste <em>resource</em>. Para isto, utilizaremos um <em>{</em> para abrir este bloco.</li>
+<li>Na linha 3 começamos a definir os atributos do nosso <em>resource</em>. A documentação do Terraform é excelente e lista todos os <em>resources</em> suportados, bem como todos os <em>atributos</em> suportados por cada <em>resource</em>. Neste caso, o único atributo que precisamos no momento é o <em>name</em>, ou nome da imagem que desejamos baixar. Em seguida, indicamos qual o nome da imagem desejada. Por padrão, o Docker adota a nomenclatura <em>&lt;REPOSITÓRIO/IMAGEM:TAG&gt;</em> para indicar a imagem desejada. Em nosso caso, o repositório onde a imagem se encontra se chama <em>pengbai</em> e a imagem em si é chamada de <em>docker-supermario</em>, portanto teremos: <em>name = &ldquo;pengbai/super-mario&rdquo;</em>. A <em>tag</em> não é obrigatória. Mas como desejo garantir que utilizaremos sempre a imagem mais recente, utilizarei a tag <em>latest</em> (última).</li>
+<li>Uma vez que concluímos a definição de nosso <em>resource</em>, podemos fechar o nosso bloco de código para o mesmo utilizando um <em>}</em> na linha 4.</li>
+</ol>
+<p><strong>A</strong>gora que temos o início de nosso código, já podemos começar a testá-lo.</p>
+<p><strong>D</strong>e volta ao nosso terminal/console, vamos iniciar o nosso ambiente Terraform para este projeto utilizando o comando <em>terraform init</em>. Este comando inicia nosso ambiente e baixa os plugins necessários para nosso projeto. No nosso caso, o Terraform baixará os plugins necessários para que nosso código possa lidar com o Docker.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform init
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Initializing provider plugins...
+</span></span><span class="line"><span class="cl">- Checking <span class="k">for</span> available provider plugins on https://releases.hashicorp.com...
+</span></span><span class="line"><span class="cl">- Downloading plugin <span class="k">for</span> provider <span class="s2">&#34;docker&#34;</span> <span class="o">(</span>1.1.0<span class="o">)</span>...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">The following providers <span class="k">do</span> not have any version constraints in configuration,
+</span></span><span class="line"><span class="cl">so the latest version was installed.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">To prevent automatic upgrades to new major versions that may contain breaking
+</span></span><span class="line"><span class="cl">changes, it is recommended to add <span class="nv">version</span> <span class="o">=</span> <span class="s2">&#34;...&#34;</span> constraints to the
+</span></span><span class="line"><span class="cl">corresponding provider blocks in configuration, with the constraint strings
+</span></span><span class="line"><span class="cl">suggested below.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">* provider.docker: <span class="nv">version</span> <span class="o">=</span> <span class="s2">&#34;~&gt; 1.1&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform has been successfully initialized!
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">You may now begin working with Terraform. Try running <span class="s2">&#34;terraform plan&#34;</span> to see
+</span></span><span class="line"><span class="cl">any changes that are required <span class="k">for</span> your infrastructure. All Terraform commands
+</span></span><span class="line"><span class="cl">should now work.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">If you ever <span class="nb">set</span> or change modules or backend configuration <span class="k">for</span> Terraform,
+</span></span><span class="line"><span class="cl">rerun this <span class="nb">command</span> to reinitialize your working directory. If you forget, other
+</span></span><span class="line"><span class="cl">commands will detect it and remind you to <span class="k">do</span> so <span class="k">if</span> necessary.</span></span></code></pre></div></div>
+<p><strong>S</strong>e você recebeu um retorno parecido com o meu, significa que tudo está como deveria e que seu projeto foi iniciado com sucesso. Caso você liste os arquivos e diretórios ocultos de seu diretório, perceberá que ao rodar o comando <em>terraform init</em>, um diretório oculto chamado <em>terraform</em> foi criado. É nele que ficarão as informações que o Terraform precisa para executar corretamente o seu código, incluindo os plugins que ele necessita. No nosso caso, o plugin para o Docker estará lá.</p>
+<p><strong>N</strong>osso próximo passo será executar o <em>planejamento</em> de nosso código. Ao rodar o <em>planejamento</em> o terraform listará exatamente tudo o que fará caso nosso código seja de fato executado. Novamente em nosso console/terminal, execute <em>terraform plan</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform plan
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Refreshing Terraform state in-memory prior to plan...
+</span></span><span class="line"><span class="cl">The refreshed state will be used to calculate this plan, but will not be
+</span></span><span class="line"><span class="cl">persisted to <span class="nb">local</span> or remote state storage.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ATENÇÃO AQUI:
+</span></span><span class="line"><span class="cl">------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">An execution plan has been generated and is shown below.
+</span></span><span class="line"><span class="cl">Resource actions are indicated with the following symbols:
+</span></span><span class="line"><span class="cl">  + create
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform will perform the following actions:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  + docker_image.image_id
+</span></span><span class="line"><span class="cl">      id:     &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      latest: &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      name:   <span class="s2">&#34;pengbai/docker-supermario:latest&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Plan: <span class="m">1</span> to add, <span class="m">0</span> to change, <span class="m">0</span> to destroy.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Note: You didn<span class="s1">&#39;t specify an &#34;-out&#34; parameter to save this plan, so Terraform
+</span></span></span><span class="line"><span class="cl"><span class="s1">can&#39;</span>t guarantee that exactly these actions will be performed <span class="k">if</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;terraform apply&#34;</span> is subsequently run.</span></span></code></pre></div></div>
+<p><strong>C</strong>aso você tenha recebido um retorno similar a este, significa que tudo parece correto em seu código e que apenas uma ação será executada, conforme descrito no resumo do plano ao final:</p>
+<p><em>Plan: 1 to add, 0 to change, 0 to destroy.</em></p>
+<p><strong>O</strong>u seja: Plano: 1 a adicionar, 0 a alterar, 0 a destruir.</p>
+<p><strong>E</strong>xatamente o que queremos.</p>
+<p><strong>C</strong>aso você tenha recebido uma mensagem de erro, significa que algo em seu código está errado. Por exemplo, se ao invés de utilizarmos <em>docker_image</em> como tipo de resource, utilizarmos <em>docker_images</em>, o resultado de meu <em>terraform plan</em> seria o seguinte:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform plan
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Error: docker_images.image_id: Provider doesn<span class="err">&#39;</span>t support resource: docker_images</span></span></code></pre></div></div>
+<p><strong>A</strong> mensagem geralmente é clara e nos indica onde está o erro. No caso acima, o Terraform nos diz que o resource <em>docker_images</em> não é suportado. Se checarmos a documentação do Terraform, veremos que o nome correto do <em>resource</em> é <em>docker_image</em> (no singular).</p>
+<p><strong>U</strong>ma vez que nosso plano foi executado sem erros, chegou a hora de aplicarmos nosso projeto.</p>
+<p><strong>E</strong>xecute o seu código através do comando <em>terraform apply</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform apply
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">An execution plan has been generated and is shown below.
+</span></span><span class="line"><span class="cl">Resource actions are indicated with the following symbols:
+</span></span><span class="line"><span class="cl">  + create
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform will perform the following actions:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  + docker_image.image_id
+</span></span><span class="line"><span class="cl">      id:     &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      latest: &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      name:   <span class="s2">&#34;pengbai/docker-supermario:latest&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Plan: <span class="m">1</span> to add, <span class="m">0</span> to change, <span class="m">0</span> to destroy.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Do you want to perform these actions?
+</span></span><span class="line"><span class="cl">  Terraform will perform the actions described above.
+</span></span><span class="line"><span class="cl">  Only <span class="s1">&#39;yes&#39;</span> will be accepted to approve.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  Enter a value:</span></span></code></pre></div></div>
+<p><strong>R</strong>epare que mesmo ao utilizar <em>apply</em> ao invés de <em>plan</em>, uma espécie de planejamento também foi realizado antes da aplicação propriamente dita. O Terraform avaliou o código e nos indicou o que será realizado, perguntando-nos ao final se queremos ou não seguir com a execução. Caso tudo nos pareça correto, basta digitarmos <em>yes</em> e pressionar Enter novamente para que ele siga com a execução de fato.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  Enter a value: yes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker_image.image_id: Creating...
+</span></span><span class="line"><span class="cl">  latest: <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  name:   <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;pengbai/docker-supermario:latest&#34;</span>
+</span></span><span class="line"><span class="cl">docker_image.image_id: Still creating... <span class="o">(</span>10s elapsed<span class="o">)</span>
+</span></span><span class="line"><span class="cl">docker_image.image_id: Still creating... <span class="o">(</span>20s elapsed<span class="o">)</span>
+</span></span><span class="line"><span class="cl">docker_image.image_id: Still creating... <span class="o">(</span>30s elapsed<span class="o">)</span>
+</span></span><span class="line"><span class="cl">docker_image.image_id: Still creating... <span class="o">(</span>40s elapsed<span class="o">)</span>
+</span></span><span class="line"><span class="cl">docker_image.image_id: Creation <span class="nb">complete</span> after 47s <span class="o">(</span>ID: sha256:49beaba1c5cc49d2fa424ac03a15b0e7...9c3d62pengbai/docker-supermario:latest<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Apply complete! Resources: <span class="m">1</span> added, <span class="m">0</span> changed, <span class="m">0</span> destroyed.</span></span></code></pre></div></div>
+<p><strong>A</strong>ssim como no <em>plan</em>, o Terraform ao final nos deu um breve relatório do que foi feito:</p>
+<p><em>Apply complete! Resources: 1 added, 0 changed, 0 destroyed.</em></p>
+<p><strong>O</strong>u seja: Aplicação completa! Recursos: 1 adicionado, 0 alterados, 0 destruídos.</p>
+<p><strong>S</strong>e quisermos ter certeza de que de fato o Terraform baixou a imagem Docker de que precisamos, basta digitarmos o comando do Docker que lista as imagens que possuímos em nosso ambiente. A nossa nova imagem do supermario deverá estar lá. Digite <em>docker images</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ docker images
+</span></span><span class="line"><span class="cl">REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
+</span></span><span class="line"><span class="cl">pengbai/docker-supermario   latest              49beaba1c5cc        <span class="m">4</span> months ago        686MB</span></span></code></pre></div></div>
+<p><strong>Ó</strong>timo, nossa imagem está presente em nosso ambiente.</p>
+<p><strong>O</strong> Terraform também nos permite saber o que estamos utilizando em termos de <em>resources</em> através do comando <em>terraform show</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform show
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker_image.image_id:
+</span></span><span class="line"><span class="cl">  <span class="nv">id</span> <span class="o">=</span> sha256:49beaba1c5cc49d2fa424ac03a15b0e761f637e835c1ed4d8108cc247a9c3d62pengbai/docker-supermario:latest
+</span></span><span class="line"><span class="cl">  <span class="nv">latest</span> <span class="o">=</span> sha256:49beaba1c5cc49d2fa424ac03a15b0e761f637e835c1ed4d8108cc247a9c3d62
+</span></span><span class="line"><span class="cl">  <span class="nv">name</span> <span class="o">=</span> pengbai/docker-supermario:latest</span></span></code></pre></div></div>
+<p><strong>V</strong>oltemos ao nosso código. Agora que já conseguimos fazer com que nosso código baixe a imagem que utilizaremos via Docker, chegou a hora de fazer algo com ela. Precisamos realizar o <em>deployment</em> da mesma em um container, certo?!</p>
+<p><strong>V</strong>amos adicionar mais um <em>resource</em> em nosso código, desta vez um <em>resource</em> de tipo <em>docker_container</em>. Como o nome já diz, este <em>resource</em> lida com o container em si, e não mais apenas com a imagem.</p>
+<p><strong>S</strong>eu código agora deverá estar da seguinte forma:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-yaml">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># Baixar a imagem do Projeto Docker-SuperMario</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">resource &#34;docker_image&#34; &#34;image_id&#34; {</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">name = &#34;pengbai/docker-supermario:latest&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Inicia o Container</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">resource &#34;docker_container&#34; &#34;container_id&#34; {</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">name  = &#34;supermario&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">image = &#34;${docker_image.image_id.latest}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">ports {</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">internal = &#34;8080&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">external = &#34;80&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>}</span></span></code></pre></div></div>
+<p><strong>I</strong>gnorando as linhas já descritas anteriormente, vamos descrever as novas linhas de nosso código:</p>
+<ol>
+<li>Na linha 6 inserimos apenas mais um comentário, indicando que ali começaremos a descrever o código que criará nosso Container.</li>
+<li>Na linha 7 indicamos que queremos mais um <em>resource</em>. Desta vez o tipo de <em>resource</em> que queremos é o <em>docker_container</em>, indicando também que queremos dar o nome <em>container_id</em> a este <em>resource</em>. Novamente, ao fim da linha, abriremos o bloco de código para este <em>resource</em> com uma <em>{</em>.</li>
+<li>Dentro de nosso bloco, na linha 8, começaremos a listar os atributos deste <em>resource</em>. O primeiro atributo que listaremos é o <em>name</em>, e para ele daremos o nome <em>supermario</em>.</li>
+<li>Na linha 9 indicaremos o atributo <em>image</em> e utilizaremos nossa primeira interpolação, onde reutilizaremos valores de outra parte de nosso código como se fossem variáveis. Em nosso <em>resource</em> anterior, <em>docker_image</em>, demos um nome <em>image_id</em> que será utilizado agora. Incluiremos também a tag <em>latest</em>, pois, conforme pudemos ver na saída de nosso comando <em>terraform show</em>, esta foi a tag utilizada pelo terraform para identificar o último status daquele <em>resource</em>. Portanto, aqui utilizaremos a interpolação inserindo o que queremos entre <em>{}</em> seguidas do símbolo <em>$</em>, conforme prega a sintaxe do Terraform para interpolação de valores, ficando o seguinte: <em>${docker_image.image_id.latest}</em>, onde <em>docker_image</em> é o tipo de resource de onde queremos o valor, <em>image_id</em> é o nome deste resource e <em>latest</em> é a tag para indicar que queremos o último valor daquele <em>resource</em>. O único motivo pelo qual temos um tipo de <em>resource</em> e um nome de <em>resource</em> é facilitar a identificação quando possuímos diversos <em>resources</em> do mesmo tipo. Imagine um projeto em que utilizaremos 5 imagens diferentes do Docker. Teríamos 5 <em>resources</em> do tipo <em>docker_image</em>, porém cada um deles teria um nome diferente, certo?!</li>
+<li>Na linha 10 de nosso código iniciamos o bloco de portas, afinal, toda aplicação roda em uma porta específica e com containers não seria diferente.</li>
+<li>Nas linhas 11 e 12 indicamos os valores para portas <em>intern</em> e <em>externß</em>, onde a porta <em>intern</em> será a porta utilizada pela aplicação internamente no container, e <em>extern</em> será a porta que o Docker irá mapear em nosso sistema local para que possamos acessar a nossa aplicação. Portanto, em nosso exemplo, a aplicação supermario irá rodar na porta <em>8080</em> internamente no container, e a porta 80 será mapeada para que possamos acessá-la de nosso navegador local.</li>
+<li>Nas linhas 13 e 14 apenas fecharemos os dois blocos de código que criamos, sendo estes o bloco <em>ports</em> e o bloco <em>resource</em> do <em>docker_container</em>.</li>
+</ol>
+<p><strong>N</strong>ovamente, vamos planejar nosso projeto com <em>terraform plan</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform plan
+</span></span><span class="line"><span class="cl">Refreshing Terraform state in-memory prior to plan...
+</span></span><span class="line"><span class="cl">The refreshed state will be used to calculate this plan, but will not be
+</span></span><span class="line"><span class="cl">persisted to <span class="nb">local</span> or remote state storage.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker_image.image_id: Refreshing state... <span class="o">(</span>ID: sha256:49beaba1c5cc49d2fa424ac03a15b0e7...9c3d62pengbai/docker-supermario:latest<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">An execution plan has been generated and is shown below.
+</span></span><span class="line"><span class="cl">Resource actions are indicated with the following symbols:
+</span></span><span class="line"><span class="cl">  + create
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform will perform the following actions:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  + docker_container.container_id
+</span></span><span class="line"><span class="cl">      id:               &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      attach:           <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">      bridge:           &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      container_logs:   &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      exit_code:        &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      gateway:          &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      image:            <span class="s2">&#34;sha256:49beaba1c5cc49d2fa424ac03a15b0e761f637e835c1ed4d8108cc247a9c3d62&#34;</span>
+</span></span><span class="line"><span class="cl">      ip_address:       &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      ip_prefix_length: &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      log_driver:       <span class="s2">&#34;json-file&#34;</span>
+</span></span><span class="line"><span class="cl">      logs:             <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">      must_run:         <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">      name:             <span class="s2">&#34;supermario&#34;</span>
+</span></span><span class="line"><span class="cl">      network_data.#:   &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      ports.#:          <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">      ports.0.external: <span class="s2">&#34;80&#34;</span>
+</span></span><span class="line"><span class="cl">      ports.0.internal: <span class="s2">&#34;8080&#34;</span>
+</span></span><span class="line"><span class="cl">      ports.0.ip:       <span class="s2">&#34;0.0.0.0&#34;</span>
+</span></span><span class="line"><span class="cl">      ports.0.protocol: <span class="s2">&#34;tcp&#34;</span>
+</span></span><span class="line"><span class="cl">      restart:          <span class="s2">&#34;no&#34;</span>
+</span></span><span class="line"><span class="cl">      rm:               <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">      start:            <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Plan: <span class="m">1</span> to add, <span class="m">0</span> to change, <span class="m">0</span> to destroy.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Note: You didn<span class="s1">&#39;t specify an &#34;-out&#34; parameter to save this plan, so Terraform
+</span></span></span><span class="line"><span class="cl"><span class="s1">can&#39;</span>t guarantee that exactly these actions will be performed <span class="k">if</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;terraform apply&#34;</span> is subsequently run.</span></span></code></pre></div></div>
+<p><strong>R</strong>epare que desta vez apenas 1 ação será executada: a criação do container. Não estamos mais recebendo as informações referentes à ação de baixar a imagem. O motivo para isto é a propriedade de idempotência que citei anteriormente. O Terraform sabe que a imagem já foi baixada, portanto a mesma não precisa ser baixada novamente, a menos que tivéssemos mudado a versão da mesma, nome, repositório, etc.</p>
+<p><strong>U</strong>ma vez que o plano esteja de acordo com o que queremos, podemos aplicar nosso código com <em>terraform apply</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform apply
+</span></span><span class="line"><span class="cl">docker_image.image_id: Refreshing state... <span class="o">(</span>ID: sha256:49beaba1c5cc49d2fa424ac03a15b0e7...9c3d62pengbai/docker-supermario:latest<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">An execution plan has been generated and is shown below.
+</span></span><span class="line"><span class="cl">Resource actions are indicated with the following symbols:
+</span></span><span class="line"><span class="cl">  + create
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform will perform the following actions:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  + docker_container.container_id
+</span></span><span class="line"><span class="cl">      id:               &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      attach:           <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">      bridge:           &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      container_logs:   &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      exit_code:        &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      gateway:          &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      image:            <span class="s2">&#34;sha256:49beaba1c5cc49d2fa424ac03a15b0e761f637e835c1ed4d8108cc247a9c3d62&#34;</span>
+</span></span><span class="line"><span class="cl">      ip_address:       &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      ip_prefix_length: &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      log_driver:       <span class="s2">&#34;json-file&#34;</span>
+</span></span><span class="line"><span class="cl">      logs:             <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">      must_run:         <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">      name:             <span class="s2">&#34;supermario&#34;</span>
+</span></span><span class="line"><span class="cl">      network_data.#:   &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      ports.#:          <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">      ports.0.external: <span class="s2">&#34;80&#34;</span>
+</span></span><span class="line"><span class="cl">      ports.0.internal: <span class="s2">&#34;8080&#34;</span>
+</span></span><span class="line"><span class="cl">      ports.0.ip:       <span class="s2">&#34;0.0.0.0&#34;</span>
+</span></span><span class="line"><span class="cl">      ports.0.protocol: <span class="s2">&#34;tcp&#34;</span>
+</span></span><span class="line"><span class="cl">      restart:          <span class="s2">&#34;no&#34;</span>
+</span></span><span class="line"><span class="cl">      rm:               <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">      start:            <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Plan: <span class="m">1</span> to add, <span class="m">0</span> to change, <span class="m">0</span> to destroy.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Do you want to perform these actions?
+</span></span><span class="line"><span class="cl">  Terraform will perform the actions described above.
+</span></span><span class="line"><span class="cl">  Only <span class="s1">&#39;yes&#39;</span> will be accepted to approve.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  Enter a value:</span></span></code></pre></div></div>
+<p><strong>M</strong>ais uma vez ele nos dá uma visão geral do que será feito e nos perguntará se queremos prosseguir. Digite <em>yes</em> e pressione Enter novamente.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Enter a value: yes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker_container.container_id: Creating...
+</span></span><span class="line"><span class="cl">attach:           <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">bridge:           <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">container_logs:   <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">exit_code:        <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">gateway:          <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">image:            <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;sha256:49beaba1c5cc49d2fa424ac03a15b0e761f637e835c1ed4d8108cc247a9c3d62&#34;</span>
+</span></span><span class="line"><span class="cl">ip_address:       <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">ip_prefix_length: <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">log_driver:       <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;json-file&#34;</span>
+</span></span><span class="line"><span class="cl">logs:             <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">must_run:         <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">name:             <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;supermario&#34;</span>
+</span></span><span class="line"><span class="cl">network_data.#:   <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">ports.#:          <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">ports.0.external: <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;80&#34;</span>
+</span></span><span class="line"><span class="cl">ports.0.internal: <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;8080&#34;</span>
+</span></span><span class="line"><span class="cl">ports.0.ip:       <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;0.0.0.0&#34;</span>
+</span></span><span class="line"><span class="cl">ports.0.protocol: <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;tcp&#34;</span>
+</span></span><span class="line"><span class="cl">restart:          <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;no&#34;</span>
+</span></span><span class="line"><span class="cl">rm:               <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">start:            <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">docker_container.container_id: Creation <span class="nb">complete</span> after 1s <span class="o">(</span>ID: 8c9d35eac2fcdc0c7e530567323167b82e72f33d4645abf20685b99d802e2359<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Apply complete! Resources: <span class="m">1</span> added, <span class="m">0</span> changed, <span class="m">0</span> destroyed.</span></span></code></pre></div></div>
+<p><strong>C</strong>onforme o esperado: Aplicaçao completa! <em>Resources</em>: 1 adicionado, 0 alterados, 0 destruídos.</p>
+<p><strong>M</strong>ais uma vez podemos verificar se de fato tudo funcionou como o esperado através do Docker. Desta vez, não queremos apenas baixar uma imagem Docker, mas sim criar um container com a mesma abrindo portas específicas que serão mapeadas entre nosso sistema local e nosso container. Execute agora <em>docker ps</em> para ver os containers que estão rodando neste momento:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker ps
+</span></span><span class="line"><span class="cl">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                  NAMES
+</span></span><span class="line"><span class="cl">8c9d35eac2fc        49beaba1c5cc        <span class="s2">&#34;catalina.sh run&#34;</span>   <span class="m">2</span> minutes ago       Up <span class="m">2</span> minutes        0.0.0.0:80-&gt;8080/tcp   supermario</span></span></code></pre></div></div>
+<p><strong>C</strong>omo podemos ver, temos um container rodando. Podemos até ver que existe um mapeamento de portas: <em>80-&gt;8080</em></p>
+<p><strong>N</strong>ão está convencido ainda?</p>
+<p><strong>A</strong>bra seu navegador e acesse o seguinte endereço: <em>localhost:80</em></p>
+<p><strong>C</strong>aso o seu resultado seja algo parecido com a imagem, significa que seu código funcionou conforme o esperado.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/introducao-ao-terraform/mariodocker.png"
+        data-srcset="/posts/introducao-ao-terraform/mariodocker.png, /posts/introducao-ao-terraform/mariodocker.png 1.5x, /posts/introducao-ao-terraform/mariodocker.png 2x"
+        data-sizes="auto"
+        alt="/posts/introducao-ao-terraform/mariodocker.png"
+        title="Super Mario" width="656" height="536" /></p>
+<p><strong>O</strong> terraform também nos permite destruir a nossa infraestrutura com o comando <em>terraform destroy</em>. Da mesma forma que o <em>apply</em>, o comando <em>destroy</em> também lhe dará uma prévia de o que será destruído e lhe pedirá par aconfirmar com um <em>yes</em> ou <em>no</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform destroy
+</span></span><span class="line"><span class="cl">docker_image.image_id: Refreshing state... <span class="o">(</span>ID: sha256:49beaba1c5cc49d2fa424ac03a15b0e7...9c3d62pengbai/docker-supermario:latest<span class="o">)</span>
+</span></span><span class="line"><span class="cl">docker_container.container_id: Refreshing state... <span class="o">(</span>ID: 8c9d35eac2fcdc0c7e530567323167b82e72f33d4645abf20685b99d802e2359<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">An execution plan has been generated and is shown below.
+</span></span><span class="line"><span class="cl">Resource actions are indicated with the following symbols:
+</span></span><span class="line"><span class="cl">  - destroy
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform will perform the following actions:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  - docker_container.container_id
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  - docker_image.image_id
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Plan: <span class="m">0</span> to add, <span class="m">0</span> to change, <span class="m">2</span> to destroy.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Do you really want to destroy all resources?
+</span></span><span class="line"><span class="cl">  Terraform will destroy all your managed infrastructure, as shown above.
+</span></span><span class="line"><span class="cl">  There is no undo. Only <span class="s1">&#39;yes&#39;</span> will be accepted to confirm.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  Enter a value: yes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker_container.container_id: Destroying... <span class="o">(</span>ID: 8c9d35eac2fcdc0c7e530567323167b82e72f33d4645abf20685b99d802e2359<span class="o">)</span>
+</span></span><span class="line"><span class="cl">docker_container.container_id: Destruction <span class="nb">complete</span> after 0s
+</span></span><span class="line"><span class="cl">docker_image.image_id: Destroying... <span class="o">(</span>ID: sha256:49beaba1c5cc49d2fa424ac03a15b0e7...9c3d62pengbai/docker-supermario:latest<span class="o">)</span>
+</span></span><span class="line"><span class="cl">docker_image.image_id: Destruction <span class="nb">complete</span> after 2s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Destroy complete! Resources: <span class="m">2</span> destroyed.</span></span></code></pre></div></div>
+<p><strong>C</strong>omo podemos ver, o terraform destruiu dois <em>resources</em>, nosso container e nossa imagem. Você poderá confirmar isto tentando acessar novamente o jogo pelo seu navegador ou mesmo através dos comandos <em>docker images</em> e <em>docker ls</em> para ver que tanto o container quanto a imagem foram removidos de nosso sistema:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ docker ps
+</span></span><span class="line"><span class="cl">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ docker images
+</span></span><span class="line"><span class="cl">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span></span></code></pre></div></div>
+<p><strong>D</strong>e volta ao nosso código, vamos incrementá-lo apenas um pouco mais.</p>
+<p><strong>O</strong> terraform nos permite especificar também <em>outputs</em>, ou saídas que nos serão apresentadas ao executarmos nosso código. Tratam-se de informações que podem nos ser úteis.</p>
+<p><strong>P</strong>or exemplo, supomos que ao executar nosso código, desejamos que o terraform nos informe o IP do container que foi criado e o nome do mesmo, nosso código agora ficaria assim:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-yaml">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># Baixar a imagem do Projeto Docker-SuperMario</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">resource &#34;docker_image&#34; &#34;image_id&#34; {</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">name = &#34;pengbai/docker-supermario:latest&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Inicia o Container</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">resource &#34;docker_container&#34; &#34;container_id&#34; {</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">name  = &#34;supermario&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">image = &#34;${docker_image.image_id.latest}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">ports {</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">internal = &#34;8080&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">external = &#34;80&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Nos informa o ip e nome do container criado</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">output &#34;Endereco IP&#34; {</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">value = &#34;${docker_container.container_id.ip_address}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">output &#34;Nome do Container&#34; {</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">value = &#34;${docker_container.container_id.name}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>}</span></span></code></pre></div></div>
+<p><strong>N</strong>ovamente, ignorando o código que já descrevemos anteriormente, teremos:</p>
+<ol>
+<li>Na linha 16 inserimos mais um comentário.</li>
+<li>Na linha 17 especificamos que desta vez queremos um <em>output</em>, e não mais um <em>resource</em>. Da mesma forma que fizemos com <em>resources</em>, vamos dar um nome a este <em>output</em>, de forma que possamos facilmente identificá-lo posteriormente. No caso, vamos chamar nosso <em>output</em> de <em>Endereco IP</em>. Em seguida abriremos o bloco de código para este <em>output</em> novamente com <em>{</em>.</li>
+<li>Na linha 18 daremos o <em>value</em> ou valor deste output. Novamente utilizaremos interpolação de valores para pegar este valor de nossos <em>resources</em>. Para conseguirmos o endereço ip do container, utilizaremos o atributo <em>ip_address</em>, que é um atributo descrito na documentação do Terraform como parte integrante do resource de tipo <em>docker_container</em>. Portanto, nosso <em>value</em> será: ${docker_container.container_id.ip_address}.</li>
+<li>Na linha 19, apenas fechamos o bloco deste <em>output</em>.</li>
+<li>Na linha 21 iniciamos nosso segundo <em>output</em>, com o nome <em>Nome do Container</em>. Em seguida, abriremos o bloco de código para este <em>output</em> com um <em>{</em>.</li>
+<li>Na linha 22, faremos algo similar ao que fizemos com o <em>value</em> do output anterior. Utilizaremos interpolação para buscar o valor do atributo <em>name</em>, que faz parte do <em>resource</em> <em>docker_container</em>. Nosso <em>value</em> será: ${docker_container.container_id.name}</li>
+<li>Na linha 23, apenas fechamos nosso <em>output</em>.</li>
+</ol>
+<p><strong>V</strong>amos então rodar nosso <em>plan</em> para ver o que aconteceria desta vez:</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform plan
+</span></span><span class="line"><span class="cl">Refreshing Terraform state in-memory prior to plan...
+</span></span><span class="line"><span class="cl">The refreshed state will be used to calculate this plan, but will not be
+</span></span><span class="line"><span class="cl">persisted to <span class="nb">local</span> or remote state storage.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">An execution plan has been generated and is shown below.
+</span></span><span class="line"><span class="cl">Resource actions are indicated with the following symbols:
+</span></span><span class="line"><span class="cl">  + create
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform will perform the following actions:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  + docker_container.container_id
+</span></span><span class="line"><span class="cl">      id:               &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      attach:           <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">      bridge:           &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      container_logs:   &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      exit_code:        &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      gateway:          &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      image:            <span class="s2">&#34;</span><span class="si">${</span><span class="nv">docker_image</span><span class="p">.image_id.latest</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">      ip_address:       &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      ip_prefix_length: &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      log_driver:       <span class="s2">&#34;json-file&#34;</span>
+</span></span><span class="line"><span class="cl">      logs:             <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">      must_run:         <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">      name:             <span class="s2">&#34;supermario&#34;</span>
+</span></span><span class="line"><span class="cl">      network_data.#:   &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      ports.#:          <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">      ports.0.external: <span class="s2">&#34;80&#34;</span>
+</span></span><span class="line"><span class="cl">      ports.0.internal: <span class="s2">&#34;8080&#34;</span>
+</span></span><span class="line"><span class="cl">      ports.0.ip:       <span class="s2">&#34;0.0.0.0&#34;</span>
+</span></span><span class="line"><span class="cl">      ports.0.protocol: <span class="s2">&#34;tcp&#34;</span>
+</span></span><span class="line"><span class="cl">      restart:          <span class="s2">&#34;no&#34;</span>
+</span></span><span class="line"><span class="cl">      rm:               <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">      start:            <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  + docker_image.image_id
+</span></span><span class="line"><span class="cl">      id:               &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      latest:           &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      name:             <span class="s2">&#34;pengbai/docker-supermario:latest&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Plan: <span class="m">2</span> to add, <span class="m">0</span> to change, <span class="m">0</span> to destroy.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Note: You didn<span class="s1">&#39;t specify an &#34;-out&#34; parameter to save this plan, so Terraform
+</span></span></span><span class="line"><span class="cl"><span class="s1">can&#39;</span>t guarantee that exactly these actions will be performed <span class="k">if</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;terraform apply&#34;</span> is subsequently run.</span></span></code></pre></div></div>
+<p><strong>D</strong>esta vez podemos ver que ambas as ações serão executadas: A imagem será baixada e o container será criado, afinal tínhamos removido tudo com <em>terraform destroy</em> anteriormente.</p>
+<p><strong>V</strong>amos aplicar nosso código e confirmar com <em>yes</em>:</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform apply
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">An execution plan has been generated and is shown below.
+</span></span><span class="line"><span class="cl">Resource actions are indicated with the following symbols:
+</span></span><span class="line"><span class="cl">  + create
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform will perform the following actions:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  + docker_container.container_id
+</span></span><span class="line"><span class="cl">      id:               &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      attach:           <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">      bridge:           &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      container_logs:   &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      exit_code:        &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      gateway:          &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      image:            <span class="s2">&#34;</span><span class="si">${</span><span class="nv">docker_image</span><span class="p">.image_id.latest</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">      ip_address:       &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      ip_prefix_length: &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      log_driver:       <span class="s2">&#34;json-file&#34;</span>
+</span></span><span class="line"><span class="cl">      logs:             <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">      must_run:         <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">      name:             <span class="s2">&#34;supermario&#34;</span>
+</span></span><span class="line"><span class="cl">      network_data.#:   &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      ports.#:          <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">      ports.0.external: <span class="s2">&#34;80&#34;</span>
+</span></span><span class="line"><span class="cl">      ports.0.internal: <span class="s2">&#34;8080&#34;</span>
+</span></span><span class="line"><span class="cl">      ports.0.ip:       <span class="s2">&#34;0.0.0.0&#34;</span>
+</span></span><span class="line"><span class="cl">      ports.0.protocol: <span class="s2">&#34;tcp&#34;</span>
+</span></span><span class="line"><span class="cl">      restart:          <span class="s2">&#34;no&#34;</span>
+</span></span><span class="line"><span class="cl">      rm:               <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">      start:            <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  + docker_image.image_id
+</span></span><span class="line"><span class="cl">      id:               &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      latest:           &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      name:             <span class="s2">&#34;pengbai/docker-supermario:latest&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Plan: <span class="m">2</span> to add, <span class="m">0</span> to change, <span class="m">0</span> to destroy.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Do you want to perform these actions?
+</span></span><span class="line"><span class="cl">  Terraform will perform the actions described above.
+</span></span><span class="line"><span class="cl">  Only <span class="s1">&#39;yes&#39;</span> will be accepted to approve.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  Enter a value: yes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker_image.image_id: Creating...
+</span></span><span class="line"><span class="cl">  latest: <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  name:   <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;pengbai/docker-supermario:latest&#34;</span>
+</span></span><span class="line"><span class="cl">docker_image.image_id: Still creating... <span class="o">(</span>10s elapsed<span class="o">)</span>
+</span></span><span class="line"><span class="cl">docker_image.image_id: Still creating... <span class="o">(</span>20s elapsed<span class="o">)</span>
+</span></span><span class="line"><span class="cl">docker_image.image_id: Still creating... <span class="o">(</span>30s elapsed<span class="o">)</span>
+</span></span><span class="line"><span class="cl">docker_image.image_id: Still creating... <span class="o">(</span>40s elapsed<span class="o">)</span>
+</span></span><span class="line"><span class="cl">docker_image.image_id: Still creating... <span class="o">(</span>50s elapsed<span class="o">)</span>
+</span></span><span class="line"><span class="cl">docker_image.image_id: Creation <span class="nb">complete</span> after 59s <span class="o">(</span>ID: sha256:49beaba1c5cc49d2fa424ac03a15b0e7...9c3d62pengbai/docker-supermario:latest<span class="o">)</span>
+</span></span><span class="line"><span class="cl">docker_container.container_id: Creating...
+</span></span><span class="line"><span class="cl">  attach:           <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">  bridge:           <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  container_logs:   <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  exit_code:        <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  gateway:          <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  image:            <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;sha256:49beaba1c5cc49d2fa424ac03a15b0e761f637e835c1ed4d8108cc247a9c3d62&#34;</span>
+</span></span><span class="line"><span class="cl">  ip_address:       <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  ip_prefix_length: <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  log_driver:       <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;json-file&#34;</span>
+</span></span><span class="line"><span class="cl">  logs:             <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">  must_run:         <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">  name:             <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;supermario&#34;</span>
+</span></span><span class="line"><span class="cl">  network_data.#:   <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  ports.#:          <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">  ports.0.external: <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;80&#34;</span>
+</span></span><span class="line"><span class="cl">  ports.0.internal: <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;8080&#34;</span>
+</span></span><span class="line"><span class="cl">  ports.0.ip:       <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;0.0.0.0&#34;</span>
+</span></span><span class="line"><span class="cl">  ports.0.protocol: <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;tcp&#34;</span>
+</span></span><span class="line"><span class="cl">  restart:          <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;no&#34;</span>
+</span></span><span class="line"><span class="cl">  rm:               <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">  start:            <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">docker_container.container_id: Creation <span class="nb">complete</span> after 0s <span class="o">(</span>ID: 655604d672af8ff76c10aca4cd169a6aa284dcca17f0e0215374fb18c86660fd<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Apply complete! Resources: <span class="m">2</span> added, <span class="m">0</span> changed, <span class="m">0</span> destroyed.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Outputs:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Endereco <span class="nv">IP</span> <span class="o">=</span> 172.17.0.2
+</span></span><span class="line"><span class="cl">Nome <span class="k">do</span> <span class="nv">Container</span> <span class="o">=</span> supermario</span></span></code></pre></div></div>
+<p><strong>R</strong>epare que tudo o que queríamos foi executado e que, ao final, recebemos duas saídas ou <em>outputs</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Apply complete! Resources: <span class="m">2</span> added, <span class="m">0</span> changed, <span class="m">0</span> destroyed.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Outputs:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Endereco <span class="nv">IP</span> <span class="o">=</span> 172.17.0.2
+</span></span><span class="line"><span class="cl">Nome <span class="k">do</span> <span class="nv">Container</span> <span class="o">=</span> supermario</span></span></code></pre></div></div>
+<p><strong>N</strong>ovamente, se você acessar em seu navegador o endereço <em>localhost:80</em>, ou utilizar os comandos <em>docker ps</em>, perceberá que sua aplicação está novamente rodando.</p>
+<p><strong>N</strong>ão é complicado, certo?!</p>
+<p><strong>O</strong>bviamente, isto é apenas um exemplo extremamente simplista de uso do Terraform para criar uma pequena infraestrutura como código, o que em nosso caso é apenas um container.</p>
+<p><strong>N</strong>o próximo post pretendo alterar um pouco este nosso código para utilizar algumas melhores práticas propostas pelo Terraform, como a utilização de variáveis e outputs em arquivos distintos, já que não utilizamos variáveis neste post.</p>
+<p><strong>U</strong>m passo de cada vez, certo?!</p>
+<p><strong>H</strong>appy Hacking!</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Atualizado em 2018-10-29</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Compartilhe em X" data-sharer="x" data-url="//blog.marcelocavalcante.net:1313/posts/introducao-ao-terraform/" data-title="Introdução ao Terraform" data-via="Marcelo_Kalib" data-hashtags="Devops,Terraform,Cloud,GCP,Docker"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Threads" data-sharer="threads" data-url="//blog.marcelocavalcante.net:1313/posts/introducao-ao-terraform/" data-title="Introdução ao Terraform"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Facebook" data-sharer="facebook" data-url="//blog.marcelocavalcante.net:1313/posts/introducao-ao-terraform/" data-hashtag="Devops"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Linkedin" data-sharer="linkedin" data-url="//blog.marcelocavalcante.net:1313/posts/introducao-ao-terraform/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Hacker News" data-sharer="hackernews" data-url="//blog.marcelocavalcante.net:1313/posts/introducao-ao-terraform/" data-title="Introdução ao Terraform"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Line" data-sharer="line" data-url="//blog.marcelocavalcante.net:1313/posts/introducao-ao-terraform/" data-title="Introdução ao Terraform"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em 微博" data-sharer="weibo" data-url="//blog.marcelocavalcante.net:1313/posts/introducao-ao-terraform/" data-title="Introdução ao Terraform"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Diaspora" data-sharer="diaspora" data-url="//blog.marcelocavalcante.net:1313/posts/introducao-ao-terraform/" data-title="Introdução ao Terraform" data-description="Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código."><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=%2f%2fblog.marcelocavalcante.net%3a1313%2fposts%2fintroducao-ao-terraform%2f&amp;text=Introdu%c3%a7%c3%a3o%20ao%20Terraform" target="_blank" title="Compartilhe em Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/devops/">Devops</a>,&nbsp;<a href="/tags/terraform/">Terraform</a>,&nbsp;<a href="/tags/cloud/">Cloud</a>,&nbsp;<a href="/tags/gcp/">GCP</a>,&nbsp;<a href="/tags/docker/">Docker</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Voltar</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/infraestrutura-como-codigo-com-terraform/" class="prev" rel="prev" title="Infraestrutura como Código com Terraform"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Infraestrutura como Código com Terraform</a>
+            <a href="/posts/terraform-variaveis-e-outputs/" class="next" rel="next" title="Terraform: Variáveis e Outputs">Terraform: Variáveis e Outputs<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Possibilitado por <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Tema - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2008 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://blog.marcelocavalcante.net" target="_blank">Marcelo Cavalcante</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Voltar ao topo">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="Ver comentários">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.20.2/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+</html>

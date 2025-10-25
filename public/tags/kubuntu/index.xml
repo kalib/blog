@@ -1,0 +1,32 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Kubuntu - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/kubuntu/</link>
+        <description>Kubuntu - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Tue, 15 Feb 2011 21:09:38 -0500</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/kubuntu/" rel="self" type="application/rss+xml" /><item>
+    <title>Brute Force: O Dirb... Dirbuster Lhe Ajuda a Identificar Vulnerabilidades Em Seu Site</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-dirbuster/</link>
+    <pubDate>Tue, 15 Feb 2011 21:09:38 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-dirbuster/</guid>
+    <description><![CDATA[<p><strong>B</strong>om, para quem não conhece nada sobre Brute-Force ou apenas ouviu falar vagamente mas não tem certeza sobre o que realmente é um ataque deste tipo, sugiro dar uma lida em meu último post, onde apresentei algumas informações sobre brute-force bem como uma ferramenta que podemos utilizar para testar nossos sites e verificar o quão vulneráveis eles estão a este tipo de ataque. Segue link para o mesmo:</p>]]></description>
+</item>
+<item>
+    <title>Configurando a Jre Para Funcionar No *Buntu 8.04 Com Firefox 3</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/jre-buntu804/</link>
+    <pubDate>Wed, 07 May 2008 12:49:34 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/jre-buntu804/</guid>
+    <description><![CDATA[<p>Aqui segue uma rápida dica que poderá ajudar aqueles que, assim como eu, instalaram o *buntu 8.04 e perceberam que o mesmo possui o Firefox 3.0 em seus repositórios como o navegador padrão.</p>]]></description>
+</item>
+<item>
+    <title>Kubuntu 8.04 - Minhas Primeiras Impressões</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/kubuntu-804/</link>
+    <pubDate>Tue, 29 Apr 2008 12:58:11 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/kubuntu-804/</guid>
+    <description><![CDATA[<p>Assim que saiu o Kubuntu 8.04 oficialmente, corri para baixar a iso antes mesmo de ser divulgado no site oficial como forma de evitar pegar uma banda completamente congestionada por centenas de pessoas baixando o mesmo arquivo na mesma fonte. Sim, existem algumas vantagens em se fazer parte das listas de discussão, desenvolvimento e debugs. :p</p>]]></description>
+</item>
+</channel>
+</rss>

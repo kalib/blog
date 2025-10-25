@@ -1,0 +1,91 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Impressões - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/impress%C3%B5es/</link>
+        <description>Impressões - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Sun, 14 Apr 2019 13:54:01 -0400</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/impress%C3%B5es/" rel="self" type="application/rss+xml" /><item>
+    <title>Go Ou Golang: Porquê Adotei Go Como Minha Linguagem Favorita</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/</link>
+    <pubDate>Sun, 14 Apr 2019 13:54:01 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/</guid>
+    <description><![CDATA[<p>Go ou Golang, a linguagem de programação desenvolvida no Google com o intuito de ser uma linguagem que realmente fosse eficiente. Neste post explico um pouco das características do Go que me levaram a adotá-la como minha linguagem favorita.</p>]]></description>
+</item>
+<item>
+    <title>De Volta à Ativa e Com Novo Visual</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/de-volta-com-novo-visual/</link>
+    <pubDate>Wed, 03 Apr 2019 19:25:00 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/de-volta-com-novo-visual/</guid>
+    <description><![CDATA[<p><strong>A</strong>pós alguns meses o blog está de volta, com diversas mudanças que facilitarão as coisas em termos de manutenção. Cara nova, estrutura nova&hellip; tudo novo.</p>]]></description>
+</item>
+<item>
+    <title>Dica: Assista Star Wars Em Um Console Ou Terminal</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/dica-assistir-star-wars-em/</link>
+    <pubDate>Fri, 17 Jan 2014 19:09:45 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/dica-assistir-star-wars-em/</guid>
+    <description><![CDATA[<p><strong>Q</strong>uem disse que o terminal ou linha de comando serve apenas para trabalho e coisas chatas?</p>]]></description>
+</item>
+<item>
+    <title>Navegação Anônima Através Da Rede Tor</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/navegacao-anonima-atraves-da-rede/</link>
+    <pubDate>Mon, 30 Dec 2013 19:35:09 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/navegacao-anonima-atraves-da-rede/</guid>
+    <description><![CDATA[<p><strong>O</strong> ano de 2013 foi marcado por diversos acontecimentos de grande repercussão e, sem sombra de dúvidas, um deles foi o escândalo causado pelo vazamento de dados que provaram que algumas instituições, dentre elas a <em>NSA</em> (Agência de Segurança dos Estados Unidos), estavam espionando diversas entidades, empresas e até mesmo pessoas físicas nas mais diversas regiões do globo. Escândalos a parte, estas denúncias acabaram despertando um pouco mais (uma pena que não tenha sido muito mais) nas pessoas o interesse em preservar sua privacidade.</p>]]></description>
+</item>
+<item>
+    <title>Sobre Mim: Tarda Mas Não Falha</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/sobre-mim-dot-dot-dot/</link>
+    <pubDate>Mon, 16 Dec 2013 20:33:34 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/sobre-mim-dot-dot-dot/</guid>
+    <description><![CDATA[<p><strong>T</strong>arda, mas não falha&hellip; Reza o antigo ditado.</p>]]></description>
+</item>
+<item>
+    <title>Kde 4.11 Lançado E Disponível No Arch Linux</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/kde-4-dot-11-lancado/</link>
+    <pubDate>Mon, 19 Aug 2013 08:50:44 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/kde-4-dot-11-lancado/</guid>
+    <description><![CDATA[<p><strong>E</strong>m 14 de Agosto de 2013 a comunidade KDE anunciou oficialmente a última release do Ambiente de Trabalho KDE, a versão 4.11. Nesta última versão o projeto incorporou grandes atualizações na Área de Trabalho, Aplicações e plataforma de Desenvolvimento, oferecendo, além de correções, novas funcionalidades, das quais muitas serão importantes para a próxima evolução da plataforma KDE.</p>]]></description>
+</item>
+<item>
+    <title>Dica Rápida Linux: Melhorando a Política De Senhas</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/dica-rapida-linux-melhorando-a/</link>
+    <pubDate>Mon, 12 Aug 2013 09:14:55 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/dica-rapida-linux-melhorando-a/</guid>
+    <description><![CDATA[<p><strong>N</strong>a dica anterior mencionei o uso do comando <em>chage</em> para <strong>forçar</strong> a alteração de senha por parte do usuário em sistemas Linux, mas e se além disso fosse possível melhorar esta prática, tornando a política de senhas de usuários um pouco mais segura?</p>]]></description>
+</item>
+<item>
+    <title>Recomendação Bibliográfica: Gravidade</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/recomendacao-bibliografica-gravidade/</link>
+    <pubDate>Thu, 08 Aug 2013 09:20:11 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/recomendacao-bibliografica-gravidade/</guid>
+    <description><![CDATA[<p><strong>O</strong> livro da vez se chama <em>Gravidade</em>, de <em>Tess Gerritsen</em>.</p>
+<p><strong>T</strong>ess Gerritsen é, sem sombra de dúvidas, uma autora que conquistou um lugar (ou vários) bastante especial em minha estante. A cada livro que leio fico mais fascinado com a facilidade e maestria com a qual ela consegue cativar o leitor e ao mesmo tempo fazer com que o mesmo se sinta imerso no cenário</p>]]></description>
+</item>
+<item>
+    <title>Renascimento... De Cara Nova</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/renascimento-dot-dot-dot-de/</link>
+    <pubDate>Thu, 01 Aug 2013 09:31:18 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/renascimento-dot-dot-dot-de/</guid>
+    <description><![CDATA[<p><strong>E</strong>instein dizia:</p>
+<blockquote>
+<p><em>&ldquo;O tempo é relativo e não pode ser medido exatamente do mesmo modo e por toda parte.&rdquo;</em></p></blockquote>]]></description>
+</item>
+<item>
+    <title>Recomendação Bibliográfica: Mago E Vidro - A Torre Negra IV</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/recomendacao-bibliografica-mago-e-vidro/</link>
+    <pubDate>Mon, 06 Feb 2012 10:48:42 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/recomendacao-bibliografica-mago-e-vidro/</guid>
+    <description><![CDATA[<p><strong>D</strong>epois de minhas longas férias, estou de volta e começando os posts do ano com uma recomendação bibliográfica: <strong>Mago e Vidro</strong>, o quarto volume da saga <strong>A Torre Negra</strong>.</p>]]></description>
+</item>
+</channel>
+</rss>

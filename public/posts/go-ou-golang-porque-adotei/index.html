@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Go Ou Golang: Porquê Adotei Go Como Minha Linguagem Favorita - Marcelo Cavalcante Rocha</title><meta name="Description" content="Go ou Golang, a linguagem de programação desenvolvida no Google com o intuito de ser uma linguagem que realmente fosse eficiente. Neste post explico um pouco das características do Go que me levaram a adotá-la como minha linguagem favorita."><meta property="og:url" content="//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/">
+  <meta property="og:site_name" content="Marcelo Cavalcante Rocha">
+  <meta property="og:title" content="Go Ou Golang: Porquê Adotei Go Como Minha Linguagem Favorita">
+  <meta property="og:description" content="Go ou Golang, a linguagem de programação desenvolvida no Google com o intuito de ser uma linguagem que realmente fosse eficiente. Neste post explico um pouco das características do Go que me levaram a adotá-la como minha linguagem favorita.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-04-14T13:54:01-04:00">
+    <meta property="article:modified_time" content="2019-04-14T13:54:01-04:00">
+    <meta property="article:tag" content="Golang">
+    <meta property="article:tag" content="Impressões">
+    <meta property="og:image" content="//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/featured-image.png">
+  <meta name="twitter:title" content="Go Ou Golang: Porquê Adotei Go Como Minha Linguagem Favorita">
+  <meta name="twitter:description" content="Go ou Golang, a linguagem de programação desenvolvida no Google com o intuito de ser uma linguagem que realmente fosse eficiente. Neste post explico um pouco das características do Go que me levaram a adotá-la como minha linguagem favorita.">
+<meta name="application-name" content="Marcelo Cavalcante">
+<meta name="apple-mobile-web-app-title" content="Marcelo Cavalcante">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/" /><link rel="prev" href="//blog.marcelocavalcante.net:1313/posts/de-volta-com-novo-visual/" /><link rel="next" href="//blog.marcelocavalcante.net:1313/posts/terraform-modules-porque-e-comop1/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Go Ou Golang: Porquê Adotei Go Como Minha Linguagem Favorita",
+        "inLanguage": "pt-BR",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/\/blog.marcelocavalcante.net:1313\/posts\/go-ou-golang-porque-adotei\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/go-ou-golang-porque-adotei\/featured-image.png",
+                            "width":  1525 ,
+                            "height":  689 
+                        }],"genre": "posts","keywords": "Golang, Impressões","wordcount":  1348 ,
+        "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/go-ou-golang-porque-adotei\/","datePublished": "2019-04-14T13:54:01-04:00","dateModified": "2019-04-14T13:54:01-04:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Marcelo Cavalcante"
+            },"description": "Go ou Golang, a linguagem de programação desenvolvida no Google com o intuito de ser uma linguagem que realmente fosse eficiente. Neste post explico um pouco das características do Go que me levaram a adotá-la como minha linguagem favorita."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'auto';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categorias </a><a class="menu-item" href="/sobre/"> Quem Sou </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancelar
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categorias</a><a class="menu-item" href="/sobre/" title="">Quem Sou</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Conteúdos</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go Ou Golang: Porquê Adotei Go Como Minha Linguagem Favorita</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://blog.marcelocavalcante.net" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Marcelo Cavalcante</a></span>&nbsp;<span class="post-category">incluido em <a href="/categories/impress%C3%B5es/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Impressões</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2019-04-14">2019-04-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1348 palavras&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutos&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/go-ou-golang-porque-adotei/featured-image.png"
+        data-srcset="/posts/go-ou-golang-porque-adotei/featured-image.png, /posts/go-ou-golang-porque-adotei/featured-image.png 1.5x, /posts/go-ou-golang-porque-adotei/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/posts/go-ou-golang-porque-adotei/featured-image.png"
+        title="Go ou Golang, a linguagem de programação desenvolvida no Google com o intuito de ser uma linguagem que realmente fosse eficiente. Neste post explico um pouco das características do Go que me levaram a adotá-la como minha linguagem favorita." /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Conteúdos</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#introdução">Introdução</a>
+      <ul>
+        <li><a href="#principais-características-do-go">Principais Características do Go</a></li>
+        <li><a href="#tipagem-estática-vs-tipagem-dinâmica">Tipagem Estática vs Tipagem Dinâmica**</a></li>
+      </ul>
+    </li>
+    <li><a href="#criação">Criação</a></li>
+    <li><a href="#para-que-serve">Para que serve</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Go ou Golang, a linguagem de programação desenvolvida no Google com o intuito de ser uma linguagem que realmente fosse eficiente. Neste post explico um pouco das características do Go que me levaram a adotá-la como minha linguagem favorita.</p>
+<h2 id="introdução">Introdução</h2>
+<p><strong>Q</strong>uem me conhece sabe que sempre tive uma certa queda pelo <em>Python</em>, e existem diversas razões óbvias para isso, visto que o Python possui uma sintaxe relativamente simples, elegante e é bastante eficiente, embora não possua a melhor performance. Apesar de todos os pontos positivos que me levaram a utilizar bastante Python, recentemente decidi me aventurar com <em>Go</em> ou <em>Golang</em>, como prefira chamar. <a href="https://golang.org" target="_blank" rel="noopener noreffer ">Go</a> foi desenvolvida para uso interno no Google em meados de 2007 com um único propósito: <em>Melhorar a produtividade da programação em uma era de processadores e computadores com múltiplos cores, máquinas em rede e bases de dados gigantescas.</em></p>
+<p><strong>B</strong>asicamente a ideia era criar uma linguagem de programação diferente, eficiente e que pudesse suprir as necessidades do Google de forma a eliminar uma série de pontos considerados negativos nas demais linguagens de programação existentes mas ao mesmo tempo mantendo pontos fortes já encontrados nas mesmas.</p>
+<p><strong>S</strong>e isso soa familiar aos amantes do Software Livre, é porque de certa forma foi um episódio relativamente similar a quando <a href="https://pt.wikipedia.org/wiki/Linus_Torvalds" target="_blank" rel="noopener noreffer ">Linus Torvalds</a>, criador do Linux, criou o <a href="https://git-scm.com" target="_blank" rel="noopener noreffer ">Git</a>, onde ele alegou que nenhum gerenciador de código fonte na ocasião era bom o suficiente, portanto ele mesmo criaria um que funcionasse de forma decente. Não preciso dizer que hoje o Git é o gerenciador de códigos mais utilizado no mundo, certo?!</p>
+<p><strong>O</strong>utro fator marcante foi o desprazer que seus criadores compartilhavam para com o C++, embora reconheçam qualidades e tenham tentado manter algumas características desta linguagem, bem como de algumas outras, resultando nas principais características do Go:</p>
+<h3 id="principais-características-do-go">Principais Características do Go</h3>
+<ul>
+<li>Tipagem estática, significando que tipos são essenciais e importantes para o Go, sendo também nominal e estrutural, embora não haja hierarquia de tipos;</li>
+<li>Eficiência em tempo de execução;</li>
+<li>Sintaxe simples e sucinta, aumentando a usabilidade;</li>
+<li>Alta performance para redes e multi processamento;</li>
+<li>Imperativa e modular, com encapsulamento e polimorfismo;</li>
+<li>Excelente coletor de lixo, diminuindo a necessidade de preocupação com o gerenciamento de memória.</li>
+</ul>
+<h3 id="tipagem-estática-vs-tipagem-dinâmica">Tipagem Estática vs Tipagem Dinâmica**</h3>
+<p><strong>A</strong>credito que esta seja a dúvida mais comum, portanto vale a pena explicar ou lembrar a diferença básica entre ambas.</p>
+<p><strong>B</strong>asicamente, com linguagens que utilizam tipagem estática, o tipo é verificado antes da execução, enquanto que com tipagem dinâmica o tipo é verificado durante a execução, ou em tempo de execução.</p>
+<p><strong>U</strong>m exemplo simples seria: &ldquo;3&rdquo; + 5</p>
+<p><strong>E</strong>m linguagens fortemente tipadas, como Go, isto irá gerar um erro, pois estas linguagens não permitem &ldquo;coerção de tipos&rdquo;, que seria justamente a habilidade para um valor mudar de tipo implicitamente em certos contextos. Linguagens de tipagem fraca, tais como o JavaScript, não apresentarão um erro neste cenário, pois terão um resultado &ldquo;35&rdquo;.</p>
+<p><strong>T</strong>ipagem estática permite que a linguagem garanta a segurança dos tipos, de forma que os mesmos não possam ser alterados uma vez que sejam definidos.</p>
+<p><strong>Exemplo:</strong></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-go">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// Criando uma variável do tipo inteiro</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">minhaVariavel</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="nx">minhaVariavel</span> <span class="p">=</span> <span class="s">&#34;Marcelo&#34;</span></span></span></code></pre></div></div>
+<p><strong>E</strong>m uma linguagem de tipagem estática, isto resultaria em um erro, pois uma variável que uma vez foi criada com o tipo <strong>int</strong> ou inteiro, não pode ser alterada para um tipo <strong>string</strong> posteriormente. No entanto, em uma linguagem de tipagem dinâmica, este código não resultaria em um erro, e a variável <em>minhaVariavel</em> mudaria de <strong>int</strong> para <strong>string</strong>, recebendo o novo valor <em>Marcelo</em>.</p>
+<p><strong>De volta ao Go</strong></p>
+<h2 id="criação">Criação</h2>
+<p><strong>A</strong> linguagem foi originalmente criada por três nomes já conhecidos da comunidade tecnológica: Robert Griesemer (um dos criadores da engine V8 JavaScript), Rob Pike (um dos co-criadores do Unix) e Ken Thompson (outro co-criador do Unix bem como do UTF-8).</p>
+<p><strong>C</strong>riada internamente no Google em meados de 2007, Go foi anunciada publicamente em Novembro de 2009 e sua versão 1.0 foi disponibilizada em Março de 2012. Obviamente, Go é bastante utilizada em produção pelo Google e em diversas outras empresas. Go também é utilizada em diversos projetos de Software Livre e/ou Código Aberto.</p>
+<p><strong>C</strong>ertamente você conhece ou mesmo já utilizou aplicações escritas em Go, tais como:</p>
+<ul>
+<li>Docker</li>
+<li>Kubernetes</li>
+<li>Dropbox</li>
+<li>Hugo</li>
+<li>Etcd</li>
+<li>InfluxDB</li>
+<li>Istio</li>
+<li>Ethereum</li>
+<li>OpenShift</li>
+<li>Terraform</li>
+</ul>
+<p><strong>D</strong>eu para entender, certo?! Quando o assunto é performance e estabilidade, Go é uma excelente escolha.</p>
+<p><strong>A</strong>lém do fato de ela ter sido criada justamente por nenhuma outra linguagem ser capaz de atender as necessidades do Google, Go também busca reduzir seu trabalho de digitação. Por design, Go tenta diminuir a desordem e complexidade em termos de declarações e cabeçalhos desnecessários; tudo é declarado exatamente uma vez. A inicialização é expressiva, automática e fácil de utilizar.</p>
+<p><strong>S</strong>ua sintaxe é limpa e fácil de compreender, de forma que o Go consegue ser expressivo e ao mesmo tempo compreensível sem sacrificar a sofisticação. Um complexo <em>(foo.Foo* myFoo = new(foo.Foo))</em> pode ser reduzido em algo simples como <em>:=</em>, que é um construtor de declaração e inicialização.</p>
+<h2 id="para-que-serve">Para que serve</h2>
+<p><strong>G</strong>o pode ser utilizado para praticamente tudo o que você precisar desenvolver:</p>
+<ul>
+<li>Aplicações Web</li>
+<li>Servidores de Redes</li>
+<li>Aplicações Móveis/Mobile</li>
+<li>Aprendizado de Máquina/Machine Learning</li>
+<li>Processamento de Imagens</li>
+<li>Load Balancers</li>
+<li>Administração de Sistemas</li>
+<li>Hardware</li>
+<li>Scripts</li>
+<li>Criptografia</li>
+</ul>
+<p><strong>G</strong>o foi criado com o intuito de ser eficiente em termos de múltiplos cores, sendo a primeira linguagem a suportar múltiplos cores nativamente, de forma que trabalhar com concorrência é uma tarefa extremamente simples.</p>
+<p><strong>S</strong>ua portabilidade é excelente, visto que pode ser compilado em diversas plataformas ou sistemas operacionais distintos, inclusive compilação cruzada, de forma que você pode compilar um código Go no OS X da Apple e rodar este binário em uma máquina Linux.</p>
+<p><strong>A</strong>lém de ter sido criada pelo Google, Go é uma linguagem de código aberto, o que facilita a evolução da linguagem por ser mantida por uma enorme comunidade de programadores espalhados pelo mundo.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/go-ou-golang-porque-adotei/go_graph.png"
+        data-srcset="/posts/go-ou-golang-porque-adotei/go_graph.png, /posts/go-ou-golang-porque-adotei/go_graph.png 1.5x, /posts/go-ou-golang-porque-adotei/go_graph.png 2x"
+        data-sizes="auto"
+        alt="/posts/go-ou-golang-porque-adotei/go_graph.png"
+        title="Go_graph" width="994" height="603" /></p>
+<p><strong>C</strong>omo podemos ver no gráfico acima, Go possui uma sintaxe bonita e sucinta, enquanto mantém uma excelente performance para aplicações e concorrência de execuções.</p>
+<p><strong>M</strong>anter e dar manutenção em código Go é fácil. Go não possui uma sintaxe complexa e cheia de rodeios como outras linguagens. Uma vez que o Google possui bases de códigos gigantescas, com milhões e milhões de linhas, esta característica era fundamental durante a criação do Go, visto que uma base de código deveria ser simples e legível para demais programadores.</p>
+<p><strong>I</strong>ntencionalmente, Go não trás uma série de recursos de linguagens modernas orientadas a objetos:</p>
+<ul>
+<li><strong>Nada de classes:</strong> Tudo é dividido em pacotes. Go utiliza apenas structs ao invés de classes;</li>
+<li><strong>Não suporta herança:</strong> Isto fará com que o código seja simples de se modificar. Em outras linguagens como Java/Python, se uma classe XYZ herda de uma classe 123 e você alterar algo na classe 123, isto poderá causar efeitos inesperados em outras classes que herdem dela. Ao remover heranças, Go torna fácil o entendimento do código, visto que não haverá uma super classe que deverá sempre ser checada;</li>
+<li><em>Sem construtores</em>;</li>
+<li><em>Sem anotações</em>;</li>
+<li><em>Sem genéricos</em>;</li>
+<li><em>Sem exceções</em>.</li>
+</ul>
+<p><strong>C</strong>aracterísticas como essas fazem com que Go seja quase tão eficiente e performático quanto C/C++, enquanto possui uma sintaxe super simples, como Ruby ou Python, conforme podemos ver no gráfico abaixo:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/go-ou-golang-porque-adotei/go_graph2.png"
+        data-srcset="/posts/go-ou-golang-porque-adotei/go_graph2.png, /posts/go-ou-golang-porque-adotei/go_graph2.png 1.5x, /posts/go-ou-golang-porque-adotei/go_graph2.png 2x"
+        data-sizes="auto"
+        alt="/posts/go-ou-golang-porque-adotei/go_graph2.png"
+        title="Go_graph2" width="1010" height="610" /></p>
+<p><strong>S</strong>e nada disso lhe convenceu, que tal o fato de que de acordo com as pesquisas públicas do Slashdot Go está entre as linguagens cujos profissionais recebem os melhores salários?</p>
+<p><strong>O</strong>k, você não liga para dinheiro e quer apenas o suficiente para pagar suas contas, certo&hellip; Pense no seguinte.. em breve não teremos muita escolha. Com o hardware evoluindo sempre mais rapidamente que o software, já existe uma pressão muito grande para uma mudança de paradigma e de qualidade de software. De que adianta ter processadores cada vez mais modernos e com múltiplos núcleos/cores se o seu software não consegue fazer uso daquilo adequadamente? A cada ano a pressão será maior neste sentido, para que possamos escrever código que justifique o custo e as qualidades dos processadores modernos.</p>
+<p><strong>S</strong>e ainda assim você não está convencido, só me resta apelar para o simpático mascote do Go. Se ele não lhe conquistar, nada mais o fará.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/go-ou-golang-porque-adotei/go_mascot1.png"
+        data-srcset="/posts/go-ou-golang-porque-adotei/go_mascot1.png, /posts/go-ou-golang-porque-adotei/go_mascot1.png 1.5x, /posts/go-ou-golang-porque-adotei/go_mascot1.png 2x"
+        data-sizes="auto"
+        alt="/posts/go-ou-golang-porque-adotei/go_mascot1.png"
+        title="Go_Mascot1" width="615" height="394" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/go-ou-golang-porque-adotei/go_mascot2.jpeg"
+        data-srcset="/posts/go-ou-golang-porque-adotei/go_mascot2.jpeg, /posts/go-ou-golang-porque-adotei/go_mascot2.jpeg 1.5x, /posts/go-ou-golang-porque-adotei/go_mascot2.jpeg 2x"
+        data-sizes="auto"
+        alt="/posts/go-ou-golang-porque-adotei/go_mascot2.jpeg"
+        title="Go_mascot2" width="559" height="372" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/go-ou-golang-porque-adotei/go_mascot3.png"
+        data-srcset="/posts/go-ou-golang-porque-adotei/go_mascot3.png, /posts/go-ou-golang-porque-adotei/go_mascot3.png 1.5x, /posts/go-ou-golang-porque-adotei/go_mascot3.png 2x"
+        data-sizes="auto"
+        alt="/posts/go-ou-golang-porque-adotei/go_mascot3.png"
+        title="Go_mascot3" width="528" height="528" /></p>
+<p><strong>H</strong>appy Hacking!</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Atualizado em 2019-04-14</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Compartilhe em X" data-sharer="x" data-url="//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/" data-title="Go Ou Golang: Porquê Adotei Go Como Minha Linguagem Favorita" data-via="Marcelo_Kalib" data-hashtags="Golang,Impressões"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Threads" data-sharer="threads" data-url="//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/" data-title="Go Ou Golang: Porquê Adotei Go Como Minha Linguagem Favorita"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Facebook" data-sharer="facebook" data-url="//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/" data-hashtag="Golang"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Linkedin" data-sharer="linkedin" data-url="//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Hacker News" data-sharer="hackernews" data-url="//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/" data-title="Go Ou Golang: Porquê Adotei Go Como Minha Linguagem Favorita"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Line" data-sharer="line" data-url="//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/" data-title="Go Ou Golang: Porquê Adotei Go Como Minha Linguagem Favorita"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em 微博" data-sharer="weibo" data-url="//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/" data-title="Go Ou Golang: Porquê Adotei Go Como Minha Linguagem Favorita"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Diaspora" data-sharer="diaspora" data-url="//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/" data-title="Go Ou Golang: Porquê Adotei Go Como Minha Linguagem Favorita" data-description="Go ou Golang, a linguagem de programação desenvolvida no Google com o intuito de ser uma linguagem que realmente fosse eficiente. Neste post explico um pouco das características do Go que me levaram a adotá-la como minha linguagem favorita."><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=%2f%2fblog.marcelocavalcante.net%3a1313%2fposts%2fgo-ou-golang-porque-adotei%2f&amp;text=Go%20Ou%20Golang%3a%20Porqu%c3%aa%20Adotei%20Go%20Como%20Minha%20Linguagem%20Favorita" target="_blank" title="Compartilhe em Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/golang/">Golang</a>,&nbsp;<a href="/tags/impress%C3%B5es/">Impressões</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Voltar</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/de-volta-com-novo-visual/" class="prev" rel="prev" title="De Volta à Ativa e Com Novo Visual"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>De Volta à Ativa e Com Novo Visual</a>
+            <a href="/posts/terraform-modules-porque-e-comop1/" class="next" rel="next" title="Terraform Modules: Porquê E Como Trabalhar Com Módulos No Terraform - PARTE 1">Terraform Modules: Porquê E Como Trabalhar Com Módulos No Terraform - PARTE 1<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Possibilitado por <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Tema - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2008 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://blog.marcelocavalcante.net" target="_blank">Marcelo Cavalcante</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Voltar ao topo">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="Ver comentários">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.20.2/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+</html>

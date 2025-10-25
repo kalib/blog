@@ -1,0 +1,92 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Redes - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/redes/</link>
+        <description>Redes - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Tue, 14 Jan 2014 19:15:35 -0500</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/redes/" rel="self" type="application/rss+xml" /><item>
+    <title>Dica: Apostila Disponibilizada Gratuitamente - Pfsense</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/dica-apostila-disponibilizada-gratuitamente-pfsense/</link>
+    <pubDate>Tue, 14 Jan 2014 19:15:35 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/dica-apostila-disponibilizada-gratuitamente-pfsense/</guid>
+    <description><![CDATA[<p>Apostila sobre um dos melhores sistemas open source de firewall disponibilizada gratuitamente, pfSense 2.x!</p>]]></description>
+</item>
+<item>
+    <title>Dica De Segurança: Previna Ataques Bloqueando Pacotes Icmp Indesejados</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/dica-de-seguranca-previna-ataques/</link>
+    <pubDate>Fri, 10 Jan 2014 19:23:19 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/dica-de-seguranca-previna-ataques/</guid>
+    <description><![CDATA[<p><strong>O</strong> protocolo <em>ICMP</em> pode ser utilizado para facilitar diversas rotinas e tarefas importantes de um administrador de redes, tais como na utilização de ferramentas como o <em>ping</em> e o <em>traceroute</em>, mas também pode ser manipulado por pessoas mal intencionadas que podem manipular mensagens ou pacotes ICMP para mapear sua rede.</p>]]></description>
+</item>
+<item>
+    <title>Criptografando Sua Partição Swap Com O Ecryptfs</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/criptografando-sua-particao-swap-com/</link>
+    <pubDate>Fri, 03 Jan 2014 19:28:47 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/criptografando-sua-particao-swap-com/</guid>
+    <description><![CDATA[<p><strong>C</strong>riptografia (Do grego <em>kryptós</em>, &ldquo;escondido&rdquo;, e <em>gráphein</em>, &ldquo;escrita&rdquo;) nada mais é do que o estudo e aplicação de técnicas com o intuito de ocultar informações, transformando a informação original em algo ilegível, exceto para seu destinatário final, o qual possui a chave ou método que será utilizado para tornar a informação legível novamente.</p>]]></description>
+</item>
+<item>
+    <title>Navegação Anônima Através Da Rede Tor</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/navegacao-anonima-atraves-da-rede/</link>
+    <pubDate>Mon, 30 Dec 2013 19:35:09 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/navegacao-anonima-atraves-da-rede/</guid>
+    <description><![CDATA[<p><strong>O</strong> ano de 2013 foi marcado por diversos acontecimentos de grande repercussão e, sem sombra de dúvidas, um deles foi o escândalo causado pelo vazamento de dados que provaram que algumas instituições, dentre elas a <em>NSA</em> (Agência de Segurança dos Estados Unidos), estavam espionando diversas entidades, empresas e até mesmo pessoas físicas nas mais diversas regiões do globo. Escândalos a parte, estas denúncias acabaram despertando um pouco mais (uma pena que não tenha sido muito mais) nas pessoas o interesse em preservar sua privacidade.</p>]]></description>
+</item>
+<item>
+    <title>Correção Do Bug Entre Kernel Linux E Placas Broadcom</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/correcao-do-bug-entre-kernel/</link>
+    <pubDate>Tue, 03 Sep 2013 08:35:42 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/correcao-do-bug-entre-kernel/</guid>
+    <description><![CDATA[<p><strong>B</strong>ug capturado e tratado!</p>
+<p><strong>D</strong>iversas pessoas se depararam com intermináveis erros de <em>kernel panic</em> após atualizar seu kernel para a versão <em>3.10.6</em> (e posteriores) quando utilizavam placas wireless da <em>Broadcom</em>. O erro reportado foi tratado e, apesar de ainda não estar resolvido no último kernel lançado, <em>3.10.10</em>, já se encontra na árvore de <em>Linus Torvalds</em>, conforme código e correção podem ser vistos através do seguinte link:</p>]]></description>
+</item>
+<item>
+    <title>Tornando Seu Ssh Mais Seguro</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/tornando-seu-ssh-mais-seguro/</link>
+    <pubDate>Wed, 28 Aug 2013 08:40:41 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/tornando-seu-ssh-mais-seguro/</guid>
+    <description><![CDATA[<p><strong>O</strong> <em>SSH</em> (Secure Shell) é um dos protocolos mais utilizados atualmente para transferência de arquivos ou mesmo conexão remota, principalmente em ambientes Linux/Unix e, por si só, já tem se provado ser confiável e seguro. O mesmo passou a ser o principal substituto ao <em>TELNET</em> por possuir a vantagem da criptografia na conexão entre o cliente e o servidor, além da possibilidade de criação de túneis, o que chamamos de <em>tunneling</em>, oferecendo assim a capacidade de redirecionar pacotes de dados. Mas não é por isso que devemos nos descuidar&hellip;</p>]]></description>
+</item>
+<item>
+    <title>Incompatibilidade Kernel Linux 3.10.6 E Placa Wireless Broadcom</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/incompatibilidade-kernel-linux-3-dot/</link>
+    <pubDate>Wed, 14 Aug 2013 09:04:10 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/incompatibilidade-kernel-linux-3-dot/</guid>
+    <description><![CDATA[<p><strong>K</strong>ernel Panic!</p>
+<p><strong>F</strong>oi com isto que me deparei logo pela manhã ao chegar no trabalho ao ligar meu notebook.</p>]]></description>
+</item>
+<item>
+    <title>Netstat Saiba O Que Esta Rolando Em Seu Ambiente</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/netstat-saiba-o-que-esta/</link>
+    <pubDate>Tue, 13 Dec 2011 11:01:23 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/netstat-saiba-o-que-esta/</guid>
+    <description><![CDATA[<p><strong>S</strong>audações pessoal,</p>
+<p><strong>Q</strong>ue tal saber um pouco mais sobre o que lhe cerca virtualmente? Conexões de rede às quais sua máquina está ligada, tabelas de roteamento, estatísticas de interfaces, conexões mascaradas, multicasting, etc.. ?</p>]]></description>
+</item>
+<item>
+    <title>Dia Livre - Inscrições E Grade Do Evento</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/dia-livre-inscricoes-e-grade/</link>
+    <pubDate>Tue, 19 Jul 2011 14:53:36 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/dia-livre-inscricoes-e-grade/</guid>
+    <description><![CDATA[<p>Gostaria de comunicar que a grade para o 1º Dia Livre já foi fechada e liberada.</p>]]></description>
+</item>
+<item>
+    <title>Lançada a Primeira Edição Da Revista Segurança Digital</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/lancada-a-primeira-edicao-da/</link>
+    <pubDate>Fri, 01 Jul 2011 15:00:36 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/lancada-a-primeira-edicao-da/</guid>
+    <description><![CDATA[<p><strong>S</strong>audações pessoal.</p>
+<p><strong>P</strong>ara quem não sabe, hoje é o lançamento da primeira edição da <a href="https://www.segurancadigital.info/revista/185-revistas" target="_blank" rel="noopener noreffer ">Revista Segurança Digital</a>.</p>]]></description>
+</item>
+</channel>
+</rss>

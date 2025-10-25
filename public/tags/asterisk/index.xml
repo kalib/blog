@@ -1,0 +1,33 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Asterisk - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/asterisk/</link>
+        <description>Asterisk - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Mon, 08 Jun 2009 20:28:23 -0400</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/asterisk/" rel="self" type="application/rss+xml" /><item>
+    <title>Asterisknow - Solução Eficiente Para Voip</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/asterisknow-solucao-eficiente-para-voip/</link>
+    <pubDate>Mon, 08 Jun 2009 20:28:23 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/asterisknow-solucao-eficiente-para-voip/</guid>
+    <description><![CDATA[<p><strong>Q</strong>ue o mundo da telefonia está sofrendo grandes mudanças com a onda de conectividade web, todo mundo já sabe. A telefonia IP, VOIP, ou simplesmente voz sobre ip, vem expandindo cada vez mais as possibilidades para comunicação instantânea à longa distância à medida que os custos se tornam cada vez menores para o usuário final.</p>]]></description>
+</item>
+<item>
+    <title>Gespeak Empacotado Hoje Para O Arch</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/gespeak-empacotado-hoje-para-o/</link>
+    <pubDate>Fri, 13 Mar 2009 21:21:36 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/gespeak-empacotado-hoje-para-o/</guid>
+    <description><![CDATA[<p>Ontem vi a notícia sobre o lançamento da versão 0.3 do aplicativo Gespeak. A mesma foi considerada a primeira versão estável do mesmo. Logo que vi resolvi empacotar para o Arch esta aplicação que poderia vir a ser útil para algumas pessoas, como é o meu caso.</p>]]></description>
+</item>
+<item>
+    <title>Asterisk Counter - Seja Contado</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/asterisk-counter-seja-contado/</link>
+    <pubDate>Mon, 27 Oct 2008 14:27:37 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/asterisk-counter-seja-contado/</guid>
+    <description><![CDATA[<p>Saudações pessoal&hellip;</p>
+<p>Muitos aqui já conheciam o sistema <a href="https://counter.li.org/" target="_blank" rel="noopener noreffer ">Linux Counter</a> que servia para contabilizar e registrar usuários Linux como forma de documentar e ter controles estatísticos do crescimento da comunidade Linux mundial. Agora chegou a vez do Asterisk.</p>]]></description>
+</item>
+</channel>
+</rss>

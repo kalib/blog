@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Ubuntu - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/ubuntu/</link>
+        <description>Ubuntu - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Thu, 20 Aug 2015 17:14:12 -0500</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/ubuntu/" rel="self" type="application/rss+xml" /><item>
+    <title>Docker - Uma Alternativa Elegante Para Containers No Linux</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/docker-uma-alternativa-elegante-para/</link>
+    <pubDate>Thu, 20 Aug 2015 17:14:12 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/docker-uma-alternativa-elegante-para/</guid>
+    <description><![CDATA[<p>Cada vez mais precisamos de soluções ágeis para deploy de aplicações e serviços e as soluções de containers surgiram com este propósito. Conheça o Docker, uma solução open source simples e prática, embora robusta, para utilização de containers no Linux.</p>]]></description>
+</item>
+</channel>
+</rss>

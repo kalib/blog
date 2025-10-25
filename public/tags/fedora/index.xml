@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Fedora - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/fedora/</link>
+        <description>Fedora - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Fri, 22 Aug 2008 15:55:42 -0400</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/fedora/" rel="self" type="application/rss+xml" /><item>
+    <title>Problemas De Infra Do Fedora - Servidores Hackeados</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/problemas-de-infra-do-fedora/</link>
+    <pubDate>Fri, 22 Aug 2008 15:55:42 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/problemas-de-infra-do-fedora/</guid>
+    <description><![CDATA[<p>Não sei se algum de vocês ficou sabendo..Mas na última semana foi notificado um problema na infra-estrutura do Fedora, e havia sido &ldquo;recomendado&rdquo; que nenhuma instalação ou atualizaçãp fosse feita, caso você use Fedora.</p>]]></description>
+</item>
+</channel>
+</rss>

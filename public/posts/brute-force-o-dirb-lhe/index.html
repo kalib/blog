@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Brute Force: O Dirb Lhe Ajuda a Identificar Vulnerabilidades Em Seu Site - Marcelo Cavalcante Rocha</title><meta name="Description" content="Para quem não conhece, brute-force é um ataque bastante utilizado em serviços web tais como smtp, pop, ssh, ftp, iax dentre outros. Se você possui um serviço web ele já sofreu tentativa de ataques brute-force."><meta property="og:url" content="//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-lhe/">
+  <meta property="og:site_name" content="Marcelo Cavalcante Rocha">
+  <meta property="og:title" content="Brute Force: O Dirb Lhe Ajuda a Identificar Vulnerabilidades Em Seu Site">
+  <meta property="og:description" content="Para quem não conhece, brute-force é um ataque bastante utilizado em serviços web tais como smtp, pop, ssh, ftp, iax dentre outros. Se você possui um serviço web ele já sofreu tentativa de ataques brute-force.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:tag" content="Cultura Hacker">
+    <meta property="article:tag" content="Impressões">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Redes">
+    <meta property="article:tag" content="Segurança">
+    <meta property="article:tag" content="Software Livre">
+    <meta property="og:image" content="//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-lhe/featured-image.jpeg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-lhe/featured-image.jpeg">
+  <meta name="twitter:title" content="Brute Force: O Dirb Lhe Ajuda a Identificar Vulnerabilidades Em Seu Site">
+  <meta name="twitter:description" content="Para quem não conhece, brute-force é um ataque bastante utilizado em serviços web tais como smtp, pop, ssh, ftp, iax dentre outros. Se você possui um serviço web ele já sofreu tentativa de ataques brute-force.">
+<meta name="application-name" content="Marcelo Cavalcante">
+<meta name="apple-mobile-web-app-title" content="Marcelo Cavalcante">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-lhe/" /><link rel="next" href="//blog.marcelocavalcante.net:1313/posts/cultura-hacker/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Brute Force: O Dirb Lhe Ajuda a Identificar Vulnerabilidades Em Seu Site",
+        "inLanguage": "pt-BR",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/\/blog.marcelocavalcante.net:1313\/posts\/brute-force-o-dirb-lhe\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/brute-force-o-dirb-lhe\/featured-image.jpeg",
+                            "width":  1280 ,
+                            "height":  853 
+                        }],"genre": "posts","keywords": "Cultura Hacker, Impressões, Linux, Redes, Segurança, Software Livre","wordcount":  1662 ,
+        "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/brute-force-o-dirb-lhe\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Marcelo Cavalcante"
+            },"description": "Para quem não conhece, brute-force é um ataque bastante utilizado em serviços web tais como smtp, pop, ssh, ftp, iax dentre outros. Se você possui um serviço web ele já sofreu tentativa de ataques brute-force."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'auto';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categorias </a><a class="menu-item" href="/sobre/"> Quem Sou </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancelar
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categorias</a><a class="menu-item" href="/sobre/" title="">Quem Sou</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Conteúdos</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Brute Force: O Dirb Lhe Ajuda a Identificar Vulnerabilidades Em Seu Site</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://blog.marcelocavalcante.net" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Marcelo Cavalcante</a></span>&nbsp;<span class="post-category">incluido em <a href="/categories/tutoriais/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutoriais</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1662 palavras&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutos&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/brute-force-o-dirb-lhe/featured-image.jpeg"
+        data-srcset="/posts/brute-force-o-dirb-lhe/featured-image.jpeg, /posts/brute-force-o-dirb-lhe/featured-image.jpeg 1.5x, /posts/brute-force-o-dirb-lhe/featured-image.jpeg 2x"
+        data-sizes="auto"
+        alt="/posts/brute-force-o-dirb-lhe/featured-image.jpeg"
+        title="Para quem não conhece, brute-force é um ataque bastante utilizado em serviços web tais como smtp, pop, ssh, ftp, iax dentre outros. Se você possui um serviço web ele já sofreu tentativa de ataques brute-force." /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Conteúdos</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#brute-force">Brute-Force</a></li>
+    <li><a href="#dirb">Dirb</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Para quem não conhece, brute-force é um ataque bastante utilizado em serviços web tais como smtp, pop, ssh, ftp, iax dentre outros. Se você possui um serviço web ele já sofreu tentativa de ataques brute-force.</p>
+<h2 id="brute-force">Brute-Force</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/brute-force-o-dirb-lhe/sherlocktux.jpg"
+        data-srcset="/posts/brute-force-o-dirb-lhe/sherlocktux.jpg, /posts/brute-force-o-dirb-lhe/sherlocktux.jpg 1.5x, /posts/brute-force-o-dirb-lhe/sherlocktux.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/brute-force-o-dirb-lhe/sherlocktux.jpg"
+        title="Sherlock Tux" width="252" height="252" /></p>
+<p><strong>P</strong>ara quem não conhece, brute-force é um ataque bastante utilizado em serviços web tais como smtp, pop, ssh, ftp, iax dentre outros. O ataque consiste em basicamente forçar o login em um determinado serviço que esteja disponível online sem que seja necessário um ataque mais sofisticado ou mesmo grandes conhecimentos sobre a tecnologia em questão. Por ser demasiado simples de se utilizar, visto que existem milhares de ferramentas disponíveis na web para este fim, ele acaba se tornando um dos pesadelos mais constantes dos administradores de redes, SysAdmins, etc.. Pois é um fato! Se você possui um serviço web ele já sofreu tentativa de ataques brute-force. Não sofreu? <!-- raw HTML omitted -->Não se preocupe, sofrerá.<!-- raw HTML omitted --> ;]</p>
+<p><strong>B</strong>asicamente existem duas formas de brute-force, porém eu prefiro acrescentar uma terceira forma&hellip;rude e grosseira, mas infelizmente já vi casos de pessoas que se utilizam dela, então vamos lá.</p>
+<p><strong>1- Brute-force puro ou força bruta</strong>, como prefiram chamar. É a metodologia mais lenta por testar uma quantidade absurdamente grande de combinações de caracteres de forma aleatória a ponto de tentar descobrir uma senha. Utilizam-se classes como &ldquo;alfanuméricos&rdquo;, &ldquo;numéricos&rdquo;, &ldquo;caracteres especiais&rdquo;, etc. Por exemplo. Supondo que nosso alfabeto fosse composto apenas das letras A, B e C. E alguém possui uma senha para um determinado serviço web. Com uma tentativa de brute-force, eu utilizaria uma ferramenta que geraria todas as combinações possíveis a partir destas 3 letras, o que, ocasionalmente, me daria acesso ao serviço uma vez que, com certeza, eu descobriria a senha, uma hora ou outra. A ferramenta começaria a tentar logar com senhas da seguite forma:</p>
+<p><em>A
+AA
+AB
+AC
+B
+C
+BA
+BB
+BC
+C
+CA
+CB
+CC
+AAB
+AAC
+&hellip;
+ACABCAACB
+&hellip;</em></p>
+<p><strong>E</strong>nfim.. Faria todas as combinações possíveis com estas 3 letras e cedo ou tarde teria sucesso no login, mas&hellip; Nosso alfabeto não é tão pequeno assim. E os números? E os caracteres especiais como %, $, #, @, !, &ldquo;, &amp;, *, (, ), _, -, +, =, etc&hellip;</p>
+<p><strong>J</strong>á imaginaram quantas tentativas seriam necessárias para se descobrir uma senha, por exemplo, de 8 caracteres contendo letras, números e caracteres especiais? o.O</p>
+<p><strong>Q</strong>uanto mais demorado for o ataque, mais fácil será de detectar o mesmo.</p>
+<p><strong>P</strong>or estas questões ele acaba não sendo a primeira opção para estes ataques. O que nos leva para a outra forma que é a mais utilizada hoje em dia e que tem se provado a mais eficaz, graças a triste realidade global de que as pessoas não possuem uma política eficiente para escolha de suas senhas, acabando por utilizar senhas com palavras reais como: deus, amor, sexo, felicidade, vida, segredo, secreto, etc.</p>
+<p><strong>2- Dicionários.</strong> Lembra daquela sua senha que faz sentido e você gosta porque é fácil de lembrar? Aquela &ldquo;deus&rdquo;, &ldquo;amor&rdquo;, &ldquo;sexo&rdquo;, &ldquo;cerveja&rdquo;, etc. Bom, ela corre grandes riscos se passar por um ataque que se utiliza de dicionários. Ataques com dicionários se resumem ao mesmo ataque de tentativa e erro com o intuito de logar em algum serviço web porém de forma mais coerente e orientada. O dicionário consiste em classes ou arquivos texto com uma sequência de palavras pré-formatadas pelo atacante que serão utilizadas como banco de possíveis senhas, ao invés de simplesmente sair tentando todas as combinações possíveis.</p>
+<p><strong>S</strong>upondo que sua senha seja &ldquo;cachorro&rdquo;. Eu lanço o ataque de brute-force utilizando-me de um dicionário de strings, ou palavras, que possui as seguintes:</p>
+<p><em>amor
+deus
+ceu
+inferno
+gato
+sexo
+divino
+futebol
+cachorro
+galinha
+absurdo
+segredo
+naodigo
+&hellip;
+&hellip;</em></p>
+<p><strong>C</strong>omo percebem, é uma simples lista de palavras. Porém, notaram que cachorro está na lista? Bom, o meu ataque faria de forma automática tentativas de login com todas estas possíveis senhas até chegar na vez do &ldquo;cachorro&rdquo;, que me resultaria em acesso à sua conta, serviço, site, aplicação ou o que quer que estivesse <!-- raw HTML omitted -->&ldquo;protegido&rdquo;<!-- raw HTML omitted --> com a senha &ldquo;cachorro&rdquo;.</p>
+<p><strong>I</strong>magine a mesma senha cachorro. Já imaginou quantas tentativas seriam necessárias com a outra técnica? A de combinações? Imaginem quantas milhares de combinações seriam necessárias utilizando o nosso alfabeto completo até chegarmos à palavra cachorro. o.O</p>
+<p><strong>C</strong>laro, quem utiliza-se de dicionários não possui um arquivo de strings tão curto como este exemplo que dei. Sequer apenas em português. Geralmente pegam arquivos prontos na internet que são feitos para este fim que possuem uma infinidade de palavras incluindo nomes próprios, cidades, países, objetos, frutas, etc, etc&hellip;</p>
+<p><strong>O</strong>u seja, se você possui uma senha bobinha e que é uma palavra de fato e faz sentido, pense seriamente em trocar por algo um pouco mais elaborado. ;]</p>
+<p><strong>S</strong>obre a terceira metodologia, se é que pode-se chamar assim, não possui um nome definido, sequer é reconhecida, porém vou citar pois ela é utilizada em casos mais amadores e específicos. O que seriam esses casos amadores e específicos? Algo como:</p>
+<p>_* mulher/namorada tentando descobrir senha do orkut/email/etc do marido/namorado ou o oposto;</p>
+<ul>
+<li>jovens tentando descobrir senha de orkut/email/msn/etc de outros jovens por qualquer motivo que o seja (briguinha na escola? o.O)&hellip;_</li>
+</ul>
+<p><strong>3- Lammer ou seja o que deus quizer</strong>. Independente da causa e das pessoas envolvidas, por mais incrível que possa parecer, esta modalidade ainda é bastante utilizada por aí. E o que é pior? Muitas vezes funciona. Não tirando os &ldquo;méritos&rdquo; o.O da pessoa que consegue a senha de alguém através dessa &ldquo;metodologia&rdquo;, mas em 100% 200% dos casos a culpa é apenas da vítima que insiste em colocar uma senha mais do que absurda como por exemplo: telefone de casa, seu número de celular, sua data de nascimento, seu sobre-nome, nome da namorada, nome da sogra <!-- raw HTML omitted -->(que o Diabo carregue)<!-- raw HTML omitted -->, etc.</p>
+<p><strong>A</strong>cho que já ficou claro como essa metodologia funciona, certo? Caso não, é o seguinte. É um &ldquo;ataque&rdquo; (será que possa chamar assim?) completamente direcionado, como informei anteriormente, onde se conhece o alvo e sabe algumas informações sobre essa pessoa. Neste caso a pessoa, supondo a esposa, não vai se utilizar de tecnologia alguma ou ferramenta específica. Vai apenas abusar do bom senso, torcer pela inocência do marido e tentar a sorte.</p>
+<p><strong>E</strong>la abre algum navegador de internet, acessa a página do orkut do cidadão e começa a tentar senhas como: telefone de casa, data de nascimento dele(a), etc.. Sim, ainda hoje vejo senhas simples como estas citadas e que acabam por ser descobertas. E o que é pior? As pessoas dizem: &ldquo;Hackearam minhas senha!&rdquo; hehehe&hellip; Parece exagero? o.O</p>
+<p><strong>A</strong>credito que já falei demais sobre isso. Resumi as 2 técnicas utlizadas para ataques de brute-force. Mas este não é o objetivo principal do post, mas sim como inspecionar seu site ou sistema web para saber se o mesmo está livre de tentativas deste tipo de ataque.</p>
+<p><strong>P</strong>ara isso utilizaremos a ferramenta <a href="https://sourceforge.net/projects/dirb/" target="_blank" rel="noopener noreffer ">Dirb</a>.</p>
+<h2 id="dirb">Dirb</h2>
+<p><strong>D</strong>irb é um URL Bruteforcer. Um WCS (Web Content Scanner) que tem a função de buscar por objetos Web Ocultos. Basicamente funciona com o lançamento um ataque baseado em dicionários contra o servidor Web analizando as respostas do mesmo. O principal propósito do Dirb é auditoria em aplicações web.</p>
+<p><strong>D</strong>entre as funcionalidades avançadas do Dirb destacam-se:</p>
+<p>_* setar diferentes cookies;</p>
+<ul>
+<li>adicionar qualquer tipo de HTTP header desejado;</li>
+<li>utilizar proxys para mascarar a conexão;</li>
+<li>utilizar catalogos ou arquivos utilizando dicionários definidos ou templates fazendo uma varredura direcionada._</li>
+</ul>
+<p><strong>M</strong>as, chega de falatório.. vamos ao teclado&hellip;</p>
+<p><strong>A</strong> ferramenta pode ser baixada através do site do projeto: [Dirb](<a href="https://sourceforge.net/projects/dirb/" target="_blank" rel="noopener noreffer ">https://sourceforge.net/projects/dirb/</a>.</p>
+<p><strong>A</strong> compilação é simples e sem grandes mistérios.</p>
+<p><strong>D</strong>escompacte o arquivo e compile seguindo os seguintes comandos:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tar -xvzf dirb203.tar.gz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> dirb/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./configure
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> make</span></span></code></pre></div></div>
+<p><strong>P</strong>ronto. O Dirb está pronto para funcionar.</p>
+<p><strong>S</strong>e você apenas executar o dirb sem nenhum parâmetros lhe serão apresentados os parâmetros deisponíveis para utilização bem como uma descrição dos mesmos:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./dirb
+</span></span><span class="line"><span class="cl">-----------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">DIRB v2.03
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">By The Dark Raver
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-----------------</span></span></code></pre></div></div>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./dirb &lt;url_base&gt; <span class="o">[</span>&lt;wordlist_file<span class="o">(</span>s<span class="o">)</span>&gt;<span class="o">]</span> <span class="o">[</span>options<span class="o">]</span></span></span></code></pre></div></div>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./dirb
+</span></span><span class="line"><span class="cl">-----------------DIRB v2.03    By The Dark Raver-----------------</span></span></code></pre></div></div>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./dirb &lt;url_base&gt; <span class="o">[</span>&lt;wordlist_file<span class="o">(</span>s<span class="o">)</span>&gt;<span class="o">]</span> <span class="o">[</span>options<span class="o">]</span>
+</span></span><span class="line"><span class="cl">....
+</span></span><span class="line"><span class="cl">....
+</span></span><span class="line"><span class="cl">....</span></span></code></pre></div></div>
+<p><strong>M</strong>as vamos ao uso mais básico.</p>
+<p><strong>A</strong> forma mais simples é utilizando apenas a URL que deseja testar, por exemplo <em><a href="https://www.meulaboratorio.com.br" target="_blank" rel="noopener noreffer ">https://www.meulaboratorio.com.br</a></em></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./dirb https://www.meulaboratorio.com.br
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-----------------
+</span></span><span class="line"><span class="cl">DIRB v2.03
+</span></span><span class="line"><span class="cl">By The Dark Raver
+</span></span><span class="line"><span class="cl">-----------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">START_TIME: Mon Jan <span class="m">31</span> 10:05:16 <span class="m">2011</span>
+</span></span><span class="line"><span class="cl">URL_BASE: https://www.meulaboratorio.com.br
+</span></span><span class="line"><span class="cl">WORDLIST_FILES: wordlists/common.txt
+</span></span><span class="line"><span class="cl">-----------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">GENERATED WORDS: <span class="m">1942</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---- Scanning URL: https://www.meulaboratorio.com.br/ ----
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">+ https://www.meulaboratorio.com.br/A
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">(</span>FOUND: <span class="m">301</span> <span class="o">[</span>Moved Permanently<span class="o">]</span> - Size: 241<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">+ https://www.meulaboratorio.com.br/a
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">(</span>FOUND: <span class="m">200</span> <span class="o">[</span>Ok<span class="o">]</span> - Size: 419<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">+ https://www.meulaboratorio.com.br/about
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">(</span>FOUND: <span class="m">301</span> <span class="o">[</span>Moved Permanently<span class="o">]</span> - Size: 237<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">+ https://www.meulaboratorio.com.br/accessibility/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; DIRECTORY
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">+ https://www.meulaboratorio.com.br/account
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">(</span>FOUND: <span class="m">302</span> <span class="o">[</span>Moved Temporarily<span class="o">]</span> - Size: 227<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">+ https://www.meulaboratorio.com.br/accounts
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">(</span>FOUND: <span class="m">302</span> <span class="o">[</span>Moved Temporarily<span class="o">]</span> - Size: 192<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">+ https://www.meulaboratorio.com.br/ad
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">(</span>FOUND: <span class="m">301</span> <span class="o">[</span>Moved Permanently<span class="o">]</span> - Size: 223<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">+ https://www.meulaboratorio.com.br/ads/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; DIRECTORY
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">...</span></span></code></pre></div></div>
+<p><strong>C</strong>ortei pois o resultado seria muito grande. Mas, como podem ver, ele escaneia a URL por diretórios, arquivos, etc., que podem ser alvos de tentativas de brute-force.</p>
+<p><strong>N</strong>o nosso simples caso, vi que foi identificado um diretório chamado accounts. Este diretório já é um alvo que merece ser inspecionado com mais atenção pois as chances de ele conter algo que interesse ao invasor são grandes.</p>
+<p><strong>C</strong>omo eu havia dito, o Dirb funciona com dicionários. Como devem ter reparado, eu não setei nenhum dicionário, portanto ele utilizou o dicionário padrão &ldquo;common&rdquo;. Mas você pode especificar manualmente qual dicionário deseja utilizar.</p>
+<p><strong>N</strong>o diretório dirb, você encontrará um diretório chamado wordlists que conterá os dicionários disponíveis.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> wordlists/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ls
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">big.txt  catala.txt  common.txt  euskera.txt  extensions_common.txt  indexes.txt  mutations_common.txt  others  small.txt  spanish.txt  stress  vulns</span></span></code></pre></div></div>
+<p><strong>B</strong>om, e sobre parâmetros?</p>
+<p><strong>V</strong>ou apresentar apenas algumas possibilidades.</p>
+<p><strong>P</strong>ara utilização de um dicionário em específico, basta adicionar o nome do dicionário desejado ao final do comando:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./dirb https://www.meulaboratorio.com.br euskera.txt</span></span></code></pre></div></div>
+<p><strong>P</strong>ara utilização de SSL, apenas inclua o HTTPS na url desejada:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./dirb https://www.meulaboratorio.com.br euskera.tx -i</span></span></code></pre></div></div>
+<p><strong>V</strong>ocê também pode utilizar múltiplos dicionários separando-os com vírgulas:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./dirb https://www.meulaboratorio.com.br euskera.txt,common.txt,spanish.txt,big.txt</span></span></code></pre></div></div>
+<p><strong>A</strong>lém disto você pode filtrar sua busca por uma extensão em específico através do parâmetro -X:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./dirb https://www.meulaboratorio.com.br euskera.txt -X .asp,.php,.jsp</span></span></code></pre></div></div>
+<p><strong>A</strong>gora é sair experimentando combinações e testando os resultados. Seja criativo em seus testes. ;]</p>
+<p><strong>A</strong>braços!</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Atualizado em 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Compartilhe em X" data-sharer="x" data-url="//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-lhe/" data-title="Brute Force: O Dirb Lhe Ajuda a Identificar Vulnerabilidades Em Seu Site" data-via="Marcelo_Kalib" data-hashtags="Cultura Hacker,Impressões,Linux,Redes,Segurança,Software Livre"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Threads" data-sharer="threads" data-url="//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-lhe/" data-title="Brute Force: O Dirb Lhe Ajuda a Identificar Vulnerabilidades Em Seu Site"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Facebook" data-sharer="facebook" data-url="//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-lhe/" data-hashtag="Cultura Hacker"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Linkedin" data-sharer="linkedin" data-url="//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-lhe/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Hacker News" data-sharer="hackernews" data-url="//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-lhe/" data-title="Brute Force: O Dirb Lhe Ajuda a Identificar Vulnerabilidades Em Seu Site"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Line" data-sharer="line" data-url="//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-lhe/" data-title="Brute Force: O Dirb Lhe Ajuda a Identificar Vulnerabilidades Em Seu Site"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em 微博" data-sharer="weibo" data-url="//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-lhe/" data-title="Brute Force: O Dirb Lhe Ajuda a Identificar Vulnerabilidades Em Seu Site"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Diaspora" data-sharer="diaspora" data-url="//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-lhe/" data-title="Brute Force: O Dirb Lhe Ajuda a Identificar Vulnerabilidades Em Seu Site" data-description="Para quem não conhece, brute-force é um ataque bastante utilizado em serviços web tais como smtp, pop, ssh, ftp, iax dentre outros. Se você possui um serviço web ele já sofreu tentativa de ataques brute-force."><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=%2f%2fblog.marcelocavalcante.net%3a1313%2fposts%2fbrute-force-o-dirb-lhe%2f&amp;text=Brute%20Force%3a%20O%20Dirb%20Lhe%20Ajuda%20a%20Identificar%20Vulnerabilidades%20Em%20Seu%20Site" target="_blank" title="Compartilhe em Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/cultura-hacker/">Cultura Hacker</a>,&nbsp;<a href="/tags/impress%C3%B5es/">Impressões</a>,&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/redes/">Redes</a>,&nbsp;<a href="/tags/seguran%C3%A7a/">Segurança</a>,&nbsp;<a href="/tags/software-livre/">Software Livre</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Voltar</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/posts/cultura-hacker/" class="next" rel="next" title="Cultura Hacker - Tenha Ética E Ganharás Respeito">Cultura Hacker - Tenha Ética E Ganharás Respeito<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Possibilitado por <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Tema - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2008 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://blog.marcelocavalcante.net" target="_blank">Marcelo Cavalcante</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Voltar ao topo">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="Ver comentários">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.20.2/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Isl - Categoria - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/categories/isl/</link>
+        <description>Isl - Categoria - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Tue, 15 Feb 2011 21:09:38 -0500</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/categories/isl/" rel="self" type="application/rss+xml" /><item>
+    <title>Brute Force: O Dirb... Dirbuster Lhe Ajuda a Identificar Vulnerabilidades Em Seu Site</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-dirbuster/</link>
+    <pubDate>Tue, 15 Feb 2011 21:09:38 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-dirbuster/</guid>
+    <description><![CDATA[<p><strong>B</strong>om, para quem não conhece nada sobre Brute-Force ou apenas ouviu falar vagamente mas não tem certeza sobre o que realmente é um ataque deste tipo, sugiro dar uma lida em meu último post, onde apresentei algumas informações sobre brute-force bem como uma ferramenta que podemos utilizar para testar nossos sites e verificar o quão vulneráveis eles estão a este tipo de ataque. Segue link para o mesmo:</p>]]></description>
+</item>
+</channel>
+</rss>

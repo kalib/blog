@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Criando Funções Lambda Facilmente Com O Framework Serverless - Marcelo Cavalcante Rocha</title><meta name="Description" content="Que tal criar a infraesturtura e sua função lambda de forma simples e dinâmica com poucos comandos? O Serverless é um framework que abstrai tudo isto de forma uq epossamos focar apenas em nosso código."><meta property="og:url" content="//blog.marcelocavalcante.net:1313/posts/criando-funcoes-lambda-facilmente-com/">
+  <meta property="og:site_name" content="Marcelo Cavalcante Rocha">
+  <meta property="og:title" content="Criando Funções Lambda Facilmente Com O Framework Serverless">
+  <meta property="og:description" content="Que tal criar a infraesturtura e sua função lambda de forma simples e dinâmica com poucos comandos? O Serverless é um framework que abstrai tudo isto de forma uq epossamos focar apenas em nosso código.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-12-17T11:51:33-05:00">
+    <meta property="article:modified_time" content="2023-12-17T11:51:33-05:00">
+    <meta property="article:tag" content="Devops">
+    <meta property="article:tag" content="AWS">
+    <meta property="article:tag" content="Serverless">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Cloud">
+    <meta property="article:tag" content="CloudFormation">
+    <meta property="og:image" content="//blog.marcelocavalcante.net:1313/posts/criando-funcoes-lambda-facilmente-com/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="//blog.marcelocavalcante.net:1313/posts/criando-funcoes-lambda-facilmente-com/featured-image.png">
+  <meta name="twitter:title" content="Criando Funções Lambda Facilmente Com O Framework Serverless">
+  <meta name="twitter:description" content="Que tal criar a infraesturtura e sua função lambda de forma simples e dinâmica com poucos comandos? O Serverless é um framework que abstrai tudo isto de forma uq epossamos focar apenas em nosso código.">
+<meta name="application-name" content="Marcelo Cavalcante">
+<meta name="apple-mobile-web-app-title" content="Marcelo Cavalcante">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="//blog.marcelocavalcante.net:1313/posts/criando-funcoes-lambda-facilmente-com/" /><link rel="prev" href="//blog.marcelocavalcante.net:1313/posts/criando-infraestrutura-no-aws-com/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Criando Funções Lambda Facilmente Com O Framework Serverless",
+        "inLanguage": "pt-BR",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/\/blog.marcelocavalcante.net:1313\/posts\/criando-funcoes-lambda-facilmente-com\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/criando-funcoes-lambda-facilmente-com\/featured-image.png",
+                            "width":  990 ,
+                            "height":  495 
+                        }],"genre": "posts","keywords": "Devops, AWS, Serverless, Python, Cloud, CloudFormation, Lambda","wordcount":  2193 ,
+        "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/criando-funcoes-lambda-facilmente-com\/","datePublished": "2023-12-17T11:51:33-05:00","dateModified": "2023-12-17T11:51:33-05:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Marcelo Cavalcante"
+            },"description": "Que tal criar a infraesturtura e sua função lambda de forma simples e dinâmica com poucos comandos? O Serverless é um framework que abstrai tudo isto de forma uq epossamos focar apenas em nosso código."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'auto';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categorias </a><a class="menu-item" href="/sobre/"> Quem Sou </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancelar
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categorias</a><a class="menu-item" href="/sobre/" title="">Quem Sou</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Conteúdos</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Criando Funções Lambda Facilmente Com O Framework Serverless</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://blog.marcelocavalcante.net" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Marcelo Cavalcante</a></span>&nbsp;<span class="post-category">incluido em <a href="/categories/tutoriais/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutoriais</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-17">2023-12-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2193 palavras&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutos&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-funcoes-lambda-facilmente-com/featured-image.png"
+        data-srcset="/posts/criando-funcoes-lambda-facilmente-com/featured-image.png, /posts/criando-funcoes-lambda-facilmente-com/featured-image.png 1.5x, /posts/criando-funcoes-lambda-facilmente-com/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-funcoes-lambda-facilmente-com/featured-image.png"
+        title="Que tal criar a infraesturtura e sua função lambda de forma simples e dinâmica com poucos comandos? O Serverless é um framework que abstrai tudo isto de forma uq epossamos focar apenas em nosso código." /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Conteúdos</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#serverless-framework---o-que-é-e-para-que-serve">Serverless Framework - O que é e para que serve</a></li>
+    <li><a href="#mas-o-que-é-serverless">Mas o que é serverless?</a></li>
+    <li><a href="#instalação-do-serverless-framework">Instalação do Serverless Framework</a></li>
+    <li><a href="#uso-básico-do-serverless-framework">Uso básico do Serverless Framework</a></li>
+    <li><a href="#fazendo-uma-pequena-customização">Fazendo uma pequena customização</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Que tal criar a infraesturtura e sua função lambda de forma simples e dinâmica com poucos comandos? O Serverless é um framework que abstrai tudo isto de forma uq epossamos focar apenas em nosso código.</p>
+<h2 id="serverless-framework---o-que-é-e-para-que-serve">Serverless Framework - O que é e para que serve</h2>
+<p><strong>E</strong>ntregue software com bem menos trabalho!</p>
+<p><strong>S</strong>im, é uma afirmação forte. Não, não sou eu quem o está dizendo. É literalmente a primeira frase que podemos encontrar na página de documentação do <a href="https://www.serverless.com/framework/docs/" target="_blank" rel="noopener noreffer ">Framework Serverless</a>.</p>
+<p><strong>E</strong>mbora não seja minha, concordo completamente com esta afirmação. Utilizando o framework Serverless eu realmente consigo entregas mais rápidas, passando por todo o ciclo de desenvolvimento e testes, abstraindo a parte que geralmente não nos interessa tanto: a infraestrutura.</p>
+<p><strong>N</strong>ão estou menosprezando a infraestrutura, obviamente. Sempre trabalhei com infraestrutura e entendo bem a importância de uma infraestrutura bem projetada e configurada, mas quando falamos em um mundo moderno e na nuvem, principalmente em soluções serverless como é o caso de <em>lambda functions</em> ou funções <em>lambda</em>, está claro que o nosso objetivo principal é o código da aplicação em si, e não a infraestrutura.</p>
+<p><strong>O</strong> Serverless nos ajuda justamente neste propósito, abstraindo e automatizando toda a infraestutrura que é necessária para rodarmos nossa lambda: IAM, cloudformation, Lambda em si, etc. Desta forma podemos dedicar a maior parte do nosso tempo de fato em nosso código. E a melhor parte, isto não compromete a segurança ou estabilidade da infraestrutura, já que o framework Serverless estará sempre seguindo as melhores práticas ao abstrair esta camada.</p>
+<p><strong>A</strong>lém de facilitar o processo de desenvolvimento e entrega ou <em>deployment</em> de nossa função lambda, o Serverless framework possui suporte à diversas linguagens, assim como o AWS Lambda: <em>Node.js</em>, <em>Python</em>, <em>Java</em>, <em>Go</em>, <em>C#</em>, <em>Ruby</em>, <em>Swift</em>, <em>Kotlin</em>, <em>PHP</em>, <em>Scala</em> e <em>F#</em>.</p>
+<h2 id="mas-o-que-é-serverless">Mas o que é serverless?</h2>
+<p><strong>A</strong>qui é preciso diferenciar um pouco o conceito de serverless e o Framework Serverless.</p>
+<p><strong>O</strong> conceito serverless, ou sem servidor quando traduzimos ao pé da letra, indica um modelo de desenvolvimento nativo na núvem (<em>cloud-native</em>). Isto quer dizer que o foco do desenvolvimento é 100% na aplicação, de forma que você não gerenciará a infraestrutura necessária para rodar sua aplicação. A ideia é você não precisar se preocupar em gerenciar/criar servidores, por exemplo. Sim, ainda existirão servidores que serão responsáveis por rodar a sua aplicação, obviamente, mas você não lidará com eles diretamente. Estes serão gerenciados por serviços na nuvem de sua escolha, como AWS, GCP, Azure, etc. O provedor de nuvem (<em>cloud</em>) cuidará desta parte de forma que você nem sequer saberá onde fisicamente está o seu servidor assim como não precisará ter acesso ao mesmo remotamente ou preocupar-se com as configurações do mesmo. Foco 100% na sua aplicação.</p>
+<h2 id="instalação-do-serverless-framework">Instalação do Serverless Framework</h2>
+<p><strong>IMPORTANTE:</strong> O meu objetivo com este post não é explicar sobre Lambda functions, mas sim como criá-las com o framework Serverless. Caso esteja buscando informações mais focadas em Lambda Functions em si, sugiro que confira um outro post que publiquei anteriormente onde o foco era a criação de uma função Lambda utilizando a linguagem GO para interagir com S3 Buckets no AWS: <a href="/posts/criando-uma-lambda-function-com/" rel="">Criando Uma Lambda Function Com Golang Qur Interage Com S3 Buckets</a>.</p>
+<p><strong>A</strong> forma mais simples de instalar o serverless framework é através do <em>npm</em>. Caso não possua ainda Node.js instalado em sua máquina, você precisará instalá-lo antes de instalar o serverless com o <em>npm</em>: <a href="https://nodejs.org/en" target="_blank" rel="noopener noreffer ">Node.js</a>.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ npm install -g serverless</span></span></code></pre></div></div>
+<p><strong>A</strong>lternativamente, caso prefira instalar o Serverless sem o <em>npm</em>, você poderá utilizar o binário diretamente: <a href="https://www.serverless.com/framework/docs/install-standalone" target="_blank" rel="noopener noreffer ">Binário Serverless</a>.</p>
+<h2 id="uso-básico-do-serverless-framework">Uso básico do Serverless Framework</h2>
+<p><strong>U</strong>ma vez que o Serverless já esteja instalado e disponível, a primeira coisa que precisamos fazer é definir as credenciais com as quais trabalharemos em nosso projeto.</p>
+<p><strong>N</strong>o console <em>IAM</em> do AWS, crie um novo usuário e, apenas para facilitar seu estudo inicial, inclua Acesso de Administrador ao seu novo usário. (Não entrarei em detalhes aqui sobre como criar um usuário no IAM pois assumo que se você está criando funções lambda, provavelmente já sabe fazer isso. Caso não, siga as instruções da <a href="https://docs.aws.amazon.com/pt_br/IAM/latest/UserGuide/id_users_create.html" target="_blank" rel="noopener noreffer ">Amazon aqui</a>.)</p>
+<p><strong>C</strong>om seu usuário já criado e com permissões de administrador, copie a chave de acesso (<em>access key</em>) e a senha da chave de acesso (<em>secret access key</em>) do seu novo usuário, como na imagem a seguir:
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-funcoes-lambda-facilmente-com/serverless-01.png"
+        data-srcset="/posts/criando-funcoes-lambda-facilmente-com/serverless-01.png, /posts/criando-funcoes-lambda-facilmente-com/serverless-01.png 1.5x, /posts/criando-funcoes-lambda-facilmente-com/serverless-01.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-funcoes-lambda-facilmente-com/serverless-01.png"
+        title="AWS" width="1000" height="600" />
+<strong>U</strong>tilizaremos estas credenciais para configurar nosso framework Serverless.</p>
+<p><strong>E</strong>m seu terminal digite:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜  serverless config credentials --provider aws --key &lt;sua-chave-de-acesso&gt; --secret &lt;sua-senha-da-chave-de-acesso&gt; --profile serverlessUser</span></span></code></pre></div></div>
+<p><strong>P</strong>ara criarmos nosso primeiro projeto podemos utilizar duas formas distintas de interação com o Serverless.</p>
+<p><strong>A</strong> primeira é através do menu interativo do Serverless. Desta forma, apenas responderemos as perguntas que o Serverless nos fará.</p>
+<p><strong>D</strong>igite <em>serverless</em> e um menu lhe será apresentado onde definiremos o nosso projeto:</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ serverless
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Creating a new serverless project
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">? What <span class="k">do</span> you want to make?
+</span></span><span class="line"><span class="cl">❯ AWS - Node.js - Starter
+</span></span><span class="line"><span class="cl">  AWS - Node.js - HTTP API
+</span></span><span class="line"><span class="cl">  AWS - Node.js - Scheduled Task
+</span></span><span class="line"><span class="cl">  AWS - Node.js - SQS Worker
+</span></span><span class="line"><span class="cl">  AWS - Node.js - Express API
+</span></span><span class="line"><span class="cl">  AWS - Node.js - Express API with DynamoDB
+</span></span><span class="line"><span class="cl">  AWS - Python - Starter
+</span></span><span class="line"><span class="cl">  AWS - Python - HTTP API
+</span></span><span class="line"><span class="cl">  AWS - Python - Scheduled Task
+</span></span><span class="line"><span class="cl">  AWS - Python - SQS Worker
+</span></span><span class="line"><span class="cl">  AWS - Python - Flask API
+</span></span><span class="line"><span class="cl">  AWS - Python - Flask API with DynamoDB
+</span></span><span class="line"><span class="cl">  Other</span></span></code></pre></div></div>
+<p><strong>N</strong>o menu acima escolheremos a opção <em>AWS - Python - Starter</em> para esta demonstração, já que Python é uma de minhas linguagens favoritas, mas perceba que temos muitas opções disponíveis e se escolhermos <em>Other</em> outras linguagens serão apresentadas também.</p>
+<p><strong>A</strong>o selecionarmos <em>AWS - Python - Starter</em> o Serverless criará o diretório de nosso projeto já com um template para Python que funcionará de imediato com AWS Lambda Functions. Mas antes de isto tudo acontecer, ele nos perguntará mais alguns detalhes, portanto vamos selecionar Python e seguir em frente.</p>
+<p><strong>A</strong> pergunta seguinte será qual nome você deseja dar para seu projeto. Aqui utilizarei <em>primeiro-teste-serverless</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ serverless
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Creating a new serverless project
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">? What <span class="k">do</span> you want to make? AWS - Python - Starter
+</span></span><span class="line"><span class="cl">? What <span class="k">do</span> you want to call this project? primeiro-teste-serverless</span></span></code></pre></div></div>
+<p><strong>R</strong>epare que ao pressionar enter o Serverless começará o download e criação dos templates:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ serverless
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Creating a new serverless project
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">? What <span class="k">do</span> you want to make? AWS - Python - Starter
+</span></span><span class="line"><span class="cl">? What <span class="k">do</span> you want to call this project? primeiro-teste-serverless
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">✔ Project successfully created in primeiro-teste-serverless folder
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">? Register or Login to Serverless Framework <span class="o">(</span>Y/n<span class="o">)</span></span></span></code></pre></div></div>
+<p><strong>E</strong>le lhe perguntará se você deseja se cadastrar ou logar no serviço Serverless. Por hora você não precisa fazer isso, portanto apenas selecionei <em>n</em> e segui em frente. A pergunta seguinte será se você deseja efetuar o deployment de seu projeto. Vamos selecionar <em>n</em> por enquanto para que possamos verificar nosso projeto antes de fazermos o primeiro deployment.</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ serverless
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Creating a new serverless project
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">? What <span class="k">do</span> you want to make? AWS - Python - Starter
+</span></span><span class="line"><span class="cl">? What <span class="k">do</span> you want to call this project? primeiro-teste-serverless
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">✔ Project successfully created in primeiro-teste-serverless folder
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">? Register or Login to Serverless Framework No
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">? Do you want to deploy now? No
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">What next?
+</span></span><span class="line"><span class="cl">Run these commands in the project directory:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">serverless deploy    Deploy changes
+</span></span><span class="line"><span class="cl">serverless info      View deployed endpoints and resources
+</span></span><span class="line"><span class="cl">serverless invoke    Invoke deployed functions
+</span></span><span class="line"><span class="cl">serverless --help    Discover more commands</span></span></code></pre></div></div>
+<p><strong>P</strong>erceba que ignoramos o deployment inicial mas o Serverless já nos indicou que comandos podemos utilizar para fazer o deployment, pegar informações, invocar, etc.</p>
+<p><strong>R</strong>epare que um diretório foi criado com o nome do seu projeto e o mesmo agora possui alguns arquivos que foram criados automaticamente pelo Serverless:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ ls primeiro-teste-serverless
+</span></span><span class="line"><span class="cl">README.md      handler.py     serverless.yml</span></span></code></pre></div></div>
+<p><strong>V</strong>amos verificar os arquivos <em>handler.py</em> e <em>serverless.yml</em>.</p>
+<p><strong>O</strong> handler.py é o arquivo principal de nossa função lambda em python. De forma resumida, para quem nunca utilizou lambda, o handler é o método no código da nossa função que processa eventos. Quando nossa função é invocada, Lambda executa o método handler. A função continuará rodando até que o handler retorne uma resposta, finalize ou caso expire a sessão (<em>time out</em>).</p>
+<p><strong>O</strong> conteúdo padrão que o Serverless adiciona ao nosso <em>handler.py</em> será algo similar ao seguinte:</p>
+<p><em>handler.py</em></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-python">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">body</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;Go Serverless v3.0! Your function executed successfully!&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;input&#34;</span><span class="p">:</span> <span class="n">event</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span><span class="s2">&#34;statusCode&#34;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&#34;body&#34;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">)}</span></span></span></code></pre></div></div>
+<p><strong>C</strong>omo podevemos ver, nada de absurdo. Um template padrão com uma função que cria um body que retorna uma mensagem dizendo que a função foi executada com sucesso no AWS Lambda.</p>
+<p><strong>E</strong>ste é o conteúdo de nosso <em>serverless.yml</em>:</p>
+<p><em>serverless.yml</em></p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-yaml">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="l">primeiro-teste-serverless</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">frameworkVersion</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">provider</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">aws</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">runtime</span><span class="p">:</span><span class="w"> </span><span class="l">python3.9</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">functions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hello</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">handler</span><span class="p">:</span><span class="w"> </span><span class="l">handler.hello</span></span></span></code></pre></div></div>
+<p><strong>N</strong>ada de muito complexo aqui. São as definições que serão utilizadas pelo Serverless para definir a nossa função lambda. Aqui estamos usando os valores padrões que ele me trouxe, como versão do <em>Python</em> (<em>3.9</em>), nome da nossa função (<em>hello</em>) e nome do nosso <em>handler</em>.</p>
+<p><strong>C</strong>omo optamos por não fazer o deployment inicial, podemos conectar ao nosso console do AWS e confirmar no menu do serviço <em>Lambda</em> que não temos nenhuma função lambda com o nome que indicamos:
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-funcoes-lambda-facilmente-com/serverless-02.png"
+        data-srcset="/posts/criando-funcoes-lambda-facilmente-com/serverless-02.png, /posts/criando-funcoes-lambda-facilmente-com/serverless-02.png 1.5x, /posts/criando-funcoes-lambda-facilmente-com/serverless-02.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-funcoes-lambda-facilmente-com/serverless-02.png"
+        title="AWS" width="750" height="380" />
+<strong>D</strong>a mesma forma, podemos verificar o console do <em>CloudFormation</em> e ver que também Não temos uma stack com o nome de nosso projeto:
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-funcoes-lambda-facilmente-com/serverless-03.png"
+        data-srcset="/posts/criando-funcoes-lambda-facilmente-com/serverless-03.png, /posts/criando-funcoes-lambda-facilmente-com/serverless-03.png 1.5x, /posts/criando-funcoes-lambda-facilmente-com/serverless-03.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-funcoes-lambda-facilmente-com/serverless-03.png"
+        title="AWS" width="600" height="400" />
+<strong>V</strong>amos então experimentar o deployment de nossa função lambda. Para isto, digite <em>sls deploy</em>:</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ sls deploy
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Deploying primeiro-teste-serverless to stage dev <span class="o">(</span>us-east-1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">⠙ Creating CloudFormation stack <span class="o">(</span>4s<span class="o">)</span>
+</span></span><span class="line"><span class="cl">⠹ Updating CloudFormation stack <span class="o">(</span>47s<span class="o">)</span>
+</span></span><span class="line"><span class="cl">✔ Service deployed to stack primeiro-teste-serverless-dev <span class="o">(</span>91s<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">functions:
+</span></span><span class="line"><span class="cl">  hello: primeiro-teste-serverless-dev-hello <span class="o">(</span>1.7 kB<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Need a faster logging experience than CloudWatch? Try our Dev Mode in Console: run <span class="s2">&#34;serverless dev&#34;</span></span></span></code></pre></div></div>
+<p><strong>C</strong>omo podemos ver, o Serverless cuidou de todo o deployment, criando a stack do CLoudformation, lambda function, etc. E nos informou que tudo foi criado com sucesso.</p>
+<p><strong>R</strong>epare que o Serverless também retornou o nome da sua função: <em>hello</em></p>
+<p><strong>S</strong>e verificarmos novamente em nosso console da AWS, em <em>Lambda</em> e em <em>Cloudformation</em>, veremos que agora nosso projeto estará lá:
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-funcoes-lambda-facilmente-com/serverless-05.png"
+        data-srcset="/posts/criando-funcoes-lambda-facilmente-com/serverless-05.png, /posts/criando-funcoes-lambda-facilmente-com/serverless-05.png 1.5x, /posts/criando-funcoes-lambda-facilmente-com/serverless-05.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-funcoes-lambda-facilmente-com/serverless-05.png"
+        title="AWS" width="1150" height="340" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-funcoes-lambda-facilmente-com/serverless-04.png"
+        data-srcset="/posts/criando-funcoes-lambda-facilmente-com/serverless-04.png, /posts/criando-funcoes-lambda-facilmente-com/serverless-04.png 1.5x, /posts/criando-funcoes-lambda-facilmente-com/serverless-04.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-funcoes-lambda-facilmente-com/serverless-04.png"
+        title="AWS" width="1400" height="406" />
+<strong>P</strong>odemos clicar em nossa função no console <em>Lambda</em> para vermos os detalhes da mesma:
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-funcoes-lambda-facilmente-com/serverless-06.png"
+        data-srcset="/posts/criando-funcoes-lambda-facilmente-com/serverless-06.png, /posts/criando-funcoes-lambda-facilmente-com/serverless-06.png 1.5x, /posts/criando-funcoes-lambda-facilmente-com/serverless-06.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-funcoes-lambda-facilmente-com/serverless-06.png"
+        title="AWS" width="1400" height="1100" />
+<strong>E</strong> simples assim, em questão de 2 ou 3 minutos, temos nossa primeira função Lambda já funcional, bem como primeiro deployment feito com sucesso no AWS, incluindo todos os componentes de infraestrutura, com os quais não precisamos nos preocupar.
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-funcoes-lambda-facilmente-com/serverless-07.png"
+        data-srcset="/posts/criando-funcoes-lambda-facilmente-com/serverless-07.png, /posts/criando-funcoes-lambda-facilmente-com/serverless-07.png 1.5x, /posts/criando-funcoes-lambda-facilmente-com/serverless-07.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-funcoes-lambda-facilmente-com/serverless-07.png"
+        title="AWS" width="915" height="200" /></p>
+<p><strong>A</strong>lém de deployment, o Serverless nos permite também executar nosta função diretamente de nossa linha de comando, bastando apenas executarmos <em>sls invoke</em> e informar o nome de nossa função:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ sls invoke -f hello --log
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;statusCode&#34;</span>: 200,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;body&#34;</span>: <span class="s2">&#34;{\&#34;message\&#34;: \&#34;Go Serverless v3.0! Your function executed successfully!\&#34;, \&#34;input\&#34;: {}}&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">START
+</span></span><span class="line"><span class="cl">END Duration: 1.49 ms <span class="o">(</span>init: 122.58 ms<span class="o">)</span> Memory Used: <span class="m">37</span> MB</span></span></code></pre></div></div>
+<p><strong>C</strong>omo podemos ver, nossa função Lambda funcionou como esperado e retornou exatamente a mensagem que esperávamos: <em>Go Serverless v3.0! Your function executed successfully!</em> bem como o <em>statusCode</em> 200, que significa sucesso.</p>
+<p><strong>S</strong>imples e rápido, certo?!</p>
+<p><strong>O</strong> Serverless também nos permite facilmente remover tudo referente à nossa função, incluindo a stack do <em>Cloudformation</em> e a função <em>lambda</em> em si. Para isto digite: <em>sls remove</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ sls remove
+</span></span><span class="line"><span class="cl">Removing primeiro-teste-serverless from stage dev <span class="o">(</span>us-east-1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">✔ Service primeiro-teste-serverless has been successfully removed <span class="o">(</span>28s<span class="o">)</span></span></span></code></pre></div></div>
+<p><strong>C</strong>aso verifique novamente no Console do AWS, tanto em <em>Lambda</em> quanto em <em>Cloudformation</em>, perceberá que todos os componentes foram excluídos com sucesso.</p>
+<h2 id="fazendo-uma-pequena-customização">Fazendo uma pequena customização</h2>
+<p><strong>V</strong>amos fazer uma pequena alteração no template padrão que nos foi entregue.</p>
+<p><strong>P</strong>rimeiramente vamos editar nosso arquivo <em>serverless.yml</em> da seguinte forma:</p>
+<p><em>serverless.yml</em></p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-yaml">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="l">primeiro-teste-serverless</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">frameworkVersion</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">provider</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">aws</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">runtime</span><span class="p">:</span><span class="w"> </span><span class="l">python3.11</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">functions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hello</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">handler</span><span class="p">:</span><span class="w"> </span><span class="l">handler.hello</span></span></span></code></pre></div></div>
+<p><strong>A</strong> única alteração que fizemos aqui foi na linha 6, onde alteramos a versão do Python. Vamos utilizar uma versão mais atual do Python, 3.11, ao invés da versão 3.9 que estávamos utilizando antes. (Dependendo de quando você estiver lendo isto, a versão padrão que poderá vir em seu template poderá ser diferente).</p>
+<p><strong>A</strong>gora vamos modificar um pouco nosso arquivo <em>handler.py</em>:</p>
+<p><em>handler.py</em></p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-python">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">cumprimento</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s1">&#39;Olá, diretamente da sua função Lambda!&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Minha primeira função AWS Lambda com Python!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;statusCode&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">cumprimento</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;unicode-escape&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>A</strong>s linhas marcadas são nossas alterações. Basicamente recriamos todo o corpo de nossa função <em>hello</em> para que possamos desta vez receber uma mensagem um pouco mais customizada em caso de execução com sucesso, ou seja, com status <em>200</em>.</p>
+<p><strong>V</strong>amos fazer um novo deployment de nosso projeto com <em>sls deploy</em>:</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ sls deploy
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Deploying primeiro-teste-serverless to stage dev <span class="o">(</span>us-east-1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">⠼ Creating CloudFormation stack <span class="o">(</span>2s<span class="o">)</span>
+</span></span><span class="line"><span class="cl">⠼ Creating CloudFormation stack <span class="o">(</span>0/2<span class="o">)</span> <span class="o">(</span>15s<span class="o">)</span>
+</span></span><span class="line"><span class="cl">⠋ Updating CloudFormation stack <span class="o">(</span>46s<span class="o">)</span>
+</span></span><span class="line"><span class="cl">✔ Service deployed to stack primeiro-teste-serverless-dev <span class="o">(</span>90s<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">functions:
+</span></span><span class="line"><span class="cl">  hello: primeiro-teste-serverless-dev-hello <span class="o">(</span>1.7 kB<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Need a faster logging experience than CloudWatch? Try our Dev Mode in Console: run <span class="s2">&#34;serverless dev&#34;</span></span></span></code></pre></div></div>
+<p><strong>N</strong>ovamente, podemos agora testar nossa função e confirmar que nosso deployment foi realizado com sucesso executando <em>sls invoke -f hello &ndash;log</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ sls invoke -f hello --log
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;statusCode&#34;</span>: 200,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;body&#34;</span>: <span class="s2">&#34;\&#34;Olá, diretamente da sua função Lambda!\&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">--------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">START
+</span></span><span class="line"><span class="cl">Minha primeira função AWS Lambda com Python!
+</span></span><span class="line"><span class="cl">END Duration: 1.24 ms Memory Used: <span class="m">41</span> MB</span></span></code></pre></div></div>
+<p><strong>P</strong>odemos ver claramente que nosso cumprimento foi impresso no body e também nossa frase <em>Minha primeira função AWS Lambda com Python!</em> foi retornada ao final.</p>
+<p><strong>O</strong> céu é o limite quanto ao que você pode fazer com isto. Como qualquer código Python, você pode utilizar lambdas para múltiplas tarefas e automações, interações. Realmente as possibilidades são infinitas.</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Atualizado em 2023-12-17</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Compartilhe em X" data-sharer="x" data-url="//blog.marcelocavalcante.net:1313/posts/criando-funcoes-lambda-facilmente-com/" data-title="Criando Funções Lambda Facilmente Com O Framework Serverless" data-via="Marcelo_Kalib" data-hashtags="Devops,AWS,Serverless,Python,Cloud,CloudFormation,Lambda"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Threads" data-sharer="threads" data-url="//blog.marcelocavalcante.net:1313/posts/criando-funcoes-lambda-facilmente-com/" data-title="Criando Funções Lambda Facilmente Com O Framework Serverless"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Facebook" data-sharer="facebook" data-url="//blog.marcelocavalcante.net:1313/posts/criando-funcoes-lambda-facilmente-com/" data-hashtag="Devops"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Linkedin" data-sharer="linkedin" data-url="//blog.marcelocavalcante.net:1313/posts/criando-funcoes-lambda-facilmente-com/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Hacker News" data-sharer="hackernews" data-url="//blog.marcelocavalcante.net:1313/posts/criando-funcoes-lambda-facilmente-com/" data-title="Criando Funções Lambda Facilmente Com O Framework Serverless"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Line" data-sharer="line" data-url="//blog.marcelocavalcante.net:1313/posts/criando-funcoes-lambda-facilmente-com/" data-title="Criando Funções Lambda Facilmente Com O Framework Serverless"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em 微博" data-sharer="weibo" data-url="//blog.marcelocavalcante.net:1313/posts/criando-funcoes-lambda-facilmente-com/" data-title="Criando Funções Lambda Facilmente Com O Framework Serverless"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Diaspora" data-sharer="diaspora" data-url="//blog.marcelocavalcante.net:1313/posts/criando-funcoes-lambda-facilmente-com/" data-title="Criando Funções Lambda Facilmente Com O Framework Serverless" data-description="Que tal criar a infraesturtura e sua função lambda de forma simples e dinâmica com poucos comandos? O Serverless é um framework que abstrai tudo isto de forma uq epossamos focar apenas em nosso código."><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=%2f%2fblog.marcelocavalcante.net%3a1313%2fposts%2fcriando-funcoes-lambda-facilmente-com%2f&amp;text=Criando%20Fun%c3%a7%c3%b5es%20Lambda%20Facilmente%20Com%20O%20Framework%20Serverless" target="_blank" title="Compartilhe em Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/devops/">Devops</a>,&nbsp;<a href="/tags/aws/">AWS</a>,&nbsp;<a href="/tags/serverless/">Serverless</a>,&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/cloud/">Cloud</a>,&nbsp;<a href="/tags/cloudformation/">CloudFormation</a>,&nbsp;<a href="/tags/lambda/">Lambda</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Voltar</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/criando-infraestrutura-no-aws-com/" class="prev" rel="prev" title="Criando Infraestrutura No Aws Com Sceptre"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Criando Infraestrutura No Aws Com Sceptre</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Possibilitado por <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Tema - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2008 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://blog.marcelocavalcante.net" target="_blank">Marcelo Cavalcante</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Voltar ao topo">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="Ver comentários">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.20.2/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+</html>

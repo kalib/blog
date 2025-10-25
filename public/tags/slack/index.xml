@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Slack - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/slack/</link>
+        <description>Slack - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Sat, 11 Mar 2017 17:01:49 -0500</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/slack/" rel="self" type="application/rss+xml" /><item>
+    <title>Recebendo Alarmes Do Aws Diretamente No Slack</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/recebendo-alarmes-do-aws-diretamente/</link>
+    <pubDate>Sat, 11 Mar 2017 17:01:49 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/recebendo-alarmes-do-aws-diretamente/</guid>
+    <description><![CDATA[<p><strong>A</strong>ntes de entrar na configuração dos serviços, talvez seja necessário apresentar o [Slack](<a href="https://www.slack.com" target="_blank" rel="noopener noreffer ">https://www.slack.com</a>, visto que muitos ainda não conhecem ou utilizam esta poderosa e versátil ferramenta de comunicação instantânea para times.</p>]]></description>
+</item>
+</channel>
+</rss>

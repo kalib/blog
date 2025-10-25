@@ -1,0 +1,88 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Linux - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/linux/</link>
+        <description>Linux - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Thu, 20 Aug 2015 17:14:12 -0500</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/linux/" rel="self" type="application/rss+xml" /><item>
+    <title>Docker - Uma Alternativa Elegante Para Containers No Linux</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/docker-uma-alternativa-elegante-para/</link>
+    <pubDate>Thu, 20 Aug 2015 17:14:12 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/docker-uma-alternativa-elegante-para/</guid>
+    <description><![CDATA[<p>Cada vez mais precisamos de soluções ágeis para deploy de aplicações e serviços e as soluções de containers surgiram com este propósito. Conheça o Docker, uma solução open source simples e prática, embora robusta, para utilização de containers no Linux.</p>]]></description>
+</item>
+<item>
+    <title>Alterando Os Parâmetros Do Kernel Em Tempo Real Com O Systcl</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/alterando-os-parametros-do-kernel/</link>
+    <pubDate>Thu, 13 Feb 2014 18:49:01 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/alterando-os-parametros-do-kernel/</guid>
+    <description><![CDATA[<p><strong>O</strong> <em>kernel</em>, em se tratando de sistemas operacionais, é o núcleo e componente mais importante da maioria dos computadores. Basicamente, serve de ponte entre os aplicativos e o processamento real de dados feito a nível de hardware. É ele o responsável por gerenciar os recursos do sistema, podendo oferecer uma camada de abstração de nível mais baixo para os recursos, como processadores e dispositivos de entrada/saída, que os softwares aplicativos devem controlar para realizar sua função. Com o GNU/Linux não é diferente. O núcleo Linux (Linux Kernel) forma a estrutura do sistema operacional GNU/Linux.</p>]]></description>
+</item>
+<item>
+    <title>Blackarch Linux - Uma Nova Distribuição Para Pentesters</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/blackarch-linux-uma-nova-distribuicao/</link>
+    <pubDate>Thu, 30 Jan 2014 18:54:14 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/blackarch-linux-uma-nova-distribuicao/</guid>
+    <description><![CDATA[<p>Experimente a nova distribuição baseada no Arch Linux voltada para pentesters e demais profissionais de segurança da informação.</p>]]></description>
+</item>
+<item>
+    <title>Dica: Escondendo Seu Endereço De Email Ao Divulgar Seu Endereço De Email</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/dica-escondendo-seu-endereco-de/</link>
+    <pubDate>Thu, 23 Jan 2014 19:02:43 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/dica-escondendo-seu-endereco-de/</guid>
+    <description><![CDATA[<p><strong>D</strong>a mesma forma que alguns animais só conseguem sobreviver utilizando-se de sua capacidade e/ou técnica de camuflar-se, misturando-se assim ao ambiente, para enganar seus predadores naturais, as pessoas do mundo atual praticamente precisam adotar as mesmas técnicas para manter seus endereços de email livres de um turbilhão de emails indesejados com propagandas de viagra, dicas para crescimento peniano, irregularidades em seu CPF, problemas em sua conta bancária, etc, etc.</p>]]></description>
+</item>
+<item>
+    <title>Dica: Assista Star Wars Em Um Console Ou Terminal</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/dica-assistir-star-wars-em/</link>
+    <pubDate>Fri, 17 Jan 2014 19:09:45 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/dica-assistir-star-wars-em/</guid>
+    <description><![CDATA[<p><strong>Q</strong>uem disse que o terminal ou linha de comando serve apenas para trabalho e coisas chatas?</p>]]></description>
+</item>
+<item>
+    <title>Dica: Apostila Disponibilizada Gratuitamente - Pfsense</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/dica-apostila-disponibilizada-gratuitamente-pfsense/</link>
+    <pubDate>Tue, 14 Jan 2014 19:15:35 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/dica-apostila-disponibilizada-gratuitamente-pfsense/</guid>
+    <description><![CDATA[<p>Apostila sobre um dos melhores sistemas open source de firewall disponibilizada gratuitamente, pfSense 2.x!</p>]]></description>
+</item>
+<item>
+    <title>Dica De Segurança: Previna Ataques Bloqueando Pacotes Icmp Indesejados</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/dica-de-seguranca-previna-ataques/</link>
+    <pubDate>Fri, 10 Jan 2014 19:23:19 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/dica-de-seguranca-previna-ataques/</guid>
+    <description><![CDATA[<p><strong>O</strong> protocolo <em>ICMP</em> pode ser utilizado para facilitar diversas rotinas e tarefas importantes de um administrador de redes, tais como na utilização de ferramentas como o <em>ping</em> e o <em>traceroute</em>, mas também pode ser manipulado por pessoas mal intencionadas que podem manipular mensagens ou pacotes ICMP para mapear sua rede.</p>]]></description>
+</item>
+<item>
+    <title>Criptografando Sua Partição Swap Com O Ecryptfs</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/criptografando-sua-particao-swap-com/</link>
+    <pubDate>Fri, 03 Jan 2014 19:28:47 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/criptografando-sua-particao-swap-com/</guid>
+    <description><![CDATA[<p><strong>C</strong>riptografia (Do grego <em>kryptós</em>, &ldquo;escondido&rdquo;, e <em>gráphein</em>, &ldquo;escrita&rdquo;) nada mais é do que o estudo e aplicação de técnicas com o intuito de ocultar informações, transformando a informação original em algo ilegível, exceto para seu destinatário final, o qual possui a chave ou método que será utilizado para tornar a informação legível novamente.</p>]]></description>
+</item>
+<item>
+    <title>Dica Rápida Linux: Troubleshooting Em Tempo De Execução Com Strace</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/dica-rapida-linux-troubleshooting-em/</link>
+    <pubDate>Thu, 19 Dec 2013 20:04:45 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/dica-rapida-linux-troubleshooting-em/</guid>
+    <description><![CDATA[<p><strong>S</strong>e algum dia você já precisou realizar uma análise para troubleshoot de algum comando em tempo de execução e não soube como fazê-lo, seus problemas acabaram. O <strong>strace</strong> faz justamente isso.</p>]]></description>
+</item>
+<item>
+    <title>Sobre Mim: Tarda Mas Não Falha</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/sobre-mim-dot-dot-dot/</link>
+    <pubDate>Mon, 16 Dec 2013 20:33:34 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/sobre-mim-dot-dot-dot/</guid>
+    <description><![CDATA[<p><strong>T</strong>arda, mas não falha&hellip; Reza o antigo ditado.</p>]]></description>
+</item>
+</channel>
+</rss>

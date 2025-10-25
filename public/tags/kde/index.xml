@@ -1,0 +1,99 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>KDE - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/kde/</link>
+        <description>KDE - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Mon, 19 Aug 2013 08:50:44 -0500</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/kde/" rel="self" type="application/rss+xml" /><item>
+    <title>Kde 4.11 Lançado E Disponível No Arch Linux</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/kde-4-dot-11-lancado/</link>
+    <pubDate>Mon, 19 Aug 2013 08:50:44 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/kde-4-dot-11-lancado/</guid>
+    <description><![CDATA[<p><strong>E</strong>m 14 de Agosto de 2013 a comunidade KDE anunciou oficialmente a última release do Ambiente de Trabalho KDE, a versão 4.11. Nesta última versão o projeto incorporou grandes atualizações na Área de Trabalho, Aplicações e plataforma de Desenvolvimento, oferecendo, além de correções, novas funcionalidades, das quais muitas serão importantes para a próxima evolução da plataforma KDE.</p>]]></description>
+</item>
+<item>
+    <title>Que Tal Ajudar O Projeto Kde Com Apenas 1 Minuto Do Seu Tempo</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/que-tal-ajudar-o-projeto/</link>
+    <pubDate>Mon, 24 Oct 2011 11:12:29 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/que-tal-ajudar-o-projeto/</guid>
+    <description><![CDATA[<p><strong>N</strong>ão acredita?</p>
+<p><strong>B</strong>om, aparentemente um <strong>banco alemão</strong> acredita que alguns projetos/instituições merecem ser ajudados financeiramente pelo seu impacto/importância.</p>]]></description>
+</item>
+<item>
+    <title>Wicd Kde - Tornando Seu Wicd No Kde Mais Amigavel</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/wicd-kde-tornando-seu-wicd/</link>
+    <pubDate>Thu, 28 Apr 2011 15:11:52 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/wicd-kde-tornando-seu-wicd/</guid>
+    <description><![CDATA[<p><strong>S</strong>audações pessoal,</p>
+<p><strong>P</strong>ara aqueles que também não curtem de forma alguma a aparência padrão GTK do Wicd e não conhecem ainda a interface que foi lançada posteriormente em QT, fica a dica: Troquem com urgência!</p>]]></description>
+</item>
+<item>
+    <title>Kde 4.6.2 Lançado - Parabéns Ao Gnome</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/kde-4-6-2-lancado/</link>
+    <pubDate>Thu, 07 Apr 2011 18:43:17 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/kde-4-6-2-lancado/</guid>
+    <description><![CDATA[<p><strong>E</strong>stranho o título?</p>
+<p><strong>B</strong>om, de fato foi o que aconteceu. O KDE 4.6.2 foi lançado e para demonstrar que a briga entre usuários <a href="https://www.kde.org" target="_blank" rel="noopener noreffer ">KDE</a> x <a href="https://www.gnome.org" target="_blank" rel="noopener noreffer ">GNOME</a> simplesmente não faz sentido, esta release foi batizada de &ldquo;Congrats&rdquo;, parabéns em português, em homenagem ao lançamento do GNOME 3 que teve mesma data.</p>]]></description>
+</item>
+<item>
+    <title>Lançado Kde 4.6 - Sim, Claro, Se Você Usa Arch, Não Precisa Esperar</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/lancado-kde-4-6-sim/</link>
+    <pubDate>Thu, 27 Jan 2011 21:30:48 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/lancado-kde-4-6-sim/</guid>
+    <description><![CDATA[<p><strong>- DEV do Arch, qual é sua missão?</strong></p>
+<p><strong>- Empacotar antes de qualquer distribuição!</strong></p>
+<p><strong>- DEV do Arch o que é que você faz?</strong></p>
+<p><strong>- Eu empacoto coisas que assustam o Satanás!</strong></p>
+<p><strong>É</strong> isso aí pessoal, ontem o projeto <a href="https://kde.org" target="_blank" rel="noopener noreffer ">KDE</a> liberou o KDE 4.6 com muitas melhorias e o pessoal do <a href="https://archlinux.org" target="_blank" rel="noopener noreffer ">Arch</a> já saiu na frente, claro. Sim, se você usa Arch, não precisa esperar, pode atualizar seu KDE com o seu rotineiro _# _<em>pacman -Syu.</em></p>]]></description>
+</item>
+<item>
+    <title>Kde 4.4.4 Liberado - Atualize Seu Arch Linux Cheers</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/kde-4-4-4-liberado/</link>
+    <pubDate>Wed, 02 Jun 2010 15:08:30 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/kde-4-4-4-liberado/</guid>
+    <description><![CDATA[<p><strong>S</strong>audações pessoal!</p>
+<p><strong>D</strong>epois de um longo tempo sem postar venho lhes informar que já podemos ter o <a href="https://www.kde.org" target="_blank" rel="noopener noreffer ">KDe 4.4.4</a> em nosso <a href="https://www.archlinux.org" target="_blank" rel="noopener noreffer ">Arch Linux</a>.</p>]]></description>
+</item>
+<item>
+    <title>Parabéns Kde Brasil! 100% Traduzido</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/parabens-kde-brasil-100-traduzido/</link>
+    <pubDate>Mon, 03 May 2010 15:11:21 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/parabens-kde-brasil-100-traduzido/</guid>
+    <description><![CDATA[<p><strong>W</strong>ow&hellip;</p>
+<p><strong>M</strong>ais uma importante marca atingida por um projeto nacional!</p>]]></description>
+</item>
+<item>
+    <title>Kde 4.3.2 Lançado - Sim O Arch Já Disponibilizou</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/kde-4-3-2-lancado/</link>
+    <pubDate>Wed, 07 Oct 2009 10:48:01 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/kde-4-3-2-lancado/</guid>
+    <description><![CDATA[<p><strong>G</strong>alera, ontem foi lançada a nova versão do kde.</p>]]></description>
+</item>
+<item>
+    <title>De Volta E Com Kde 4.3</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/de-volta-e-com-kde/</link>
+    <pubDate>Wed, 05 Aug 2009 12:29:52 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/de-volta-e-com-kde/</guid>
+    <description><![CDATA[<p><strong>S</strong>audações pessoal&hellip;</p>
+<p><strong>E</strong>stive meio ausente nos últimos dias por problemas com minha máquina. Recentemente meu hd queimou e acabei ficando meio &ldquo;inativo&rdquo;. Ontem consegui reinstalar todo o meu sistema operacional (Archlinux) e restaurar todos os meus backups.</p>]]></description>
+</item>
+<item>
+    <title>Fisl 2009 Foi Que Foi</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/fisl-2009-foi-que-foi/</link>
+    <pubDate>Tue, 07 Jul 2009 12:38:48 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/fisl-2009-foi-que-foi/</guid>
+    <description><![CDATA[<p><strong>T</strong>ardo mas não falho..</p>
+<p><strong>D</strong>epois de dias corridos aqui na empresa, finalmente consegui publicar algumas fotos do FISL bem como um pequeno relato do que achei dessa experiência.</p>]]></description>
+</item>
+</channel>
+</rss>

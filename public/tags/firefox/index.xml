@@ -1,0 +1,32 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Firefox - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/firefox/</link>
+        <description>Firefox - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Fri, 27 Dec 2013 19:40:20 -0500</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/firefox/" rel="self" type="application/rss+xml" /><item>
+    <title>Vulnerabilidade No Firefox: Descobrindo Senhas Salvas</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/vulnerabilidade-no-firefox-descobrindo-senhas/</link>
+    <pubDate>Fri, 27 Dec 2013 19:40:20 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/vulnerabilidade-no-firefox-descobrindo-senhas/</guid>
+    <description><![CDATA[<p><strong>U</strong>ma coisa é certa&hellip; usuários teimam em salvar senhas em navegadores para <em>facilitar</em> suas vidas durante a navegação na internet. Seja em emails, redes sociais, serviços online ou qualquer outra coisa, a opção <em>Salvar sua senha</em> parece possuir um enorme magnetismo ou um centro gravitacional extremamente denso a ponto de atrair o usuário para tal.</p>]]></description>
+</item>
+<item>
+    <title>Ajude O Firefox a Estabelecer Um Recorde Mundial</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/ajude-o-firefox-a-estabelecer/</link>
+    <pubDate>Sat, 31 May 2008 12:39:14 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/ajude-o-firefox-a-estabelecer/</guid>
+    <description><![CDATA[<p>&ldquo;Queremos estabelecer um Recorde Mundial no Guinness para o software mais baixado em 24 horas e com a sua ajuda temos certeza de que conseguiremos!&rdquo;</p>]]></description>
+</item>
+<item>
+    <title>Configurando a Jre Para Funcionar No *Buntu 8.04 Com Firefox 3</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/jre-buntu804/</link>
+    <pubDate>Wed, 07 May 2008 12:49:34 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/jre-buntu804/</guid>
+    <description><![CDATA[<p>Aqui segue uma rápida dica que poderá ajudar aqueles que, assim como eu, instalaram o *buntu 8.04 e perceberam que o mesmo possui o Firefox 3.0 em seus repositórios como o navegador padrão.</p>]]></description>
+</item>
+</channel>
+</rss>

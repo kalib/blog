@@ -1,0 +1,72 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Terraform - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/terraform/</link>
+        <description>Terraform - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Sat, 15 May 2021 18:39:51 -0400</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/terraform/" rel="self" type="application/rss+xml" /><item>
+    <title>Criando Um Cluster Kubernetes No Gcp Com Terraform</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/criando-um-cluster-kubernetes-no/</link>
+    <pubDate>Sat, 15 May 2021 18:39:51 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/criando-um-cluster-kubernetes-no/</guid>
+    <description><![CDATA[<p>O GKE é a plataforma Kubernetes do GCP. Um ambiente simplificado que nos possibilita criar clusters rapidamente bem como o deployment de nossas aplicações sem a necessidade de lidarmos com a instalação do Kubernetes e seus serviços. Neste post faremos um simples deployment de cluster GKE utilizando o Terraform.</p>]]></description>
+</item>
+<item>
+    <title>Criando Uma Pipeline Para Terraform Com o Gitlab</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/criando-uma-pipeline-para-terraform/</link>
+    <pubDate>Mon, 17 Feb 2020 12:50:52 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/criando-uma-pipeline-para-terraform/</guid>
+    <description><![CDATA[<p>Integração contínua (CI) e entrega contínua (CD) são termos bastante utilizados em equipes ágeis e de alta performance. São termos fundamentais na cultura e no dia a dia de uma equipe DevOps. Demonstrarei como podemos criar uma eficiente pipeline para Terraform com o Gitlab.</p>]]></description>
+</item>
+<item>
+    <title>Terraform Modules: Porquê E Como Trabalhar Com Módulos No Terraform - PARTE 2</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/terraform-modules-porque-e-como/</link>
+    <pubDate>Mon, 20 May 2019 14:09:21 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/terraform-modules-porque-e-como/</guid>
+    <description><![CDATA[<p>Todos sabem que o Terraform é uma solucão fantástica para criar infraestrutura através de código, porém nem todos utilizam as diversas possibilidades do mesmo, como por exemplos módulos. Com módulos podemos fazer a reutilização de código para nossa infraestrutura.</p>]]></description>
+</item>
+<item>
+    <title>Terraform Modules: Porquê E Como Trabalhar Com Módulos No Terraform - PARTE 1</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/terraform-modules-porque-e-comop1/</link>
+    <pubDate>Fri, 17 May 2019 20:01:40 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/terraform-modules-porque-e-comop1/</guid>
+    <description><![CDATA[<p><strong>T</strong>odos sabem o quão fantástico o Terraform é quando o assunto é criar infraestrutura de forma automática e através de código, a chamada IaC ou Infraestrutura como Código <em>(Infrastructure as Code)</em>. No entanto, nem todos se utilizam de todos os recursos ou funcionalidades que o Terraform nos disponibiliza para tornar nossa vida ainda mais fácil e nosso código mais organizado.</p>]]></description>
+</item>
+<item>
+    <title>Terraform: Criando uma infraestrutura no Google Cloud</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/terraform-criando-uma-infraestrutura-no/</link>
+    <pubDate>Sat, 24 Nov 2018 21:04:44 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/terraform-criando-uma-infraestrutura-no/</guid>
+    <description><![CDATA[<p><strong>Q</strong>uando se fala em infraestrutura como código imagina-se algo mais complexo do que simplesmente um container docker rodando uma aplicação, certo?! O propósito deste post é justamente criar uma infraestrutura um pouco mais complexa e completa no GCP, <em>Google Cloud Platform</em>. Embora o Terraform possua integração com diversos provedores de computação em nuvem, utilizarei o Google Cloud para este post por estar trabalhando mais com GCP atualmente e estar gostando da experiência.</p>]]></description>
+</item>
+<item>
+    <title>Terraform: Variáveis e Outputs</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/terraform-variaveis-e-outputs/</link>
+    <pubDate>Tue, 06 Nov 2018 08:40:27 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/terraform-variaveis-e-outputs/</guid>
+    <description><![CDATA[<p>Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código. Separando variáveis e Outputs.</p>]]></description>
+</item>
+<item>
+    <title>Introdução ao Terraform</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/introducao-ao-terraform/</link>
+    <pubDate>Mon, 29 Oct 2018 22:34:06 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/introducao-ao-terraform/</guid>
+    <description><![CDATA[<p>Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código.</p>]]></description>
+</item>
+<item>
+    <title>Infraestrutura como Código com Terraform</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/infraestrutura-como-codigo-com-terraform/</link>
+    <pubDate>Mon, 22 Oct 2018 08:40:21 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/infraestrutura-como-codigo-com-terraform/</guid>
+    <description><![CDATA[<p>Uma introdução aos conceitos e benefícios de IAC, ou Infraestrutura como Código bem como uma breve apresentação da ferramenta Terraform, da Hashicorp.</p>]]></description>
+</item>
+</channel>
+</rss>

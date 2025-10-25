@@ -1,0 +1,80 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Docker - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/docker/</link>
+        <description>Docker - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Sat, 15 May 2021 18:39:51 -0400</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/docker/" rel="self" type="application/rss+xml" /><item>
+    <title>Criando Um Cluster Kubernetes No Gcp Com Terraform</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/criando-um-cluster-kubernetes-no/</link>
+    <pubDate>Sat, 15 May 2021 18:39:51 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/criando-um-cluster-kubernetes-no/</guid>
+    <description><![CDATA[<p>O GKE é a plataforma Kubernetes do GCP. Um ambiente simplificado que nos possibilita criar clusters rapidamente bem como o deployment de nossas aplicações sem a necessidade de lidarmos com a instalação do Kubernetes e seus serviços. Neste post faremos um simples deployment de cluster GKE utilizando o Terraform.</p>]]></description>
+</item>
+<item>
+    <title>Lens - Uma IDE para o Kubernetes</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/lens-uma-ide-para-o/</link>
+    <pubDate>Sat, 17 Apr 2021 15:26:43 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/lens-uma-ide-para-o/</guid>
+    <description><![CDATA[<p>Cansado de digitar tantos comandos com o kubectl para saber como anda o status do seu cluster? Cansado de alternar seu contexto o tempo todo para gerenciar múltiplos clusters Kubernetes? Cansado de não ter uma forma simples e interativa de gerenciar e manipular os diversos recursos em seu cluster? Apresento-lhe o Lens, uma magnífica IDE para o Kubernetes.</p>]]></description>
+</item>
+<item>
+    <title>Criando Um Cluster Kubernetes Local Com O Kind</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/criando-um-cluster-kubernetes-local/</link>
+    <pubDate>Sun, 03 Jan 2021 13:29:27 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/criando-um-cluster-kubernetes-local/</guid>
+    <description><![CDATA[<p>Rodar um cluster kubernetes local muitas vezes facilita e acelera o desenvolvimento de aplicações, testes ou mesmo criação de pipelines de CI/CD. Dentre as várias opções disponívels para tal, abordarei o Kind, que roda clusters kubernetes locais utilizando-se do Docker.</p>]]></description>
+</item>
+<item>
+    <title>Terraform: Criando uma infraestrutura no Google Cloud</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/terraform-criando-uma-infraestrutura-no/</link>
+    <pubDate>Sat, 24 Nov 2018 21:04:44 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/terraform-criando-uma-infraestrutura-no/</guid>
+    <description><![CDATA[<p><strong>Q</strong>uando se fala em infraestrutura como código imagina-se algo mais complexo do que simplesmente um container docker rodando uma aplicação, certo?! O propósito deste post é justamente criar uma infraestrutura um pouco mais complexa e completa no GCP, <em>Google Cloud Platform</em>. Embora o Terraform possua integração com diversos provedores de computação em nuvem, utilizarei o Google Cloud para este post por estar trabalhando mais com GCP atualmente e estar gostando da experiência.</p>]]></description>
+</item>
+<item>
+    <title>Terraform: Variáveis e Outputs</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/terraform-variaveis-e-outputs/</link>
+    <pubDate>Tue, 06 Nov 2018 08:40:27 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/terraform-variaveis-e-outputs/</guid>
+    <description><![CDATA[<p>Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código. Separando variáveis e Outputs.</p>]]></description>
+</item>
+<item>
+    <title>Introdução ao Terraform</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/introducao-ao-terraform/</link>
+    <pubDate>Mon, 29 Oct 2018 22:34:06 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/introducao-ao-terraform/</guid>
+    <description><![CDATA[<p>Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código.</p>]]></description>
+</item>
+<item>
+    <title>Automatizando a Criacao De Imagens Com Packer</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/automatizando-a-criacao-de-imagens/</link>
+    <pubDate>Mon, 30 Jul 2018 13:32:42 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/automatizando-a-criacao-de-imagens/</guid>
+    <description><![CDATA[<p>Já utilizou Packer para automatizar e facilitar sua criação de recursos e imagens de máquinas? Caso não, está na hora de você conhecer e experimentar esta excelente ferramenta.</p>]]></description>
+</item>
+<item>
+    <title>Conhecendo O Kubernetes - Clusters De Containers</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/conhecendo-o-kubernetes-clusters-de/</link>
+    <pubDate>Sat, 24 Jun 2017 16:27:16 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/conhecendo-o-kubernetes-clusters-de/</guid>
+    <description><![CDATA[<p>Sistema Open Source desenvolvido pelo Google para o gerenciamento de cluster de containers tendo como características auto-scaling de serviços e containers, auto-monitoração de containers, permite o deploy de containers e serviços, load balancer, orquestração de containers, e orquestração de volumes de armazenamento.</p>]]></description>
+</item>
+<item>
+    <title>Docker - Uma Alternativa Elegante Para Containers No Linux</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/docker-uma-alternativa-elegante-para/</link>
+    <pubDate>Thu, 20 Aug 2015 17:14:12 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/docker-uma-alternativa-elegante-para/</guid>
+    <description><![CDATA[<p>Cada vez mais precisamos de soluções ágeis para deploy de aplicações e serviços e as soluções de containers surgiram com este propósito. Conheça o Docker, uma solução open source simples e prática, embora robusta, para utilização de containers no Linux.</p>]]></description>
+</item>
+</channel>
+</rss>

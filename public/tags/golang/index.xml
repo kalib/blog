@@ -1,0 +1,40 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Golang - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/golang/</link>
+        <description>Golang - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Sun, 27 Jun 2021 14:38:00 -0400</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/golang/" rel="self" type="application/rss+xml" /><item>
+    <title>Criando Uma Lambda Function Com Golang Que Interage Com S3 Buckets</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/</link>
+    <pubDate>Sun, 27 Jun 2021 14:38:00 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/</guid>
+    <description><![CDATA[<p>Criando uma lambda function com golang que interage com s3 buckets do AWS</p>]]></description>
+</item>
+<item>
+    <title>Go Ou Golang: Porquê Adotei Go Como Minha Linguagem Favorita</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/</link>
+    <pubDate>Sun, 14 Apr 2019 13:54:01 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/</guid>
+    <description><![CDATA[<p>Go ou Golang, a linguagem de programação desenvolvida no Google com o intuito de ser uma linguagem que realmente fosse eficiente. Neste post explico um pouco das características do Go que me levaram a adotá-la como minha linguagem favorita.</p>]]></description>
+</item>
+<item>
+    <title>De Volta à Ativa e Com Novo Visual</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/de-volta-com-novo-visual/</link>
+    <pubDate>Wed, 03 Apr 2019 19:25:00 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/de-volta-com-novo-visual/</guid>
+    <description><![CDATA[<p><strong>A</strong>pós alguns meses o blog está de volta, com diversas mudanças que facilitarão as coisas em termos de manutenção. Cara nova, estrutura nova&hellip; tudo novo.</p>]]></description>
+</item>
+<item>
+    <title>Go Ou Go!, Linguagem Do Google Cria Primeira Intriga</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/go-ou-go-linguagem-do/</link>
+    <pubDate>Thu, 12 Nov 2009 10:36:48 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/go-ou-go-linguagem-do/</guid>
+    <description><![CDATA[<p><strong>A</strong>cho que todos, ou quase todos, devem ter acompanhado a notícia de que a gigante Google criou uma linguagem de programação chamada Go.</p>]]></description>
+</item>
+</channel>
+</rss>

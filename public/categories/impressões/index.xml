@@ -1,0 +1,90 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Impressões - Categoria - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/categories/impress%C3%B5es/</link>
+        <description>Impressões - Categoria - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Sun, 14 Apr 2019 13:54:01 -0400</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/categories/impress%C3%B5es/" rel="self" type="application/rss+xml" /><item>
+    <title>Go Ou Golang: Porquê Adotei Go Como Minha Linguagem Favorita</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/</link>
+    <pubDate>Sun, 14 Apr 2019 13:54:01 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/go-ou-golang-porque-adotei/</guid>
+    <description><![CDATA[<p>Go ou Golang, a linguagem de programação desenvolvida no Google com o intuito de ser uma linguagem que realmente fosse eficiente. Neste post explico um pouco das características do Go que me levaram a adotá-la como minha linguagem favorita.</p>]]></description>
+</item>
+<item>
+    <title>Infraestrutura como Código com Terraform</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/infraestrutura-como-codigo-com-terraform/</link>
+    <pubDate>Mon, 22 Oct 2018 08:40:21 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/infraestrutura-como-codigo-com-terraform/</guid>
+    <description><![CDATA[<p>Uma introdução aos conceitos e benefícios de IAC, ou Infraestrutura como Código bem como uma breve apresentação da ferramenta Terraform, da Hashicorp.</p>]]></description>
+</item>
+<item>
+    <title>Assista Ao Documentário Sobre Aaron Swartz O Menino Da Internet</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/assista-ao-documentario-sobre-aaron/</link>
+    <pubDate>Sun, 03 Aug 2014 17:30:51 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/assista-ao-documentario-sobre-aaron/</guid>
+    <description><![CDATA[<p>Assista ao documentário que conta toda a trajetória do ativista Aaron Swartz, do seu nascimento ao ato que terminou de forma trágica sua vida.</p>
+<h2 id="introdução">Introdução</h2>]]></description>
+</item>
+<item>
+    <title>Blackarch Linux - Uma Nova Distribuição Para Pentesters</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/blackarch-linux-uma-nova-distribuicao/</link>
+    <pubDate>Thu, 30 Jan 2014 18:54:14 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/blackarch-linux-uma-nova-distribuicao/</guid>
+    <description><![CDATA[<p>Experimente a nova distribuição baseada no Arch Linux voltada para pentesters e demais profissionais de segurança da informação.</p>]]></description>
+</item>
+<item>
+    <title>Dica: Apostila Disponibilizada Gratuitamente - Pfsense</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/dica-apostila-disponibilizada-gratuitamente-pfsense/</link>
+    <pubDate>Tue, 14 Jan 2014 19:15:35 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/dica-apostila-disponibilizada-gratuitamente-pfsense/</guid>
+    <description><![CDATA[<p>Apostila sobre um dos melhores sistemas open source de firewall disponibilizada gratuitamente, pfSense 2.x!</p>]]></description>
+</item>
+<item>
+    <title>Dica De Segurança: Previna Ataques Bloqueando Pacotes Icmp Indesejados</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/dica-de-seguranca-previna-ataques/</link>
+    <pubDate>Fri, 10 Jan 2014 19:23:19 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/dica-de-seguranca-previna-ataques/</guid>
+    <description><![CDATA[<p><strong>O</strong> protocolo <em>ICMP</em> pode ser utilizado para facilitar diversas rotinas e tarefas importantes de um administrador de redes, tais como na utilização de ferramentas como o <em>ping</em> e o <em>traceroute</em>, mas também pode ser manipulado por pessoas mal intencionadas que podem manipular mensagens ou pacotes ICMP para mapear sua rede.</p>]]></description>
+</item>
+<item>
+    <title>Recomendação Bibliográfica: As Treze Relíquias</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/recomendacao-bibliografica-as-treze-reliquias/</link>
+    <pubDate>Mon, 25 Nov 2013 21:24:15 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/recomendacao-bibliografica-as-treze-reliquias/</guid>
+    <description><![CDATA[<p><strong>S</strong>em sombra de dúvidas o livro superou minhas expectativas. Apesar de a sinopse passar a impressão de que se trata de mais um livro com temática sobrenatural voltado a um público mais jovem, a leitura revela o oposto. Certamente um livro que pode agradar diversas faixas etárias, trazendo foco no ocultismo, antigas religiões, artefatos mágicos, sexo e assassinatos com incrível crueldade, tudo isto em uma trama muito bem elaborada e descrita.</p>]]></description>
+</item>
+<item>
+    <title>Recomendação Bibliográfica: Filhos Do Éden, Herdeiros De Atlântida</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/recomendacao-bibliografica-filhos-do-eden/</link>
+    <pubDate>Fri, 04 Oct 2013 00:13:50 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/recomendacao-bibliografica-filhos-do-eden/</guid>
+    <description><![CDATA[<p><strong>A</strong>njos, Arcanjos e Demônios&hellip; Entidades que sempre despertaram a curiosidade e o interesse de milhares de pessoas. Não diferente, sempre tive um grande apreço por histórias, sejam em filmes ou literatura escrita, que abordem tais entidades.</p>]]></description>
+</item>
+<item>
+    <title>Vulnerabilidade Ios7: Hack Na Tela De Bloqueio Permite Burlar Segurança</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/vulnerabilidade-ios7-hack-na-tela/</link>
+    <pubDate>Fri, 20 Sep 2013 00:17:44 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/vulnerabilidade-ios7-hack-na-tela/</guid>
+    <description><![CDATA[<p><strong>N</strong>ão é de hoje que as telas de bloqueio (supostas proteções) de smartphones possuem <em>vulnerabilidades</em>. Mal foi lançado o novo iOS 7 e o mesmo já possui uma vulnerabilidade possibilitando a qualquer pessoa utilizar um simples hack para ter acesso à alguns dados do dono do smartphone com o iOS 7.</p>]]></description>
+</item>
+<item>
+    <title>Correção Do Bug Entre Kernel Linux E Placas Broadcom</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/correcao-do-bug-entre-kernel/</link>
+    <pubDate>Tue, 03 Sep 2013 08:35:42 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/correcao-do-bug-entre-kernel/</guid>
+    <description><![CDATA[<p><strong>B</strong>ug capturado e tratado!</p>
+<p><strong>D</strong>iversas pessoas se depararam com intermináveis erros de <em>kernel panic</em> após atualizar seu kernel para a versão <em>3.10.6</em> (e posteriores) quando utilizavam placas wireless da <em>Broadcom</em>. O erro reportado foi tratado e, apesar de ainda não estar resolvido no último kernel lançado, <em>3.10.10</em>, já se encontra na árvore de <em>Linus Torvalds</em>, conforme código e correção podem ser vistos através do seguinte link:</p>]]></description>
+</item>
+</channel>
+</rss>

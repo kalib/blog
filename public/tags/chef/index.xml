@@ -1,0 +1,24 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Chef - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/chef/</link>
+        <description>Chef - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Sat, 14 Apr 2018 15:03:10 -0500</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/chef/" rel="self" type="application/rss+xml" /><item>
+    <title>Chef: Uso De Condicionais not_if E only_if</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/chef-uso-de-condicionais-not/</link>
+    <pubDate>Sat, 14 Apr 2018 15:03:10 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/chef-uso-de-condicionais-not/</guid>
+    <description><![CDATA[<p>Chef é uma popular ferramenta de Gerenciamento de Configurações criado pela empresa de mesmo nome, Chef. Neste post veremos a utilização de condicionais em recipes com only_if e not_if.</p>]]></description>
+</item>
+<item>
+    <title>Chef: Automação E Gerenciamento De Configuração</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/chef-aautomacao-e-gerenciamento-de/</link>
+    <pubDate>Sun, 01 Apr 2018 16:11:20 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/chef-aautomacao-e-gerenciamento-de/</guid>
+    <description><![CDATA[<p><strong>C</strong>hef é uma popular ferramenta de Gerenciamento de Configurações criado pela empresa de mesmo nome, Chef. O <a href="https://www.chef.io" target="_blank" rel="noopener noreffer ">Chef</a> é desenvolvido em <a href="https://www.ruby-lang.org" target="_blank" rel="noopener noreffer ">Ruby</a> e <a href="https://www.erlang.org" target="_blank" rel="noopener noreffer ">Erlang</a>, e utiliza uma linguagem DSL (domain-specific language) em Ruby puro para escrever arquivos de configuração de sistemas chamados &ldquo;recipes&rdquo; (receitas).</p>]]></description>
+</item>
+</channel>
+</rss>

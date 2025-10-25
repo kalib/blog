@@ -1,0 +1,52 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Chromium - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/chromium/</link>
+        <description>Chromium - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Mon, 14 Dec 2009 10:13:33 -0400</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/chromium/" rel="self" type="application/rss+xml" /><item>
+    <title>Chromium No Testing Do Arch Linux</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/chromium-no-testing-do-arch/</link>
+    <pubDate>Mon, 14 Dec 2009 10:13:33 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/chromium-no-testing-do-arch/</guid>
+    <description><![CDATA[<p><strong>S</strong>audações pessoal&hellip;</p>
+<p><strong>J</strong>á estava na hora eim?! Chromium passando para o repositório [testing] no Arch.</p>]]></description>
+</item>
+<item>
+    <title>Chromium Suportando Java Agora</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/chromium-suportando-java-agora/</link>
+    <pubDate>Thu, 03 Sep 2009 12:16:18 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/chromium-suportando-java-agora/</guid>
+    <description><![CDATA[<p><strong>É</strong> isso aí galera..</p>
+<p><strong>D</strong>epois de dominar 100% o plugin flash, chegou a vez do nosso amigo Java.</p>]]></description>
+</item>
+<item>
+    <title>Habilitando Plugins No Chromium</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/habilitando-plugins-no-chromium/</link>
+    <pubDate>Wed, 12 Aug 2009 12:27:17 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/habilitando-plugins-no-chromium/</guid>
+    <description><![CDATA[<p><strong>T</strong>odos que visitam meu blog já devem estar cansados de saber que estou bastante atento ao projeto chromium e ajudando com o possível para o desenvolvimento e divulgação do mesmo.</p>]]></description>
+</item>
+<item>
+    <title>Chromium Ganha Suporte Ao Flash Por Completo</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/chromium-ganha-suporte-ao-flash/</link>
+    <pubDate>Thu, 09 Jul 2009 12:36:17 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/chromium-ganha-suporte-ao-flash/</guid>
+    <description><![CDATA[<p><strong>S</strong>audações pessoal..</p>
+<p><strong>E</strong>u já havia postado aqui a notícia sobre o lançamento do navegador Chromium para o Linux, bem como o fato de o mesmo se encontrar disponível em nosso repositório nacional do Arch Linux. Na ocasião o projeto chromium ainda era bem imaturo e não possuía nenhum suporte à plugins. Bom, as coisas estão mudando.</p>]]></description>
+</item>
+<item>
+    <title>Chromium - Pronto Para O Arch</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/chromium-pronto-para-o-arch/</link>
+    <pubDate>Thu, 28 May 2009 10:26:18 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/chromium-pronto-para-o-arch/</guid>
+    <description><![CDATA[<p><strong>S</strong>audações pessoal, tudo tranquilo?</p>
+<p><strong>G</strong>ostaria de lhes comunicar que o Google Chromium alpha já está pronto e rodando no Arch.</p>]]></description>
+</item>
+</channel>
+</rss>

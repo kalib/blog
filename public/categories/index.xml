@@ -1,14 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Categories on My New Hugo Site</title>
-    <link>http://example.org/categories/</link>
-    <description>Recent content in Categories on My New Hugo Site</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="http://example.org/categories/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Categories - Categoria - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/categories/</link>
+        <description>Categories - Categoria - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Sun, 17 Dec 2023 11:51:33 -0500</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>Tutoriais</title>
+    <link>//blog.marcelocavalcante.net:1313/categories/tutoriais/</link>
+    <pubDate>Sun, 17 Dec 2023 11:51:33 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/categories/tutoriais/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Impressões</title>
+    <link>//blog.marcelocavalcante.net:1313/categories/impress%C3%B5es/</link>
+    <pubDate>Sun, 14 Apr 2019 13:54:01 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/categories/impress%C3%B5es/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Aleatórios</title>
+    <link>//blog.marcelocavalcante.net:1313/categories/aleat%C3%B3rios/</link>
+    <pubDate>Wed, 03 Apr 2019 19:25:00 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/categories/aleat%C3%B3rios/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Eventos</title>
+    <link>//blog.marcelocavalcante.net:1313/categories/eventos/</link>
+    <pubDate>Sun, 04 Aug 2013 09:26:24 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/categories/eventos/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
 </rss>

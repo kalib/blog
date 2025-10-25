@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Vulnerabilidade No Firefox: Descobrindo Senhas Salvas - Marcelo Cavalcante Rocha</title><meta name="Description" content="Veja como é fácil descobrir senhas salvas pelo usuário no Firefox."><meta property="og:url" content="//blog.marcelocavalcante.net:1313/posts/vulnerabilidade-no-firefox-descobrindo-senhas/">
+  <meta property="og:site_name" content="Marcelo Cavalcante Rocha">
+  <meta property="og:title" content="Vulnerabilidade No Firefox: Descobrindo Senhas Salvas">
+  <meta property="og:description" content="Veja como é fácil descobrir senhas salvas pelo usuário no Firefox.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2013-12-27T19:40:20-05:00">
+    <meta property="article:modified_time" content="2013-12-27T19:40:20-05:00">
+    <meta property="article:tag" content="Firefox">
+    <meta property="article:tag" content="Software Livre">
+    <meta property="article:tag" content="Segurança">
+    <meta property="og:image" content="//blog.marcelocavalcante.net:1313/posts/vulnerabilidade-no-firefox-descobrindo-senhas/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="//blog.marcelocavalcante.net:1313/posts/vulnerabilidade-no-firefox-descobrindo-senhas/featured-image.png">
+  <meta name="twitter:title" content="Vulnerabilidade No Firefox: Descobrindo Senhas Salvas">
+  <meta name="twitter:description" content="Veja como é fácil descobrir senhas salvas pelo usuário no Firefox.">
+<meta name="application-name" content="Marcelo Cavalcante">
+<meta name="apple-mobile-web-app-title" content="Marcelo Cavalcante">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="//blog.marcelocavalcante.net:1313/posts/vulnerabilidade-no-firefox-descobrindo-senhas/" /><link rel="prev" href="//blog.marcelocavalcante.net:1313/posts/dica-rapida-linux-troubleshooting-em/" /><link rel="next" href="//blog.marcelocavalcante.net:1313/posts/navegacao-anonima-atraves-da-rede/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Vulnerabilidade No Firefox: Descobrindo Senhas Salvas",
+        "inLanguage": "pt-BR",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/\/blog.marcelocavalcante.net:1313\/posts\/vulnerabilidade-no-firefox-descobrindo-senhas\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/vulnerabilidade-no-firefox-descobrindo-senhas\/featured-image.png",
+                            "width":  300 ,
+                            "height":  229 
+                        }],"genre": "posts","keywords": "Firefox, Software Livre, Segurança","wordcount":  292 ,
+        "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/vulnerabilidade-no-firefox-descobrindo-senhas\/","datePublished": "2013-12-27T19:40:20-05:00","dateModified": "2013-12-27T19:40:20-05:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Marcelo Cavalcante"
+            },"description": "Veja como é fácil descobrir senhas salvas pelo usuário no Firefox."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'auto';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categorias </a><a class="menu-item" href="/sobre/"> Quem Sou </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancelar
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categorias</a><a class="menu-item" href="/sobre/" title="">Quem Sou</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Conteúdos</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Vulnerabilidade No Firefox: Descobrindo Senhas Salvas</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://blog.marcelocavalcante.net" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Marcelo Cavalcante</a></span>&nbsp;<span class="post-category">incluido em <a href="/categories/tutoriais/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutoriais</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2013-12-27">2013-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;292 palavras&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutos&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/featured-image.png"
+        data-srcset="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/featured-image.png, /posts/vulnerabilidade-no-firefox-descobrindo-senhas/featured-image.png 1.5x, /posts/vulnerabilidade-no-firefox-descobrindo-senhas/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/featured-image.png"
+        title="Veja como é fácil descobrir senhas salvas pelo usuário no Firefox." /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Conteúdos</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p><strong>U</strong>ma coisa é certa&hellip; usuários teimam em salvar senhas em navegadores para <em>facilitar</em> suas vidas durante a navegação na internet. Seja em emails, redes sociais, serviços online ou qualquer outra coisa, a opção <em>Salvar sua senha</em> parece possuir um enorme magnetismo ou um centro gravitacional extremamente denso a ponto de atrair o usuário para tal.</p>
+<p><strong>S</strong>erá que as pessoas não entendem o quão perigosa é a ideia de <em>salvar sua senha</em> onde quer que seja? É, praticamente, o mesmo risco assumido por quem anota suas senhas em <em>post-its</em> e os colam em seu monitor ou mesa.</p>
+<p><strong>H</strong>oje um colega me procurou para saber como recuperar uma senha que ele não lembrava mais. Já conhecendo o histórico do mesmo eu tinha certeza que ele tinha salvo esta senha no navegador. Então lhe mostrei como ele, ou qualquer outra pessoa, conseguiria facilmente descobrir todas as senhas salvas em seu navegador Firefox. A experiência foi boa por dois motivos:</p>
+<ol>
+<li>Ele conseguiu descobrir sua senha; <em>(a qual ele provavelmente não esqueceria se tivesse o costume de digitá-la sempre que necessário ao invés de salá-la no navegador)</em></li>
+<li>Ele entendeu o risco que ele corre com esta prática absurda;</li>
+</ol>
+<p><strong>V</strong>ejamos o quão <strong>simples</strong> <em>(para não dizer estúpido)</em> é o procedimento para descobrir as senhas salvas pelo usuário no navegador Firefox.</p>
+<ol>
+<li>Clique no menu <strong>Firefox</strong> que se encontra no canto superior esquerdo do navegador;</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_1.png"
+        data-srcset="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_1.png, /posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_1.png 1.5x, /posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_1.png 2x"
+        data-sizes="auto"
+        alt="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_1.png"
+        title="Firefox Pass" width="439" height="354" /></p>
+<ol start="2">
+<li>Selecione a opção <strong>Preferências</strong> no menu e em seguida, novamente, <strong>Preferências</strong>;</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_2.png"
+        data-srcset="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_2.png, /posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_2.png 1.5x, /posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_2.png 2x"
+        data-sizes="auto"
+        alt="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_2.png"
+        title="Firefox Pass" width="601" height="352" /></p>
+<ol start="3">
+<li>Na aba <strong>Segurança</strong>, clique no botão <strong>Senhas Salvas</strong>;</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_3.png"
+        data-srcset="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_3.png, /posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_3.png 1.5x, /posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_3.png 2x"
+        data-sizes="auto"
+        alt="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_3.png"
+        title="Firefox Pass" width="568" height="524" /></p>
+<ol start="4">
+<li>Repare que na janela que será apresentada você terá uma lista de sites/serviços e usuários que deixaram suas senhas salvas. Nesta janela, clique no botão <strong>Mostrar Senhas</strong>;</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_4.png"
+        data-srcset="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_4.png, /posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_4.png 1.5x, /posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_4.png 2x"
+        data-sizes="auto"
+        alt="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_4.png"
+        title="Firefox Pass" width="568" height="524" /></p>
+<ol start="5">
+<li>Agora você poderá ver as senhas salvas em texto plano, limpo e claro.</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_5.png"
+        data-srcset="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_5.png, /posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_5.png 1.5x, /posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_5.png 2x"
+        data-sizes="auto"
+        alt="/posts/vulnerabilidade-no-firefox-descobrindo-senhas/firefox_pass_5.png"
+        title="Firefox Pass" width="568" height="524" /></p>
+<p><strong>Lição aprendida: Não salve suas senhas!</strong></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Atualizado em 2013-12-27</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Compartilhe em X" data-sharer="x" data-url="//blog.marcelocavalcante.net:1313/posts/vulnerabilidade-no-firefox-descobrindo-senhas/" data-title="Vulnerabilidade No Firefox: Descobrindo Senhas Salvas" data-via="Marcelo_Kalib" data-hashtags="Firefox,Software Livre,Segurança"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Threads" data-sharer="threads" data-url="//blog.marcelocavalcante.net:1313/posts/vulnerabilidade-no-firefox-descobrindo-senhas/" data-title="Vulnerabilidade No Firefox: Descobrindo Senhas Salvas"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Facebook" data-sharer="facebook" data-url="//blog.marcelocavalcante.net:1313/posts/vulnerabilidade-no-firefox-descobrindo-senhas/" data-hashtag="Firefox"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Linkedin" data-sharer="linkedin" data-url="//blog.marcelocavalcante.net:1313/posts/vulnerabilidade-no-firefox-descobrindo-senhas/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Hacker News" data-sharer="hackernews" data-url="//blog.marcelocavalcante.net:1313/posts/vulnerabilidade-no-firefox-descobrindo-senhas/" data-title="Vulnerabilidade No Firefox: Descobrindo Senhas Salvas"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Line" data-sharer="line" data-url="//blog.marcelocavalcante.net:1313/posts/vulnerabilidade-no-firefox-descobrindo-senhas/" data-title="Vulnerabilidade No Firefox: Descobrindo Senhas Salvas"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em 微博" data-sharer="weibo" data-url="//blog.marcelocavalcante.net:1313/posts/vulnerabilidade-no-firefox-descobrindo-senhas/" data-title="Vulnerabilidade No Firefox: Descobrindo Senhas Salvas"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Diaspora" data-sharer="diaspora" data-url="//blog.marcelocavalcante.net:1313/posts/vulnerabilidade-no-firefox-descobrindo-senhas/" data-title="Vulnerabilidade No Firefox: Descobrindo Senhas Salvas" data-description="Veja como é fácil descobrir senhas salvas pelo usuário no Firefox."><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=%2f%2fblog.marcelocavalcante.net%3a1313%2fposts%2fvulnerabilidade-no-firefox-descobrindo-senhas%2f&amp;text=Vulnerabilidade%20No%20Firefox%3a%20Descobrindo%20Senhas%20Salvas" target="_blank" title="Compartilhe em Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/firefox/">Firefox</a>,&nbsp;<a href="/tags/software-livre/">Software Livre</a>,&nbsp;<a href="/tags/seguran%C3%A7a/">Segurança</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Voltar</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/dica-rapida-linux-troubleshooting-em/" class="prev" rel="prev" title="Dica Rápida Linux: Troubleshooting Em Tempo De Execução Com Strace"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Dica Rápida Linux: Troubleshooting Em Tempo De Execução Com Strace</a>
+            <a href="/posts/navegacao-anonima-atraves-da-rede/" class="next" rel="next" title="Navegação Anônima Através Da Rede Tor">Navegação Anônima Através Da Rede Tor<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Possibilitado por <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Tema - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2008 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://blog.marcelocavalcante.net" target="_blank">Marcelo Cavalcante</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Voltar ao topo">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="Ver comentários">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.20.2/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Free BSD - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/free-bsd/</link>
+        <description>Free BSD - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Tue, 14 Jan 2014 19:15:35 -0500</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/free-bsd/" rel="self" type="application/rss+xml" /><item>
+    <title>Dica: Apostila Disponibilizada Gratuitamente - Pfsense</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/dica-apostila-disponibilizada-gratuitamente-pfsense/</link>
+    <pubDate>Tue, 14 Jan 2014 19:15:35 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/dica-apostila-disponibilizada-gratuitamente-pfsense/</guid>
+    <description><![CDATA[<p>Apostila sobre um dos melhores sistemas open source de firewall disponibilizada gratuitamente, pfSense 2.x!</p>]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,66 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Java - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/java/</link>
+        <description>Java - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Mon, 17 Oct 2011 11:17:57 -0500</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/java/" rel="self" type="application/rss+xml" /><item>
+    <title>3 Dia Livre Programacao Definida</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/3-dia-livre-programacao-definida/</link>
+    <pubDate>Mon, 17 Oct 2011 11:17:57 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/3-dia-livre-programacao-definida/</guid>
+    <description><![CDATA[<p><strong>N</strong>este fim de semana foi publicada a programação oficial do <strong><a href="https://www.dialivre.net/portal" target="_blank" rel="noopener noreffer ">3º Dia Livre</a></strong>, encontro para usuários, profissionais ou entusiastas do movimento de Software Livre no Ceará.</p>]]></description>
+</item>
+<item>
+    <title>Feliz Dia Do Programador</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/feliz-dia-do-programador/</link>
+    <pubDate>Tue, 13 Sep 2011 11:41:30 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/feliz-dia-do-programador/</guid>
+    <description><![CDATA[<p><strong>S</strong>audações pessoal,</p>
+<p><strong>U</strong>m feliz dia do programador para todos aqueles que, profissionalmente, curiosamente ou mesmo por mera falta do que fazer escrevem ou já escreveram linhas de código!</p>]]></description>
+</item>
+<item>
+    <title>Brute Force: O Dirb... Dirbuster Lhe Ajuda a Identificar Vulnerabilidades Em Seu Site</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-dirbuster/</link>
+    <pubDate>Tue, 15 Feb 2011 21:09:38 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/brute-force-o-dirb-dirbuster/</guid>
+    <description><![CDATA[<p><strong>B</strong>om, para quem não conhece nada sobre Brute-Force ou apenas ouviu falar vagamente mas não tem certeza sobre o que realmente é um ataque deste tipo, sugiro dar uma lida em meu último post, onde apresentei algumas informações sobre brute-force bem como uma ferramenta que podemos utilizar para testar nossos sites e verificar o quão vulneráveis eles estão a este tipo de ataque. Segue link para o mesmo:</p>]]></description>
+</item>
+<item>
+    <title>Que Tal Testar O Android Em Seu Linux</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/que-tal-testar-o-android/</link>
+    <pubDate>Tue, 20 Jul 2010 14:32:05 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/que-tal-testar-o-android/</guid>
+    <description><![CDATA[<p><strong>S</strong>e você é da área de tecnologia, com certeza já ouviu falar deste tal <a href="https://www.android.com/" target="_blank" rel="noopener noreffer ">Android</a> que vem ganhando cada vez mais notoriedade e mercado no mundo dos smartphones. Não ouviu falar? Sugiro que repense suas escolhas acadêmicas e/ou profissionais. Talvez não tenha feito a escolha certa. Atualize-se.</p>]]></description>
+</item>
+<item>
+    <title>Chromium Suportando Java Agora</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/chromium-suportando-java-agora/</link>
+    <pubDate>Thu, 03 Sep 2009 12:16:18 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/chromium-suportando-java-agora/</guid>
+    <description><![CDATA[<p><strong>É</strong> isso aí galera..</p>
+<p><strong>D</strong>epois de dominar 100% o plugin flash, chegou a vez do nosso amigo Java.</p>]]></description>
+</item>
+<item>
+    <title>Java No Arch Começa a Ser Mais Livre</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/java-no-arch-comeca-a/</link>
+    <pubDate>Tue, 04 Nov 2008 14:09:57 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/java-no-arch-comeca-a/</guid>
+    <description><![CDATA[<p>Os usuários de Arch Linux, pelo menos alguns deles, talvez já saibam que o Sun Java Runtime Environment (JRE) e o Java Development Kit (JDK) tem passado muito tempo no repositório Extra esperando por algum amor extra. Entretanto, nenhum desenvolvedor se sentiu motivado à manter este pacote.</p>]]></description>
+</item>
+<item>
+    <title>Configurando a Jre Para Funcionar No *Buntu 8.04 Com Firefox 3</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/jre-buntu804/</link>
+    <pubDate>Wed, 07 May 2008 12:49:34 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/jre-buntu804/</guid>
+    <description><![CDATA[<p>Aqui segue uma rápida dica que poderá ajudar aqueles que, assim como eu, instalaram o *buntu 8.04 e perceberam que o mesmo possui o Firefox 3.0 em seus repositórios como o navegador padrão.</p>]]></description>
+</item>
+</channel>
+</rss>

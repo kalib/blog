@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>De Onde Vêm O Conceito De Software Livre - Marcelo Cavalcante Rocha</title><meta name="Description" content="Diante de nossa atual situação tecnológica seria impossível falarmos de GNU Linux sem antes entendermos o que é Software Livre ou de onde surgiu essa filosofia."><meta property="og:url" content="//blog.marcelocavalcante.net:1313/posts/de-onde-vem-o-conceito/">
+  <meta property="og:site_name" content="Marcelo Cavalcante Rocha">
+  <meta property="og:title" content="De Onde Vêm O Conceito De Software Livre">
+  <meta property="og:description" content="Diante de nossa atual situação tecnológica seria impossível falarmos de GNU Linux sem antes entendermos o que é Software Livre ou de onde surgiu essa filosofia.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2008-05-23T12:45:32-04:00">
+    <meta property="article:modified_time" content="2008-05-23T12:45:32-04:00">
+    <meta property="article:tag" content="Cultura Hacker">
+    <meta property="article:tag" content="Impressões">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Software Livre">
+    <meta property="og:image" content="//blog.marcelocavalcante.net:1313/posts/de-onde-vem-o-conceito/featured-image.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="//blog.marcelocavalcante.net:1313/posts/de-onde-vem-o-conceito/featured-image.jpg">
+  <meta name="twitter:title" content="De Onde Vêm O Conceito De Software Livre">
+  <meta name="twitter:description" content="Diante de nossa atual situação tecnológica seria impossível falarmos de GNU Linux sem antes entendermos o que é Software Livre ou de onde surgiu essa filosofia.">
+<meta name="application-name" content="Marcelo Cavalcante">
+<meta name="apple-mobile-web-app-title" content="Marcelo Cavalcante">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="//blog.marcelocavalcante.net:1313/posts/de-onde-vem-o-conceito/" /><link rel="prev" href="//blog.marcelocavalcante.net:1313/posts/jre-buntu804/" /><link rel="next" href="//blog.marcelocavalcante.net:1313/posts/por-que-usar-a-plataforma/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "De Onde Vêm O Conceito De Software Livre",
+        "inLanguage": "pt-BR",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/\/blog.marcelocavalcante.net:1313\/posts\/de-onde-vem-o-conceito\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/de-onde-vem-o-conceito\/featured-image.jpg",
+                            "width":  870 ,
+                            "height":  488 
+                        }],"genre": "posts","keywords": "Cultura Hacker, Impressões, Linux, Software Livre","wordcount":  602 ,
+        "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/de-onde-vem-o-conceito\/","datePublished": "2008-05-23T12:45:32-04:00","dateModified": "2008-05-23T12:45:32-04:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Marcelo Cavalcante"
+            },"description": "Diante de nossa atual situação tecnológica seria impossível falarmos de GNU Linux sem antes entendermos o que é Software Livre ou de onde surgiu essa filosofia."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'auto';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categorias </a><a class="menu-item" href="/sobre/"> Quem Sou </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancelar
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categorias</a><a class="menu-item" href="/sobre/" title="">Quem Sou</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Conteúdos</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">De Onde Vêm O Conceito De Software Livre</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://blog.marcelocavalcante.net" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Marcelo Cavalcante</a></span>&nbsp;<span class="post-category">incluido em <a href="/categories/impress%C3%B5es/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Impressões</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2008-05-23">2008-05-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;602 palavras&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutos&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/de-onde-vem-o-conceito/featured-image.jpg"
+        data-srcset="/posts/de-onde-vem-o-conceito/featured-image.jpg, /posts/de-onde-vem-o-conceito/featured-image.jpg 1.5x, /posts/de-onde-vem-o-conceito/featured-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/de-onde-vem-o-conceito/featured-image.jpg"
+        title="Diante de nossa atual situação tecnológica seria impossível falarmos de GNU Linux sem antes entendermos o que é Software Livre ou de onde surgiu essa filosofia." /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Conteúdos</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#introdução">Introdução</a></li>
+    <li><a href="#dinheiro-falou-alto">Dinheiro falou alto</a></li>
+    <li><a href="#richard-stallman-inicia-um-movimento">Richard Stallman inicia um movimento</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Diante de nossa atual situação tecnológica seria impossível falarmos de GNU Linux sem antes entendermos o que é Software Livre ou de onde surgiu essa filosofia.</p>
+<h2 id="introdução">Introdução</h2>
+<p>Durante muito tempo a tecnologia vem se desenvolvendo e tornando-se cada vez mais necessária para os dias atuais. Para tal evolução, pessoas do mundo inteiro, chamadas programadores, contribuíram de forma significativa criando programas ou softwares para customizar o funcionamento dos computadores. Em boa parte desta evolução, ao precisar de algo que outro já criou, o programador receberia prontamente deste outro para assim poder fazer suas devidas mudanças ou mesmo aperfeiçoamentos poupando-lhe esforço e tempo. O autor original como agradecimento recebia seu programa melhorado. Porque refazer o que já foi feito antes?</p>
+<p>Desta forma se dava a troca de informações e conhecimento entre a comunidade como um todo até que uma outra idéia surgiu: Fechar o código fonte e ganhar dinheiro em cima disso.</p>
+<h2 id="dinheiro-falou-alto">Dinheiro falou alto</h2>
+<p>Foi nesta época que o conhecimento passou a deixar de ser livre passando a ter um dono e uma patente em cima do mesmo. Sendo vendido em caixas com a permissão para instalação em apenas uma máquina limitando-se ao uso técnico sem poder estudar aquela tecnologia a fundo ou repassar para outros interessados. Aí mostrava-se o limite da tecnologia como uma linha que não se podia ultrapassar, já que você não mais poderia aperfeiçoar um software adaptando-o às suas necessidades por não mais ter acesso ao código fonte do mesmo. O conhecimento passou a ser então manipulado e controlado criando uma enorme dependência tecnológica.</p>
+<h2 id="richard-stallman-inicia-um-movimento">Richard Stallman inicia um movimento</h2>
+<p>Em meados de 1983-1984 o programador americano Richard Stallman percebeu que o senso de união e integração estava perdendo espaço para um senso de egoísmo e monopólio passando assim a iniciar um movimento ativista criando assim o Projeto GNU em 1985 defendendo a idéia do Software Livre. Por que refazer todo um programa quando você tinha programas parecidos com o que você queria desenvolver? Por que não ajudar em um programa que você achava que estava rodando lento e que possivelmente saberia como deixa-lo mais rápido contribuindo assim para o seu código fonte? Essas perguntas não faziam sentido para o Richard, e por essas e outras ele começou este projeto, que de tão óbvio que era, rapidamente caiu na simpatia de toda a comunidade. A partir daí milhares de pessoas espalhadas pelo mundo inteiro uniram-se a ele nessa luta de forma a mostrar ao mundo que o compartilhamento da informação é fundamental para o desenvolvimento assim como a união e a solidariedade. Para tal filosofia foram criadas algumas regras que na verdade são liberdades. Não poderia ser diferente tratando-se de Software LIVRE. São as 4 liberdades do Software Livre listadas abaixo:</p>
+<ul>
+<li>Liberdade de executar o programa, da forma como quiser. * Liberdade de estudar o funcionamento do programa podendo inclusive modificá-lo de acordo com sua necessidade. * Liberdade de redistribuir cópias do programa livremente. * Liberdade de melhorar o programa e tornar estas melhorias públicas de forma a beneficiar o próximo.</li>
+</ul>
+<p>O projeto GNU não é somente desenvolvimento e distribuição de alguns softwares livres úteis. O coração do projeto GNU é uma idéia: que software deve ser livre__, e que a liberdade do usuário vale a pena ser defendida. Se as pessoas têm liberdade mas não a apreciam conscientemente, não irão mantê-la por muito tempo. Se queremos que a liberdade dure, precisamos chamar a atenção das pessoas para a liberdade que elas têm em programas livres.</p>
+<p>Com o passar dos anos, e baseado nessa filosofia do Software Livre, surgiu então o sistema operacional que hoje chamamos de GNU / Linux.</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Atualizado em 2008-05-23</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Compartilhe em X" data-sharer="x" data-url="//blog.marcelocavalcante.net:1313/posts/de-onde-vem-o-conceito/" data-title="De Onde Vêm O Conceito De Software Livre" data-via="Marcelo_Kalib" data-hashtags="Cultura Hacker,Impressões,Linux,Software Livre"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Threads" data-sharer="threads" data-url="//blog.marcelocavalcante.net:1313/posts/de-onde-vem-o-conceito/" data-title="De Onde Vêm O Conceito De Software Livre"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Facebook" data-sharer="facebook" data-url="//blog.marcelocavalcante.net:1313/posts/de-onde-vem-o-conceito/" data-hashtag="Cultura Hacker"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Linkedin" data-sharer="linkedin" data-url="//blog.marcelocavalcante.net:1313/posts/de-onde-vem-o-conceito/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Hacker News" data-sharer="hackernews" data-url="//blog.marcelocavalcante.net:1313/posts/de-onde-vem-o-conceito/" data-title="De Onde Vêm O Conceito De Software Livre"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Line" data-sharer="line" data-url="//blog.marcelocavalcante.net:1313/posts/de-onde-vem-o-conceito/" data-title="De Onde Vêm O Conceito De Software Livre"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em 微博" data-sharer="weibo" data-url="//blog.marcelocavalcante.net:1313/posts/de-onde-vem-o-conceito/" data-title="De Onde Vêm O Conceito De Software Livre"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Diaspora" data-sharer="diaspora" data-url="//blog.marcelocavalcante.net:1313/posts/de-onde-vem-o-conceito/" data-title="De Onde Vêm O Conceito De Software Livre" data-description="Diante de nossa atual situação tecnológica seria impossível falarmos de GNU Linux sem antes entendermos o que é Software Livre ou de onde surgiu essa filosofia."><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=%2f%2fblog.marcelocavalcante.net%3a1313%2fposts%2fde-onde-vem-o-conceito%2f&amp;text=De%20Onde%20V%c3%aam%20O%20Conceito%20De%20Software%20Livre" target="_blank" title="Compartilhe em Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/cultura-hacker/">Cultura Hacker</a>,&nbsp;<a href="/tags/impress%C3%B5es/">Impressões</a>,&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/software-livre/">Software Livre</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Voltar</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/jre-buntu804/" class="prev" rel="prev" title="Configurando a Jre Para Funcionar No *Buntu 8.04 Com Firefox 3"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Configurando a Jre Para Funcionar No *Buntu 8.04 Com Firefox 3</a>
+            <a href="/posts/por-que-usar-a-plataforma/" class="next" rel="next" title="Por Que Usar a Plataforma Livre">Por Que Usar a Plataforma Livre<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Possibilitado por <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Tema - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2008 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://blog.marcelocavalcante.net" target="_blank">Marcelo Cavalcante</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Voltar ao topo">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="Ver comentários">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.20.2/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,49 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Aleatório - Categoria - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/categories/aleat%C3%B3rio/</link>
+        <description>Aleatório - Categoria - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Mon, 16 Apr 2018 13:45:05 -0500</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/categories/aleat%C3%B3rio/" rel="self" type="application/rss+xml" /><item>
+    <title>10 Anos de Blog!</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/10-anos/</link>
+    <pubDate>Mon, 16 Apr 2018 13:45:05 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/10-anos/</guid>
+    <description><![CDATA[<p>10 anos de blog! Parece que foi ontem que comecei a postas algumas dicas simples sobre Linux&hellip; Jamais imaginei manter este blog por tanto tempo.</p>]]></description>
+</item>
+<item>
+    <title>Arch Linux Schwag - Uma Loja Para O Arch Linux</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/arch-linux-schwag-uma-loja/</link>
+    <pubDate>Mon, 10 Nov 2008 13:48:29 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/arch-linux-schwag-uma-loja/</guid>
+    <description><![CDATA[<p>Neste post eu deixo a dica de uma <a href="https://www.zazzle.com/archlinux" target="_blank" rel="noopener noreffer ">loja online</a> na qual você pode encontrar diversos produtos bacanas do <a href="https://www.archlinux-br.org/" target="_blank" rel="noopener noreffer ">Arch Linux</a>. Produtos estes que vão desde camisetas até mesmo shapes de skates ou aventais (é mole?).</p>]]></description>
+</item>
+<item>
+    <title>Asterisk Counter - Seja Contado</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/asterisk-counter-seja-contado/</link>
+    <pubDate>Mon, 27 Oct 2008 14:27:37 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/asterisk-counter-seja-contado/</guid>
+    <description><![CDATA[<p>Saudações pessoal&hellip;</p>
+<p>Muitos aqui já conheciam o sistema <a href="https://counter.li.org/" target="_blank" rel="noopener noreffer ">Linux Counter</a> que servia para contabilizar e registrar usuários Linux como forma de documentar e ter controles estatísticos do crescimento da comunidade Linux mundial. Agora chegou a vez do Asterisk.</p>]]></description>
+</item>
+<item>
+    <title>Ajude a Sustentar a Wikipedia E Concorra a Um Eee Pc</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/ajude-a-sustentar-a-wikipedia/</link>
+    <pubDate>Tue, 24 Jun 2008 16:45:09 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/ajude-a-sustentar-a-wikipedia/</guid>
+    <description><![CDATA[<p>Ajude a sustentar a Wikipédia e outros projetos, sem colocar a mão no bolso, e concorra a um Eee PC!</p>]]></description>
+</item>
+<item>
+    <title>Ajude O Firefox a Estabelecer Um Recorde Mundial</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/ajude-o-firefox-a-estabelecer/</link>
+    <pubDate>Sat, 31 May 2008 12:39:14 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/ajude-o-firefox-a-estabelecer/</guid>
+    <description><![CDATA[<p>&ldquo;Queremos estabelecer um Recorde Mundial no Guinness para o software mais baixado em 24 horas e com a sua ajuda temos certeza de que conseguiremos!&rdquo;</p>]]></description>
+</item>
+</channel>
+</rss>

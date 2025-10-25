@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Criando Uma Imagem Aws Ec2 Com Packer E Puppet - Marcelo Cavalcante Rocha</title><meta name="Description" content="Um exemplo de como utilizar a ferramenta Open Source Packer para criar uma imagem de forma automatizada para AWS EC2 com Puppet e Bash script para provisionar as configurações da imagem/vm."><meta property="og:url" content="//blog.marcelocavalcante.net:1313/posts/criando-uma-imagem-aws-ec2/">
+  <meta property="og:site_name" content="Marcelo Cavalcante Rocha">
+  <meta property="og:title" content="Criando Uma Imagem Aws Ec2 Com Packer E Puppet">
+  <meta property="og:description" content="Um exemplo de como utilizar a ferramenta Open Source Packer para criar uma imagem de forma automatizada para AWS EC2 com Puppet e Bash script para provisionar as configurações da imagem/vm.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2018-08-04T13:12:15-05:00">
+    <meta property="article:modified_time" content="2018-08-04T13:12:15-05:00">
+    <meta property="article:tag" content="Devops">
+    <meta property="article:tag" content="Packer">
+    <meta property="article:tag" content="Cloud">
+    <meta property="article:tag" content="Puppet">
+    <meta property="article:tag" content="AWS">
+    <meta property="og:image" content="//blog.marcelocavalcante.net:1313/posts/criando-uma-imagem-aws-ec2/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="//blog.marcelocavalcante.net:1313/posts/criando-uma-imagem-aws-ec2/featured-image.png">
+  <meta name="twitter:title" content="Criando Uma Imagem Aws Ec2 Com Packer E Puppet">
+  <meta name="twitter:description" content="Um exemplo de como utilizar a ferramenta Open Source Packer para criar uma imagem de forma automatizada para AWS EC2 com Puppet e Bash script para provisionar as configurações da imagem/vm.">
+<meta name="application-name" content="Marcelo Cavalcante">
+<meta name="apple-mobile-web-app-title" content="Marcelo Cavalcante">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="//blog.marcelocavalcante.net:1313/posts/criando-uma-imagem-aws-ec2/" /><link rel="prev" href="//blog.marcelocavalcante.net:1313/posts/automatizando-a-criacao-de-imagens/" /><link rel="next" href="//blog.marcelocavalcante.net:1313/posts/infraestrutura-como-codigo-com-terraform/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Criando Uma Imagem Aws Ec2 Com Packer E Puppet",
+        "inLanguage": "pt-BR",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/\/blog.marcelocavalcante.net:1313\/posts\/criando-uma-imagem-aws-ec2\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/criando-uma-imagem-aws-ec2\/featured-image.png",
+                            "width":  600 ,
+                            "height":  600 
+                        }],"genre": "posts","keywords": "Devops, Packer, Cloud, Puppet, AWS","wordcount":  4630 ,
+        "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/criando-uma-imagem-aws-ec2\/","datePublished": "2018-08-04T13:12:15-05:00","dateModified": "2018-08-04T13:12:15-05:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Marcelo Cavalcante"
+            },"description": "Um exemplo de como utilizar a ferramenta Open Source Packer para criar uma imagem de forma automatizada para AWS EC2 com Puppet e Bash script para provisionar as configurações da imagem/vm."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'auto';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categorias </a><a class="menu-item" href="/sobre/"> Quem Sou </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancelar
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categorias</a><a class="menu-item" href="/sobre/" title="">Quem Sou</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Conteúdos</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Criando Uma Imagem Aws Ec2 Com Packer E Puppet</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://blog.marcelocavalcante.net" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Marcelo Cavalcante</a></span>&nbsp;<span class="post-category">incluido em <a href="/categories/tutoriais/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutoriais</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2018-08-04">2018-08-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4630 palavras&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;22 minutos&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-imagem-aws-ec2/featured-image.png"
+        data-srcset="/posts/criando-uma-imagem-aws-ec2/featured-image.png, /posts/criando-uma-imagem-aws-ec2/featured-image.png 1.5x, /posts/criando-uma-imagem-aws-ec2/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-imagem-aws-ec2/featured-image.png"
+        title="Um exemplo de como utilizar a ferramenta Open Source Packer para criar uma imagem de forma automatizada para AWS EC2 com Puppet e Bash script para provisionar as configurações da imagem/vm." /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Conteúdos</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#packer-puppet-bash-e-aws">Packer, Puppet, Bash e AWS</a></li>
+    <li><a href="#aws">AWS</a></li>
+    <li><a href="#packer">Packer</a></li>
+    <li><a href="#testando-sua-imagem">Testando sua imagem</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Um exemplo de como utilizar a ferramenta Open Source Packer para criar uma imagem de forma automatizada para AWS EC2 com Puppet e Bash script para provisionar as configurações da imagem/vm.</p>
+<h2 id="packer-puppet-bash-e-aws">Packer, Puppet, Bash e AWS</h2>
+<p><strong>A</strong> plataforma AWS da Amazon é atualmente uma das maiores e mais populares quando o assunto é Cloud e automação em nuvem, permitindo o uso de soluções de infra estrutura completamente na nuvem, sem a necessidade de termos Hardware físico, otimizando custos e nos dando mais flexibilidade.</p>
+<p><strong>A</strong> própria plataforma nos disponibiliza diversos recursos para facilitar a implementação de nossas soluções e tornar nossas tarefas rotineiras mais simples. Por exemplo, para a criação de VMs, ou instâncias, no AWS de forma mais rápida, podemos utilizar uma imagem previamente criada, de forma que possamos evitar alguns passos e configurações repetitivas.</p>
+<p><strong>U</strong>ma vez que eu identifico uma necessidade para minha aplicação e sei que preciso de uma máquina virtual com configurações e aplicações específicas para poder rodar minha aplicação, eu posso criar uma imagem com todos estes pré-requisitos de forma que ao resolver criar uma nova VM, eu não precise realizar todos estes passos manualmente. Além de evitar trabalho repetitivo, nos garante uma maior flexibilidade ao ter nossa infraestrutura como código, de forma que podemos literalmente ter as instruções que compõem nossa infraestrutura em um repositório Git, por exemplo, além de nos permitir realizar alterações nesta imagem também de forma simples e rápida para a geração de novas imagens de instâncias com as nossas alterações em poucos segundos ou minutos, dependendo da quantidade de alterações envolvdidas.</p>
+<p><strong>S</strong>e você ainda não faz ideia de o que seja o Packer ou o que ele é capaz de fazer, sugiro que volte uma casa e leia meu <a href="/posts/criando-uma-imagem-aws-ec2/" rel="">post anterior</a>, onde explico o que é o Packer e apresento um simples exemplo de seu uso para a criação de imagens para o Docker.</p>
+<p><strong>O</strong> intuito deste post é mostrar como podemos estruturar um simples código para que possamos criar uma imagem no AWS que poderá ser utilizada posteriormente para a criação de instâncias. Esta imagem será criada através do Packer e, para incrementar ainda mais nossa imagem, utilizaremos o recurso de provisioners (ou provisionadores/provedores) disponível no Packer. Utilizaremos dois provisioners como recursos externos para o provisionamento e configuração de nossa imagem, sendo eles bash script e <a href="https://puppet.com/" target="_blank" rel="noopener noreffer ">Puppet</a>.</p>
+<h2 id="aws">AWS</h2>
+<p><strong>U</strong>ma vez que estou assumindo que você já possui o Packer instalado, bem como que você já possui uma ideia de como ele funciona, vamos iniciar pelo AWS. (Ainda não possui o Packer e não sabe o que ele faz? Novamente, <a href="/posts/automatizando-a-criacao-de-imagens/" rel="">Automatizando a Criacao De Imagens Com Packer</a>.)</p>
+<p><strong>O</strong> primeiro pré-requisito para este post/tutorial é uma conta no AWS. Caso você não possua uma e queira repetir os passos aqui descritos, siga e crie uma. Lembrando que o AWS lhe dá uma série de recursos que podem ser utilizados gratuitamente no que eles chamam de &ldquo;Free Tier&rdquo;. Uma vez que utilizaremos apenas recursos simples aqui, você não deverá ser cobrado por nada ao seguir os exemplos deste post. O ideal é que você exclua os recursos ou encerre sua conta após o término deste exercício para evitar ser cobrado por algo. Caso não o faça e resolva continuar testando algumas coisas no AWS, você pode ser cobrado em alguns centavos ou reais, dependendo de o que resolva testar e por quanto. (Sua responsabilidade, claro.)</p>
+<p><strong>A</strong> conta no AWS pode ser criada aqui: <a href="https://aws.amazon.com/free/" target="_blank" rel="noopener noreffer ">AWS Conta Gratuita</a>.</p>
+<p><strong>U</strong>ma vez que a conta no AWS esteja criada e pronta para uso, o primeiro passo será de fato conseguir uma chave para que possamos nos comunicar com o AWS via CLI através de uma API. Durante a criação de nosso código com o Packer precisaremos utilizar esta chave de acesso, portanto vá em frente e crie uma através deste link: [IAM](<a href="https://console.aws.amazon.com/iam/home?#security_credential" target="_blank" rel="noopener noreffer ">https://console.aws.amazon.com/iam/home?#security_credential</a>.</p>
+<p><strong>C</strong>lique na opção Access Keys, ou Chaves de Acesso, e crie uma nova. <strong>É extremamente importante</strong> que você esteja atento neste momento, pois ele apenas lhe mostrará o ID e senha para a chave uma única vez, portanto esteja pronto para copiar e salvar ambos os valores. Será algo similar a isto:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-imagem-aws-ec2/aws_key.png"
+        data-srcset="/posts/criando-uma-imagem-aws-ec2/aws_key.png, /posts/criando-uma-imagem-aws-ec2/aws_key.png 1.5x, /posts/criando-uma-imagem-aws-ec2/aws_key.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-imagem-aws-ec2/aws_key.png"
+        title="AWS Key" width="600" height="350" /></p>
+<p><strong>É</strong> claro que eu já excluí essa chave&hellip; :p Não perca seu tempo&hellip; &gt;]</p>
+<p><strong>U</strong>ma vez que você tenha salvo ambos os valores, vamos tratar da identificação/autenticação com o AWS.</p>
+<p><strong>O</strong> mecanismo padrão do Packer de autenticação neste caso seria através de duas variáveis em nosso arquivo json:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-json">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;builders&#34;</span><span class="p">:</span> <span class="p">[{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;amazon-ebs&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;SUA ACCESS KEY AQUI&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;SUA SECRET ACCESS KEY AQUI&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="err">...</span> <span class="err">...</span> <span class="err">...</span></span></span></code></pre></div></div>
+<p><strong>E</strong>mbora seja a forma mais simples, não a utilizaremos. Fica claro que não é uma forma muito segura, certo?! Quando se pensa em infraestrutura como código, um dos principais objetivos é podermos versionar e hospedar nosso código em um repositório Git, por exemplo. Ter nossa chave como parte do código não é nada seguro, especialmente se vamos compartilhar este código em um repositório Git.</p>
+<p><strong>A</strong> forma mais simples de lidarmos com isso é salvando nossa chave e senha como variáveis de ambiente e, em nosso arquivo json, importarmos estas variáveis de ambiente diretamente.</p>
+<p><strong>E</strong>m Linux ou OS X, digite o seguinte em um terminal ou console:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">export</span> <span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span>SUA ACCESS KEY AQUI
+</span></span><span class="line"><span class="cl">$ <span class="nb">export</span> <span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span>SUA SECRET ACCESS KEY AQUI</span></span></code></pre></div></div>
+<p><strong>C</strong>ertifique-se de que os valores foram definidos corretamente:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="nv">$AWS_ACCESS_KEY_ID</span>
+</span></span><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="nv">$AWS_SECRET_ACCESS_KEY</span></span></span></code></pre></div></div>
+<p>Por hora isso é tudo de que precisaremos para o AWS.</p>
+<h2 id="packer">Packer</h2>
+<p><strong>H</strong>ora de começarmos a escrever nosso código que será utilizado pelo Packer para a criação de nossa imagem.</p>
+<p><strong>D</strong>esta vez estaremos criando uma imagem EC2 para o AWS, portanto alguns provisioners e parâmetros serão diferentes dos utilizados no <a href="/posts/automatizando-a-criacao-de-imagens/" rel="">post anterior</a>, onde criamos uma imagem para o Docker.</p>
+<p><strong>C</strong>omecemos criando um arquivo json vazio. Chamarei meu arquivo de <em>ubuntuaws.json</em>.</p>
+<p><strong>A</strong> primeira coisa que faremos é incluir as credenciais de nossa conta no AWS. Como criamos duas variáveis de ambiente em nosso host, chamadas <em>AWS_ACCESS_KEY_ID</em> e <em>AWS_SECRET_ACCESS_KEY</em>, invocaremos estas duas variáveis da seguinte forma no início de nosso arquivo: <em>env `AWS_ACCESS_KEY_ID`</em>, etc&hellip; Vamos ao código.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-json">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;variables&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;aws_access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{env `AWS_ACCESS_KEY_ID`}}{% endraw %}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;aws_secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{env `AWS_SECRET_ACCESS_KEY`}}{% endraw %}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;region&#34;</span><span class="p">:</span> <span class="s2">&#34;us-east-1&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>N</strong>ormalmente uma varíavel poderia ser declarada apenas com <em>&ldquo;aws_access_key&rdquo;: &ldquo;sua_chave&rdquo;</em>, conforme fizemos com a variável <em>region</em> acima, no entanto, por questões de segurança, não queremos ter nossa chave exposta no código, certo?! Portanto, estamos trazendo os valores diretamente das variáveis de ambiente que criamos. A utilização do parâmetro <em>env</em> é o que indica ao Packer que ele deverá buscar estas variáveis em nosso <em>env</em> (environment).</p>
+<p><strong>É</strong> importante lembrar que o aws possui datacenters e recursos em diversas regiões do mundo. Você não precisa obrigatoriamente utilizar a região <em>us-east-1</em>. Optei por utilizar esta região em meu código pelo fato de eu morar em Toronto, o que faz desta região uma boa escolha para meus recursos de nuvem por conta da proximidade (menor delay).</p>
+<p><strong>S</strong>e você está no Brasil, provavelmente a melhor opção seja <em>sa-east-1</em>, a qual se encontra em São Paulo. De qualquer forma, você pode verificar a lista de regiões disponíveis no AWS através <a href="https://docs.aws.amazon.com/pt_br/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions" target="_blank" rel="noopener noreffer ">deste link</a>.</p>
+<p><strong>A</strong>té então nosso código está simples e não faz basicamente nada além de definir as duas variáves para nossa autenticação, mas ainda assim é importante termos certeza de que não cometemos nenhum erro de sintaxe:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ packer validate ubuntuaws.json
+</span></span><span class="line"><span class="cl">Error initializing core: <span class="m">1</span> error<span class="o">(</span>s<span class="o">)</span> occurred:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">* at least one builder must be defined</span></span></code></pre></div></div>
+<p><strong>P</strong>or enquanto ignore este erro, nossa sintaxe esta correta. O Packer apenas está nos dizendo que não conseguiu iniciar o projeto pois ao menos um builder deve ser definido e, até então, nós não definimos nenhum. Este será o nosso próximo passo. Desta vez, ao invés de utilizarmos um builder do tipo Docker, utilizaremos um do tipo <em>amazon-ebs</em>. Começaremos inserindo uma vírgula ao fim do bloco de variáveis e nosso código agora ficará da seguinte forma:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-json">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;variables&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;aws_access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{env `AWS_ACCESS_KEY_ID`}}{% endraw %}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;aws_secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{env `AWS_SECRET_ACCESS_KEY`}}{% endraw %}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;region&#34;</span><span class="p">:</span> <span class="s2">&#34;us-east-1&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&#34;builders&#34;</span><span class="p">:</span> <span class="p">[{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;amazon-ebs&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{user `aws_access_key`}}{% endraw %}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{user `aws_secret_key`}}{% endraw %}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;region&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{user `region`}}{% endraw %},
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;</span><span class="err">source_ami_filter</span><span class="s2">&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">filters</span><span class="s2">&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">virtualization-type</span><span class="s2">&#34;: &#34;</span><span class="err">hvm</span><span class="s2">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">name</span><span class="s2">&#34;: &#34;</span><span class="err">ubuntu/images/*ubuntu-xenial</span><span class="mf">-16.04</span><span class="err">-amd</span><span class="mi">64</span><span class="err">-server-*</span><span class="s2">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">root-device-type</span><span class="s2">&#34;: &#34;</span><span class="err">ebs</span><span class="s2">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">      },
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">owners</span><span class="s2">&#34;: [&#34;</span><span class="mi">099720109477</span><span class="s2">&#34;],
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">most_recent</span><span class="s2">&#34;: true
+</span></span></span><span class="line"><span class="cl"><span class="s2">    },
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;</span><span class="err">instance_type</span><span class="s2">&#34;: &#34;</span><span class="err">t</span><span class="mi">2</span><span class="err">.micro</span><span class="s2">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;</span><span class="err">ssh_username</span><span class="s2">&#34;: &#34;</span><span class="err">ubuntu</span><span class="s2">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;</span><span class="err">ami_name</span><span class="s2">&#34;: &#34;</span><span class="err">packer-example</span> <span class="p">{</span><span class="err">%</span> <span class="err">raw</span> <span class="err">%</span><span class="p">}{</span><span class="err">{timestamp</span><span class="p">}}{</span><span class="err">%</span> <span class="err">endraw</span> <span class="err">%</span><span class="p">}</span><span class="err">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">}</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>O</strong> que temos agora:</p>
+<p><em>builders:</em> Inciamos nosso bloco de builders com as intruções ou parâmetros que definirão as especificações mais básicas para a criação de nossa imagem no AWS.</p>
+<p><em>type:</em> Aqui indicamos o tipo de builders que utilizaremos. No caso do EC2 do AWS, o tipo se chama <em>amazon-ebs</em>. Basicamente este builder irá utilizar uma imagem previamente existente, como as fornecidas por padrão pela Amazon, para criar uma nova imagem que poderá ser futuramente utilizada para provisionar suas instâncias EC2 com EBS (Elastic Block Storage).</p>
+<p><em>access_key:</em> e <em>secret_key:</em> Aqui apenas indicamos que queremos utilizar o valor das variáveis que criamos mais acima. É importante lembrar que quando as definimos, utilizamos <em>env</em>, para indicar que a origem delas estava em nossas variáveis de ambiente. Agora estamos utilizando <em>user</em> para indicar que são variáveis criadas em nosso código mesmo (usuário).</p>
+<p><em>region:</em> Novamente, assim como com as chaves, anteriormente nós declaramos esta variável e agora estamos inserindo-a em nosso código como uma variável de usuário <em>user</em>.</p>
+<p><em>source_ami_filter:</em> Neste bloco iremos passar as informações básicas sobre a imagem que será utilizada como origem ou <em>source</em> base para nossa imagem. Lembrando novamente de que utilizaremos uma AMI (Amazon Machine Image) já existente por padrão no AWS.</p>
+<p><em>filters:</em> Utilizaremos alguns filtros para definir a nossa imagem <em>source</em>.</p>
+<p><em>virtualization_type:</em> Nosso primeiro parâmetro de filtro será o tipo de virtualização que desejamos utilizar. Se você já utilizou AWS antes, provavelmente reparou que você possui algumas formas de virtualização disponíveis, como HVM e PV. Utilizaremos HVM em nosso código.</p>
+<p><em>name:</em> Aqui indicamos o nome da imagem <em>source</em> que queremos utilizar como base de nossa imagem. Como a Canonical vive atualizando suas imagens no marketplace do AWS, não utilizaremos um nome exato aqui, pois correríamos o risco de esta imagem ter sido descontinuada ou mesmo de estar desatualizada quando você estiver lendo e executando este tutorial, portanto utilizaremos um coringa (asterísco) e indicaremos um parâmetro extra para dizer que queremos utilizar a mais recente. Para nome, utilizaremos apenas: <em>ubuntu/images/*ubuntu-xenial-16.04-amd64-server-*</em> onde o asterísco do final indica que não nos importa o final do nome, e qualquer coisa será válida.</p>
+<p><em>root-device-type:</em> Indicamos <em>ebs</em> como tipo de storage para nossa imagem e tipo de instância.</p>
+<p><em>owners:</em> Indicamos o dono da imagem. Na página do AWS, cada imagem é vinculada a um dono, conforme imagem abaixo:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-imagem-aws-ec2/aws_ubuntu_ami.png"
+        data-srcset="/posts/criando-uma-imagem-aws-ec2/aws_ubuntu_ami.png, /posts/criando-uma-imagem-aws-ec2/aws_ubuntu_ami.png 1.5x, /posts/criando-uma-imagem-aws-ec2/aws_ubuntu_ami.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-imagem-aws-ec2/aws_ubuntu_ami.png"
+        title="AWS Ubuntu AMI" width="900" height="300" /></p>
+<p><em>most_recent:</em> Este é o parâmetro que, quando definido como <em>true</em>, fará com que seja utilizada a imagem mais recente que atenda aos demais filtros utilizados para a imagem.</p>
+<p><em>instance_type:</em> Indica o tipo de instância que será utilizada no AWS. O AWS possui dezenas de categorias de instâncias, onde cada categoria ou tipo possui uma quantidade diferente de memória, CPU, etc.</p>
+<p><em>ami_name:</em> Finalmente, aqui indicamos o nome que queremos atribuir à nossa imagem ao final da criação da mesma.</p>
+<p><strong>A</strong>gora que possuímos um código mais completo e que realmente conseguirá fazer algo, vamos validar o código e executá-lo em seguida para criarmos nossa primeira imagem no AWS.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ packer validate ubuntuaws.json
+</span></span><span class="line"><span class="cl">Template validated successfully.</span></span></code></pre></div></div>
+<p><strong>C</strong>ódigo validado e sem erros.</p>
+<p><strong>É</strong> importante entender o que realmente acontece durante a criação de uma imagem. O Packer não tem como executar as instruções e rodar o que queremos para criar a imagem de forma estática e mágica, portanto o que vai acontecer na verdade será o seguinte:</p>
+<ol>
+<li>Primeiramente o Packer irá buscar a imagem que definimos que será utilizada como fonte;</li>
+<li>O packer irá criar literalmente uma instância no AWS utilizando as propriedades que definimos em nosso código para executar nossas instruções e garantir que tudo funcionará. Uma vez que todas as instruções sejam realizadas com sucesso, ele irá desligar e remover esta instância ou máquina virtual e irá salvar a imagem gerada;</li>
+</ol>
+<p><strong>S</strong>e durante a execução do Packer build você verificar o painel de instâncias EC2 no AWS, ficará claro que o Packer cria uma instância temporária durante a criação da imagem.</p>
+<p><strong>H</strong>ora do build:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ packer build ubuntuaws.json
+</span></span><span class="line"><span class="cl">amazon-ebs output will be in this color.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Prevalidating AMI Name: packer-example <span class="m">1534022746</span>
+</span></span><span class="line"><span class="cl">    amazon-ebs: Found Image ID: ami-5c150e23
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Creating temporary keypair: packer_5b6f545a-8955-2f4f-b66a-8fd752d75bee
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Creating temporary security group <span class="k">for</span> this instance: packer_5b6f545c-0f04-553a-7944-a70d081be39d
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Authorizing access to port <span class="m">22</span> from 0.0.0.0/0 in the temporary security group...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Launching a <span class="nb">source</span> AWS instance...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Adding tags to <span class="nb">source</span> instance
+</span></span><span class="line"><span class="cl">    amazon-ebs: Adding tag: <span class="s2">&#34;Name&#34;</span>: <span class="s2">&#34;Packer Builder&#34;</span>
+</span></span><span class="line"><span class="cl">    amazon-ebs: Instance ID: i-0ef4a6036aebd0d56
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Waiting <span class="k">for</span> instance <span class="o">(</span>i-0ef4a6036aebd0d56<span class="o">)</span> to become ready...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Waiting <span class="k">for</span> SSH to become available...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Connected to SSH!
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Stopping the <span class="nb">source</span> instance...
+</span></span><span class="line"><span class="cl">    amazon-ebs: Stopping instance, attempt <span class="nv">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Waiting <span class="k">for</span> the instance to stop...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Creating the AMI: packer-example <span class="m">1534022746</span>
+</span></span><span class="line"><span class="cl">    amazon-ebs: AMI: ami-0bbd7494d2e6cee71
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Waiting <span class="k">for</span> AMI to become ready...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Terminating the <span class="nb">source</span> AWS instance...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Cleaning up any extra volumes...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: No volumes to clean up, <span class="nv">skipping</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Deleting temporary security group...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Deleting temporary keypair...
+</span></span><span class="line"><span class="cl">Build <span class="s1">&#39;amazon-ebs&#39;</span> finished.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Builds finished. The artifacts of successful builds are:
+</span></span><span class="line"><span class="cl">--&gt; amazon-ebs: AMIs were created:
+</span></span><span class="line"><span class="cl">us-east-1: ami-0bbd7494d2e6cee71</span></span></code></pre></div></div>
+<p><strong>V</strong>erificando em minha interface de instâncias da região que escolhi (us-east-1) posso ver que existe uma instância que foi criada mas que já foi terminada ou deletada. Esta é a instância que o Packer criou automaticamente para dar início à criação de nossa imagem:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-imagem-aws-ec2/packer_aws_instance1.png"
+        data-srcset="/posts/criando-uma-imagem-aws-ec2/packer_aws_instance1.png, /posts/criando-uma-imagem-aws-ec2/packer_aws_instance1.png 1.5x, /posts/criando-uma-imagem-aws-ec2/packer_aws_instance1.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-imagem-aws-ec2/packer_aws_instance1.png"
+        title="Packer Instance" width="800" height="320" /></p>
+<p><strong>D</strong>a mesma forma, se formos na interface de imagens (AMI), veremos a nossa imagem recém criada:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-imagem-aws-ec2/packer_aws_image1.png"
+        data-srcset="/posts/criando-uma-imagem-aws-ec2/packer_aws_image1.png, /posts/criando-uma-imagem-aws-ec2/packer_aws_image1.png 1.5x, /posts/criando-uma-imagem-aws-ec2/packer_aws_image1.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-imagem-aws-ec2/packer_aws_image1.png"
+        title="Packer Image" width="800" height="265" /></p>
+<p><strong>D</strong>e certa forma não fizemos nada aqui, visto que utilizamos uma imagem base do Ubuntu com o Packer e salvamos uma nova imagem sem mudar absolutamente nada neste Ubuntu, portanto basicamente criamos apenas uma cópia da imagem original. Nada empolgante&hellip;</p>
+<p><strong>V</strong>amos incrementar um pouco nossa imagem realizando mudanças em nosso Ubuntu. De nada nos valeria criar uma imagem se ela não tiver nenhuma customização, certo?!</p>
+<p><strong>C</strong>omeçaremos criando um simples shell script chamado <em>setup.sh</em> com o seguinte conteúdo:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt-get upgrade -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt-get install puppet -y</span></span></code></pre></div></div>
+<p><strong>T</strong>rata-se de um simples script que basicamente irá atualizar o sistema operacional e em seguida instalar o Puppet no mesmo.</p>
+<p><strong>V</strong>oltando ao nosso arquivo ubuntuaws.json, vamos incluir um bloco de código <em>provisioner</em> ou provisionador. Existem diversos tipos de provisioners, mas para este momento utilizaremos apenas um, chamado <em>shell</em> pois desejamos executar um shell script. Nosso código agora estará assim:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-json">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;variables&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;aws_access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{env `AWS_ACCESS_KEY_ID`}}{% endraw %}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;aws_secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{env `AWS_SECRET_ACCESS_KEY`}}{% endraw %}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;region&#34;</span><span class="p">:</span> <span class="s2">&#34;us-east-1&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;builders&#34;</span><span class="p">:</span> <span class="p">[{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;amazon-ebs&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{user `aws_access_key`}}{% endraw %}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{user `aws_secret_key`}}{% endraw %}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;region&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{user `region`}}{% endraw %},
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;</span><span class="err">source_ami_filter</span><span class="s2">&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">filters</span><span class="s2">&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">virtualization-type</span><span class="s2">&#34;: &#34;</span><span class="err">hvm</span><span class="s2">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">name</span><span class="s2">&#34;: &#34;</span><span class="err">ubuntu/images/*ubuntu-xenial</span><span class="mf">-16.04</span><span class="err">-amd</span><span class="mi">64</span><span class="err">-server-*</span><span class="s2">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">root-device-type</span><span class="s2">&#34;: &#34;</span><span class="err">ebs</span><span class="s2">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">      },
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">owners</span><span class="s2">&#34;: [&#34;</span><span class="mi">099720109477</span><span class="s2">&#34;],
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">most_recent</span><span class="s2">&#34;: true
+</span></span></span><span class="line"><span class="cl"><span class="s2">    },
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;</span><span class="err">instance_type</span><span class="s2">&#34;: &#34;</span><span class="err">t</span><span class="mi">2</span><span class="err">.micro</span><span class="s2">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;</span><span class="err">ssh_username</span><span class="s2">&#34;: &#34;</span><span class="err">ubuntu</span><span class="s2">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;</span><span class="err">ami_name</span><span class="s2">&#34;: &#34;</span><span class="err">packer-example</span> <span class="p">{</span><span class="err">%</span> <span class="err">raw</span> <span class="err">%</span><span class="p">}{</span><span class="err">{timestamp</span><span class="p">}}{</span><span class="err">%</span> <span class="err">endraw</span> <span class="err">%</span><span class="p">}</span><span class="s2">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">  }],
+</span></span></span><span class="line"><span class="cl"><span class="s2">  &#34;</span><span class="err">provisioners</span><span class="s2">&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s2">    {
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">type</span><span class="s2">&#34;: &#34;</span><span class="err">shell</span><span class="s2">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">script</span><span class="s2">&#34;: &#34;</span><span class="err">./setup.sh&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>A</strong>ntes de entrarmos em maiores detalhes e na utilização do Puppet em si para nossa imagem, vamos testar nosso código e aplicá-lo novamente:</p>
+<p><strong>I</strong>ncluímos aqui:</p>
+<p><em>provisioners:</em> Para indicar que utilizaremos provisioners</p>
+<p><em>type:</em> Tipo de provisioner. Neste exemplo, será <em>bash</em></p>
+<p><em>script:</em> Com o provisioner bash nós podemos declarar diretamente os comandos que queremos executar na imagem ou indicar um script com os comandos. Neste caso, optei por utilizar um script.</p>
+<p><strong>V</strong>alidando e executando nosso código:
+(PS: Como a saída dos comandos apt-get update e apt-get upgrade são muito extensas, cortarei a maior parte aqui&hellip;)</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ packer validate ubuntuaws.json
+</span></span><span class="line"><span class="cl">Template validated successfully.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ packer build ubuntuaws.json
+</span></span><span class="line"><span class="cl">amazon-ebs output will be in this color.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Prevalidating AMI Name: packer-example <span class="m">1534024952</span>
+</span></span><span class="line"><span class="cl">    amazon-ebs: Found Image ID: ami-5c150e23
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Creating temporary keypair: packer_5b6f5cf9-dedc-aec2-ad77-acb29d37e8f9
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Creating temporary security group <span class="k">for</span> this instance: packer_5b6f5cfa-d35c-ff6c-aaad-cf02cedf8e74
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Authorizing access to port <span class="m">22</span> from 0.0.0.0/0 in the temporary security group...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Launching a <span class="nb">source</span> AWS instance...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Adding tags to <span class="nb">source</span> instance
+</span></span><span class="line"><span class="cl">    amazon-ebs: Adding tag: <span class="s2">&#34;Name&#34;</span>: <span class="s2">&#34;Packer Builder&#34;</span>
+</span></span><span class="line"><span class="cl">    amazon-ebs: Instance ID: i-0bbf230a251f76393
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Waiting <span class="k">for</span> instance <span class="o">(</span>i-0bbf230a251f76393<span class="o">)</span> to become ready...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Waiting <span class="k">for</span> SSH to become available...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Connected to SSH!
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">######</span>
+</span></span><span class="line"><span class="cl">---&gt;&gt;&gt; REPARE A SEGUIR QUANDO O PACKER COMEÇA A EXECUTAR NOSSO SCRIPT SETUP.SH <span class="o">&lt;&lt;&lt;</span>---
+</span></span><span class="line"><span class="cl"><span class="c1">######</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Provisioning with shell script: ./setup.sh
+</span></span><span class="line"><span class="cl">    amazon-ebs: Hit:1 https://us-east-1.ec2.archive.ubuntu.com/ubuntu xenial InRelease
+</span></span><span class="line"><span class="cl">    amazon-ebs: Get:2 https://us-east-1.ec2.archive.ubuntu.com/ubuntu xenial-updates InRelease <span class="o">[</span><span class="m">109</span> kB<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">######</span>
+</span></span><span class="line"><span class="cl">---&gt;&gt;&gt; NESTE MOMENTO O COMANDO <span class="s2">&#34;SUDO APT-GET UPDATE&#34;</span> ESTÁ SENDO EXECUTADO <span class="o">&lt;&lt;&lt;</span>---
+</span></span><span class="line"><span class="cl"><span class="c1">######</span>
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">######</span>
+</span></span><span class="line"><span class="cl">---&gt;&gt;&gt; A PARTIR DAQUI O COMANDO <span class="s2">&#34;SUDO APT-GET UPGRADE -Y&#34;</span> ESTÁ SENDO EXECUTADO <span class="o">&lt;&lt;&lt;</span>---
+</span></span><span class="line"><span class="cl"><span class="c1">######</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">amazon-ebs: Calculating upgrade...
+</span></span><span class="line"><span class="cl">amazon-ebs: The following packages will be upgraded:
+</span></span><span class="line"><span class="cl">amazon-ebs:   cloud-init gnupg gpgv grub-legacy-ec2
+</span></span><span class="line"><span class="cl">amazon-ebs: <span class="m">4</span> upgraded, <span class="m">0</span> newly installed, <span class="m">0</span> to remove and <span class="m">0</span> not upgraded.
+</span></span><span class="line"><span class="cl">amazon-ebs: Need to get 1,188 kB of archives.
+</span></span><span class="line"><span class="cl">amazon-ebs: After this operation, 76.8 kB of additional disk space will be used.
+</span></span><span class="line"><span class="cl">amazon-ebs: Get:1 https://us-east-1.ec2.archive.ubuntu.com/ubuntu xenial-updates/main amd64 gpgv amd64 1.4.20-1ubuntu3.3 <span class="o">[</span><span class="m">165</span> kB<span class="o">]</span>
+</span></span><span class="line"><span class="cl">amazon-ebs: Get:2 https://us-east-1.ec2.archive.ubuntu.com/ubuntu xenial-updates/main amd64 gnupg amd64 1.4.20-1ubuntu3.3 <span class="o">[</span><span class="m">626</span> kB<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">######</span>
+</span></span><span class="line"><span class="cl">---&gt;&gt;&gt; A PARTIR DAQUI O COMANDO <span class="s2">&#34;SUDO APT-GET INSTALL PUPPET -Y&#34;</span> ESTÁ SENDO EXECUTADO <span class="o">&lt;&lt;&lt;</span>---
+</span></span><span class="line"><span class="cl"><span class="c1">######</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">amazon-ebs: The following additional packages will be installed:
+</span></span><span class="line"><span class="cl"> amazon-ebs:   augeas-lenses debconf-utils facter fonts-lato hiera javascript-common
+</span></span><span class="line"><span class="cl"> amazon-ebs:   libaugeas0 libjs-jquery libruby2.3 puppet-common rake ruby ruby-augeas
+</span></span><span class="line"><span class="cl"> amazon-ebs:   ruby-deep-merge ruby-did-you-mean ruby-json ruby-minitest ruby-net-telnet
+</span></span><span class="line"><span class="cl"> amazon-ebs:   ruby-nokogiri ruby-power-assert ruby-rgen ruby-safe-yaml ruby-selinux
+</span></span><span class="line"><span class="cl"> amazon-ebs:   ruby-shadow ruby-test-unit ruby2.3 rubygems-integration unzip virt-what zip
+</span></span><span class="line"><span class="cl"> amazon-ebs: Suggested packages:
+</span></span><span class="line"><span class="cl"> amazon-ebs:   augeas-doc mcollective-common apache2 <span class="p">|</span> lighttpd <span class="p">|</span> httpd augeas-tools
+</span></span><span class="line"><span class="cl"> amazon-ebs:   puppet-el vim-puppet etckeeper ruby-rrd ri ruby-dev bundler
+</span></span><span class="line"><span class="cl"> amazon-ebs: The following NEW packages will be installed:
+</span></span><span class="line"><span class="cl"> amazon-ebs:   augeas-lenses debconf-utils facter fonts-lato hiera javascript-common
+</span></span><span class="line"><span class="cl"> amazon-ebs:   libaugeas0 libjs-jquery libruby2.3 puppet puppet-common rake ruby
+</span></span><span class="line"><span class="cl"> amazon-ebs:   ruby-augeas ruby-deep-merge ruby-did-you-mean ruby-json ruby-minitest
+</span></span><span class="line"><span class="cl"> amazon-ebs:   ruby-net-telnet ruby-nokogiri ruby-power-assert ruby-rgen ruby-safe-yaml
+</span></span><span class="line"><span class="cl"> amazon-ebs:   ruby-selinux ruby-shadow ruby-test-unit ruby2.3 rubygems-integration unzip
+</span></span><span class="line"><span class="cl"> amazon-ebs:   virt-what zip
+</span></span><span class="line"><span class="cl"> amazon-ebs: <span class="m">0</span> upgraded, <span class="m">31</span> newly installed, <span class="m">0</span> to remove and <span class="m">0</span> not upgraded.
+</span></span><span class="line"><span class="cl"> amazon-ebs: Need to get 8,267 kB of archives.
+</span></span><span class="line"><span class="cl"> amazon-ebs: After this operation, 38.2 MB of additional disk space will be used.
+</span></span><span class="line"><span class="cl"> amazon-ebs: Get:1 https://us-east-1.ec2.archive.ubuntu.com/ubuntu xenial/main amd64 fonts-lato all 2.0-1 <span class="o">[</span>2,693 kB<span class="o">]</span>
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">######</span>
+</span></span><span class="line"><span class="cl">---&gt;&gt;&gt;  E O PROCESSO SE ENCERRA <span class="o">&lt;&lt;&lt;</span>---
+</span></span><span class="line"><span class="cl"><span class="c1">######</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Stopping the <span class="nb">source</span> instance...
+</span></span><span class="line"><span class="cl">    amazon-ebs: Stopping instance, attempt <span class="nv">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Waiting <span class="k">for</span> the instance to stop...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Creating the AMI: packer-example <span class="m">1534024952</span>
+</span></span><span class="line"><span class="cl">    amazon-ebs: AMI: ami-06fe27bd22afcaa71
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Waiting <span class="k">for</span> AMI to become ready...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Terminating the <span class="nb">source</span> AWS instance...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Cleaning up any extra volumes...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: No volumes to clean up, <span class="nv">skipping</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Deleting temporary security group...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Deleting temporary keypair...
+</span></span><span class="line"><span class="cl">Build <span class="s1">&#39;amazon-ebs&#39;</span> finished.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Builds finished. The artifacts of successful builds are:
+</span></span><span class="line"><span class="cl">--&gt; amazon-ebs: AMIs were created:
+</span></span><span class="line"><span class="cl">us-east-1: ami-06fe27bd22afcaa71</span></span></code></pre></div></div>
+<p><strong>A</strong> partir deste momento já temos duas imagens criadas. Uma vez que a primeira não tinha nada de diferente do Ubuntu convencional e padrão do AWS, poderíamos muito bem deletá-la. Já a segunda imagem, é um pouco diferente da imagem padrão, visto que ela já conta com um sistema mais atualizado (apt-get upgrade), bem como possui o puppet já instalado nela.</p>
+<p><strong>D</strong>esta mesma maneira seria possível fazer um deployment bem mais complexo de acordo com suas necessidades e, sempre que lhe fosse necessário atualizar ou modificar algo, você poderia gerar uma nova imagem e aplicá-la onde desejasse.</p>
+<p><strong>M</strong>as vamos incrementar um pouco mais nossa imagem, desta vez com o puppet como segundo provisioner.</p>
+<p><strong>Puppet</strong></p>
+<p><strong>U</strong>ma vez que o objetivo deste post não é apresentar o <a href="https://puppet.com" target="_blank" rel="noopener noreffer ">Puppet</a> em si, por hora ficaremos apenas com a informação de que o Puppet é uma ferramenta open source para gerenciamento de configurações (CM Tool - Configuration Management Tool) muito robusta e flexível.</p>
+<p><strong>E</strong>m futuros posts pretendo apresentar mais detalhes e explicações sobre o Puppet em si, mas para este post o objetivo é apenas demonstrar a flexibilidade do Packer para a criação de imagens, mesmo quando integramos diversos elementos a ele, como bash script e Puppet.</p>
+<p><strong>C</strong>rie um novo arquivo chamado <em>deployment.pp</em>. O Puppet chama seus arquivos de configuração ou instruções de manifests (manifestos) e estes sempre possuem a extensão .pp.</p>
+<p><strong>I</strong>nsira o seguinte conteúdo em seu arquivo <em>deployment.pp</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-ruby">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="nb">exec</span> <span class="p">{</span> <span class="s1">&#39;apt-update&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">command</span> <span class="o">=&gt;</span> <span class="s1">&#39;/usr/bin/apt-get update&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">package</span> <span class="p">{</span> <span class="s1">&#39;apache2&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">ensure</span> <span class="o">=&gt;</span> <span class="n">installed</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">before</span> <span class="o">=&gt;</span> <span class="no">Service</span><span class="o">[</span><span class="s1">&#39;apache2&#39;</span><span class="o">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">service</span> <span class="p">{</span> <span class="s1">&#39;apache2&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">ensure</span> <span class="o">=&gt;</span> <span class="n">running</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">before</span> <span class="o">=&gt;</span> <span class="no">Package</span><span class="o">[</span><span class="s1">&#39;mysql-server&#39;</span><span class="o">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">package</span> <span class="p">{</span> <span class="s1">&#39;mysql-server&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">ensure</span> <span class="o">=&gt;</span> <span class="n">installed</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">before</span> <span class="o">=&gt;</span> <span class="no">Service</span><span class="o">[</span><span class="s1">&#39;mysql&#39;</span><span class="o">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">service</span> <span class="p">{</span> <span class="s1">&#39;mysql&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">ensure</span> <span class="o">=&gt;</span> <span class="n">running</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">before</span> <span class="o">=&gt;</span> <span class="no">Package</span><span class="o">[</span><span class="s1">&#39;php&#39;</span><span class="o">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">package</span> <span class="p">{</span> <span class="s1">&#39;php&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">ensure</span> <span class="o">=&gt;</span> <span class="n">installed</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">before</span> <span class="o">=&gt;</span> <span class="no">File</span><span class="o">[</span><span class="s1">&#39;/var/www/html/info.php&#39;</span><span class="o">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">file</span> <span class="p">{</span> <span class="s1">&#39;/var/www/html/info.php&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">ensure</span> <span class="o">=&gt;</span> <span class="n">file</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">content</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;?php  phpinfo(); ?&gt;&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">require</span> <span class="o">=&gt;</span> <span class="no">Package</span><span class="o">[</span><span class="s1">&#39;apache2&#39;</span><span class="o">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>E</strong>ste manifesto Puppet tem a tarefa de instalar um servidor web LAMP em nossa imagem Ubuntu, com Apache, Mysql e PHP, bem como expor uma página de informações do php default (php.info).</p>
+<p><strong>C</strong>omo puppet não é o foco para este post, não entrarei em detalhes sobre as linhas contidas neste manifesto <em>deployment.pp</em>.</p>
+<p><strong>PS:</strong> Também estou assumindo que você já possui o puppet instalado em sua máquina. ;] (sudo apt-get install puppet -y)</p>
+<p><strong>V</strong>amos primeiramente validar nosso código puppet para garantirmos que está tudo em ordem:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ puppet parser validate deployment.pp</span></span></code></pre></div></div>
+<p><strong>S</strong>e nada for apresentado na tela, significa que está tudo certo.</p>
+<p><strong>A</strong>gora vamos voltar ao nosso código packer e editar o arquivo <em>ubuntuaws.json</em> para inserir nosso segundo provisioner (Puppet):</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-json">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;variables&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;aws_access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{env `AWS_ACCESS_KEY_ID`}}{% endraw %}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;aws_secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{env `AWS_SECRET_ACCESS_KEY`}}{% endraw %}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;region&#34;</span><span class="p">:</span> <span class="s2">&#34;us-east-1&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;builders&#34;</span><span class="p">:</span> <span class="p">[{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;amazon-ebs&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{user `aws_access_key`}}{% endraw %}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{user `aws_secret_key`}}{% endraw %}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;region&#34;</span><span class="p">:</span> <span class="s2">&#34;{% raw %}{{user `region`}}{% endraw %},
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;</span><span class="err">source_ami_filter</span><span class="s2">&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">filters</span><span class="s2">&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">virtualization-type</span><span class="s2">&#34;: &#34;</span><span class="err">hvm</span><span class="s2">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">name</span><span class="s2">&#34;: &#34;</span><span class="err">ubuntu/images/*ubuntu-xenial</span><span class="mf">-16.04</span><span class="err">-amd</span><span class="mi">64</span><span class="err">-server-*</span><span class="s2">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">root-device-type</span><span class="s2">&#34;: &#34;</span><span class="err">ebs</span><span class="s2">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">      },
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">owners</span><span class="s2">&#34;: [&#34;</span><span class="mi">099720109477</span><span class="s2">&#34;],
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">most_recent</span><span class="s2">&#34;: true
+</span></span></span><span class="line"><span class="cl"><span class="s2">    },
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;</span><span class="err">instance_type</span><span class="s2">&#34;: &#34;</span><span class="err">t</span><span class="mi">2</span><span class="err">.micro</span><span class="s2">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;</span><span class="err">ssh_username</span><span class="s2">&#34;: &#34;</span><span class="err">ubuntu</span><span class="s2">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;</span><span class="err">ami_name</span><span class="s2">&#34;: &#34;</span><span class="err">packer-example</span> <span class="p">{</span><span class="err">%</span> <span class="err">raw</span> <span class="err">%</span><span class="p">}{</span><span class="err">{timestamp</span><span class="p">}}{</span><span class="err">%</span> <span class="err">endraw</span> <span class="err">%</span><span class="p">}</span><span class="s2">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">  }],
+</span></span></span><span class="line"><span class="cl"><span class="s2">  &#34;</span><span class="err">provisioners</span><span class="s2">&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s2">    {
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">type</span><span class="s2">&#34;: &#34;</span><span class="err">shell</span><span class="s2">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">script</span><span class="s2">&#34;: &#34;</span><span class="err">./setup.sh</span><span class="s2">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    },
+</span></span></span><span class="line"><span class="cl"><span class="s2">    {
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">type</span><span class="s2">&#34;: &#34;</span><span class="err">puppet-masterless</span><span class="s2">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &#34;</span><span class="err">manifest_file</span><span class="s2">&#34;: &#34;</span><span class="err">deployment.pp&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>O</strong> que incluímos? Apenas mais um item dentro do bloco provisioners, porém desta vez com o tipo <em>puppet-masterless</em>:</p>
+<p><em>type:</em> Indicamos que o tipo deste provisioner é <em>puppet-masterless</em>. O Puppet pode funcionar de forma cliente/servidor, ou de forma autônoma, sem um master. Aqui queremos que ele funcione de forma autônoma e independente, portanto utilizaremos <em>puppet-masterless</em> (puppet sem master).</p>
+<p><em>manifest_file:</em> Indicamos que arquivo(s) de manifesto(s) do puppet devem ser executados. Neste caso, iremos apenas apontar para nosso <em>deployment.pp</em>.</p>
+<p><strong>V</strong>alidando nosso código:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ packer validate ubuntuaws.json
+</span></span><span class="line"><span class="cl">Template validated successfully.</span></span></code></pre></div></div>
+<p><strong>T</strong>udo certo com nosso código, portanto vamos executar novamente nosso build. Desta vez o Packer irá criar nossa imagem Ubuntu executando ambos, o shell script e o manifesto puppet, portanto nossa saída será bastante extensa. Como já vimos os detalhes nas execuções anteriores, irei cortar a saída aqui para focar na execução do manifesto puppet em si:</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ packer build ubuntuaws.json
+</span></span><span class="line"><span class="cl">amazon-ebs output will be in this color.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Prevalidating AMI Name: packer-example <span class="m">1534028156</span>
+</span></span><span class="line"><span class="cl">    amazon-ebs: Found Image ID: ami-5c150e23
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Creating temporary keypair: packer_5b6f697c-9aa2-4a5b-0554-255f223460ce
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Creating temporary security group <span class="k">for</span> this instance: packer_5b6f697e-92da-f29d-8688-92b3d787afff
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Authorizing access to port <span class="m">22</span> from 0.0.0.0/0 in the temporary security group...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Launching a <span class="nb">source</span> AWS instance...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Adding tags to <span class="nb">source</span> instance
+</span></span><span class="line"><span class="cl">    amazon-ebs: Adding tag: <span class="s2">&#34;Name&#34;</span>: <span class="s2">&#34;Packer Builder&#34;</span>
+</span></span><span class="line"><span class="cl">    amazon-ebs: Instance ID: i-01b0ccb4a7d4462ae
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#####</span>
+</span></span><span class="line"><span class="cl">---&gt;&gt;&gt; A PARTIR DAQUI O PACKER INICIA A EXECUÇÃO DO MANIFESTO COM O PUPPET <span class="o">&lt;&lt;&lt;</span>---
+</span></span><span class="line"><span class="cl"><span class="c1">#####</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Provisioning with Puppet...
+</span></span><span class="line"><span class="cl">    amazon-ebs: Creating Puppet staging directory...
+</span></span><span class="line"><span class="cl">    amazon-ebs: Creating directory: /tmp/packer-puppet-masterless
+</span></span><span class="line"><span class="cl">    amazon-ebs: Uploading manifests...
+</span></span><span class="line"><span class="cl">    amazon-ebs: Creating directory: /tmp/packer-puppet-masterless/manifests
+</span></span><span class="line"><span class="cl">    amazon-ebs: Uploading manifest file from: deployment.pp
+</span></span><span class="line"><span class="cl">    amazon-ebs: Running Puppet: <span class="nb">cd</span> /tmp/packer-puppet-masterless <span class="o">&amp;&amp;</span> <span class="nv">FACTER_packer_build_name</span><span class="o">=</span><span class="s1">&#39;amazon-ebs&#39;</span> <span class="nv">FACTER_packer_builder_type</span><span class="o">=</span><span class="s1">&#39;amazon-ebs&#39;</span> sudo -E puppet apply --detailed-exitcodes /tmp/packer-puppet-masterless/manifests/deployment.pp
+</span></span><span class="line"><span class="cl">    amazon-ebs: Notice: Compiled catalog <span class="k">for</span> ip-172-31-91-36.ec2.internal in environment production in 0.43 seconds
+</span></span><span class="line"><span class="cl">    amazon-ebs: Notice: /Stage<span class="o">[</span>main<span class="o">]</span>/Main/Exec<span class="o">[</span>apt-update<span class="o">]</span>/returns: executed successfully
+</span></span><span class="line"><span class="cl">    amazon-ebs: Notice: /Stage<span class="o">[</span>main<span class="o">]</span>/Main/Package<span class="o">[</span>apache2<span class="o">]</span>/ensure: ensure changed <span class="s1">&#39;purged&#39;</span> to <span class="s1">&#39;present&#39;</span>
+</span></span><span class="line"><span class="cl">    amazon-ebs: Notice: /Stage<span class="o">[</span>main<span class="o">]</span>/Main/Package<span class="o">[</span>mysql-server<span class="o">]</span>/ensure: ensure changed <span class="s1">&#39;purged&#39;</span> to <span class="s1">&#39;present&#39;</span>
+</span></span><span class="line"><span class="cl">    amazon-ebs: Notice: /Stage<span class="o">[</span>main<span class="o">]</span>/Main/Package<span class="o">[</span>php<span class="o">]</span>/ensure: ensure changed <span class="s1">&#39;purged&#39;</span> to <span class="s1">&#39;present&#39;</span>
+</span></span><span class="line"><span class="cl">    amazon-ebs: Notice: /Stage<span class="o">[</span>main<span class="o">]</span>/Main/File<span class="o">[</span>/var/www/html/info.php<span class="o">]</span>/ensure: defined content as <span class="s1">&#39;{md5}d9c0c977ee96604e48b81d795236619a&#39;</span>
+</span></span><span class="line"><span class="cl">    amazon-ebs: Notice: Finished catalog run in 35.64 seconds
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#####</span>
+</span></span><span class="line"><span class="cl">---&gt;&gt;&gt; FINALIZOU A EXECUÇÃO DO MANIFESTO PUPPET <span class="o">&lt;&lt;&lt;</span>---
+</span></span><span class="line"><span class="cl"><span class="c1">#####</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Stopping the <span class="nb">source</span> instance...
+</span></span><span class="line"><span class="cl">    amazon-ebs: Stopping instance, attempt <span class="nv">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Waiting <span class="k">for</span> the instance to stop...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Creating the AMI: packer-example <span class="m">1534031735</span>
+</span></span><span class="line"><span class="cl">    amazon-ebs: AMI: ami-04b480ee18474759c
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Waiting <span class="k">for</span> AMI to become ready...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Terminating the <span class="nb">source</span> AWS instance...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Cleaning up any extra volumes...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: No volumes to clean up, <span class="nv">skipping</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Deleting temporary security group...
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; amazon-ebs: Deleting temporary keypair...
+</span></span><span class="line"><span class="cl">Build <span class="s1">&#39;amazon-ebs&#39;</span> finished.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Builds finished. The artifacts of successful builds are:
+</span></span><span class="line"><span class="cl">--&gt; amazon-ebs: AMIs were created:
+</span></span><span class="line"><span class="cl">us-east-1: ami-04b480ee18474759c</span></span></code></pre></div></div>
+<p><strong>E</strong> nossa imagem foi criada com sucesso.</p>
+<p><strong>A</strong> partir deste momento você decide o que fazer. As possibilidades são infinitas, dependendo do que se deseja conseguir ou arquitetar e como deseja que sua pipeline funcione.</p>
+<p><strong>P</strong>or exemplo, você poderia ter uma pipeline no <em>Jenkins</em> que iniciasse o build de uma nova imagem atualizada, que por sua vez chamasse shell script e puppet para provisionamento e configuração desta imagem, em seguida o Jenkins poderia chamar o terraform para criar uma instância ou múltiplas instâncias em um cluster por trás de um load balancer utilizando a imagem que foi criada pelo Packer, etc..etc..etc.. Sua criatividade será o seu limite.</p>
+<p><strong>P</strong>ara confirmarmos que nosso código completo funcionou e que nossa imagem foi gerada com sucesso, você pode criar manualmente uma instância a partir do AWS com esta sua nova imagem.</p>
+<h2 id="testando-sua-imagem">Testando sua imagem</h2>
+<p>1- Efetue login em sua conta do AWS;</p>
+<p>2- Vá ao menu de Serviços/Services -&gt; Imagens/Images -&gt; AMIs;</p>
+<p>3- Na lista de imagens disponíveis, selecione a sua mais recente, para ter certeza de que está escolhendo a que foi criada por último, pois ela será a imagem que contém o deployment via puppet por completo (Repare a data de criação para ter certeza);</p>
+<p>4- Ao selecionar a imagem, clique em Lançar/Launch, conforme imagem abaixo:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-imagem-aws-ec2/packer_aws_image2.png"
+        data-srcset="/posts/criando-uma-imagem-aws-ec2/packer_aws_image2.png, /posts/criando-uma-imagem-aws-ec2/packer_aws_image2.png 1.5x, /posts/criando-uma-imagem-aws-ec2/packer_aws_image2.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-imagem-aws-ec2/packer_aws_image2.png"
+        title="Packer Image" width="700" height="373" /></p>
+<p>5- Selecione o tipo de instância padrão que pode ser utilizada gratuitamente para este exemplo, <em>t2.micro</em>, em seguida clique em <em>Próximo/Next</em>, conforme imagem abaixo:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-imagem-aws-ec2/packer_aws_image3.png"
+        data-srcset="/posts/criando-uma-imagem-aws-ec2/packer_aws_image3.png, /posts/criando-uma-imagem-aws-ec2/packer_aws_image3.png 1.5x, /posts/criando-uma-imagem-aws-ec2/packer_aws_image3.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-imagem-aws-ec2/packer_aws_image3.png"
+        title="Packer Image" width="800" height="259" /></p>
+<p>6- Na tela seguinte, deixe tudo como está <strong>exceto</strong> a opção de <em>Atribuir Ip Público/Auto-Assign Public IP</em>. Ative esta opção, em seguida clique em <em>Próximo</em>, conforme imagem abaixo:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-imagem-aws-ec2/packer_aws_image4.png"
+        data-srcset="/posts/criando-uma-imagem-aws-ec2/packer_aws_image4.png, /posts/criando-uma-imagem-aws-ec2/packer_aws_image4.png 1.5x, /posts/criando-uma-imagem-aws-ec2/packer_aws_image4.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-imagem-aws-ec2/packer_aws_image4.png"
+        title="Packer Image" width="900" height="292" /></p>
+<p>7- Na tela seguinte, pode manter o padrão de 8GB de disco/storage e clicar em <em>Próximo</em>;</p>
+<p>8- Na parte de Tags, pode novamente manter tudo vazio para este exemplo e clicar em <em>Próximo</em>;</p>
+<p>9- Nas configurações de Grupo de Segurança/Security Group, pode manter o padrão, mas certifique-se de <strong>inserir mais uma regra de firewall</strong> para que possamos testar o servidor web. Por padrão o AWS já apresentará a porta 22 (SSH) aberta, portanto vamos abrir também a porta 80, conforme imagem abaixo. Em seguida, clique em Revisar e Lançar/Review and Launch;</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-imagem-aws-ec2/packer_aws_image5.png"
+        data-srcset="/posts/criando-uma-imagem-aws-ec2/packer_aws_image5.png, /posts/criando-uma-imagem-aws-ec2/packer_aws_image5.png 1.5x, /posts/criando-uma-imagem-aws-ec2/packer_aws_image5.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-imagem-aws-ec2/packer_aws_image5.png"
+        title="Packer Image" width="1900" height="400" /></p>
+<p>10- Em seguida, confirme novamente e clique em <em>Lançar/Launch</em>;</p>
+<p>11- Uma janela popup será apresentada lhe perguntando se você deseja criar um par de chaves. Fica a seu critério. Caso deseje se conectar a esta instância via ssh, crie uma chave, do contrário, pode prosseguir sem criar uma chave. Como eu apenas quero testar se o servidor web estará rodando, e já abrimos a porta 80 no firewall, poderemos confirmar isto através de nosso navegador, portanto ignorarei a chave e clicarei em Lançar Instância/Launch Instance;</p>
+<p>12- O AWS lhe informará que sua instância está sendo criada. Como se trata de uma instância Linux, costuma ser um processo rápido, geralmente leva algo entre 1 e 2 minutos. Você pode ir para a página principal de instâncias e aguardar sua instância estar com status <em>running</em>;</p>
+<p>13- Copie o IP público ou externo que o AWS atribuiu à sua instância conforme imagem abaixo:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-imagem-aws-ec2/packer_aws_image6.png"
+        data-srcset="/posts/criando-uma-imagem-aws-ec2/packer_aws_image6.png, /posts/criando-uma-imagem-aws-ec2/packer_aws_image6.png 1.5x, /posts/criando-uma-imagem-aws-ec2/packer_aws_image6.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-imagem-aws-ec2/packer_aws_image6.png"
+        title="Packer Image" width="800" height="267" /></p>
+<p>14- Agora cole o ip em qualquer browser e você deverá ver uma página default do apache que está rodando em seu novo servidor web:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-imagem-aws-ec2/packer_aws_image7.png"
+        data-srcset="/posts/criando-uma-imagem-aws-ec2/packer_aws_image7.png, /posts/criando-uma-imagem-aws-ec2/packer_aws_image7.png 1.5x, /posts/criando-uma-imagem-aws-ec2/packer_aws_image7.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-imagem-aws-ec2/packer_aws_image7.png"
+        title="Packer Image" width="800" height="400" /></p>
+<p><strong>F</strong>inalizado.</p>
+<p><strong>L</strong>embre-se de excluir os recursos no AWS para evitar ser cobrado:</p>
+<ul>
+<li>Instâncias</li>
+<li>Volumes</li>
+<li>Imagens</li>
+<li>Security Groups</li>
+</ul>
+<p>&hellip; ou o que mais você tiver criado em seus testes caso não os vá mais utilizar.</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Atualizado em 2018-08-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Compartilhe em X" data-sharer="x" data-url="//blog.marcelocavalcante.net:1313/posts/criando-uma-imagem-aws-ec2/" data-title="Criando Uma Imagem Aws Ec2 Com Packer E Puppet" data-via="Marcelo_Kalib" data-hashtags="Devops,Packer,Cloud,Puppet,AWS"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Threads" data-sharer="threads" data-url="//blog.marcelocavalcante.net:1313/posts/criando-uma-imagem-aws-ec2/" data-title="Criando Uma Imagem Aws Ec2 Com Packer E Puppet"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Facebook" data-sharer="facebook" data-url="//blog.marcelocavalcante.net:1313/posts/criando-uma-imagem-aws-ec2/" data-hashtag="Devops"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Linkedin" data-sharer="linkedin" data-url="//blog.marcelocavalcante.net:1313/posts/criando-uma-imagem-aws-ec2/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Hacker News" data-sharer="hackernews" data-url="//blog.marcelocavalcante.net:1313/posts/criando-uma-imagem-aws-ec2/" data-title="Criando Uma Imagem Aws Ec2 Com Packer E Puppet"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Line" data-sharer="line" data-url="//blog.marcelocavalcante.net:1313/posts/criando-uma-imagem-aws-ec2/" data-title="Criando Uma Imagem Aws Ec2 Com Packer E Puppet"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em 微博" data-sharer="weibo" data-url="//blog.marcelocavalcante.net:1313/posts/criando-uma-imagem-aws-ec2/" data-title="Criando Uma Imagem Aws Ec2 Com Packer E Puppet"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Diaspora" data-sharer="diaspora" data-url="//blog.marcelocavalcante.net:1313/posts/criando-uma-imagem-aws-ec2/" data-title="Criando Uma Imagem Aws Ec2 Com Packer E Puppet" data-description="Um exemplo de como utilizar a ferramenta Open Source Packer para criar uma imagem de forma automatizada para AWS EC2 com Puppet e Bash script para provisionar as configurações da imagem/vm."><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=%2f%2fblog.marcelocavalcante.net%3a1313%2fposts%2fcriando-uma-imagem-aws-ec2%2f&amp;text=Criando%20Uma%20Imagem%20Aws%20Ec2%20Com%20Packer%20E%20Puppet" target="_blank" title="Compartilhe em Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/devops/">Devops</a>,&nbsp;<a href="/tags/packer/">Packer</a>,&nbsp;<a href="/tags/cloud/">Cloud</a>,&nbsp;<a href="/tags/puppet/">Puppet</a>,&nbsp;<a href="/tags/aws/">AWS</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Voltar</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/automatizando-a-criacao-de-imagens/" class="prev" rel="prev" title="Automatizando a Criacao De Imagens Com Packer"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Automatizando a Criacao De Imagens Com Packer</a>
+            <a href="/posts/infraestrutura-como-codigo-com-terraform/" class="next" rel="next" title="Infraestrutura como Código com Terraform">Infraestrutura como Código com Terraform<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Possibilitado por <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Tema - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2008 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://blog.marcelocavalcante.net" target="_blank">Marcelo Cavalcante</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Voltar ao topo">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="Ver comentários">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.20.2/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+</html>

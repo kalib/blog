@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Terraform: Criando uma infraestrutura no Google Cloud - Marcelo Cavalcante Rocha</title><meta name="Description" content="Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código. Criando infraestrutura na nuvem GCP, do Google."><meta property="og:url" content="//blog.marcelocavalcante.net:1313/posts/terraform-criando-uma-infraestrutura-no/">
+  <meta property="og:site_name" content="Marcelo Cavalcante Rocha">
+  <meta property="og:title" content="Terraform: Criando uma infraestrutura no Google Cloud">
+  <meta property="og:description" content="Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código. Criando infraestrutura na nuvem GCP, do Google.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2018-11-24T21:04:44-05:00">
+    <meta property="article:modified_time" content="2018-11-24T21:04:44-05:00">
+    <meta property="article:tag" content="Devops">
+    <meta property="article:tag" content="Terraform">
+    <meta property="article:tag" content="Cloud">
+    <meta property="article:tag" content="GCP">
+    <meta property="article:tag" content="Docker">
+    <meta property="article:tag" content="Kubernetes">
+    <meta property="og:image" content="//blog.marcelocavalcante.net:1313/posts/terraform-criando-uma-infraestrutura-no/featured-image.jpeg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="//blog.marcelocavalcante.net:1313/posts/terraform-criando-uma-infraestrutura-no/featured-image.jpeg">
+  <meta name="twitter:title" content="Terraform: Criando uma infraestrutura no Google Cloud">
+  <meta name="twitter:description" content="Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código. Criando infraestrutura na nuvem GCP, do Google.">
+<meta name="application-name" content="Marcelo Cavalcante">
+<meta name="apple-mobile-web-app-title" content="Marcelo Cavalcante">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="//blog.marcelocavalcante.net:1313/posts/terraform-criando-uma-infraestrutura-no/" /><link rel="prev" href="//blog.marcelocavalcante.net:1313/posts/terraform-variaveis-e-outputs/" /><link rel="next" href="//blog.marcelocavalcante.net:1313/posts/de-volta-com-novo-visual/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Terraform: Criando uma infraestrutura no Google Cloud",
+        "inLanguage": "pt-BR",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/\/blog.marcelocavalcante.net:1313\/posts\/terraform-criando-uma-infraestrutura-no\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/terraform-criando-uma-infraestrutura-no\/featured-image.jpeg",
+                            "width":  1400 ,
+                            "height":  933 
+                        }],"genre": "posts","keywords": "Devops, Terraform, Cloud, GCP, Docker, Kubernetes","wordcount":  4971 ,
+        "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/terraform-criando-uma-infraestrutura-no\/","datePublished": "2018-11-24T21:04:44-05:00","dateModified": "2018-11-24T21:04:44-05:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Marcelo Cavalcante"
+            },"description": "Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código. Criando infraestrutura na nuvem GCP, do Google."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'auto';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categorias </a><a class="menu-item" href="/sobre/"> Quem Sou </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancelar
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categorias</a><a class="menu-item" href="/sobre/" title="">Quem Sou</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Conteúdos</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Terraform: Criando uma infraestrutura no Google Cloud</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://blog.marcelocavalcante.net" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Marcelo Cavalcante</a></span>&nbsp;<span class="post-category">incluido em <a href="/categories/tutoriais/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutoriais</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2018-11-24">2018-11-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4971 palavras&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;24 minutos&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/terraform-criando-uma-infraestrutura-no/featured-image.jpeg"
+        data-srcset="/posts/terraform-criando-uma-infraestrutura-no/featured-image.jpeg, /posts/terraform-criando-uma-infraestrutura-no/featured-image.jpeg 1.5x, /posts/terraform-criando-uma-infraestrutura-no/featured-image.jpeg 2x"
+        data-sizes="auto"
+        alt="/posts/terraform-criando-uma-infraestrutura-no/featured-image.jpeg"
+        title="Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código. Criando infraestrutura na nuvem GCP, do Google." /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Conteúdos</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-introdução">1 Introdução</a></li>
+    <li><a href="#2-gcp---google-cloud-platform">2 GCP - Google Cloud Platform</a>
+      <ul>
+        <li><a href="#21-cadastro">2.1 Cadastro</a></li>
+        <li><a href="#22-criando-uma-conta-de-serviço-ou-service-account">2.2 Criando uma conta de serviço ou service account</a></li>
+        <li><a href="#23-google-cloud-sdk">2.3 Google Cloud SDK</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-terraform">3 Terraform</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>Q</strong>uando se fala em infraestrutura como código imagina-se algo mais complexo do que simplesmente um container docker rodando uma aplicação, certo?! O propósito deste post é justamente criar uma infraestrutura um pouco mais complexa e completa no GCP, <em>Google Cloud Platform</em>. Embora o Terraform possua integração com diversos provedores de computação em nuvem, utilizarei o Google Cloud para este post por estar trabalhando mais com GCP atualmente e estar gostando da experiência.</p>
+<h2 id="1-introdução">1 Introdução</h2>
+<p><strong>U</strong>ma vez que não entrarei em tantos detalhes básicos do Terraform neste post, espero que você já possua algum conhecimento básico sobre o mesmo bem como entenda como funcionam seus <em>resources</em>, <em>variables</em>, etc. Do contrário, recomendo <strong>fortemente</strong> que você volte um pouco e leia meus posts anteriores nesta respectiva ordem:</p>
+<ul>
+<li><a href="/posts/infraestrutura-como-codigo-com-terraform/" rel="">Infraestrutura como Código com Terraform</a></li>
+<li><a href="/posts/introducao-ao-terraform/" rel="">Introdução ao Terraform</a></li>
+<li><a href="/posts/terraform-variaveis-e-outputs/" rel="">Terraform: Variáveis e Outputs</a></li>
+</ul>
+<p><strong>A</strong>ssumindo que você já possui algum conhecimento básico sobre Terraform, chegou a hora de inciarmos o nosso pequeno projeto de infraestrutura como código.</p>
+<h2 id="2-gcp---google-cloud-platform">2 GCP - Google Cloud Platform</h2>
+<p><figure><a class="lightgallery" href="/posts/terraform-criando-uma-infraestrutura-no/gcloud.png" title="Google Cloud Platform" data-thumbnail="/posts/terraform-criando-uma-infraestrutura-no/gcloud.png" data-sub-html="<h2>Google Cloud Platform</h2><p>Google Cloud Platform</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/posts/terraform-criando-uma-infraestrutura-no/gcloud.png"
+            data-srcset="/posts/terraform-criando-uma-infraestrutura-no/gcloud.png, /posts/terraform-criando-uma-infraestrutura-no/gcloud.png 1.5x, /posts/terraform-criando-uma-infraestrutura-no/gcloud.png 2x"
+            data-sizes="auto"
+            alt="/posts/terraform-criando-uma-infraestrutura-no/gcloud.png" width="350" height="163" />
+    </a><figcaption class="image-caption">Google Cloud Platform</figcaption>
+    </figure>
+<strong>G</strong>oogle Cloud Platform, ou GCP, é uma suíte de computação em nuvem oferecida pelo Google, funcionando na mesma infraestrutura que a empresa utiliza para seus produtos dirigidos aos usuários, dentre eles o buscador Google e o Youtube. Juntamente com um conjunto de ferramentas de gerenciamento modulares, o GCP fornece uma série de serviços incluindo computação, armazenamento de dados, análise de dados, machine learning, containers, etc.</p>
+<p><strong>N</strong>ovamente, o motivo pelo qual optei por utilizar GCP para este pequeno projeto foi simplesmente o fato de eu estar trabalhando mais com GCP em meu dia a dia atual, mas nada impede que você utilize AWS ou Microsoft Azure, por exemplo. Embora a sintaxe e o código Terraform deverá ser ajustado para tais plataformas caso decida utilizá-las.</p>
+<p><strong>O</strong>utro motivo interessante é o plano gratuito oferecido pelo Google, o que facilita nossos estudos e experimentos. O GCP nos oferece 1 ano de utilização grátis OU $300 dólares em créditos, o que ocorrer primeiro. De uma forma ou de outra, isto será muito mais que o suficiente para a execução deste nosso projeto.</p>
+<p><strong>A</strong>lém das duas razões já citadas, a integração e facilidade de criação de uma nova conta no GCP foi levada em conta para esta escolha. O fato de o gmail e demais serviços do Google serem amplamente utilizados, é bem provável que você possua um email do Google (gmail, por exemplo), certo!? Se este é o caso, você já possui uma &ldquo;pré-conta&rdquo; no GCP sem ao menos saber.</p>
+<h3 id="21-cadastro">2.1 Cadastro</h3>
+<p><strong>S</strong>e você possui uma conta do Google, autentique-se com a mesma. Caso não possua uma, você poderá criar uma através do Gmail, por exemplo, ou criar diretamente na interface do Google Cloud durante o cadastro.</p>
+<p>1-   Uma vez logado com sua conta do Google, acesse em seu navegador o seguinte endereço: <a href="https://cloud.google.com" target="_blank" rel="noopener noreffer ">Google Cloud Console</a></p>
+<p>2-   Caso esteja logado com sua conta do Google, verá sua foto ou imagem de conta no canto superior direito da página conforme na imagem a seguir. Clique em <em>Try free</em> ou Experimente Gratuitamente;</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/terraform-criando-uma-infraestrutura-no/gcloud1.png"
+        data-srcset="/posts/terraform-criando-uma-infraestrutura-no/gcloud1.png, /posts/terraform-criando-uma-infraestrutura-no/gcloud1.png 1.5x, /posts/terraform-criando-uma-infraestrutura-no/gcloud1.png 2x"
+        data-sizes="auto"
+        alt="/posts/terraform-criando-uma-infraestrutura-no/gcloud1.png"
+        title="Google Cloud Platform" width="640" height="400" /></p>
+<p>3-   Você cairá na primeira página do cadastro. Informe seu País, leia e concorde com os termos de uso caso deseje seguir e em seguida clique em Concordar e Continuar;</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/terraform-criando-uma-infraestrutura-no/gcloud2.png"
+        data-srcset="/posts/terraform-criando-uma-infraestrutura-no/gcloud2.png, /posts/terraform-criando-uma-infraestrutura-no/gcloud2.png 1.5x, /posts/terraform-criando-uma-infraestrutura-no/gcloud2.png 2x"
+        data-sizes="auto"
+        alt="/posts/terraform-criando-uma-infraestrutura-no/gcloud2.png"
+        title="Google Cloud Platform" width="640" height="400" /></p>
+<p>4-   Após confirmar e validar todas as informações que eles pedem na etapa 2, clique em Iniciar minha avaliação gratuita;</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/terraform-criando-uma-infraestrutura-no/gcloud3.png"
+        data-srcset="/posts/terraform-criando-uma-infraestrutura-no/gcloud3.png, /posts/terraform-criando-uma-infraestrutura-no/gcloud3.png 1.5x, /posts/terraform-criando-uma-infraestrutura-no/gcloud3.png 2x"
+        data-sizes="auto"
+        alt="/posts/terraform-criando-uma-infraestrutura-no/gcloud3.png"
+        title="Google Cloud Platform" width="640" height="400" /></p>
+<p><strong>E</strong>m poucos segundos você deverá cair no painel ou <em>dashboard</em> principal do GCP, com um popup de boas vindas com alguma mensagem de boas vindas: &ldquo;Olá, Marcelo, Agradecemos por você se inscrever na avaliação gratuita de 12 meses. Demos US$ 300 de crédito grátis para você gastar. Não se preocupe se o crédito acabar, você só receberá cobranças se tivermos sua permissão.&rdquo;</p>
+<p><strong>E</strong>ste é outro fator interessante do GCP. Durante este período de avaliação, você não corre o risco de ser cobrado caso utilize mais do que deveria por descuido. Uma vez que o período de 12 meses, ou o crédito de $300 tenha se esgotado, você será notificado e deverá encerrar sua conta ou confirmar que deseja continuar utilizando os serviços, autorizando assim o Google a lhe efetuar cobranças a partir deste momento.</p>
+<p><strong>O</strong> painel principal se parecerá com este:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/terraform-criando-uma-infraestrutura-no/gcloud4.png"
+        data-srcset="/posts/terraform-criando-uma-infraestrutura-no/gcloud4.png, /posts/terraform-criando-uma-infraestrutura-no/gcloud4.png 1.5x, /posts/terraform-criando-uma-infraestrutura-no/gcloud4.png 2x"
+        data-sizes="auto"
+        alt="/posts/terraform-criando-uma-infraestrutura-no/gcloud4.png"
+        title="Google Cloud Platform" width="640" height="400" /></p>
+<p><strong>C</strong>onforme a imagem abaixo, através do Menu principal que se encontra na lateral esquerda, clique em <strong>IAM e Admin</strong>, e em seguida em <strong>Gerenciar recursos</strong>.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/terraform-criando-uma-infraestrutura-no/gcloud5.png"
+        data-srcset="/posts/terraform-criando-uma-infraestrutura-no/gcloud5.png, /posts/terraform-criando-uma-infraestrutura-no/gcloud5.png 1.5x, /posts/terraform-criando-uma-infraestrutura-no/gcloud5.png 2x"
+        data-sizes="auto"
+        alt="/posts/terraform-criando-uma-infraestrutura-no/gcloud5.png"
+        title="Google Cloud Platform" width="640" height="400" /></p>
+<p><strong>V</strong>ocê receberá uma listagem inicial de seus recursos. Por padrão, quando se cria uma nova conta no GCP, apenas um projeto inicial é criado, chamado My First Project, sem qualquer recurso vinculado ou inserido no mesmo.</p>
+<h3 id="22-criando-uma-conta-de-serviço-ou-service-account">2.2 Criando uma conta de serviço ou service account</h3>
+<p>Embora seja possível e permitido utilizar-se de uma conta pessoal para este tipo de tarefa, não é o mais indicado. O ideal é deixar serviços utilizarem contas específicas, as chamadas service accounts. Uma vez que utilizaremos o Terraform para criar nossos recursos na nuvem, ele não deixa de funcionar como um serviço, não sendo uma pessoa XYZ de um departamento qualquer de uma empresa.</p>
+<p>1-   No menu principal da lateral esquerda, clique em <strong>IAM e Admin</strong>, em seguida em <strong>Contas de serviço</strong>, conforme na imagem abaixo:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/terraform-criando-uma-infraestrutura-no/gcloud7.png"
+        data-srcset="/posts/terraform-criando-uma-infraestrutura-no/gcloud7.png, /posts/terraform-criando-uma-infraestrutura-no/gcloud7.png 1.5x, /posts/terraform-criando-uma-infraestrutura-no/gcloud7.png 2x"
+        data-sizes="auto"
+        alt="/posts/terraform-criando-uma-infraestrutura-no/gcloud7.png"
+        title="Google Cloud Platform" width="640" height="400" /></p>
+<p>2-   Na tela de Contas de serviço, clique em <strong>Criar conta de serviço</strong>;</p>
+<p>3-   Indique o nome <strong>terraform</strong> para esta conta, conforme imagem abaixo, e clique em <strong>CRIAR</strong>;</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/terraform-criando-uma-infraestrutura-no/gcloud8.png"
+        data-srcset="/posts/terraform-criando-uma-infraestrutura-no/gcloud8.png, /posts/terraform-criando-uma-infraestrutura-no/gcloud8.png 1.5x, /posts/terraform-criando-uma-infraestrutura-no/gcloud8.png 2x"
+        data-sizes="auto"
+        alt="/posts/terraform-criando-uma-infraestrutura-no/gcloud8.png"
+        title="Google Cloud Platform" width="640" height="400" /></p>
+<p>4-   No passo 2, daremos um papel para esta conta de serviço. Aqui indicaremos quais permissões ela terá. Para facilitar nosso exercício, utilizaremos <strong>Projeto</strong> &gt; <strong>Proprietário</strong>, significando que nossa conta de serviço terá todas as permissões em nosso projeto, podendo criar ou destruir qualquer tipo de recurso.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/terraform-criando-uma-infraestrutura-no/gcloud9.png"
+        data-srcset="/posts/terraform-criando-uma-infraestrutura-no/gcloud9.png, /posts/terraform-criando-uma-infraestrutura-no/gcloud9.png 1.5x, /posts/terraform-criando-uma-infraestrutura-no/gcloud9.png 2x"
+        data-sizes="auto"
+        alt="/posts/terraform-criando-uma-infraestrutura-no/gcloud9.png"
+        title="Google Cloud Platform" width="640" height="400" /></p>
+<p>5-   Em seguida, clicaremos em <strong>Continuar</strong> para seguir com a criação de nossa conta de serviço;</p>
+<p>6-   Na tela seguinte lhe será dada a opção de dar permissões para algum usuário que possa precisar utilizar-se desta conta de serviço para criar recursos. Você pode inserir neste campo o seu usuário principal do google cloud, o qual será o seu email que foi utilizado para criar esta conta no GCP. Insira-o em <em>Papel de usuários da conta de serviço</em>. Em seguida, clique no botão de <em>Criar Chave</em> que se encontra logo abaixo. Esta será a chave criptografada que utilizaremos para comunicação segura com o GCP;</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/terraform-criando-uma-infraestrutura-no/gcloud10.png"
+        data-srcset="/posts/terraform-criando-uma-infraestrutura-no/gcloud10.png, /posts/terraform-criando-uma-infraestrutura-no/gcloud10.png 1.5x, /posts/terraform-criando-uma-infraestrutura-no/gcloud10.png 2x"
+        data-sizes="auto"
+        alt="/posts/terraform-criando-uma-infraestrutura-no/gcloud10.png"
+        title="Google Cloud Platform" width="640" height="400" /></p>
+<p>7-   Lhe será perguntado em que formato você deseja slavar a chave. Escolha o formato JSON e clique em <strong>CRIAR</strong>;</p>
+<p>8-   Escolha com atenção o local onde salvará esta chave, pois você não poderá baixá-la novamente e precisaremos da mesma posteriormente;</p>
+<p><strong>OBS:</strong> Para facilitar este exemplo, estarei salvando a chave no mesmo diretório no qual criaremos o código de nosso projeto. Caso você decida fazer o mesmo, e decida hospedar este código em alguma espécie de repositório git, por exemplo, lembre-se de <strong>sempre</strong> incluir esta e outras chaves ou dados sigilosos em seu <em>.gitignore</em>, para que este tipo de arquivo com informações confidenciais não seja enviado para o repositório juntamente com o código. =) (Sim, já vi pessoas hospedando chaves em repositórios git e tendo sérios problemas. Sim, é você mesmo. :p)</p>
+<h3 id="23-google-cloud-sdk">2.3 Google Cloud SDK</h3>
+<p><strong>U</strong>m dos nossos pré-requisitos será o Google Cloud SDK, que possui um conjunto de ferramentas via linha de comando que nos permitem interagir com o Google Cloud remotamente através de APIs. O Terraform também fará uso desta ferramenta.</p>
+<p><strong>P</strong>ara o funcionamento do gcloud SDK precisaremos também possuir o Python instalado, na versão 2.7. Você poderá confirmar a sua versão do python executando <em>python -V</em> em algum console ou terminal.</p>
+<p><strong>I</strong>nformações detalhadas sobre como instalar o Gcloud SDK encontram-se com excelentes detalhes nas páginas oficiais do Google, listadas abaixo:</p>
+<ul>
+<li>
+<p>Para Linux (genérico): <a href="https://cloud.google.com/sdk/docs/quickstart-linux" target="_blank" rel="noopener noreffer ">Aqui</a></p>
+</li>
+<li>
+<p>Para Linux (Debian e Ubuntu): <a href="https://cloud.google.com/sdk/docs/quickstart-debian-ubuntu" target="_blank" rel="noopener noreffer ">Aqui</a></p>
+</li>
+<li>
+<p>Para Linux (Red Hat e CentOS): <a href="https://cloud.google.com/sdk/docs/quickstart-redhat-centos" target="_blank" rel="noopener noreffer ">Aqui</a></p>
+</li>
+<li>
+<p>Para Mac OS X: <a href="https://cloud.google.com/sdk/docs/quickstart-macos" target="_blank" rel="noopener noreffer ">Aqui</a></p>
+</li>
+<li>
+<p>Para Windows: <a href="https://cloud.google.com/sdk/docs/quickstart-windows" target="_blank" rel="noopener noreffer ">Aqui</a></p>
+</li>
+</ul>
+<p><strong>É</strong> importante lembrar de reiniciar o seu terminal ou console após a instalação.</p>
+<p><strong>P</strong>ara certificar-se de que a instalação foi realizada com sucesso, execute:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ gcloud --version
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Google Cloud SDK 225.0.0
+</span></span><span class="line"><span class="cl">bq 2.0.37
+</span></span><span class="line"><span class="cl">core 2018.11.09
+</span></span><span class="line"><span class="cl">gsutil 4.34</span></span></code></pre></div></div>
+<p><strong>S</strong>e você recebeu informações referentes à versão do Google Cloud SDK, significa que a instalação foi bem sucedida. O próximo passo é autenticar-se com sua conta do google através do SDK. Execute <em>gcloud init</em>. O seu navegador deverá abrir automaticamente lhe pedindo a autenticação de sua conta do Google após você confirmar com um <em>Y</em> a solicitação no console ou terminal.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ gcloud init
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Welcome! This <span class="nb">command</span> will take you through the configuration of gcloud.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Your current configuration has been <span class="nb">set</span> to: <span class="o">[</span>default<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">You can skip diagnostics next <span class="nb">time</span> by using the following flag:
+</span></span><span class="line"><span class="cl">  gcloud init --skip-diagnostics
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Network diagnostic detects and fixes <span class="nb">local</span> network connection issues.
+</span></span><span class="line"><span class="cl">Checking network connection...done.
+</span></span><span class="line"><span class="cl">Reachability Check passed.
+</span></span><span class="line"><span class="cl">Network diagnostic passed <span class="o">(</span>1/1 checks passed<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">You must log in to <span class="k">continue</span>. Would you like to log in <span class="o">(</span>Y/n<span class="o">)</span>?</span></span></code></pre></div></div>
+<p><strong>C</strong>aso ao inserir um <em>Y</em>, o seu navegador não lhe solicite a autenticação do Google, copie e cole a longa URL que lhe será apresentada.</p>
+<p><strong>A</strong> solicitação de autenticação será similar à esta:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/terraform-criando-uma-infraestrutura-no/gcloud6.png"
+        data-srcset="/posts/terraform-criando-uma-infraestrutura-no/gcloud6.png, /posts/terraform-criando-uma-infraestrutura-no/gcloud6.png 1.5x, /posts/terraform-criando-uma-infraestrutura-no/gcloud6.png 2x"
+        data-sizes="auto"
+        alt="/posts/terraform-criando-uma-infraestrutura-no/gcloud6.png"
+        title="Google Cloud Platform" width="640" height="400" /></p>
+<p><strong>A</strong>o finalizar sua autenticação no navegador, você receberá mais uma pergunta em seu terminal ou console. O SDK lhe indicará o seu projeto e lhe perguntará se você quer utilizá-lo ou criar um novo. Vamos escolher a opção <em>1</em>, para utilizar o projeto que foi criado automaticamente e em seguida confirmar com um Enter:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Your browser has been opened to visit:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    https://accounts.google.com/o/oauth2/auth?reblablabalblablaba<span class="o">=</span>http%3A%2F%2Flocalhost%3A8085%2F<span class="p">&amp;</span><span class="nv">prompt</span><span class="o">=</span>select_account<span class="p">&amp;</span>response_typereblablabalblablabauid.apps.googleusercontent.com<span class="p">&amp;</span><span class="nv">scope</span><span class="o">=</span>https%3A%2F%2Fwww.googleapis.com%reblablabalblablabaemreblablabalblablabaw.gooreblablabalblablaba%2Fauth%2Fclreblablabalblablaba%2Fwwwreblablabalblablabacomreblablabalblablabaappenreblablabalblablabattpsreblablabalblablabaww.reblablabalblablabaleapis.com%2Fauthreblablabalblablabattps%3A%2F%2Fwww.googleapis.com%2Fauthreblablabalblablaba<span class="p">&amp;</span><span class="nv">access_type</span><span class="o">=</span>offline
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">You are logged in as: <span class="o">[</span>marcelo@marceloemail.net<span class="o">]</span>.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Pick cloud project to use:
+</span></span><span class="line"><span class="cl"> <span class="o">[</span>1<span class="o">]</span> possible-sun-meuid
+</span></span><span class="line"><span class="cl"> <span class="o">[</span>2<span class="o">]</span> Create a new project
+</span></span><span class="line"><span class="cl">Please enter numeric choice or text value <span class="o">(</span>must exactly match list
+</span></span><span class="line"><span class="cl">item<span class="o">)</span>:</span></span></code></pre></div></div>
+<p><strong>O</strong> SDK finalizará o setup e lhe informará que o projeto está pronto para ser utilizado.</p>
+<h2 id="3-terraform">3 Terraform</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/terraform-criando-uma-infraestrutura-no/terraform_badge.png"
+        data-srcset="/posts/terraform-criando-uma-infraestrutura-no/terraform_badge.png, /posts/terraform-criando-uma-infraestrutura-no/terraform_badge.png 1.5x, /posts/terraform-criando-uma-infraestrutura-no/terraform_badge.png 2x"
+        data-sizes="auto"
+        alt="/posts/terraform-criando-uma-infraestrutura-no/terraform_badge.png"
+        title="Terraform" width="120" height="129" /></p>
+<p><strong>V</strong>amos ao que interessa agora. Antes de iniciarmos nosso código, crie um diretório chamado <em>terraform-gcp</em>, ou algo de sua preferência. Dentro deste diretório apenas teremos por enquanto o arquivo JSON que baixamos do GCP com as credenciais de nossa conta de serviço.</p>
+<p><strong>C</strong>riaremos agora nosso primeiro arquivo terraform.</p>
+<p><strong>C</strong>omecemos criando nosso arquivo de variáveis, o qual por enquanto conterá apenas 2 variáveis para começarmos nosso código. Crie o arquivo <em>variables.tf</em> com o seguinte conteúdo:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-terraform">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-terraform" data-lang="terraform"><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;project_id&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">type</span>    = <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">default</span> = <span class="s2">&#34;possible-sun-83482736&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;regiao&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">type</span> = <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">default</span> = <span class="s2">&#34;northamerica-northeast1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>OBS:</strong> Lembre-se de alterar o valor default da variável <em>project_id</em>. Eu inseri aqui o id do projeto que foi criado para mim pelo GCP automaticamente. O id do seu projeto deverá ser o mesmo fornecido a você pelo GCP.</p>
+<p><strong>O</strong>utra coisa importante é lembrar que estou assumindo que você já possui algum conhecimento básico sobre como o Terraform funciona, ou que leu meus posts anteriores sobre o assunto, de forma que não estarei aqui entrando em tantos detalhes explicativos sobre cada arquivo, conforme fiz nos anteriores.</p>
+<p><strong>E</strong>m nosso arquivo <em>variables.tf</em>, por enquanto, criamos apenas duas variáveis: <em>project_id</em> e <em>regiao</em>. Para quem já utilizou algum serviço de computação em nuvem, seja GCP, AWS, Azure, etc., isto pode soar familiar. Sempre que se deseja criar recursos na nuvem, devemos optar por alguma região disponível no provedor de escolha. Estou optando por utilizar <em>northamerica-northeast1</em> pelo fato de eu morar em Toronto, e esta ser a região mais próxima, mas sinta-se livre para optar por qualquer região disponível no GCP conforme <a href="https://cloud.google.com/compute/docs/regions-zones/" target="_blank" rel="noopener noreffer ">lista fornecida aqui</a>.</p>
+<p><strong>E</strong>m seguida criaremos nosso arquivo <em>main.tf</em> que, inicialmente, possuirá apenas o seguinte:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-terraform">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-terraform" data-lang="terraform"><span class="line"><span class="cl"><span class="c1"># Configura o projeto GCP
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">provider</span> <span class="s2">&#34;google&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">credentials</span> = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">file</span><span class="p">(</span><span class="s2">&#34;possible-sun-83482736-sabh45jhb2345ghv.json&#34;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">project</span>     = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">project_id</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">region</span>      = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">regiao</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>A</strong>qui estamos apenas informando ao Terraform que utilizaremos o <em>google</em> como provedor ou <em>provider</em>. Para nos conectarmos com o <em>provider</em> precisamos passar nossas credenciais e para tal estamos apontando o arquivo ou <em>file</em> que baixamos do GCP com as informações de nossa conta de serviço. Aqui estou passando apenas o nome do arquivo, pois o mesmo se encontra no mesmo diretório onde se encontra meu código.</p>
+<p><strong>A</strong>lém da credencial, estamos também informando qual o nome do projeto que utilizaremos no GCP bem como a região na qual estaremos trabalhando. Ambos os valores estão sendo trazidos do arquivo <em>variables.tf</em>. Aqui apenas invocamos as variáveis. (Novamente: Se esta invocação das variáveis lhe parece confusa, significa que não leu o post anterior, onde expliquei o básico sobre uso de variáveis no Terraform. Volte uma casa!)</p>
+<p><strong>C</strong>om ambos os arquivos criados, podemos iniciar a execução de nosso projeto. Neste momento, nosso código não fará nada além de permitir que o Terraform consiga se conectar ao GCP e validar que nossa conta e projeto de fato existem. Executemos <em>terraform init</em> para ver se está tudo certo:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform init
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Initializing provider plugins...
+</span></span><span class="line"><span class="cl">- Checking <span class="k">for</span> available provider plugins on https://releases.hashicorp.com...
+</span></span><span class="line"><span class="cl">- Downloading plugin <span class="k">for</span> provider <span class="s2">&#34;google&#34;</span> <span class="o">(</span>1.19.1<span class="o">)</span>...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">The following providers <span class="k">do</span> not have any version constraints in configuration,
+</span></span><span class="line"><span class="cl">so the latest version was installed.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">To prevent automatic upgrades to new major versions that may contain breaking
+</span></span><span class="line"><span class="cl">changes, it is recommended to add <span class="nv">version</span> <span class="o">=</span> <span class="s2">&#34;...&#34;</span> constraints to the
+</span></span><span class="line"><span class="cl">corresponding provider blocks in configuration, with the constraint strings
+</span></span><span class="line"><span class="cl">suggested below.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">* provider.google: <span class="nv">version</span> <span class="o">=</span> <span class="s2">&#34;~&gt; 1.19&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform has been successfully initialized!
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">You may now begin working with Terraform. Try running <span class="s2">&#34;terraform plan&#34;</span> to see
+</span></span><span class="line"><span class="cl">any changes that are required <span class="k">for</span> your infrastructure. All Terraform commands
+</span></span><span class="line"><span class="cl">should now work.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">If you ever <span class="nb">set</span> or change modules or backend configuration <span class="k">for</span> Terraform,
+</span></span><span class="line"><span class="cl">rerun this <span class="nb">command</span> to reinitialize your working directory. If you forget, other
+</span></span><span class="line"><span class="cl">commands will detect it and remind you to <span class="k">do</span> so <span class="k">if</span> necessary.</span></span></code></pre></div></div>
+<p><strong>A</strong>o que parece, o nosso <em>state</em> do Terraform foi iniciado com sucesso e tudo parece correto. Vamos tentar criar nosso plano de execução agora com <em>terraform plan</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform plan
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Refreshing Terraform state in-memory prior to plan...
+</span></span><span class="line"><span class="cl">The refreshed state will be used to calculate this plan, but will not be
+</span></span><span class="line"><span class="cl">persisted to <span class="nb">local</span> or remote state storage.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">No changes. Infrastructure is up-to-date.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">This means that Terraform did not detect any differences between your
+</span></span><span class="line"><span class="cl">configuration and real physical resources that exist. As a result, no
+</span></span><span class="line"><span class="cl">actions need to be performed.</span></span></code></pre></div></div>
+<p><strong>T</strong>udo parece correto e, assim como dito anteriormente, o Terraform também nos informa que tudo está atualizado e que nenhuma ação precisa ser realizada, afinal não indicamos nada a ser criado, nenhum recurso. Apenas indicamos que utilizaremos um determinado projeto em uma determinada região, e tal projeto já existe no GCP.</p>
+<p><strong>V</strong>amos então iniciar a criação de nossa infraestrutura básica. Iniciemos criando uma VM simples.</p>
+<p><strong>Q</strong>uando falamos em VMs na nuvem, existem alguns atributos importantes que devemos levar em conta antes de criar a mesma:</p>
+<ul>
+<li>Nome: Nossa VM precisa ter um nome;</li>
+<li>Tipo de máquina: Quando se decide comprar um novo servidor para sua empresa, você terá diversas máquinas disponíveis a venda, algumas com mais memória, outras com menos, CPU, Disco, etc. Da mesma forma funcionam VMs em um ambiente de nuvem como o GCP. Precisamos determinar o tipo de VM que queremos;</li>
+<li>Zona: Todo provedor na nuvem ou <em>cloud</em> possui diversas zonas ou regiões disponíveis espalhadas pelo globo, portanto devemos sempre informar onde queremos rodar nossos recursos;</li>
+<li>Imagem: Assim como fazemos com um servidor físico, sempre devemos escolher uma imagem ou Sistema Operacional para ser instalado em nossa VM;</li>
+</ul>
+<p><strong>U</strong>ma vez que tenhamos iuma listagem básica de algumas variáveis importantes para nossa VM, vamos inserí-las em nosso arquivo <em>variables.tf</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-terraform">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-terraform" data-lang="terraform"><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;project_id&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">type</span>    = <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">default</span> = <span class="s2">&#34;possible-sun-83482736&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;regiao&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">type</span> = <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">default</span> = <span class="s2">&#34;northamerica-northeast1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;nome&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">type</span> = <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">default</span> = <span class="s2">&#34;vm-webserver&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;tipo_maquina&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">type</span> = <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">default</span> = <span class="s2">&#34;f1-micro&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;zona&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">type</span> = <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">default</span> = <span class="s2">&#34;northamerica-northeast1-a&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;imagem&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">type</span> = <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">default</span> = <span class="s2">&#34;debian-cloud/debian-9&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>A</strong>qui criamos 4 novas variáveis. Daremos um nome (vm-webserver) para nossa VM, um tipo de máquina (f1-micro), uma zona (em meu caso utilizarei northamerica-northamerica1-a por ser a mais próxima de mim, mas sinta-se livre para utilizar a que melhor lhe servir) e uma imagem (debian-cloud/debian-9, a qual faz parte da enorme lista de imagens disponíveis no Google).</p>
+<p>Agora que temos nossas variáveis definidas, vamos editar o arquivo <em>main.tf</em> para criar nossos recursos para a VM:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-terraform">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-terraform" data-lang="terraform"><span class="line"><span class="cl"><span class="c1"># Configura o projeto GCP
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">provider</span> <span class="s2">&#34;google&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">credentials</span> = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">file</span><span class="p">(</span><span class="s2">&#34;possible-sun-83482736-sabh45jhb2345ghv.json&#34;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">project</span>     = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">project_id</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">region</span>      = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">regiao</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1"># Cria a VM com o Google Compute Engine
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">resource</span> <span class="s2">&#34;google_compute_instance&#34;</span> <span class="s2">&#34;webserver&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">name</span>          = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">nome</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">machine_type</span>  = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">tipo_maquina</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">zone</span>          = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">zona</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">boot_disk</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">initialize_params</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="na">image</span> = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">imagem</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">  # Instala o servidor web Apache
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">metadata_startup_script</span> = <span class="s2">&#34;sudo apt-get update; sudo apt-get install apache2 -y; echo Testando &gt; /var/www/html/index.html&#34;</span><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">  # Habilita rede para a VM bem como um IP público
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">network_interface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="na">network</span> = <span class="s2">&#34;default&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">access_config</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>A</strong>qui inserimos um <em>resource</em> de tipo <em>google_compute_instance</em> para criar nossa VM e nele passamos os detalhes de nossa VM, tais como nome, tipo de máquina, zona e rede.</p>
+<p><strong>E</strong>stamos também utilizando a propriedade <em>metadata_startup_script</em>, na qual o Terraform nos permite utilizar o recurso de script de inicialização do Google Cloud. Este parâmetro nos permite executar um script logo que a VM é criada, portanto podemos automatizar qualquer setup inicial de nossa VM através deste recurso. Neste exemplo estaremos apenas atualizando os repositórios de nosso Debian e instalando um servidor web Apache para nosso teste.</p>
+<p><strong>A</strong>gora que temos nossos arquivos <em>variables.tf</em> e <em>main.tf</em> atualizados, vamos executar novamente <em>terraform plan</em> para ver o que aconteceria com nossa infraestrutura:</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform plan
+</span></span><span class="line"><span class="cl">Refreshing Terraform state in-memory prior to plan...
+</span></span><span class="line"><span class="cl">The refreshed state will be used to calculate this plan, but will not be
+</span></span><span class="line"><span class="cl">persisted to <span class="nb">local</span> or remote state storage.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">An execution plan has been generated and is shown below.
+</span></span><span class="line"><span class="cl">Resource actions are indicated with the following symbols:
+</span></span><span class="line"><span class="cl"> + create
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform will perform the following actions:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> + google_compute_instance.webserver
+</span></span><span class="line"><span class="cl">     id:                                                  &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     boot_disk.#:                                         <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">     boot_disk.0.auto_delete:                             <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">     boot_disk.0.device_name:                             &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     boot_disk.0.disk_encryption_key_sha256:              &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     boot_disk.0.initialize_params.#:                     <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">     boot_disk.0.initialize_params.0.image:               <span class="s2">&#34;debian-cloud/debian-9&#34;</span>
+</span></span><span class="line"><span class="cl">     boot_disk.0.initialize_params.0.size:                &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     boot_disk.0.initialize_params.0.type:                &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     can_ip_forward:                                      <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">     cpu_platform:                                        &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     create_timeout:                                      <span class="s2">&#34;4&#34;</span>
+</span></span><span class="line"><span class="cl">     deletion_protection:                                 <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">     guest_accelerator.#:                                 &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     instance_id:                                         &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     label_fingerprint:                                   &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     machine_type:                                        <span class="s2">&#34;f1-micro&#34;</span>
+</span></span><span class="line"><span class="cl">     metadata_fingerprint:                                &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     metadata_startup_script:                             <span class="s2">&#34;sudo apt-get update; sudo apt-get install apache2 -y; echo Testando &gt; /var/www/html/index.html&#34;</span>
+</span></span><span class="line"><span class="cl">     name:                                                <span class="s2">&#34;vm-webserver&#34;</span>
+</span></span><span class="line"><span class="cl">     network_interface.#:                                 <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">     network_interface.0.access_config.#:                 <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">     network_interface.0.access_config.0.assigned_nat_ip: &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     network_interface.0.access_config.0.nat_ip:          &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     network_interface.0.access_config.0.network_tier:    &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     network_interface.0.address:                         &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     network_interface.0.name:                            &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     network_interface.0.network:                         <span class="s2">&#34;default&#34;</span>
+</span></span><span class="line"><span class="cl">     network_interface.0.network_ip:                      &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     network_interface.0.subnetwork_project:              &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     project:                                             &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     scheduling.#:                                        &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     self_link:                                           &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     tags_fingerprint:                                    &lt;computed&gt;
+</span></span><span class="line"><span class="cl">     zone:                                                <span class="s2">&#34;northamerica-northeast1-a&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Plan: <span class="m">1</span> to add, <span class="m">0</span> to change, <span class="m">0</span> to destroy.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Note: You didn<span class="s1">&#39;t specify an &#34;-out&#34; parameter to save this plan, so Terraform
+</span></span></span><span class="line"><span class="cl"><span class="s1">can&#39;</span>t guarantee that exactly these actions will be performed <span class="k">if</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;terraform apply&#34;</span> is subsequently run.</span></span></code></pre></div></div>
+<p><strong>A</strong>parentemente tudo está conforme o esperado. O Terraform criará um recurso para nossa VM.</p>
+<p><strong>A</strong>ntes de aplicarmos nosso plano de fato, volte à sua <em>Dashboard</em> do GCP e, no menu principal do canto esquerdo navegue até o painel de Instâncias (VMs):</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/terraform-criando-uma-infraestrutura-no/gcloud11.png"
+        data-srcset="/posts/terraform-criando-uma-infraestrutura-no/gcloud11.png, /posts/terraform-criando-uma-infraestrutura-no/gcloud11.png 1.5x, /posts/terraform-criando-uma-infraestrutura-no/gcloud11.png 2x"
+        data-sizes="auto"
+        alt="/posts/terraform-criando-uma-infraestrutura-no/gcloud11.png"
+        title="Google Cloud Platform" width="640" height="400" /></p>
+<p><strong>C</strong>aso seja a sua primeira vez acessando esta seção, você deverá receber a informação de que o Google esta carregando a API de <em>Compute Engine</em> para seu uso. Este processo costuma levar cerca de 1 ou 2 minutos, mas apenas acontece na primeira vez que você acessa este painel. Para otimizar sua nuvem o Google não carrega todas as APIs por padrão, habilitando-as aos poucos conforme você as utiliza, bem como lhe permitindo habilitar apenas as que você deseja ou desabilitar as que não precisa.</p>
+<p><strong>V</strong>ocê provavelmente não terá nenhuma VM ou instância criada, portanto nada será listado para você além de uma tela informando que ali ficarão suas VMs, bem como um botão de <strong>Criar</strong> VMs, através do qual você poderia criar suas VMs e passar todas as suas definições pela interface. Mas o nosso objetivo é automatizar tudo isso e codificar nossa infraestrutura, certo?! Portanto, ignoremos isto por enquanto. O nosso objetivo nesta interface era apenas ver que não temos nossa vm webserver criada (ainda).</p>
+<p><strong>D</strong>e volta ao nosso console ou terminal, executemos <em>terraform apply</em>:</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform apply
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">An execution plan has been generated and is shown below.
+</span></span><span class="line"><span class="cl">Resource actions are indicated with the following symbols:
+</span></span><span class="line"><span class="cl">  + create
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform will perform the following actions:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  + google_compute_instance.webserver
+</span></span><span class="line"><span class="cl">      id:                                                  &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      boot_disk.#:                                         <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">      boot_disk.0.auto_delete:                             <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">      boot_disk.0.device_name:                             &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      boot_disk.0.disk_encryption_key_sha256:              &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      boot_disk.0.initialize_params.#:                     <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">      boot_disk.0.initialize_params.0.image:               <span class="s2">&#34;debian-cloud/debian-9&#34;</span>
+</span></span><span class="line"><span class="cl">      boot_disk.0.initialize_params.0.size:                &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      boot_disk.0.initialize_params.0.type:                &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      can_ip_forward:                                      <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">      cpu_platform:                                        &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      create_timeout:                                      <span class="s2">&#34;4&#34;</span>
+</span></span><span class="line"><span class="cl">      deletion_protection:                                 <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">      guest_accelerator.#:                                 &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      instance_id:                                         &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      label_fingerprint:                                   &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      machine_type:                                        <span class="s2">&#34;f1-micro&#34;</span>
+</span></span><span class="line"><span class="cl">      metadata_fingerprint:                                &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      metadata_startup_script:                             <span class="s2">&#34;sudo apt-get update; sudo apt-get install apache2 -y; echo Testando &gt; /var/www/html/index.html&#34;</span>
+</span></span><span class="line"><span class="cl">      name:                                                <span class="s2">&#34;vm-webserver&#34;</span>
+</span></span><span class="line"><span class="cl">      network_interface.#:                                 <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">      network_interface.0.access_config.#:                 <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">      network_interface.0.access_config.0.assigned_nat_ip: &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      network_interface.0.access_config.0.nat_ip:          &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      network_interface.0.access_config.0.network_tier:    &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      network_interface.0.address:                         &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      network_interface.0.name:                            &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      network_interface.0.network:                         <span class="s2">&#34;default&#34;</span>
+</span></span><span class="line"><span class="cl">      network_interface.0.network_ip:                      &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      network_interface.0.subnetwork_project:              &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      project:                                             &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      scheduling.#:                                        &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      self_link:                                           &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      tags_fingerprint:                                    &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      zone:                                                <span class="s2">&#34;northamerica-northeast1-a&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Plan: <span class="m">1</span> to add, <span class="m">0</span> to change, <span class="m">0</span> to destroy.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Do you want to perform these actions?
+</span></span><span class="line"><span class="cl">  Terraform will perform the actions described above.
+</span></span><span class="line"><span class="cl">  Only <span class="s1">&#39;yes&#39;</span> will be accepted to approve.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  Enter a value:</span></span></code></pre></div></div>
+<p><strong>T</strong>udo parece correto, inclusive podemos ver nosso script de metadata que deverá ser executado durante a criação da VM para instalar nosso servidor WEB Apache. Confirme com um <em>yes</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Enter a value: yes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">google_compute_instance.webserver: Creating...
+</span></span><span class="line"><span class="cl">boot_disk.#:                                         <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">boot_disk.0.auto_delete:                             <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">boot_disk.0.device_name:                             <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">boot_disk.0.disk_encryption_key_sha256:              <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">boot_disk.0.initialize_params.#:                     <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">boot_disk.0.initialize_params.0.image:               <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;debian-cloud/debian-9&#34;</span>
+</span></span><span class="line"><span class="cl">boot_disk.0.initialize_params.0.size:                <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">boot_disk.0.initialize_params.0.type:                <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">can_ip_forward:                                      <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">cpu_platform:                                        <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">create_timeout:                                      <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;4&#34;</span>
+</span></span><span class="line"><span class="cl">deletion_protection:                                 <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;false&#34;</span>
+</span></span><span class="line"><span class="cl">guest_accelerator.#:                                 <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">instance_id:                                         <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">label_fingerprint:                                   <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">machine_type:                                        <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;f1-micro&#34;</span>
+</span></span><span class="line"><span class="cl">metadata_fingerprint:                                <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">metadata_startup_script:                             <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;sudo apt-get update; sudo apt-get install apache2 -y; echo Testando &gt; /var/www/html/index.html&#34;</span>
+</span></span><span class="line"><span class="cl">name:                                                <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;vm-webserver&#34;</span>
+</span></span><span class="line"><span class="cl">network_interface.#:                                 <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">network_interface.0.access_config.#:                 <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">network_interface.0.access_config.0.assigned_nat_ip: <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">network_interface.0.access_config.0.nat_ip:          <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">network_interface.0.access_config.0.network_tier:    <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">network_interface.0.address:                         <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">network_interface.0.name:                            <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">network_interface.0.network:                         <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;default&#34;</span>
+</span></span><span class="line"><span class="cl">network_interface.0.network_ip:                      <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">network_interface.0.subnetwork_project:              <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">project:                                             <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">scheduling.#:                                        <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">self_link:                                           <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">tags_fingerprint:                                    <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">zone:                                                <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;northamerica-northeast1-a&#34;</span>
+</span></span><span class="line"><span class="cl">google_compute_instance.webserver: Still creating... <span class="o">(</span>10s elapsed<span class="o">)</span>
+</span></span><span class="line"><span class="cl">google_compute_instance.webserver: Creation <span class="nb">complete</span> after 14s <span class="o">(</span>ID: vm-webserver<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Apply complete! Resources: <span class="m">1</span> added, <span class="m">0</span> changed, <span class="m">0</span> destroyed.</span></span></code></pre></div></div>
+<p><strong>N</strong>osso código parece ter sido executado com sucesso e o Terraform ao final nos confirma que um <em>resource</em> foi adicionado (o qual esperamos ser nossa VM).</p>
+<p>Se atualizarmos nossa página de instâncias no GCP, devemos agora ver nossa <em>vm-webserver</em> criada e rodando:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/terraform-criando-uma-infraestrutura-no/gcloud12.png"
+        data-srcset="/posts/terraform-criando-uma-infraestrutura-no/gcloud12.png, /posts/terraform-criando-uma-infraestrutura-no/gcloud12.png 1.5x, /posts/terraform-criando-uma-infraestrutura-no/gcloud12.png 2x"
+        data-sizes="auto"
+        alt="/posts/terraform-criando-uma-infraestrutura-no/gcloud12.png"
+        title="Google Cloud Platform" width="640" height="400" /></p>
+<p><strong>A</strong>gora que temos a certeza de que nosso código funciona para a criação de nossa VM, precisamos também fazer com que a mesma seja acessível, afinal a principal função de qualquer servidor web é justamente ser acessível para apresentar alguma aplicação ou site. Para isto precisamos habilitar o firewall de nossa VM ou instância. Além disso, precisamos saber qual o endereço IP desta instância. Embora seja possível e simples conseguir este endereço IP através da interface do GCP ao clicarmos em cima de nossa VM, podemos também automatizar isto e receber este valor diretamente através do Terraform. (Lembre-se: O principal objetivo por trás da ideia de infraestrutura como código é automatizar ao máximo, evitando o uso de interfaces ou  dashboards (odeio cliques) :p).</p>
+<p><strong>V</strong>amos começar criando um arquivo <em>outputs.tf</em> que será utilizado para nos informar o IP da VM criada pelo Terraform:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-terraform">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-terraform" data-lang="terraform"><span class="line"><span class="cl"><span class="c1"># Retorna o IP da VM criada
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">output</span> <span class="s2">&#34;ip&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">value</span> = <span class="s2">&#34;</span><span class="si">${</span><span class="nx">google_compute_instance</span><span class="p">.</span><span class="nx">webserver</span><span class="p">.</span><span class="nx">network_interface</span><span class="p">.</span><span class="m">0</span><span class="p">.</span><span class="nx">access_config</span><span class="p">.</span><span class="m">0</span><span class="p">.</span><span class="nx">nat_ip</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>N</strong>ão, eu não estou inventando comandos ou trazendo algo do além. Se você é curioso e atencioso deve ter percebido que aqui estamos apenas puxando informações que o GCP criou através do Terraform. Se você voltar e reparar em seu comando <em>terraform apply</em>, perceberá que um dos atributos listados/criados em sua VM foi justamente o <em>network_interface.0.access_config.0.nat_ip</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">network_interface.0.access_config.0.assigned_nat_ip: <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">--&gt; network_interface.0.access_config.0.nat_ip:          <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">network_interface.0.access_config.0.network_tier:    <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">network_interface.0.address:                         <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">...</span></span></code></pre></div></div>
+<p><strong>P</strong>ara validarmos que isto de fato funcionará, vamos executar novamente <em>terraform apply</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform apply
+</span></span><span class="line"><span class="cl">google_compute_instance.webserver: Refreshing state... <span class="o">(</span>ID: vm-webserver<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Apply complete! Resources: <span class="m">0</span> added, <span class="m">0</span> changed, <span class="m">0</span> destroyed.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Outputs:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">ip</span> <span class="o">=</span> 35.203.117.191</span></span></code></pre></div></div>
+<p><strong>C</strong>onforme o esperado, nenhum <em>resource</em> precisou ser criado, pois não alteramos nada em nosso código indicando a necessidade de alguma mudança. A única coisa que aocnteceu de diferente foi que desta vez recebemos o IP de nossa instância ou VM.</p>
+<p><strong>O</strong>utra forma de recebermos este valor a qualquer momento é executando <em>terraform output ip</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform output ip
+</span></span><span class="line"><span class="cl">35.203.117.191</span></span></code></pre></div></div>
+<p><strong>Ó</strong>timo, já temos nossa instância e sabemos que podemos receber o endereço IP externo dela facilmente para acesso. Só nos resta agora abrir as portas de firewall necessárias para que possamos acessar nossa aplicação. Vamos abrir a porta 80 para nossa VM.</p>
+<p><strong>V</strong>amos criar as seguintes variáveis em nosso arquivo <em>variables.tf</em>:</p>
+<ul>
+<li>nome_fw: precisamos dar um nome para nosso firewall;</li>
+<li>portas: precisamos criar uma lista de portas que serão abertas neste firewall.</li>
+</ul>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-terraform">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-terraform" data-lang="terraform"><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;project_id&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">type</span>    = <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">default</span> = <span class="s2">&#34;possible-sun-83482736&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;regiao&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">type</span> = <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">default</span> = <span class="s2">&#34;northamerica-northeast1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;nome&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">type</span> = <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">default</span> = <span class="s2">&#34;vm-webserver&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;tipo_maquina&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">type</span> = <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">default</span> = <span class="s2">&#34;f1-micro&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;zona&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">type</span> = <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">default</span> = <span class="s2">&#34;northamerica-northeast1-a&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;imagem&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">type</span> = <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">default</span> = <span class="s2">&#34;debian-cloud/debian-9&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;nome_fw&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">type</span> = <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">default</span> = <span class="s2">&#34;webserver-firewall&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">
+</span></span></span><span class="line"><span class="cl"><span class="kr">variable</span> <span class="s2">&#34;portas&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">type</span> = <span class="nb">&#34;list</span><span class="s2">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">  default = [&#34;</span><span class="m">80</span><span class="s2">&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s2">}</span></span></span></code></pre></div></div>
+<p><strong>A</strong> única novidade aqui foi o tipo <em>list</em> que utilizamos para a variável <em>portas</em>. Uma vez que podemos querer abrir múltiplas portas, utilizaremos o tipo <em>list</em>, o qual nos permite ter vários valores, ou uma lista de valores, para esta variável.</p>
+<p><strong>A</strong>gora vamos criar o <em>resource</em> para nosso firewall no arquivo <em>main.tf</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-terraform">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-terraform" data-lang="terraform"><span class="line"><span class="cl"><span class="c1"># Configura o projeto GCP
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">provider</span> <span class="s2">&#34;google&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">credentials</span> = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">file</span><span class="p">(</span><span class="s2">&#34;possible-sun-83482736-sabh45jhb2345ghv.json&#34;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">project</span>     = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">project_id</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">region</span>      = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">regiao</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1"># Cria a VM com o Google Compute Engine
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">resource</span> <span class="s2">&#34;google_compute_instance&#34;</span> <span class="s2">&#34;webserver&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">name</span>          = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">nome</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">machine_type</span>  = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">tipo_maquina</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">zone</span>          = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">zona</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">boot_disk</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">initialize_params</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="na">image</span> = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">imagem</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">  # Instala o servidor web Apache
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">metadata_startup_script</span> = <span class="s2">&#34;sudo apt-get update; sudo apt-get install apache2 -y; echo Testando &gt; /var/www/html/index.html&#34;</span><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">  # Habilita rede para a VM bem como um IP público
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">network_interface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="na">network</span> = <span class="s2">&#34;default&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">access_config</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1">
+</span></span></span><span class="line"><span class="cl"><span class="c1"># Cria o Firewall para a VM
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">resource</span> <span class="s2">&#34;google_compute_firewall&#34;</span> <span class="s2">&#34;webfirewall&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="na">name</span>        = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">nome_fw</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">network</span>     = <span class="s2">&#34;default&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">allow</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="na">protocol</span>  = <span class="s2">&#34;tcp&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">ports</span>     = <span class="s2">&#34;</span><span class="si">${</span><span class="nb">var</span><span class="p">.</span><span class="nx">portas</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>I</strong>ncluímos apenas um novo <em>resource</em> para a criação de nosso firewall abrindo as portas que definimos em nosso arquivo <em>variables.tf</em> com o protocolo <em>tcp</em>. Execute novamente <em>terraform plan</em> para ver o que mudaria:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform plan
+</span></span><span class="line"><span class="cl">Refreshing Terraform state in-memory prior to plan...
+</span></span><span class="line"><span class="cl">The refreshed state will be used to calculate this plan, but will not be
+</span></span><span class="line"><span class="cl">persisted to <span class="nb">local</span> or remote state storage.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">google_compute_instance.webserver: Refreshing state... <span class="o">(</span>ID: vm-webserver<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">An execution plan has been generated and is shown below.
+</span></span><span class="line"><span class="cl">Resource actions are indicated with the following symbols:
+</span></span><span class="line"><span class="cl">  + create
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform will perform the following actions:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  + google_compute_firewall.webfirewall
+</span></span><span class="line"><span class="cl">      id:                       &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      allow.#:                  <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">      allow.272637744.ports.#:  <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">      allow.272637744.ports.0:  <span class="s2">&#34;80&#34;</span>
+</span></span><span class="line"><span class="cl">      allow.272637744.protocol: <span class="s2">&#34;tcp&#34;</span>
+</span></span><span class="line"><span class="cl">      creation_timestamp:       &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      destination_ranges.#:     &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      direction:                &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      name:                     <span class="s2">&#34;webserver-firewall&#34;</span>
+</span></span><span class="line"><span class="cl">      network:                  <span class="s2">&#34;default&#34;</span>
+</span></span><span class="line"><span class="cl">      priority:                 <span class="s2">&#34;1000&#34;</span>
+</span></span><span class="line"><span class="cl">      project:                  &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      self_link:                &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      source_ranges.#:          &lt;computed&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Plan: <span class="m">1</span> to add, <span class="m">0</span> to change, <span class="m">0</span> to destroy.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Note: You didn<span class="s1">&#39;t specify an &#34;-out&#34; parameter to save this plan, so Terraform
+</span></span></span><span class="line"><span class="cl"><span class="s1">can&#39;</span>t guarantee that exactly these actions will be performed <span class="k">if</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;terraform apply&#34;</span> is subsequently run.</span></span></code></pre></div></div>
+<p><strong>T</strong>udo parece correto. Como a VM já existe e nada foi modificado no código da mesma, o Terraform apenas criará um  novo <em>resource</em> para nosso firewall com os valores que definimos. Execute seu plano com <em>terraform apply</em> e confirme com <em>yes</em>:</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform apply
+</span></span><span class="line"><span class="cl">google_compute_instance.webserver: Refreshing state... <span class="o">(</span>ID: vm-webserver<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">An execution plan has been generated and is shown below.
+</span></span><span class="line"><span class="cl">Resource actions are indicated with the following symbols:
+</span></span><span class="line"><span class="cl">  + create
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform will perform the following actions:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  + google_compute_firewall.webfirewall
+</span></span><span class="line"><span class="cl">      id:                       &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      allow.#:                  <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">      allow.272637744.ports.#:  <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">      allow.272637744.ports.0:  <span class="s2">&#34;80&#34;</span>
+</span></span><span class="line"><span class="cl">      allow.272637744.protocol: <span class="s2">&#34;tcp&#34;</span>
+</span></span><span class="line"><span class="cl">      creation_timestamp:       &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      destination_ranges.#:     &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      direction:                &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      name:                     <span class="s2">&#34;webserver-firewall&#34;</span>
+</span></span><span class="line"><span class="cl">      network:                  <span class="s2">&#34;default&#34;</span>
+</span></span><span class="line"><span class="cl">      priority:                 <span class="s2">&#34;1000&#34;</span>
+</span></span><span class="line"><span class="cl">      project:                  &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      self_link:                &lt;computed&gt;
+</span></span><span class="line"><span class="cl">      source_ranges.#:          &lt;computed&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Plan: <span class="m">1</span> to add, <span class="m">0</span> to change, <span class="m">0</span> to destroy.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Do you want to perform these actions?
+</span></span><span class="line"><span class="cl">  Terraform will perform the actions described above.
+</span></span><span class="line"><span class="cl">  Only <span class="s1">&#39;yes&#39;</span> will be accepted to approve.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  Enter a value: yes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">google_compute_firewall.webfirewall: Creating...
+</span></span><span class="line"><span class="cl">  allow.#:                  <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">  allow.272637744.ports.#:  <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">  allow.272637744.ports.0:  <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;80&#34;</span>
+</span></span><span class="line"><span class="cl">  allow.272637744.protocol: <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;tcp&#34;</span>
+</span></span><span class="line"><span class="cl">  creation_timestamp:       <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  destination_ranges.#:     <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  direction:                <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  name:                     <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;webserver-firewall&#34;</span>
+</span></span><span class="line"><span class="cl">  network:                  <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;default&#34;</span>
+</span></span><span class="line"><span class="cl">  priority:                 <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;1000&#34;</span>
+</span></span><span class="line"><span class="cl">  project:                  <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  self_link:                <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  source_ranges.#:          <span class="s2">&#34;&#34;</span> <span class="o">=</span>&gt; <span class="s2">&#34;&lt;computed&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">google_compute_firewall.webfirewall: Still creating... <span class="o">(</span>10s elapsed<span class="o">)</span>
+</span></span><span class="line"><span class="cl">google_compute_firewall.webfirewall: Creation <span class="nb">complete</span> after 14s <span class="o">(</span>ID: webserver-firewall<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Apply complete! Resources: <span class="m">1</span> added, <span class="m">0</span> changed, <span class="m">0</span> destroyed.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Outputs:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">ip</span> <span class="o">=</span> 35.203.117.191</span></span></code></pre></div></div>
+<p><strong>T</strong>udo parece ter funcionado. Um novo resource de <em>firewall</em> foi criado e, conforme visto anteriormente, também recebemos o nosso IP como output.</p>
+<p><strong>C</strong>onfirme que tudo funcionou como o esperado copiando este IP e colando-o em seu navegador:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/terraform-criando-uma-infraestrutura-no/gcloud13.png"
+        data-srcset="/posts/terraform-criando-uma-infraestrutura-no/gcloud13.png, /posts/terraform-criando-uma-infraestrutura-no/gcloud13.png 1.5x, /posts/terraform-criando-uma-infraestrutura-no/gcloud13.png 2x"
+        data-sizes="auto"
+        alt="/posts/terraform-criando-uma-infraestrutura-no/gcloud13.png"
+        title="Google Cloud Platform" width="640" height="400" /></p>
+<p><strong>S</strong>e você recebeu uma página em branco com a palavra <em>Testando</em>, significa que tudo ocorreu conforme o esperado.</p>
+<p><strong>A</strong>té agora nossa infraestrutura possui:</p>
+<ul>
+<li>1 VM como servidor Web básico rodando Apache e uma página de teste;</li>
+<li>1 rede default;</li>
+<li>1 firewall básico aplicado à nossa VM abrindo a porta 80.</li>
+</ul>
+<p><strong>E</strong>mbora esta seja uma infraestrutura extremamente simples, o Terraform lhe permite criar infraestruturas muito mais complexas e robustas.</p>
+<p><strong>N</strong>o próximo post incrementaremos este código para incluírmos a criação de um cluster Kubernetes em nossa <em>cloud</em>.</p>
+<p><strong>P</strong>or hora, para não consumir muito de nossos créditos no GCP, vamos destruir nossa infraestrutura com <em>terraform destroy</em>. É tão simples e rápido criar tudo novamente agora que temos o código pronto, certo?! Então destruir tudo não nos causará problemas.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ terraform destroy
+</span></span><span class="line"><span class="cl">google_compute_firewall.webfirewall: Refreshing state... <span class="o">(</span>ID: webserver-firewall<span class="o">)</span>
+</span></span><span class="line"><span class="cl">google_compute_instance.webserver: Refreshing state... <span class="o">(</span>ID: vm-webserver<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">An execution plan has been generated and is shown below.
+</span></span><span class="line"><span class="cl">Resource actions are indicated with the following symbols:
+</span></span><span class="line"><span class="cl">  - destroy
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform will perform the following actions:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  - google_compute_firewall.webfirewall
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  - google_compute_instance.webserver
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Plan: <span class="m">0</span> to add, <span class="m">0</span> to change, <span class="m">2</span> to destroy.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Do you really want to destroy all resources?
+</span></span><span class="line"><span class="cl">  Terraform will destroy all your managed infrastructure, as shown above.
+</span></span><span class="line"><span class="cl">  There is no undo. Only <span class="s1">&#39;yes&#39;</span> will be accepted to confirm.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  Enter a value: yes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">google_compute_firewall.webfirewall: Destroying... <span class="o">(</span>ID: webserver-firewall<span class="o">)</span>
+</span></span><span class="line"><span class="cl">google_compute_instance.webserver: Destroying... <span class="o">(</span>ID: vm-webserver<span class="o">)</span>
+</span></span><span class="line"><span class="cl">google_compute_firewall.webfirewall: Still destroying... <span class="o">(</span>ID: webserver-firewall, 10s elapsed<span class="o">)</span>
+</span></span><span class="line"><span class="cl">google_compute_instance.webserver: Still destroying... <span class="o">(</span>ID: vm-webserver, 10s elapsed<span class="o">)</span>
+</span></span><span class="line"><span class="cl">google_compute_firewall.webfirewall: Destruction <span class="nb">complete</span> after 12s
+</span></span><span class="line"><span class="cl">google_compute_instance.webserver: Destruction <span class="nb">complete</span> after 14s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Destroy complete! Resources: <span class="m">2</span> destroyed.</span></span></code></pre></div></div>
+<p><strong>T</strong>udo certo, sua infra foi completamente removida e seus créditos não mais serão utilizados agora.</p>
+<p><strong>H</strong>appy hacking!</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Atualizado em 2018-11-24</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Compartilhe em X" data-sharer="x" data-url="//blog.marcelocavalcante.net:1313/posts/terraform-criando-uma-infraestrutura-no/" data-title="Terraform: Criando uma infraestrutura no Google Cloud" data-via="Marcelo_Kalib" data-hashtags="Devops,Terraform,Cloud,GCP,Docker,Kubernetes"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Threads" data-sharer="threads" data-url="//blog.marcelocavalcante.net:1313/posts/terraform-criando-uma-infraestrutura-no/" data-title="Terraform: Criando uma infraestrutura no Google Cloud"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Facebook" data-sharer="facebook" data-url="//blog.marcelocavalcante.net:1313/posts/terraform-criando-uma-infraestrutura-no/" data-hashtag="Devops"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Linkedin" data-sharer="linkedin" data-url="//blog.marcelocavalcante.net:1313/posts/terraform-criando-uma-infraestrutura-no/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Hacker News" data-sharer="hackernews" data-url="//blog.marcelocavalcante.net:1313/posts/terraform-criando-uma-infraestrutura-no/" data-title="Terraform: Criando uma infraestrutura no Google Cloud"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Line" data-sharer="line" data-url="//blog.marcelocavalcante.net:1313/posts/terraform-criando-uma-infraestrutura-no/" data-title="Terraform: Criando uma infraestrutura no Google Cloud"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em 微博" data-sharer="weibo" data-url="//blog.marcelocavalcante.net:1313/posts/terraform-criando-uma-infraestrutura-no/" data-title="Terraform: Criando uma infraestrutura no Google Cloud"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Diaspora" data-sharer="diaspora" data-url="//blog.marcelocavalcante.net:1313/posts/terraform-criando-uma-infraestrutura-no/" data-title="Terraform: Criando uma infraestrutura no Google Cloud" data-description="Uma introdução ao Terraform, da Hashicorp, como robusta e eficiente ferramenta para infraestrutura como código. Criando infraestrutura na nuvem GCP, do Google."><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=%2f%2fblog.marcelocavalcante.net%3a1313%2fposts%2fterraform-criando-uma-infraestrutura-no%2f&amp;text=Terraform%3a%20Criando%20uma%20infraestrutura%20no%20Google%20Cloud" target="_blank" title="Compartilhe em Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/devops/">Devops</a>,&nbsp;<a href="/tags/terraform/">Terraform</a>,&nbsp;<a href="/tags/cloud/">Cloud</a>,&nbsp;<a href="/tags/gcp/">GCP</a>,&nbsp;<a href="/tags/docker/">Docker</a>,&nbsp;<a href="/tags/kubernetes/">Kubernetes</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Voltar</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/terraform-variaveis-e-outputs/" class="prev" rel="prev" title="Terraform: Variáveis e Outputs"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Terraform: Variáveis e Outputs</a>
+            <a href="/posts/de-volta-com-novo-visual/" class="next" rel="next" title="De Volta à Ativa e Com Novo Visual">De Volta à Ativa e Com Novo Visual<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Possibilitado por <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Tema - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2008 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://blog.marcelocavalcante.net" target="_blank">Marcelo Cavalcante</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Voltar ao topo">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="Ver comentários">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.20.2/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+</html>

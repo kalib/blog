@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Chef: Automação E Gerenciamento De Configuração - Marcelo Cavalcante Rocha</title><meta name="Description" content="Chef é uma popular ferramenta de Gerenciamento de Configurações criado pela empresa de mesmo nome, Chef. O Chef é desenvolvido em Ruby e Erlang, utiliza uma linguagem DSL em Ruby puro para escrever arquivos de configuração de sistemas chamados recipes."><meta property="og:url" content="//blog.marcelocavalcante.net:1313/posts/chef-aautomacao-e-gerenciamento-de/">
+  <meta property="og:site_name" content="Marcelo Cavalcante Rocha">
+  <meta property="og:title" content="Chef: Automação E Gerenciamento De Configuração">
+  <meta property="og:description" content="Chef é uma popular ferramenta de Gerenciamento de Configurações criado pela empresa de mesmo nome, Chef. O Chef é desenvolvido em Ruby e Erlang, utiliza uma linguagem DSL em Ruby puro para escrever arquivos de configuração de sistemas chamados recipes.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2018-04-01T16:11:20-05:00">
+    <meta property="article:modified_time" content="2018-04-01T16:11:20-05:00">
+    <meta property="article:tag" content="Devops">
+    <meta property="article:tag" content="Chef">
+    <meta property="og:image" content="//blog.marcelocavalcante.net:1313/posts/chef-aautomacao-e-gerenciamento-de/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="//blog.marcelocavalcante.net:1313/posts/chef-aautomacao-e-gerenciamento-de/featured-image.png">
+  <meta name="twitter:title" content="Chef: Automação E Gerenciamento De Configuração">
+  <meta name="twitter:description" content="Chef é uma popular ferramenta de Gerenciamento de Configurações criado pela empresa de mesmo nome, Chef. O Chef é desenvolvido em Ruby e Erlang, utiliza uma linguagem DSL em Ruby puro para escrever arquivos de configuração de sistemas chamados recipes.">
+<meta name="application-name" content="Marcelo Cavalcante">
+<meta name="apple-mobile-web-app-title" content="Marcelo Cavalcante">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="//blog.marcelocavalcante.net:1313/posts/chef-aautomacao-e-gerenciamento-de/" /><link rel="prev" href="//blog.marcelocavalcante.net:1313/posts/conhecendo-o-kubernetes-clusters-de/" /><link rel="next" href="//blog.marcelocavalcante.net:1313/posts/chef-uso-de-condicionais-not/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Chef: Automação E Gerenciamento De Configuração",
+        "inLanguage": "pt-BR",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/\/blog.marcelocavalcante.net:1313\/posts\/chef-aautomacao-e-gerenciamento-de\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/chef-aautomacao-e-gerenciamento-de\/featured-image.png",
+                            "width":  900 ,
+                            "height":  788 
+                        }],"genre": "posts","keywords": "Devops, Chef","wordcount":  3460 ,
+        "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/chef-aautomacao-e-gerenciamento-de\/","datePublished": "2018-04-01T16:11:20-05:00","dateModified": "2018-04-01T16:11:20-05:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Marcelo Cavalcante"
+            },"description": "Chef é uma popular ferramenta de Gerenciamento de Configurações criado pela empresa de mesmo nome, Chef. O Chef é desenvolvido em Ruby e Erlang, utiliza uma linguagem DSL em Ruby puro para escrever arquivos de configuração de sistemas chamados recipes."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'auto';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categorias </a><a class="menu-item" href="/sobre/"> Quem Sou </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancelar
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categorias</a><a class="menu-item" href="/sobre/" title="">Quem Sou</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Conteúdos</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Chef: Automação E Gerenciamento De Configuração</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://blog.marcelocavalcante.net" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Marcelo Cavalcante</a></span>&nbsp;<span class="post-category">incluido em <a href="/categories/tutoriais/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutoriais</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2018-04-01">2018-04-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3460 palavras&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;17 minutos&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/chef-aautomacao-e-gerenciamento-de/featured-image.png"
+        data-srcset="/posts/chef-aautomacao-e-gerenciamento-de/featured-image.png, /posts/chef-aautomacao-e-gerenciamento-de/featured-image.png 1.5x, /posts/chef-aautomacao-e-gerenciamento-de/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/posts/chef-aautomacao-e-gerenciamento-de/featured-image.png"
+        title="Chef é uma popular ferramenta de Gerenciamento de Configurações criado pela empresa de mesmo nome, Chef. O Chef é desenvolvido em Ruby e Erlang, utiliza uma linguagem DSL em Ruby puro para escrever arquivos de configuração de sistemas chamados recipes." /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Conteúdos</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#gerenciamento-de-configuração">Gerenciamento de Configuração</a></li>
+    <li><a href="#o-que-é-chef">O que é Chef?</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#instalando-o-chef">Instalando o Chef</a>
+      <ul>
+        <li><a href="#arch-linux">Arch Linux</a></li>
+        <li><a href="#centos-debian-ubuntu">Centos, Debian, Ubuntu&hellip;</a></li>
+      </ul>
+    </li>
+    <li><a href="#testando-o-chef-localmente">Testando o Chef Localmente</a></li>
+    <li><a href="#vale-a-pena">Vale a pena?</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>C</strong>hef é uma popular ferramenta de Gerenciamento de Configurações criado pela empresa de mesmo nome, Chef. O <a href="https://www.chef.io" target="_blank" rel="noopener noreffer ">Chef</a> é desenvolvido em <a href="https://www.ruby-lang.org" target="_blank" rel="noopener noreffer ">Ruby</a> e <a href="https://www.erlang.org" target="_blank" rel="noopener noreffer ">Erlang</a>, e utiliza uma linguagem DSL (domain-specific language) em Ruby puro para escrever arquivos de configuração de sistemas chamados &ldquo;recipes&rdquo; (receitas).</p>
+<p><strong>A</strong>ntes de falarmos sobre o Chef é importante entender primeiramente o conceito e a utilidade de ferramentas de Gerenciamento de Configuração.</p>
+<h2 id="gerenciamento-de-configuração">Gerenciamento de Configuração</h2>
+<p><strong>G</strong>erenciamento de Configuração, ou CM (Configuration Management), é um processo de engenharia de sistemas que visa garantir a consistência entre ativos físicos e lógicos em um ambiente operacional. O processo de gerenciamento de configuração busca identificar e rastrear itens individuais de configuração, documentando capacidades funcionais e interdependências. Administradores, técnicos e desenvolvedores de sistemas podem utilizar ferramentas de Gerenciamento de Configuração para verificar o efeito que uma mudança em um item de configuração terá em outros sistemas.</p>
+<p><strong>E</strong>m palavras simples, o objetivo de uma ferramenta de gerenciamento de configuração é simplificar a vida de quem administra serviços e sistemas garantindo uma uniformidade no quesito configuração.</p>
+<p><strong>C</strong>omo exemplo prático e simplista, imagine um servidor web que será responsável por hospedar um pequeno site em php. Este servidor possuirá alguns atributos/aplicativos/configurações, tais como:</p>
+<ul>
+<li>Apache instalado;</li>
+<li>Alterações específicas nos arquivos de configuração do Apache;</li>
+<li>Serviço do Apache ativo e iniciado;</li>
+<li>Arquivos referentes ao site em si em um diretório específico;</li>
+<li>Permissões específicas atribuídas ao diretório específico do site;</li>
+<li>etc&hellip;</li>
+</ul>
+<p><strong>C</strong>onfigurar tudo isso manualmente em um único servidor é simples. Você poderia conectar-se via SSH no servidor, instalar o apache com o gerenciador de pacotes da distribuição utilizada, configurar o que for necessário no apache, iniciar o serviço, etc, etc, etc. Mas o que fazer quando sua infraestrutura cresce? Quando se quer maior disponibilidade do site, quando agora você roda este site em um cluster com 5 servidores?</p>
+<p><strong>B</strong>asicamente a mesma coisa, certo? Você pode se conectar em cada um dos servidores e repetir os mesmos passos. O problema se dá justamente nessa repetição de passos, onde você pode cometer erros, perder tempo, etc. Além disso, o que acontece se um colega seu modificar algo em um dos servidores e não lhe avisar? E se ele esquecer de replicar esta mudança nos demais?</p>
+<p><strong>É</strong> fácil achar diversas razões pelas quais torna-se difícil administrar e gerenciar configurações em ambientes mais complexos. A ideia por trás de uma ferramenta de Gerenciamento de Configuração é justamente reduzir esta complexidade, eliminando a necessidade de conectar-se manualmente à diversos servidores para aplicar as mesmas rotinas, passos e configurações.</p>
+<p><strong>A</strong>través de arquivos de texto podemos literalmente descrever o estado e as ações desejadas para nossos serviços e sistemas. Por exemplo: Posso dizer que possuo um grupo de servidores chamado WebServer, o qual contém 10 servidores com o Sistema Operacional CentOS 7. Posso incluir a informação de que preciso que todos eles estejam com a versão X do Apache instalada e que o serviço esteja ativo e rodando. Além disso, posso dizer que desejo que exista no diretório /var/www/meusite/ todo o conteúdo que está em um mapeamento de rede específico, ou mesmo em um repositório que possuo no github.</p>
+<p><strong>A</strong>o invés de me conectar em cada um dos 10 servidores para fazer tudo isso, um simples comando será o suficiente. O comando em específico dependerá da solução adotada, visto que existem diversas ferramentas de CM (Gerenciamento de Configuração). Mas, basicamente, ele irá ler o(s) arquivo(s) de &ldquo;instruções&rdquo; que nós definimos e saberá em quais servidores ele deverá instalar o Apache e configurar de acordo com o especificado, nos dando apenas o resultado final em forma de relatório simples.</p>
+<p><strong>E</strong> se alguém da equipe alterar um arquivo de configuração diretamente em um dos servidores? A ferramenta, em sua próxima execucação, irá identificar que o estado desejado para aquele meu grupo de servidores está diferente em um dos servidores. Ela então modificará aquele arquivo específico naquele servidor para que ele volte ao seu estado desejado.</p>
+<p><strong>A</strong>lém desta segurança, nós agora passamos a ter um ponto único de modificação. Ao desejarmos mudar algo, o faremos apenas no nosso &ldquo;código&rdquo;, ao invés de o fazer nos 10 servidores manualmente.</p>
+<p><strong>O</strong> mesmo benefício se dá em caso de erros e falhas: um ponto único de correção.</p>
+<p><strong>C</strong>om este mecanismo de descrever o estado de nossa infraestrutura em arquivos de texto/código, entramos em um novo conceito: Infrastructure as Code, ou Infraestrutura como Código. Uma vez que temos nossa infraestrutura em formato de código, podemos literalmente versionar e gerenciar nossa infraestrutura com repositórios Git, por exemplo.</p>
+<h2 id="o-que-é-chef">O que é Chef?</h2>
+<p><strong>C</strong>onforme dito mais acima, Chef é uma das mais populares ferramentas de Gerenciamento de Configuração disponíveis atualmente. É compatível e facilmente integrado à plataformas de computação em nuvem, tais como Internap, Amazon EC2, Google Cloud Platform, OpenStack, SoftLayer, Microsoft Azure e Rackspace, provendo e configurando servidores automaticamente.</p>
+<p><strong>O</strong> usuário escreve &ldquo;recipes&rdquo; (receitas) que descrevem como o Chef deve gerenciar aplicações, servidores e utilitários. Estas &ldquo;recipes&rdquo;, as quais podem ser agrupadas em &ldquo;cookbooks&rdquo; (livros de receitas) descrevem uma série de recursos que devem estar em um determinado estado. Este recursos podem ser pacotes, serviços ou mesmo arquivos.</p>
+<p><strong>C</strong>hef pode rodar em um modo cliente/servidor ou standalone, com o chamado &ldquo;chef-solo&rdquo;. No modo cliente/servidor, o cliente Chef envia uma série de atributos sobre o node ou cliente/host para o Chef server. O Chef server utiliza-se da ferramenta <a href="https://lucene.apache.org/solr" target="_blank" rel="noopener noreffer ">Solr</a> para indexar estes atributos e provê uma API na qual os clientes podem fazer consultas. As recipes podem fazer requisições à esta base de atributos e utilizar os dados resultantes para configurar o cliente ou node.</p>
+<p><strong>E</strong>mbora inicialmente o Chef fosse utilizado para gerenciar exclusivamente máquinas Linux, as versões mais atuais também suportam máquinas Windows.</p>
+<p><strong>A</strong> ideia para este post é dar uma breve introdução ao Chef, portanto não vou entrar em maiores detalhes do funcionamento por hora.</p>
+<h2 id="resources">Resources</h2>
+<p><strong>C</strong>omo dito antes, um Resource é uma descrição de estado desejado para um determinado item. Estes resources são gerenciados através de recipes.</p>
+<p><strong>U</strong>m resource possui basicamente 4 componentes fundamentais que são definidos em um bloco de código Ruby:</p>
+<ul>
+<li>Resource Type - Tipo de resource (Pode ser um pacote, serviço, arquivo&hellip;)</li>
+<li>Resource Name - Nome do resource</li>
+<li>Resource Properties - Propriedades do resource</li>
+<li>Actions - Ações a serem aplicadas ao resource</li>
+</ul>
+<p><strong>U</strong>m exemplo de recipe para instalar o Apache em um servidor Ubuntu, por exemplo, seria o seguinte:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-ruby">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">package</span> <span class="s1">&#39;httpd&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="n">action</span> <span class="ss">:install</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span></span></span></code></pre></div></div>
+<p>No exemplo acima temos o tipo de resource como sendo &ldquo;package&rdquo;, o nome do resource como sendo &ldquo;httpd&rdquo; e a ação &ldquo;install&rdquo;.</p>
+<p><strong>O</strong> que vai acontecer aqui? Simples de entender, certo? O pacote httpd (Apache) será instalado. Mas o que acontece caso o pacote httpd já esteja instalado?</p>
+<p><strong>N</strong>ada. Uma das características do Chef é a <strong>idempotência</strong>. Na matemática e ciência da computação, a idempotência é a propriedade que algumas operações têm de poderem ser aplicadas várias vezes sem que o valor do resultado se altere após a aplicação inicial. Ou seja, O Chef primeiramente confere se o estado desejado já está aplicado e, caso sim, ignora aquela instrução.</p>
+<p><strong>N</strong>ovamente&hellip; A ideia para este post é dar uma breve introdução ao Chef, portanto não vou entrar em maiores detalhes sobre os tipos de resources e suas possíveis ações. Vamos ao que interessa&hellip;</p>
+<h2 id="instalando-o-chef">Instalando o Chef</h2>
+<p><strong>C</strong>onforme explicado acima, o Chef pode ser utilizado em modo cliente/servidor ou standalone. Para esta introdução utilizaremos o modo standalone ou local para simplificar as coisas.</p>
+<p><strong>P</strong>ara instalar podemos utilizar o gerenciador de pacotes da distribuição Linux que utilizamos ou baixando o chefdk (Development Kit) através da página de <a href="https://downloads.chef.io/chefdk" target="_blank" rel="noopener noreffer ">downloads do chef</a>.</p>
+<h3 id="arch-linux">Arch Linux</h3>
+<p><strong>N</strong>o meu caso, utilizarei o pacote <a href="https://aur.archlinux.org/packages/chef-dk/" target="_blank" rel="noopener noreffer ">chef-dk</a> existente para o Arch Linux, mas sinta-se livre para baixar diretamente no site e executar o pacote de acordo com sua distribuição.</p>
+<p><strong>1- Baixar o pacote do AUR:</strong></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ wget https://aur.archlinux.org/cgit/aur.git/snapshot/chef-dk.tar.gz</span></span></code></pre></div></div>
+<p><strong>2- Descompactar e Compilar:</strong></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ tar -xvzf chef-dk.tar.gz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> chef-dk
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ makepkg</span></span></code></pre></div></div>
+<p><strong>3- Instalar o pacote:</strong></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo pacman -U chef-dk-2.5.3-1-x86_64.pkg.tar.xz</span></span></code></pre></div></div>
+<p><strong>4- Confirmar que deu tudo certo:</strong>*</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ chef --version
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Chef Development Kit Version: 2.5.3
+</span></span><span class="line"><span class="cl">chef-client version: 13.8.5
+</span></span><span class="line"><span class="cl">delivery version: master <span class="o">(</span>73ebb72a6c42b3d2ff5370c476be800fee7e5427<span class="o">)</span>
+</span></span><span class="line"><span class="cl">berks version: 6.3.1
+</span></span><span class="line"><span class="cl">kitchen version: 1.20.0
+</span></span><span class="line"><span class="cl">inspec version: 1.51.21</span></span></code></pre></div></div>
+<h3 id="centos-debian-ubuntu">Centos, Debian, Ubuntu&hellip;</h3>
+<p><strong>N</strong>o CentOS, Ubuntu, Debian ou outras distribuições, o procedimento será relativamente parecido, portanto vejamos como seria no caso do CentOS baixando o arquivo diretamente do site de downloads:</p>
+<p><strong>1- Baixar o arquivo .rpm para Red Hat:</strong> <a href="https://downloads.chef.io/chefdk" target="_blank" rel="noopener noreffer ">Aqui</a></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ wget https://packages.chef.io/files/stable/chefdk/2.5.3/el/7/chefdk-2.5.3-1.el7.x86_64.rpm</span></span></code></pre></div></div>
+<p><strong>2- Instalar via RPM:</strong></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo rpm -ivh chefdk-2.5.3-1.el7.x86_64.rpm</span></span></code></pre></div></div>
+<p><strong>3- Confirmar que deu tudo certo:</strong></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ chef --version
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Chef Development Kit Version: 2.5.3
+</span></span><span class="line"><span class="cl">chef-client version: 13.8.5
+</span></span><span class="line"><span class="cl">delivery version: master <span class="o">(</span>73ebb72a6c42b3d2ff5370c476be800fee7e5427<span class="o">)</span>
+</span></span><span class="line"><span class="cl">berks version: 6.3.1
+</span></span><span class="line"><span class="cl">kitchen version: 1.20.0
+</span></span><span class="line"><span class="cl">inspec version: 1.51.21</span></span></code></pre></div></div>
+<h2 id="testando-o-chef-localmente">Testando o Chef Localmente</h2>
+<p><strong>P</strong>ara facilitar o entendimento, vamos criar uma recipe simples para aplicarmos localmente.</p>
+<p><strong>V</strong>amos começar criando um arquivo chamado <strong>exemplo.rb</strong> com o seguinte conteúdo:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-ruby">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">package</span> <span class="s1">&#39;apache&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">package_name</span> <span class="s1">&#39;httpd&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">action</span> <span class="ss">:install</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span></span></span></code></pre></div></div>
+<p><strong>O</strong> que temos aqui?</p>
+<ul>
+<li>Resource Type: package (Pois queremos instalar o pacote httpd)</li>
+<li>Resource Name: apache (Embora o nome do pacote no CentOS seja httpd, o nome do nosso resource aqui é apache, mas poderia ser qualquer coisa que desejarmos)</li>
+<li>Resource Properties: Aqui temos apenas <em>package_name</em> como propriedade, no qual damos o nome do pacote desejado. OBS: Caso não utilizemos a propriedade <em>package_name</em>, ele buscará por um pacote com mesmo nome do resource. No nosso caso, demos o nome <em>apache</em> para nosso resource, portanto ele buscaria por um pacote chamado <em>apache</em> e falharia, pois no CentOS este pacote não existe.</li>
+<li>Actions: install (Temos apenas uma ação para esta recipe, que é justamente a de instalar o pacote, caso já não esteja instalado (idempotência))</li>
+</ul>
+<p><strong>S</strong>alve o arquivo e verifique o mesmo com os dois passos a seguir:</p>
+<p><strong>1-</strong> Verifique se a sintaxe ruby está correta:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ruby -c exemplo.rb</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Syntax OK</span></span></code></pre></div></div>
+<p><strong>2-</strong> Utilize uma ferramenta do chef para verificar se a recipe está de acordo com o esperado pelo Chef:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># foodcritic exemplo.rb</span>
+</span></span><span class="line"><span class="cl">Checking <span class="m">1</span> files
+</span></span><span class="line"><span class="cl">x
+</span></span><span class="line"><span class="cl">FC011: Missing README in markdown format: ../README.md:1
+</span></span><span class="line"><span class="cl">FC031: Cookbook without metadata.rb file: ../metadata.rb:1
+</span></span><span class="line"><span class="cl">FC071: Missing LICENSE file: ../LICENSE:1</span></span></code></pre></div></div>
+<p>PS: Não se espante por enquanto com estes Warnings. Ele apenas está indicando que não possuímos um metadata, um readme e uma licença, pois não os criamos para este exemplo.</p>
+<p><strong>V</strong>erificado o código e aprovado, vamos executar esta recipe localmente.
+<em>(Repare no retorno que será apresentado, onde ele verifica o tipo de resource e identifica que estamos rodando em uma máquina CentoOS, portanto utiliza por padrão o yum para instalar o pacote desejado.)</em></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># chef-client --local-mode exemplo.rb</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-01T19:18:00+00:00<span class="o">]</span> WARN: No config file found or specified on <span class="nb">command</span> line, using <span class="nb">command</span> line options.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-01T19:18:00+00:00<span class="o">]</span> WARN: No cookbooks directory found at or above current directory.  Assuming /root.
+</span></span><span class="line"><span class="cl">Starting Chef Client, version 13.8.5
+</span></span><span class="line"><span class="cl">resolving cookbooks <span class="k">for</span> run list: <span class="o">[]</span>
+</span></span><span class="line"><span class="cl">Synchronizing Cookbooks:
+</span></span><span class="line"><span class="cl">Installing Cookbook Gems:
+</span></span><span class="line"><span class="cl">Compiling Cookbooks...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-01T19:18:03+00:00<span class="o">]</span> WARN: Node kalib6.test.com has an empty run list.
+</span></span><span class="line"><span class="cl">Converging <span class="m">1</span> resources
+</span></span><span class="line"><span class="cl">Recipe: @recipe_files::/root/exemplo.rb
+</span></span><span class="line"><span class="cl">  * yum_package<span class="o">[</span>apache<span class="o">]</span> action install
+</span></span><span class="line"><span class="cl">    - install version 2.4.6-67.el7.centos.6 of package httpd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Running handlers:
+</span></span><span class="line"><span class="cl">Running handlers <span class="nb">complete</span>
+</span></span><span class="line"><span class="cl">Chef Client finished, 1/1 resources updated in <span class="m">16</span> seconds
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-01T19:18:17+00:00<span class="o">]</span> WARN: No config file found or specified on <span class="nb">command</span> line, using <span class="nb">command</span> line options.</span></span></code></pre></div></div>
+<p><strong>S</strong>imples, certo? O pacote httpd (Apache) foi instalado em nosso CentOS. Verificando o status do serviço httpd, veremos que o serviço não está rodando e também não está ativo.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># systemctl status httpd</span>
+</span></span><span class="line"><span class="cl">● httpd.service - The Apache HTTP Server
+</span></span><span class="line"><span class="cl">   Loaded: loaded <span class="o">(</span>/usr/lib/systemd/system/httpd.service<span class="p">;</span> disabled<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
+</span></span><span class="line"><span class="cl">   Active: inactive <span class="o">(</span>dead<span class="o">)</span>
+</span></span><span class="line"><span class="cl">     Docs: man:httpd<span class="o">(</span>8<span class="o">)</span>
+</span></span><span class="line"><span class="cl">           man:apachectl<span class="o">(</span>8<span class="o">)</span></span></span></code></pre></div></div>
+<p><strong>I</strong>sto está correto, afinal o Chef vai deixar a máquina no estado que determinamos. O determinado foi apenas instalar o pacote httpd. Mas de nada ele serve sem estar rodando como serviço, portanto vamos editar nossa recipe <em>exemplo.rb</em> e incluir nela um novo resource, desta vez um resource do tipo <em>service</em>, ou serviço. Sim, podemos ter diversos resources em uma mesma recipe. ;]</p>
+<p><strong>E</strong>dite sua recipe para que ela possua o seguinte conteúdo:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-ruby">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">package</span> <span class="s1">&#39;apache&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">package_name</span> <span class="s1">&#39;httpd&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">action</span> <span class="ss">:installchef_httpd_default</span><span class="o">.</span><span class="n">png</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">service</span> <span class="s1">&#39;httpd&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">action</span> <span class="o">[</span><span class="ss">:enable</span><span class="p">,</span> <span class="ss">:start</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span></span></span></code></pre></div></div>
+<p><strong>O</strong> que adicionamos aqui?</p>
+<ul>
+<li>Resource Type: service (Pois queremos gerenciar o serviço httpd)</li>
+<li>Resource Name: httpd (Poderíamos ter utilizado qualquer nome, mas para simplificar e não precisarmos utilizar uma propriedade de nome, deixaremos o resource com o nome do serviço, <em>httpd</em>)</li>
+<li>Actions: enable e start (Como nosso objetivo é não apenas iniciar o serviço, mas também deixá-lo habilitado para ser iniciado automaticamente após reinicialização, utilizaremos o <em>enable</em> e o <em>start</em>) -&gt; equivalente aos comandos <em>systemctl enable httpd</em> e <em>systemctl start httpd</em></li>
+</ul>
+<p><strong>N</strong>ovamente vamos verificar nosso código via ruby e foodcritic:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ruby -c exemplo.rb &amp;&amp; foodcritic exemplo.rb</span></span></span></code></pre></div></div>
+<p><strong>E</strong> executando nossa recipe. (Novamente, o pacote httpd já está instalado, esta parte da recipe será ignorada automaticamente pelo Chef.)</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># chef-client --local-mode exemplo.rb</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-01T19:32:26+00:00<span class="o">]</span> WARN: No config file found or specified on <span class="nb">command</span> line, using <span class="nb">command</span> line options.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-01T19:32:26+00:00<span class="o">]</span> WARN: No cookbooks directory found at or above current directory.  Assuming /root.
+</span></span><span class="line"><span class="cl">Starting Chef Client, version 13.8.5
+</span></span><span class="line"><span class="cl">resolving cookbooks <span class="k">for</span> run list: <span class="o">[]</span>
+</span></span><span class="line"><span class="cl">Synchronizing Cookbooks:
+</span></span><span class="line"><span class="cl">Installing Cookbook Gems:
+</span></span><span class="line"><span class="cl">Compiling Cookbooks...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-01T19:32:28+00:00<span class="o">]</span> WARN: Node kalib6.test.com has an empty run list.
+</span></span><span class="line"><span class="cl">Converging <span class="m">2</span> resources
+</span></span><span class="line"><span class="cl">Recipe: @recipe_files::/root/exemplo.rb
+</span></span><span class="line"><span class="cl">  * yum_package<span class="o">[</span>apache<span class="o">]</span> action install <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * service<span class="o">[</span>httpd<span class="o">]</span> action <span class="nb">enable</span>
+</span></span><span class="line"><span class="cl">    - <span class="nb">enable</span> service service<span class="o">[</span>httpd<span class="o">]</span>
+</span></span><span class="line"><span class="cl">  * service<span class="o">[</span>httpd<span class="o">]</span> action start
+</span></span><span class="line"><span class="cl">    - start service service<span class="o">[</span>httpd<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Running handlers:
+</span></span><span class="line"><span class="cl">Running handlers <span class="nb">complete</span>
+</span></span><span class="line"><span class="cl">Chef Client finished, 2/3 resources updated in <span class="m">06</span> seconds
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-01T19:32:33+00:00<span class="o">]</span> WARN: No config file found or specified on <span class="nb">command</span> line, using <span class="nb">command</span> line options.</span></span></code></pre></div></div>
+<p><strong>A</strong>gora podemos verificar que nosso serviço httpd está de fato rodando.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># systemctl status httpd &amp;&amp; ps aux | grep httpd</span>
+</span></span><span class="line"><span class="cl">● httpd.service - The Apache HTTP Server
+</span></span><span class="line"><span class="cl">   Loaded: loaded <span class="o">(</span>/usr/lib/systemd/system/httpd.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
+</span></span><span class="line"><span class="cl">   Active: active <span class="o">(</span>running<span class="o">)</span> since Sun 2018-04-01 19:32:33 UTC<span class="p">;</span> 1min 17s ago
+</span></span><span class="line"><span class="cl">     Docs: man:httpd<span class="o">(</span>8<span class="o">)</span>
+</span></span><span class="line"><span class="cl">           man:apachectl<span class="o">(</span>8<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> Main PID: <span class="m">2409</span> <span class="o">(</span>httpd<span class="o">)</span>
+</span></span><span class="line"><span class="cl">   Status: <span class="s2">&#34;Total requests: 0; Current requests/sec: 0; Current traffic:   0 B/sec&#34;</span>
+</span></span><span class="line"><span class="cl">   CGroup: /system.slice/httpd.service
+</span></span><span class="line"><span class="cl">           ├─2409 /usr/sbin/httpd -DFOREGROUND
+</span></span><span class="line"><span class="cl">           ├─2410 /usr/sbin/httpd -DFOREGROUND
+</span></span><span class="line"><span class="cl">           ├─2411 /usr/sbin/httpd -DFOREGROUND
+</span></span><span class="line"><span class="cl">           ├─2412 /usr/sbin/httpd -DFOREGROUND
+</span></span><span class="line"><span class="cl">           ├─2413 /usr/sbin/httpd -DFOREGROUND
+</span></span><span class="line"><span class="cl">           └─2414 /usr/sbin/httpd -DFOREGROUND
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Apr <span class="m">01</span> 19:32:33 kalib6.test.com systemd<span class="o">[</span>1<span class="o">]</span>: Starting The Apache HTTP Server...
+</span></span><span class="line"><span class="cl">Apr <span class="m">01</span> 19:32:33 kalib6.test.com systemd<span class="o">[</span>1<span class="o">]</span>: Started The Apache HTTP Server.
+</span></span><span class="line"><span class="cl">root      <span class="m">2409</span>  0.0  0.2 <span class="m">226040</span>  <span class="m">4948</span> ?        Ss   19:32   0:00 /usr/sbin/httpd -DFOREGROUND
+</span></span><span class="line"><span class="cl">apache    <span class="m">2410</span>  0.0  0.1 <span class="m">226040</span>  <span class="m">2872</span> ?        S    19:32   0:00 /usr/sbin/httpd -DFOREGROUND
+</span></span><span class="line"><span class="cl">apache    <span class="m">2411</span>  0.0  0.1 <span class="m">226040</span>  <span class="m">2872</span> ?        S    19:32   0:00 /usr/sbin/httpd -DFOREGROUND
+</span></span><span class="line"><span class="cl">apache    <span class="m">2412</span>  0.0  0.1 <span class="m">226040</span>  <span class="m">2872</span> ?        S    19:32   0:00 /usr/sbin/httpd -DFOREGROUND
+</span></span><span class="line"><span class="cl">apache    <span class="m">2413</span>  0.0  0.1 <span class="m">226040</span>  <span class="m">2872</span> ?        S    19:32   0:00 /usr/sbin/httpd -DFOREGROUND
+</span></span><span class="line"><span class="cl">apache    <span class="m">2414</span>  0.0  0.1 <span class="m">226040</span>  <span class="m">2872</span> ?        S    19:32   0:00 /usr/sbin/httpd -DFOREGROUND
+</span></span><span class="line"><span class="cl">root      <span class="m">2425</span>  0.0  0.0 <span class="m">112660</span>   <span class="m">976</span> pts/0    R+   19:33   0:00 grep --color<span class="o">=</span>auto httpd</span></span></code></pre></div></div>
+<p><strong>A</strong>lém disso, você pode testar seu novo servidor web diretamente em seu navegador. Caso esteja executando tudo em localhost, pode utilizar <em>localhost</em> como endereço. Caso contrário, pode utilizar o endereço ip da máquina em questão.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/chef-aautomacao-e-gerenciamento-de/chef_httpd_default.png"
+        data-srcset="/posts/chef-aautomacao-e-gerenciamento-de/chef_httpd_default.png, /posts/chef-aautomacao-e-gerenciamento-de/chef_httpd_default.png 1.5x, /posts/chef-aautomacao-e-gerenciamento-de/chef_httpd_default.png 2x"
+        data-sizes="auto"
+        alt="/posts/chef-aautomacao-e-gerenciamento-de/chef_httpd_default.png"
+        title="Chef" width="400" height="198" /></p>
+<p><strong>A</strong> página padrão do Apache não é algo que queremos, portanto vamos criar nosso próprio site (Hello World) para exemplificar melhor. Para isto editaremos novamente nossa recipe e incluiremos mais um resource, do tipo <em>file</em>, ou arquivo. O conteúdo de sua recipe deverá ficar assim:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-ruby">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">package</span> <span class="s1">&#39;apache&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">package_name</span> <span class="s1">&#39;httpd&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">action</span> <span class="ss">:install</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">service</span> <span class="s1">&#39;httpd&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">action</span> <span class="o">[</span><span class="ss">:enable</span><span class="p">,</span> <span class="ss">:start</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">file</span> <span class="s1">&#39;/var/www/html/index.html&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">content</span> <span class="s1">&#39;Hello World!&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mode</span> <span class="s1">&#39;0755&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">owner</span> <span class="s1">&#39;root&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">group</span> <span class="s1">&#39;apache&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span></span></span></code></pre></div></div>
+<p><strong>O</strong> que adicionamos aqui?</p>
+<ul>
+<li>Resource Type: file (Pois queremos gerenciar o nosso arquivo index.html, o qual, caso não exista, será criado)</li>
+<li>Resource Name: /var/www/html/index.html (Poderíamos ter utilizado qualquer nome, mas para simplificar e não precisarmos utilizar uma propriedade de nome, deixaremos o resource com o nome do arquivo que vamos utilizar, <em>/var/www/html/index.html</em>)</li>
+<li>Content: Hello World! (Para simplificar teremos uma simples string <em>Hello World!</em> como conteúdo de nosso site)</li>
+<li>Mode: Permissão que desejamos atribuir ao arquivo index.html</li>
+<li>Owner: Dono que deve ser atribuído ao arquivo index.html</li>
+<li>Group: Grupo que deve ser atribuído ao arquivo index.html</li>
+</ul>
+<p><strong>N</strong>ovamente vamos verificar nosso código via ruby e foodcritic:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ruby -c exemplo.rb &amp;&amp; foodcritic exemplo.rb</span></span></span></code></pre></div></div>
+<p><strong>E</strong> executaremos novamente nossa recipe. (Assim como anteriormente, o Chef ignorará as instruções referentes aos resources que já se encontram no estado desejado)</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># chef-client --local-mode exemplo.rb          </span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-01T19:48:00+00:00<span class="o">]</span> WARN: No config file found or specified on <span class="nb">command</span> line, using <span class="nb">command</span> line options.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-01T19:48:00+00:00<span class="o">]</span> WARN: No cookbooks directory found at or above current directory.  Assuming /root.
+</span></span><span class="line"><span class="cl">Starting Chef Client, version 13.8.5
+</span></span><span class="line"><span class="cl">resolving cookbooks <span class="k">for</span> run list: <span class="o">[]</span>
+</span></span><span class="line"><span class="cl">Synchronizing Cookbooks:
+</span></span><span class="line"><span class="cl">Installing Cookbook Gems:
+</span></span><span class="line"><span class="cl">Compiling Cookbooks...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-01T19:48:02+00:00<span class="o">]</span> WARN: Node kalib6.test.com has an empty run list.
+</span></span><span class="line"><span class="cl">Converging <span class="m">3</span> resources
+</span></span><span class="line"><span class="cl">Recipe: @recipe_files::/root/exemplo.rb
+</span></span><span class="line"><span class="cl">  * yum_package<span class="o">[</span>apache<span class="o">]</span> action install <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * service<span class="o">[</span>httpd<span class="o">]</span> action <span class="nb">enable</span> <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * service<span class="o">[</span>httpd<span class="o">]</span> action start <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * file<span class="o">[</span>/var/www/html/index.html<span class="o">]</span> action create
+</span></span><span class="line"><span class="cl">    - create new file /var/www/html/index.html
+</span></span><span class="line"><span class="cl">    - update content in file /var/www/html/index.html from none to 7f83b1
+</span></span><span class="line"><span class="cl">    --- /var/www/html/index.html        2018-04-01 19:48:06.829566745 +0000
+</span></span><span class="line"><span class="cl">    +++ /var/www/html/.chef-index20180401-2631-164958p.html     2018-04-01 19:48:06.829566745 +0000
+</span></span><span class="line"><span class="cl">    @@ -1 +1,2 @@
+</span></span><span class="line"><span class="cl">    +Hello World!
+</span></span><span class="line"><span class="cl">    - change mode from <span class="s1">&#39;&#39;</span> to <span class="s1">&#39;0755&#39;</span>
+</span></span><span class="line"><span class="cl">    - change owner from <span class="s1">&#39;&#39;</span> to <span class="s1">&#39;root&#39;</span>
+</span></span><span class="line"><span class="cl">    - change group from <span class="s1">&#39;&#39;</span> to <span class="s1">&#39;apache&#39;</span>
+</span></span><span class="line"><span class="cl">    - restore selinux security context
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Running handlers:
+</span></span><span class="line"><span class="cl">Running handlers <span class="nb">complete</span>
+</span></span><span class="line"><span class="cl">Chef Client finished, 1/4 resources updated in <span class="m">06</span> seconds
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-01T19:48:07+00:00<span class="o">]</span> WARN: No config file found or specified on <span class="nb">command</span> line, using <span class="nb">command</span> line options.</span></span></code></pre></div></div>
+<p><strong>P</strong>odemos verificar que o Chef criou o nosso arquivo index.html, atribuindo o dono, grupo e permissão que indicamos:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ls -lh /var/www/html/</span>
+</span></span><span class="line"><span class="cl">total 4.0K
+</span></span><span class="line"><span class="cl">-rwxr-xr-x. <span class="m">1</span> root apache <span class="m">12</span> Apr  <span class="m">1</span> 19:48 index.html</span></span></code></pre></div></div>
+<p><strong>T</strong>ambém podemos voltar em nosso navegador e atualizar a página para que vejamos o nosso Hello World ao invés da página padrão do Apache.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/chef-aautomacao-e-gerenciamento-de/chef_httpd_hw.png"
+        data-srcset="/posts/chef-aautomacao-e-gerenciamento-de/chef_httpd_hw.png, /posts/chef-aautomacao-e-gerenciamento-de/chef_httpd_hw.png 1.5x, /posts/chef-aautomacao-e-gerenciamento-de/chef_httpd_hw.png 2x"
+        data-sizes="auto"
+        alt="/posts/chef-aautomacao-e-gerenciamento-de/chef_httpd_hw.png"
+        title="Chef" width="400" height="198" /></p>
+<h2 id="vale-a-pena">Vale a pena?</h2>
+<p><strong>R</strong>ealizar este processo manualmente na mesma máquina CentoOS seria mais rápido do que utilizando o Chef. Vamos rever:</p>
+<p><strong>O</strong> que precisamos?</p>
+<ul>
+<li>Instalar o pacote httpd</li>
+<li>Habilitar e Iniciar o serviço httpd</li>
+<li>Criar o arquivo index.html com o conteúdo &ldquo;Hello World!&rdquo;</li>
+</ul>
+<p><strong>F</strong>azendo manualmente seria apenas uma questão de executarmos 4 comandos:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># yum install httpd</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># systemctl enable httpd &amp;&amp; systemctl start httpd</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># echo &#34;Hello World!&#34; &gt; /var/www/html/index.html</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># chmod 0755 /var/www/html/index.html &amp;&amp; chown root:apache /var/www/html/index.html</span></span></span></code></pre></div></div>
+<p><strong>S</strong>im, é verdade que fazendo manualmente neste caso seria MUITO mais rápido. O importante é lembrar do que falamos anteriormente: E se não for apenas 1 servidor? E se for um grupo? E se ao invés de apenas 3 resources, tiver 15? ou 40? E se alguém modificar algo em algum dos resources? Como você saberá qual foi? Vai verificar todos um a um para identificar o que precisa ser corrigido?</p>
+<h1 id="vantagens">Vantagens:</h1>
+<p><strong>I</strong>magine que algum membro de sua equipe alterou a permissão do arquivo index.html sem lhe avisar, por exemplo ele foi lá e&hellip;</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># chmod 0666 /var/www/html/index.html</span></span></span></code></pre></div></div>
+<p><strong>L</strong>embrando que em nossa recipe exemplo.rb, definimos a permissão 0755. Neste caso, sempre que executarmos a recipe, o Chef irá verificar todos os resources e corrigir o que quer que tenha sido alterado.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># chef-client --local-mode exemplo.rb</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-01T20:04:08+00:00<span class="o">]</span> WARN: No config file found or specified on <span class="nb">command</span> line, using <span class="nb">command</span> line options.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-01T20:04:08+00:00<span class="o">]</span> WARN: No cookbooks directory found at or above current directory.  Assuming /root.
+</span></span><span class="line"><span class="cl">Starting Chef Client, version 13.8.5
+</span></span><span class="line"><span class="cl">resolving cookbooks <span class="k">for</span> run list: <span class="o">[]</span>
+</span></span><span class="line"><span class="cl">Synchronizing Cookbooks:
+</span></span><span class="line"><span class="cl">Installing Cookbook Gems:
+</span></span><span class="line"><span class="cl">Compiling Cookbooks...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-01T20:04:10+00:00<span class="o">]</span> WARN: Node kalib6.test.com has an empty run list.
+</span></span><span class="line"><span class="cl">Converging <span class="m">3</span> resources
+</span></span><span class="line"><span class="cl">Recipe: @recipe_files::/root/exemplo.rb
+</span></span><span class="line"><span class="cl">  * yum_package<span class="o">[</span>apache<span class="o">]</span> action install <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * service<span class="o">[</span>httpd<span class="o">]</span> action <span class="nb">enable</span> <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * service<span class="o">[</span>httpd<span class="o">]</span> action start <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * file<span class="o">[</span>/var/www/html/index.html<span class="o">]</span> action create
+</span></span><span class="line"><span class="cl">    - change mode from <span class="s1">&#39;0666&#39;</span> to <span class="s1">&#39;0755&#39;</span>
+</span></span><span class="line"><span class="cl">    - restore selinux security context
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Running handlers:
+</span></span><span class="line"><span class="cl">Running handlers <span class="nb">complete</span>
+</span></span><span class="line"><span class="cl">Chef Client finished, 1/4 resources updated in <span class="m">06</span> seconds
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-01T20:04:14+00:00<span class="o">]</span> WARN: No config file found or specified on <span class="nb">command</span> line, using <span class="nb">command</span> line options.</span></span></code></pre></div></div>
+<p><strong>R</strong>epare na linha <em>- change mode from &lsquo;0666&rsquo; to &lsquo;0755&rsquo;</em>. O Chef acabou de corrigir automaticamente sem que nós tenhamos de vasculhar cada componente e arquivo em nosso servidor para saber o que foi alterado ou o que está diferente do estado desejado. Novamente, aqui tratamos de um servidor único, com apenas um arquivo. Imagine ter que varrer manualmente diversos servidores e diversos arquivos e diretórios?</p>
+<p><strong>N</strong>este exemplo, provavelmente o site poderia continuar funcionando, pois foi alterada apenas a permissão de um único arquivo, certo? Mas imagine que sem querer ele acabou parando o serviço httpd, ou até desinstalou o mesmo? Em uma instalação padrão com Chef Server, existem agendamentos que fazem com que o Chef execute as recipes a cada X minutos, portanto o serviço seria inicializado novamente automaticamente, ou mesmo instalado caso necessário.</p>
+<p><strong>É</strong> fácil imaginar diversos cenários nos quais seria útil ter a sua infraestrutura em formato de código.</p>
+<p><strong>I</strong>magine uma catástrofe em que seu servidor simplesmente parou de funcionar e você precisará criar outro. Novamente você teria que executar aqueles comandos. Se desde o início tivesse utilizado Chef, ou outra ferramenta de Gerenciamento de Configuração, você poderia ter a sua recipe armazenada em um repositório Git, por exemplo, conforme mencionado no início deste post, e bastaria apenas executar o seu chef-client para instalar os pacotes necessários, habilitar e inicializar serviços, criar arquivos, etc.</p>
+<p><strong>A</strong> imaginação é o seu limite. ;]</p>
+<p><strong>E</strong>m posts futuros pretendo explorar mais a fundo o Chef, bem como outras ferramentas.</p>
+<p><strong>H</strong>appy Hacking!</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Atualizado em 2018-04-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Compartilhe em X" data-sharer="x" data-url="//blog.marcelocavalcante.net:1313/posts/chef-aautomacao-e-gerenciamento-de/" data-title="Chef: Automação E Gerenciamento De Configuração" data-via="Marcelo_Kalib" data-hashtags="Devops,Chef"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Threads" data-sharer="threads" data-url="//blog.marcelocavalcante.net:1313/posts/chef-aautomacao-e-gerenciamento-de/" data-title="Chef: Automação E Gerenciamento De Configuração"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Facebook" data-sharer="facebook" data-url="//blog.marcelocavalcante.net:1313/posts/chef-aautomacao-e-gerenciamento-de/" data-hashtag="Devops"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Linkedin" data-sharer="linkedin" data-url="//blog.marcelocavalcante.net:1313/posts/chef-aautomacao-e-gerenciamento-de/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Hacker News" data-sharer="hackernews" data-url="//blog.marcelocavalcante.net:1313/posts/chef-aautomacao-e-gerenciamento-de/" data-title="Chef: Automação E Gerenciamento De Configuração"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Line" data-sharer="line" data-url="//blog.marcelocavalcante.net:1313/posts/chef-aautomacao-e-gerenciamento-de/" data-title="Chef: Automação E Gerenciamento De Configuração"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em 微博" data-sharer="weibo" data-url="//blog.marcelocavalcante.net:1313/posts/chef-aautomacao-e-gerenciamento-de/" data-title="Chef: Automação E Gerenciamento De Configuração"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Diaspora" data-sharer="diaspora" data-url="//blog.marcelocavalcante.net:1313/posts/chef-aautomacao-e-gerenciamento-de/" data-title="Chef: Automação E Gerenciamento De Configuração" data-description="Chef é uma popular ferramenta de Gerenciamento de Configurações criado pela empresa de mesmo nome, Chef. O Chef é desenvolvido em Ruby e Erlang, utiliza uma linguagem DSL em Ruby puro para escrever arquivos de configuração de sistemas chamados recipes."><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=%2f%2fblog.marcelocavalcante.net%3a1313%2fposts%2fchef-aautomacao-e-gerenciamento-de%2f&amp;text=Chef%3a%20Automa%c3%a7%c3%a3o%20E%20Gerenciamento%20De%20Configura%c3%a7%c3%a3o" target="_blank" title="Compartilhe em Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/devops/">Devops</a>,&nbsp;<a href="/tags/chef/">Chef</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Voltar</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/conhecendo-o-kubernetes-clusters-de/" class="prev" rel="prev" title="Conhecendo O Kubernetes - Clusters De Containers"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Conhecendo O Kubernetes - Clusters De Containers</a>
+            <a href="/posts/chef-uso-de-condicionais-not/" class="next" rel="next" title="Chef: Uso De Condicionais not_if E only_if">Chef: Uso De Condicionais not_if E only_if<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Possibilitado por <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Tema - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2008 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://blog.marcelocavalcante.net" target="_blank">Marcelo Cavalcante</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Voltar ao topo">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="Ver comentários">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.20.2/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+</html>

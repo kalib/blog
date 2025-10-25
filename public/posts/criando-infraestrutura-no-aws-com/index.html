@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Criando Infraestrutura No Aws Com Sceptre - Marcelo Cavalcante Rocha</title><meta name="Description" content="O que é o Sceptre e como utilizar esta tecnologia para melhor gerenciamento de infraestruturas na nuvem AWS com CloudFormation."><meta property="og:url" content="//blog.marcelocavalcante.net:1313/posts/criando-infraestrutura-no-aws-com/">
+  <meta property="og:site_name" content="Marcelo Cavalcante Rocha">
+  <meta property="og:title" content="Criando Infraestrutura No Aws Com Sceptre">
+  <meta property="og:description" content="O que é o Sceptre e como utilizar esta tecnologia para melhor gerenciamento de infraestruturas na nuvem AWS com CloudFormation.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-03-12T20:12:54-05:00">
+    <meta property="article:modified_time" content="2022-03-12T20:12:54-05:00">
+    <meta property="article:tag" content="Devops">
+    <meta property="article:tag" content="AWS">
+    <meta property="article:tag" content="Sceptre">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Cloud">
+    <meta property="article:tag" content="CloudFormation">
+    <meta property="og:image" content="//blog.marcelocavalcante.net:1313/posts/criando-infraestrutura-no-aws-com/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="//blog.marcelocavalcante.net:1313/posts/criando-infraestrutura-no-aws-com/featured-image.png">
+  <meta name="twitter:title" content="Criando Infraestrutura No Aws Com Sceptre">
+  <meta name="twitter:description" content="O que é o Sceptre e como utilizar esta tecnologia para melhor gerenciamento de infraestruturas na nuvem AWS com CloudFormation.">
+<meta name="application-name" content="Marcelo Cavalcante">
+<meta name="apple-mobile-web-app-title" content="Marcelo Cavalcante">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="//blog.marcelocavalcante.net:1313/posts/criando-infraestrutura-no-aws-com/" /><link rel="prev" href="//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/" /><link rel="next" href="//blog.marcelocavalcante.net:1313/posts/criando-funcoes-lambda-facilmente-com/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Criando Infraestrutura No Aws Com Sceptre",
+        "inLanguage": "pt-BR",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/\/blog.marcelocavalcante.net:1313\/posts\/criando-infraestrutura-no-aws-com\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/criando-infraestrutura-no-aws-com\/featured-image.png",
+                            "width":  990 ,
+                            "height":  495 
+                        }],"genre": "posts","keywords": "Devops, AWS, Sceptre, Python, Cloud, CloudFormation","wordcount":  2528 ,
+        "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/criando-infraestrutura-no-aws-com\/","datePublished": "2022-03-12T20:12:54-05:00","dateModified": "2022-03-12T20:12:54-05:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Marcelo Cavalcante"
+            },"description": "O que é o Sceptre e como utilizar esta tecnologia para melhor gerenciamento de infraestruturas na nuvem AWS com CloudFormation."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'auto';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categorias </a><a class="menu-item" href="/sobre/"> Quem Sou </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancelar
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categorias</a><a class="menu-item" href="/sobre/" title="">Quem Sou</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Conteúdos</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Criando Infraestrutura No Aws Com Sceptre</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://blog.marcelocavalcante.net" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Marcelo Cavalcante</a></span>&nbsp;<span class="post-category">incluido em <a href="/categories/tutoriais/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutoriais</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-03-12">2022-03-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2528 palavras&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutos&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-infraestrutura-no-aws-com/featured-image.png"
+        data-srcset="/posts/criando-infraestrutura-no-aws-com/featured-image.png, /posts/criando-infraestrutura-no-aws-com/featured-image.png 1.5x, /posts/criando-infraestrutura-no-aws-com/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-infraestrutura-no-aws-com/featured-image.png"
+        title="O que é o Sceptre e como utilizar esta tecnologia para melhor gerenciamento de infraestruturas na nuvem AWS com CloudFormation." /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Conteúdos</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#sceptre-o-que-é-isso">Sceptre? O que é isso?</a></li>
+    <li><a href="#instalação">Instalação</a>
+      <ul>
+        <li><a href="#utilizando-docker">Utilizando Docker</a></li>
+        <li><a href="#utilizando-pip">Utilizando Pip</a></li>
+      </ul>
+    </li>
+    <li><a href="#utilizando-o-sceptre">Utilizando o Sceptre</a>
+      <ul>
+        <li><a href="#autenticação-com-o-aws">Autenticação com o AWS</a></li>
+        <li><a href="#iniciando-com-o-sceptre">Iniciando com o Sceptre</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>O que é o Sceptre e como utilizar esta tecnologia para melhor gerenciamento de infraestruturas na nuvem AWS com CloudFormation.</p>
+<h2 id="sceptre-o-que-é-isso">Sceptre? O que é isso?</h2>
+<p><strong>S</strong>ceptre é uma ferramenta de IaC ou Infraestrutura como Código (<em>Infrastructure as Code</em>). Se este termo ainda é novidade para você, sugiro uma lida em um post no qual explico o que é e quais as vantagens de se utilizar Infraestrutura como Código: <a href="/posts/infraestrutura-como-codigo-com-terraform/" rel="">Infraestrutura como Código com Terraform</a>.</p>
+<p><strong>A</strong>ssim como o <em>Terraform</em>, o Sceptre nos ajuda a gerenciar infraestruturas no AWS de forma mais eficiente. Criado pela empresa <a href="https://www.cloudreach.com/" target="_blank" rel="noopener noreffer ">CloudReach</a>, o Sceptre possui algumas diferenças marcantes quando comparado ao Terraform. A primeira delas é que não se trata de uma ferramenta para gerenciamento de infraestrutura como código de forma generalista, ou seja, não pode ser utilizado para qualquer provedor de nuvem por exemplo. O Sceptre foi criado especificamente com o intuito de gerenciar infraestrutura no AWS. Além disso, o Sceptre não funciona de forma 100% autônoma, como no caso do Terraform que gerencia e manipula recursos na nuvem mantendo um arquivo (ou vários) para seu status. O Sceptre na verdade utiliza-se do já existente <em>CloudFormation</em> do AWS.</p>
+<p><strong>S</strong>e você não conhece o CloudFormation, trata-se da solução nativa da Amazon para gerenciamento de infraestrutura na nuvem AWS utilizando-se de infraestrutura como código. Mas.. espera aí&hellip; algo está esquisito&hellip;</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-infraestrutura-no-aws-com/estranho.png"
+        data-srcset="/posts/criando-infraestrutura-no-aws-com/estranho.png, /posts/criando-infraestrutura-no-aws-com/estranho.png 1.5x, /posts/criando-infraestrutura-no-aws-com/estranho.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-infraestrutura-no-aws-com/estranho.png"
+        title="Estranho" width="450" height="330" /></p>
+<p><strong>S</strong>e o AWS já possui sua própria ferramenta nativa de infraestrutura como código, que é o CloudFormation&hellip; É compreensível o uso de Terraform como uma alternativa por ser um padrão mais genérico e que pode ser utilizado para todas as nuvens, não apenas o AWS. Mas o que justificaria utilizar o Sceptre ao invés do CloudFormation se por baixo ele acabará utilizando o CloudFormation?</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-infraestrutura-no-aws-com/calma.png"
+        data-srcset="/posts/criando-infraestrutura-no-aws-com/calma.png, /posts/criando-infraestrutura-no-aws-com/calma.png 1.5x, /posts/criando-infraestrutura-no-aws-com/calma.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-infraestrutura-no-aws-com/calma.png"
+        title="calma" width="370" height="295" /></p>
+<p><strong>O</strong> Sceptre foi criado para gerenciar o CloudFormation, sim. Ninguém criaria algo apenas por criar, portanto o Sceptre veio com a proposta de lidar com algumas carências já existentes no CloudFormation. O Sceptre é capaz de criar, atualizar e deletar stacks ou conjuntos de recursos no AWS, além de fornecer informações mais detalhadas, metadata bem como recuperar facilmente tais dados.</p>
+<p><strong>C</strong>riado em <em>Python</em>, o Sceptre pode ser utilizado como um comando CLI ou como um módulo Python, pronto para ser utilizado em ambientes de produção e enterprise e desenhado para ser executado como parte de pipelines de CI/CD.</p>
+<p><strong>A</strong> principal motivação para a criação do Sceptre foi o fato de o CloudFormation não possuir recursos mais robustos para gerenciamento de stacks ou conjuntos de recursos, enquanto que a CLI padrão do AWS bem como a biblioteca Boto3 para Python oferecem alguns destes recursos, mas ainda assim nenhuma delas disponibiliza:</p>
+<ul>
+<li>Links entre a saída de uma stack com parâmetros de outra stack;</li>
+<li>Facilidade para se trabalhar com roles ou mesmo com múltiplas contas do AWS;</li>
+</ul>
+<p><strong>S</strong>em mais lenga lenga, vamos ao que interessa.</p>
+<h2 id="instalação">Instalação</h2>
+<p><strong>A</strong>s duas formas mais simples de se utilizar o Sceptre são via docker ou instalando via Pip. Sinta-se livre para utilizar a forma que mais lhe agradar.</p>
+<p><strong>A</strong>o longo do post estarei utilizando o sceptre instalado localmente através do pip, mas os passos deverão funcionar via docker também caso prefira este método.</p>
+<h3 id="utilizando-docker">Utilizando Docker</h3>
+<p><strong>E</strong>sta opção assume que você já possua o Docker instalado.</p>
+<p><strong>B</strong>aixe a imagem Docker do Sceptre da seguinte forma:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ docker pull cloudreach/sceptre</span></span></code></pre></div></div>
+<p><strong>C</strong>aso queira baixar alguma versão em específico, inclua a versão desejada ao seu comando:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ docker pull cloudreach/sceptre:2.1.3</span></span></code></pre></div></div>
+<p><strong>D</strong>eixando em branco ele buscará a última versão disponível (<em>latest</em>).</p>
+<p><strong>P</strong>odemos testar o Sceptre via Docker utilizando o comando a seguir para vermos a versão do Sceptre utilizada.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ docker run cloudreach/sceptre:latest --version
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Sceptre, version 3.0.0</span></span></code></pre></div></div>
+<p><strong>S</strong>im, o container Docker é iniciado, executa o que pedimos e se encerra em seguida. Oi, simples assim.</p>
+<p><strong>V</strong>ale lembrar que será necessário sempre montar o seu diretório local em seu container docker para que o sceptre executado no container tenha acesso ao seu código, portanto para cada comando que executaremos a seguir você utilizaria algo similar a isto:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/project -v ~/.aws/:/root/.aws/:ro cloudreach/sceptre:latest</span></span></code></pre></div></div>
+<h3 id="utilizando-pip">Utilizando Pip</h3>
+<p><strong>E</strong>sta opção assume que você já possua o Python e o Pip instalados.</p>
+<p><strong>S</strong>endo uma ferramenta Python, podemos intalar o sceptre com o pip:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ pip install sceptre</span></span></code></pre></div></div>
+<p><strong>E</strong>m seguida podemos confirmar a versão do sceptre instalada:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ sceptre --version</span></span></code></pre></div></div>
+<h2 id="utilizando-o-sceptre">Utilizando o Sceptre</h2>
+<h3 id="autenticação-com-o-aws">Autenticação com o AWS</h3>
+<p><strong>O</strong> Sceptre utilizará os mesmos arquivos de configuração utilizados pela CLI do AWS para autenticar-se, portanto este post assume que você já possui também o AWS CLI instalado e configurado em sua máquina.</p>
+<p><strong>C</strong>aso você ainda não possua, siga os passos descritos aqui para instalar e configurar o seu AWS CLI:</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/pt_br/cli/latest/userguide/getting-started-install.html" target="_blank" rel="noopener noreffer ">Instalação do AWS CLI</a></li>
+<li><a href="https://docs.aws.amazon.com/pt_br/cli/latest/userguide/cli-configure-quickstart.html" target="_blank" rel="noopener noreffer ">Configuração do AWS CLI</a></li>
+</ul>
+<p><strong>V</strong>ocê pode testar seu AWS CLI através do seguinte comando:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ aws sts get-caller-identity
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;UserId&#34;</span>: <span class="s2">&#34;ABLABLABLABLABLABLADH&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Account&#34;</span>: <span class="s2">&#34;6777777777775&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Arn&#34;</span>: <span class="s2">&#34;arn:aws:iam::6777777777775:user/marcelo&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></div></div>
+<p><strong>S</strong>e você recebeu um retorno similar a este, informando o ID do seu usuário AWS, o ID de sua conta AWS e o ARN de seu uruário, significa que seu AWS CLI está devidamente configurado e conseguindo autenticar e se comunicar com o AWS.</p>
+<h3 id="iniciando-com-o-sceptre">Iniciando com o Sceptre</h3>
+<p><strong>A</strong>gora que sabemos que o Sceptre já conseguirá autenticar-se com o AWS vamos iniciar a configuração básica de nossa infraestrutura.</p>
+<p><strong>O</strong> Sceptre utiliza uma árvore ou estrutura de diretórios seguindo o padrão a seguir:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">meu-projeto-sceptre
+</span></span><span class="line"><span class="cl">    ├── config
+</span></span><span class="line"><span class="cl">    │   └── config.yaml
+</span></span><span class="line"><span class="cl">    └── templates</span></span></code></pre></div></div>
+<p><strong>B</strong>asicamente a estrutura mais simples é com o diretório principal de seu projeto e dentro dele dois diretórios, sendo um deles para as configurações e o outro para os templates.</p>
+<p><strong>O</strong> Sceptre pode criar esta árvore de diretórios automaticamente ao criarmos um novo projeto. Para isto utilizaremos o comando <em>sceptre new project</em>. Perceba que ele lhe pedirá que indique a região na qual deseja o seu projeto. Esta seria a região a ser utilizada no AWS para a sua infraestrutura. No meu caso estou utilizando ca-central-1, pois é onde moro. Sinta-se livre para usar a região de sua preferência, como por exemplo sa-east-1 (para São Paulo, Brasil). A lista de regiões pode ser encontrada aqui: <a href="https://docs.aws.amazon.com/pt_br/AWSEC2/latest/UserGuide/using-regions-availability-zones.html" target="_blank" rel="noopener noreffer ">Lista de Regiões AWS</a>. Em seguida o Sceptre lhe pedirá um código para o projeto, pode deixar em branco:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ sceptre new project meu-projeto-sceptre
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Please enter a region <span class="o">[]</span>: ca-central-1
+</span></span><span class="line"><span class="cl">Please enter a project_code <span class="o">[</span>meu-projeto-sceptre<span class="o">]</span>:</span></span></code></pre></div></div>
+<p><strong>P</strong>odemos confirmar a criação do diretório de nosso projeto, bem como os dois sub-diretórios:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ ls meu-projeto-sceptre
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">config    templates</span></span></code></pre></div></div>
+<p><strong>A</strong>gora que temos nosso projeto criado, podemos começar a inserir nosso código de fato.</p>
+<p><strong>V</strong>erifcando o que foi criado pelo Sceptre automaticamente veremos que o diretório de templates está vazio, mas o diretório de config possui um arquivo padrão <em>config.yaml</em> com o seguinte conteúdo:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-yaml">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">project_code</span><span class="p">:</span><span class="w"> </span><span class="l">meu-projeto-sceptre</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="l">ca-central-1</span></span></span></code></pre></div></div>
+<p><strong>O</strong> diretório <em>config</em> é onde manteremos as configurações de nossas stacks e o diretório <em>templates</em> é onde manteremos os arquivos de template do CloudFormation.</p>
+<p><strong>V</strong>amos iniciar criando um stack chamado <em>test</em> e iniciaremos criando uma VPC nesta stack, visto que VPCs são geralmente o nosso ponto de partida em uma nuvem já que todo e qualquer recurso deve ser criado em uma VPC.</p>
+<p><strong>C</strong>riaremos um diretório chamado <em>test</em> dentro do diretório <em>config</em>. Sinta-se livre para criá-lo da forma que preferir. Em Linux ou OS X(mac) podemos fazer isto através do comando <em>mkdir</em> executado dentro do diretório de nosso projeto, <em>meu-projeto-sceptre</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ mkdir config/test
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">➜ ls config
+</span></span><span class="line"><span class="cl">config.yaml test</span></span></code></pre></div></div>
+<p><strong>E</strong>m seguida vamos criar o arquivo de configuração de nossa stack <em>test</em>, o arquivo de configuração de nossa VPC e também o template de nossa vpc:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ touch config/test/config.yaml config/test/vpc.yaml templates/vpc.yaml</span></span></code></pre></div></div>
+<p><strong>A</strong> nossa árvore de diretórios e arquivos deverá estar da seguinte forma:</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ tree .
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── config
+</span></span><span class="line"><span class="cl">│   ├── config.yaml
+</span></span><span class="line"><span class="cl">│   └── <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">│       ├── config.yaml
+</span></span><span class="line"><span class="cl">│       └── vpc.yaml
+</span></span><span class="line"><span class="cl">└── templates
+</span></span><span class="line"><span class="cl">    └── vpc.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">3</span> directories, <span class="m">4</span> files</span></span></code></pre></div></div>
+<p><strong>N</strong>estes arquivos teremos:</p>
+<ul>
+<li>templates/vpc.yaml: o template CloudFormation de nossa VPC</li>
+<li>config/test/vpc.yaml: as configurações referentes a este template de VPC</li>
+<li>config/test/config.yaml: a configuração do ambiente</li>
+</ul>
+<p><strong>V</strong>amos iniciar pela configuração do nosso ambiente. Para isto daremos um código de projeto e a região na qual desejamos nossa infraestrutura. Vamos inserir o seguinte conteúdo no arquivo <em>config/test/config.yaml</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-yaml">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">project_code</span><span class="p">:</span><span class="w"> </span><span class="l">projeto-sceptre</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="l">ca-central-1</span></span></span></code></pre></div></div>
+<p><strong>N</strong>ovamente, lembre-se de usar a região que melhor lhe sirva, não precisa utilizar a região canadense como estou utilizando aqui.</p>
+<p><strong>E</strong>m seguida vamos inserir a configuração do template de nossa VPC no arquivo <em>config/test/vpc.yaml</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-yaml">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">vpc.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">file</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">parameters</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">CidrBlock</span><span class="p">:</span><span class="w"> </span><span class="m">10.0.0.0</span><span class="l">/16</span></span></span></code></pre></div></div>
+<p><strong>R</strong>epare que aqui temos dois blocos de código:</p>
+<ul>
+<li>template: definimos que template será usado com esta configuração. Indicamos que o path é <em>vpc.yaml</em>, pois este é o caminho referente ao nosso template de vpc que fica dentro do diretório de templates.</li>
+<li>parameters: aqui listamos parâmetros, que podem ser utilizados como variáveis para nosso template. Neste caso estamos utilizando apenas um parâmetro, que é o bloco de endereços IP de nossa VPC, o <em>CidrBlock</em>.</li>
+</ul>
+<p><strong>A</strong>gora vamos ao nosso template CloudFormation em si. Insira o seguinte código no arquivo <em>templates/vpc.yaml</em>:</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-yaml">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">Parameters</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">CidrBlock</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">String</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VPC</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;AWS::EC2::VPC&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">CidrBlock</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">Ref</span><span class="p">:</span><span class="w"> </span><span class="l">CidrBlock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Outputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VpcId</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Value</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Ref</span><span class="p">:</span><span class="w"> </span><span class="l">VPC</span></span></span></code></pre></div></div>
+<p><strong>P</strong>erceba que este código yaml é bem parecido com o yaml já utilizado pelo CloudFormation padrão. O tipo do recurso (<em>type</em>) também é exatamente como definido e utilizado pelo CloudFormation, <em>AWS::EC2::VPC</em>. O único detalhe aqui é o parâmetro que estamos utilizando nas propriedades (<em>Properties</em>), onde estamos referenciando (<em>Ref</em>) o parâmetro <em>CidrBlock</em>. Apenas lembrando, nós definimos este parâmetro em nosso arquivo de configuração <em>/config/test/vpc.yaml</em>, portanto aqui o valor <em>10.0.0.0/16</em> será utilizado para a nossa VPC.</p>
+<p>**Agora que nosso código está utilizável podemos começar a testar o que fizemos até agora.</p>
+<p><strong>A</strong>ntes disto, podemos ver que não possuo nenhuma stack já criada em minha conta do AWS, bem como ainda não temos a VPC que será criada com este CidrBlock que definimos.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-infraestrutura-no-aws-com/sceptre-1.png"
+        data-srcset="/posts/criando-infraestrutura-no-aws-com/sceptre-1.png, /posts/criando-infraestrutura-no-aws-com/sceptre-1.png 1.5x, /posts/criando-infraestrutura-no-aws-com/sceptre-1.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-infraestrutura-no-aws-com/sceptre-1.png"
+        title="AWS" width="900" height="585" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-infraestrutura-no-aws-com/sceptre-2.png"
+        data-srcset="/posts/criando-infraestrutura-no-aws-com/sceptre-2.png, /posts/criando-infraestrutura-no-aws-com/sceptre-2.png 1.5x, /posts/criando-infraestrutura-no-aws-com/sceptre-2.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-infraestrutura-no-aws-com/sceptre-2.png"
+        title="AWS" width="900" height="450" /></p>
+<p><strong>A</strong>gora podemos executar nosso código. Com o comando <em>sceptre create test/vpc.yaml</em> poderemos aplicar e criar nosso stack. O comando nos pedirá uma confirmação, bastando digitar <em>y</em> para confirmar a execução:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ sceptre create test/vpc.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Do you want to create <span class="s1">&#39;test/vpc.yaml&#39;</span> <span class="o">[</span>y/N<span class="o">]</span>: y
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 13:41:37<span class="o">]</span> - test/vpc - Creating Stack
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 13:41:38<span class="o">]</span> - test/vpc projeto-sceptre-test-vpc AWS::CloudFormation::Stack CREATE_IN_PROGRESS User Initiated
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 13:41:42<span class="o">]</span> - test/vpc VPC AWS::EC2::VPC CREATE_IN_PROGRESS
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 13:41:42<span class="o">]</span> - test/vpc VPC AWS::EC2::VPC CREATE_IN_PROGRESS Resource creation Initiated
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 13:41:59<span class="o">]</span> - test/vpc VPC AWS::EC2::VPC CREATE_COMPLETE
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 13:42:03<span class="o">]</span> - test/vpc projeto-sceptre-test-vpc AWS::CloudFormation::Stack CREATE_COMPLETE</span></span></code></pre></div></div>
+<p><strong>R</strong>epare que a execução não reportou nenhum erro. Se durante esta execução checarmos novamente a página de stacks do CLoudFormation, poderemos ver que a nossa stack está sendo criada:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-infraestrutura-no-aws-com/sceptre-3.png"
+        data-srcset="/posts/criando-infraestrutura-no-aws-com/sceptre-3.png, /posts/criando-infraestrutura-no-aws-com/sceptre-3.png 1.5x, /posts/criando-infraestrutura-no-aws-com/sceptre-3.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-infraestrutura-no-aws-com/sceptre-3.png"
+        title="AWS" width="900" height="495" /></p>
+<p><strong>A</strong>pós a finalização da execução, deveremos ver a stack já criada bem como a VPC:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-infraestrutura-no-aws-com/sceptre-4.png"
+        data-srcset="/posts/criando-infraestrutura-no-aws-com/sceptre-4.png, /posts/criando-infraestrutura-no-aws-com/sceptre-4.png 1.5x, /posts/criando-infraestrutura-no-aws-com/sceptre-4.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-infraestrutura-no-aws-com/sceptre-4.png"
+        title="AWS" width="900" height="495" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-infraestrutura-no-aws-com/sceptre-5.png"
+        data-srcset="/posts/criando-infraestrutura-no-aws-com/sceptre-5.png, /posts/criando-infraestrutura-no-aws-com/sceptre-5.png 1.5x, /posts/criando-infraestrutura-no-aws-com/sceptre-5.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-infraestrutura-no-aws-com/sceptre-5.png"
+        title="AWS" width="900" height="360" /></p>
+<p><strong>T</strong>ambém podemos utilizar o próprio Sceptre para verificar a lista de nossos recursos no ambiente test com o comando <em>sceptre list resources</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ sceptre list resources <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">StackLogicalResourceIdPhysicalResourceId
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">test/vpcVPCvpc-027cb3d73fcc7aa64</span></span></code></pre></div></div>
+<p><strong>A</strong>lgo que devemos sempre ter em nossa lista de prioridades para todo e qualquer recurso criado em nossa infraestrutura é a identificação. No caso do AWS, utilizamos Tags. As tags são essenciais para organização e identificação de nossos recursos. Como esquecemos de inserir tags em nossa VPC, vamos alterar nosso arquivo <em>templates/vpc.yaml</em>:</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-yaml">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">Parameters</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">CidrBlock</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">String</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VPC</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;AWS::EC2::VPC&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">CidrBlock</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">Ref</span><span class="p">:</span><span class="w"> </span><span class="l">CidrBlock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Tags</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">Key</span><span class="p">:</span><span class="w"> </span><span class="l">Ambiente</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">Value</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Outputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VpcId</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Value</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Ref</span><span class="p">:</span><span class="w"> </span><span class="l">VPC</span></span></span></code></pre></div></div>
+<p><strong>A</strong>qui inserimos apenas uma tag para este exemplo. Para efetuarmos esta atualização podemos usar o comando <em>sceptre update</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ sceptre update test/vpc.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Do you want to update <span class="s1">&#39;test/vpc.yaml&#39;</span> <span class="o">[</span>y/N<span class="o">]</span>: y
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 13:56:45<span class="o">]</span> - test/vpc - Updating Stack
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 13:56:45<span class="o">]</span> - test/vpc projeto-sceptre-test-vpc AWS::CloudFormation::Stack UPDATE_IN_PROGRESS User Initiated
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 13:56:49<span class="o">]</span> - test/vpc VPC AWS::EC2::VPC UPDATE_IN_PROGRESS
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 13:56:49<span class="o">]</span> - test/vpc VPC AWS::EC2::VPC UPDATE_COMPLETE
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 13:56:53<span class="o">]</span> - test/vpc projeto-sceptre-test-vpc AWS::CloudFormation::Stack UPDATE_COMPLETE_CLEANUP_IN_PROGRESS
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 13:56:53<span class="o">]</span> - test/vpc projeto-sceptre-test-vpc AWS::CloudFormation::Stack UPDATE_COMPLETE</span></span></code></pre></div></div>
+<p>Podemos voltar à nossa página de VPCs do AWS e veremos que nossa VPC agora possui a nossa tag:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-infraestrutura-no-aws-com/sceptre-6.png"
+        data-srcset="/posts/criando-infraestrutura-no-aws-com/sceptre-6.png, /posts/criando-infraestrutura-no-aws-com/sceptre-6.png 1.5x, /posts/criando-infraestrutura-no-aws-com/sceptre-6.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-infraestrutura-no-aws-com/sceptre-6.png"
+        title="AWS" width="900" height="720" /></p>
+<p><strong>V</strong>amos criar então um recurso mais tangível, como por exemplo uma Instância EC2 (<em>VM</em>). Primeiramente, podemos ver que não possuo nenhuma instância já existente:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-infraestrutura-no-aws-com/sceptre-7.png"
+        data-srcset="/posts/criando-infraestrutura-no-aws-com/sceptre-7.png, /posts/criando-infraestrutura-no-aws-com/sceptre-7.png 1.5x, /posts/criando-infraestrutura-no-aws-com/sceptre-7.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-infraestrutura-no-aws-com/sceptre-7.png"
+        title="AWS" width="900" height="360" /></p>
+<p><strong>C</strong>riaremos dois novos arquivos, sendo um de configuração para nosso ec2 e um de template para o ec2:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ touch config/test/ec2.yaml templates/ec2.yaml</span></span></code></pre></div></div>
+<p><strong>P</strong>ara simplificar nosso exemplo, definiremos 2 parâmetros em nosso arquivo <em>test/config/ec2.yaml</em>, sendo eles <em>ImageId</em> e <em>InstanceType</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-yaml">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">ec2.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">file</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">parameters</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ImageId</span><span class="p">:</span><span class="w"> </span><span class="l">ami-041d49677629acc40</span><span class="w"> </span><span class="c"># AMI para Amazon Linux distro</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">InstanceType</span><span class="p">:</span><span class="w"> </span><span class="l">t2.micro</span></span></span></code></pre></div></div>
+<p><strong>A</strong>gora inserimos o código de nosso arquivo <em>templates/ec2.yaml</em> onde referenciaremos os dois parâmetros já definidos no arquivo de config:</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-yaml">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">Parameters</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ImageId</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">String</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">InstanceType</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">String</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Instance</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;AWS::EC2::Instance&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ImageId</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">Ref</span><span class="p">:</span><span class="w"> </span><span class="l">ImageId</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">InstanceType</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">Ref</span><span class="p">:</span><span class="w"> </span><span class="l">InstanceType</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Tags</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">Key</span><span class="p">:</span><span class="w"> </span><span class="l">Ambiente</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">Value</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">Key</span><span class="p">:</span><span class="w"> </span><span class="l">Name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">Value</span><span class="p">:</span><span class="w"> </span><span class="l">Instancia-test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Outputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">InstanceId</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Value</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Ref</span><span class="p">:</span><span class="w"> </span><span class="l">Instance</span></span></span></code></pre></div></div>
+<p><strong>A</strong>gora podemos criar esta nova stack com o comando <em>sceptre create test/ec2.yaml</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ sceptre create test/ec2.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Do you want to create <span class="s1">&#39;test/ec2.yaml&#39;</span> <span class="o">[</span>y/N<span class="o">]</span>: y
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:32:16<span class="o">]</span> - test/ec2 - Creating Stack
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:32:17<span class="o">]</span> - test/ec2 projeto-sceptre-test-ec2 AWS::CloudFormation::Stack CREATE_IN_PROGRESS User Initiated
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:32:21<span class="o">]</span> - test/ec2 Instance AWS::EC2::Instance CREATE_IN_PROGRESS
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:32:25<span class="o">]</span> - test/ec2 Instance AWS::EC2::Instance CREATE_IN_PROGRESS Resource creation Initiated
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:32:37<span class="o">]</span> - test/ec2 Instance AWS::EC2::Instance CREATE_COMPLETE
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:32:41<span class="o">]</span> - test/ec2 projeto-sceptre-test-ec2 AWS::CloudFormation::Stack CREATE_COMPLETE</span></span></code></pre></div></div>
+<p><strong>R</strong>epare que tanto a nova stack quanto a instância EC2 foram devidamente criadas no AWS:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-infraestrutura-no-aws-com/sceptre-8.png"
+        data-srcset="/posts/criando-infraestrutura-no-aws-com/sceptre-8.png, /posts/criando-infraestrutura-no-aws-com/sceptre-8.png 1.5x, /posts/criando-infraestrutura-no-aws-com/sceptre-8.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-infraestrutura-no-aws-com/sceptre-8.png"
+        title="AWS" width="900" height="450" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-infraestrutura-no-aws-com/sceptre-9.png"
+        data-srcset="/posts/criando-infraestrutura-no-aws-com/sceptre-9.png, /posts/criando-infraestrutura-no-aws-com/sceptre-9.png 1.5x, /posts/criando-infraestrutura-no-aws-com/sceptre-9.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-infraestrutura-no-aws-com/sceptre-9.png"
+        title="AWS" width="900" height="360" /></p>
+<p><strong>A</strong>través do sceptre podemos ainda listar os outputs que definimos em nossos templates com o comando <em>sceptre list outputs</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ sceptre list outputs <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">StackOutputKeyOutputValue
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">test/ec2InstanceIdi-05031a4a80244fd17
+</span></span><span class="line"><span class="cl">test/vpcVpcIdvpc-027cb3d73fcc7aa64</span></span></code></pre></div></div>
+<p><strong>O</strong>bviamente que não precisamos lidar com cada stack individualmente. Aqui criamos com o sceptre a stack de vpc e em seguida a stack de ec2. Mas e se tivéssemos 20 stacks? 50 stacks? Não queremos ter que executar um comando para cada uma, certo?!</p>
+<p><strong>V</strong>amos testar isso limpando nosso ambiente com o comando <em>sceptre delete</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ sceptre delete test/ec2.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">The following stacks, in the following order, will be deleted:
+</span></span><span class="line"><span class="cl">test/ec2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Do you want to delete <span class="s1">&#39;test/ec2.yaml&#39;</span> <span class="o">[</span>y/N<span class="o">]</span>: y
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:45:21<span class="o">]</span> - test/ec2 - Deleting stack
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:45:21<span class="o">]</span> - test/ec2 projeto-sceptre-test-ec2 AWS::CloudFormation::Stack DELETE_IN_PROGRESS User Initiated
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:45:25<span class="o">]</span> - test/ec2 Instance AWS::EC2::Instance DELETE_IN_PROGRESS
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:45:54<span class="o">]</span> - test/ec2 - delete complete</span></span></code></pre></div></div>
+<p>e&hellip;</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ sceptre delete test/vpc.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">The following stacks, in the following order, will be deleted:
+</span></span><span class="line"><span class="cl">test/vpc
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Do you want to delete <span class="s1">&#39;test/vpc.yaml&#39;</span> <span class="o">[</span>y/N<span class="o">]</span>: y
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:46:07<span class="o">]</span> - test/vpc - Deleting stack
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:46:08<span class="o">]</span> - test/vpc projeto-sceptre-test-vpc AWS::CloudFormation::Stack DELETE_IN_PROGRESS User Initiated
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:46:12<span class="o">]</span> - test/vpc VPC AWS::EC2::VPC DELETE_IN_PROGRESS
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:46:29<span class="o">]</span> - test/vpc - delete complete</span></span></code></pre></div></div>
+<p><strong>A</strong>gora que nossas stacks e recursos foram excluídos com sucesso, podemos criar tudo de uma vez com o comando <em>sceptre create test</em>, sem especificar uma stack em específico. Desta forma o sceptre entenderá que precisa executar todas as stacks que se encontram dentro de <em>test</em>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ sceptre create <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Do you want to create <span class="s1">&#39;test&#39;</span> <span class="o">[</span>y/N<span class="o">]</span>: y
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:49:20<span class="o">]</span> - test/ec2 - Creating Stack
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:49:20<span class="o">]</span> - test/vpc - Creating Stack
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:49:21<span class="o">]</span> - test/ec2 projeto-sceptre-test-ec2 AWS::CloudFormation::Stack CREATE_IN_PROGRESS User Initiated
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:49:21<span class="o">]</span> - test/vpc projeto-sceptre-test-vpc AWS::CloudFormation::Stack CREATE_IN_PROGRESS User Initiated
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:49:25<span class="o">]</span> - test/vpc VPC AWS::EC2::VPC CREATE_IN_PROGRESS
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:49:25<span class="o">]</span> - test/ec2 Instance AWS::EC2::Instance CREATE_IN_PROGRESS
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:49:25<span class="o">]</span> - test/vpc VPC AWS::EC2::VPC CREATE_IN_PROGRESS Resource creation Initiated
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:49:29<span class="o">]</span> - test/ec2 Instance AWS::EC2::Instance CREATE_IN_PROGRESS Resource creation Initiated
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:49:41<span class="o">]</span> - test/ec2 Instance AWS::EC2::Instance CREATE_COMPLETE
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:49:41<span class="o">]</span> - test/vpc VPC AWS::EC2::VPC CREATE_COMPLETE
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:49:46<span class="o">]</span> - test/vpc projeto-sceptre-test-vpc AWS::CloudFormation::Stack CREATE_COMPLETE
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2022-03-13 14:49:46<span class="o">]</span> - test/ec2 projeto-sceptre-test-ec2 AWS::CloudFormation::Stack CREATE_COMPLETE</span></span></code></pre></div></div>
+<p><strong>R</strong>epare que desta vez tanto a stack de vpc quanto a de ec2 foram criadas.</p>
+<p><strong>O</strong>bviamente que este foi apenas um exemplo simplista do uso do Sceptre, mas a ideia era de fato apresentar esta alternativa.</p>
+<p><strong>A</strong>braço!</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Atualizado em 2022-03-12</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Compartilhe em X" data-sharer="x" data-url="//blog.marcelocavalcante.net:1313/posts/criando-infraestrutura-no-aws-com/" data-title="Criando Infraestrutura No Aws Com Sceptre" data-via="Marcelo_Kalib" data-hashtags="Devops,AWS,Sceptre,Python,Cloud,CloudFormation"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Threads" data-sharer="threads" data-url="//blog.marcelocavalcante.net:1313/posts/criando-infraestrutura-no-aws-com/" data-title="Criando Infraestrutura No Aws Com Sceptre"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Facebook" data-sharer="facebook" data-url="//blog.marcelocavalcante.net:1313/posts/criando-infraestrutura-no-aws-com/" data-hashtag="Devops"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Linkedin" data-sharer="linkedin" data-url="//blog.marcelocavalcante.net:1313/posts/criando-infraestrutura-no-aws-com/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Hacker News" data-sharer="hackernews" data-url="//blog.marcelocavalcante.net:1313/posts/criando-infraestrutura-no-aws-com/" data-title="Criando Infraestrutura No Aws Com Sceptre"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Line" data-sharer="line" data-url="//blog.marcelocavalcante.net:1313/posts/criando-infraestrutura-no-aws-com/" data-title="Criando Infraestrutura No Aws Com Sceptre"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em 微博" data-sharer="weibo" data-url="//blog.marcelocavalcante.net:1313/posts/criando-infraestrutura-no-aws-com/" data-title="Criando Infraestrutura No Aws Com Sceptre"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Diaspora" data-sharer="diaspora" data-url="//blog.marcelocavalcante.net:1313/posts/criando-infraestrutura-no-aws-com/" data-title="Criando Infraestrutura No Aws Com Sceptre" data-description="O que é o Sceptre e como utilizar esta tecnologia para melhor gerenciamento de infraestruturas na nuvem AWS com CloudFormation."><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=%2f%2fblog.marcelocavalcante.net%3a1313%2fposts%2fcriando-infraestrutura-no-aws-com%2f&amp;text=Criando%20Infraestrutura%20No%20Aws%20Com%20Sceptre" target="_blank" title="Compartilhe em Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/devops/">Devops</a>,&nbsp;<a href="/tags/aws/">AWS</a>,&nbsp;<a href="/tags/sceptre/">Sceptre</a>,&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/cloud/">Cloud</a>,&nbsp;<a href="/tags/cloudformation/">CloudFormation</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Voltar</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/criando-uma-lambda-function-com/" class="prev" rel="prev" title="Criando Uma Lambda Function Com Golang Que Interage Com S3 Buckets"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Criando Uma Lambda Function Com Golang Que Interage Com S3 Buckets</a>
+            <a href="/posts/criando-funcoes-lambda-facilmente-com/" class="next" rel="next" title="Criando Funções Lambda Facilmente Com O Framework Serverless">Criando Funções Lambda Facilmente Com O Framework Serverless<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Possibilitado por <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Tema - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2008 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://blog.marcelocavalcante.net" target="_blank">Marcelo Cavalcante</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Voltar ao topo">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="Ver comentários">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.20.2/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Chef: Uso De Condicionais not_if E only_if - Marcelo Cavalcante Rocha</title><meta name="Description" content="Chef é uma popular ferramenta de Gerenciamento de Configurações criado pela empresa de mesmo nome, Chef. Neste post veremos a utilização de condicionais em recipes com only_if e not_if."><meta property="og:url" content="//blog.marcelocavalcante.net:1313/posts/chef-uso-de-condicionais-not/">
+  <meta property="og:site_name" content="Marcelo Cavalcante Rocha">
+  <meta property="og:title" content="Chef: Uso De Condicionais not_if E only_if">
+  <meta property="og:description" content="Chef é uma popular ferramenta de Gerenciamento de Configurações criado pela empresa de mesmo nome, Chef. Neste post veremos a utilização de condicionais em recipes com only_if e not_if.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2018-04-14T15:03:10-05:00">
+    <meta property="article:modified_time" content="2018-04-14T15:03:10-05:00">
+    <meta property="article:tag" content="Devops">
+    <meta property="article:tag" content="Chef">
+    <meta property="og:image" content="//blog.marcelocavalcante.net:1313/posts/chef-uso-de-condicionais-not/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="//blog.marcelocavalcante.net:1313/posts/chef-uso-de-condicionais-not/featured-image.png">
+  <meta name="twitter:title" content="Chef: Uso De Condicionais not_if E only_if">
+  <meta name="twitter:description" content="Chef é uma popular ferramenta de Gerenciamento de Configurações criado pela empresa de mesmo nome, Chef. Neste post veremos a utilização de condicionais em recipes com only_if e not_if.">
+<meta name="application-name" content="Marcelo Cavalcante">
+<meta name="apple-mobile-web-app-title" content="Marcelo Cavalcante">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="//blog.marcelocavalcante.net:1313/posts/chef-uso-de-condicionais-not/" /><link rel="prev" href="//blog.marcelocavalcante.net:1313/posts/chef-aautomacao-e-gerenciamento-de/" /><link rel="next" href="//blog.marcelocavalcante.net:1313/posts/10-anos/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Chef: Uso De Condicionais not_if E only_if",
+        "inLanguage": "pt-BR",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/\/blog.marcelocavalcante.net:1313\/posts\/chef-uso-de-condicionais-not\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/chef-uso-de-condicionais-not\/featured-image.png",
+                            "width":  500 ,
+                            "height":  333 
+                        }],"genre": "posts","keywords": "Devops, Chef","wordcount":  2238 ,
+        "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/chef-uso-de-condicionais-not\/","datePublished": "2018-04-14T15:03:10-05:00","dateModified": "2018-04-14T15:03:10-05:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Marcelo Cavalcante"
+            },"description": "Chef é uma popular ferramenta de Gerenciamento de Configurações criado pela empresa de mesmo nome, Chef. Neste post veremos a utilização de condicionais em recipes com only_if e not_if."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'auto';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categorias </a><a class="menu-item" href="/sobre/"> Quem Sou </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancelar
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categorias</a><a class="menu-item" href="/sobre/" title="">Quem Sou</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Conteúdos</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Chef: Uso De Condicionais not_if E only_if</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://blog.marcelocavalcante.net" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Marcelo Cavalcante</a></span>&nbsp;<span class="post-category">incluido em <a href="/categories/tutoriais/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutoriais</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2018-04-14">2018-04-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2238 palavras&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutos&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/chef-uso-de-condicionais-not/featured-image.png"
+        data-srcset="/posts/chef-uso-de-condicionais-not/featured-image.png, /posts/chef-uso-de-condicionais-not/featured-image.png 1.5x, /posts/chef-uso-de-condicionais-not/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/posts/chef-uso-de-condicionais-not/featured-image.png"
+        title="Chef é uma popular ferramenta de Gerenciamento de Configurações criado pela empresa de mesmo nome, Chef. Neste post veremos a utilização de condicionais em recipes com only_if e not_if." /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Conteúdos</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#pare-e-volte-uma-casa">Pare e volte uma casa</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#utilizando-guardas-not_if-e-only_if">Utilizando (Guardas) not_if e only_if</a></li>
+    <li><a href="#mãos-à-obra">Mãos à obra</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Chef é uma popular ferramenta de Gerenciamento de Configurações criado pela empresa de mesmo nome, Chef. Neste post veremos a utilização de condicionais em recipes com only_if e not_if.</p>
+<h2 id="pare-e-volte-uma-casa">Pare e volte uma casa</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/chef-uso-de-condicionais-not/volte1casa.jpeg"
+        data-srcset="/posts/chef-uso-de-condicionais-not/volte1casa.jpeg, /posts/chef-uso-de-condicionais-not/volte1casa.jpeg 1.5x, /posts/chef-uso-de-condicionais-not/volte1casa.jpeg 2x"
+        data-sizes="auto"
+        alt="/posts/chef-uso-de-condicionais-not/volte1casa.jpeg"
+        title="Volte 1 Casa" width="350" height="233" /></p>
+<p><strong>S</strong>e você nunca utilizou ou sabe pouco sobre o <em>Chef</em> é importante que você pare aqui mesmo e volte uma casa. Sugiro que leia o post <a href="posts/chef-aautomacao-e-gerenciamento-de" rel="">Chef: Automação e Gerenciamento de Configuração</a> antes de seguir este, uma vez que através dele você entenderá o que é, e como funciona o Chef, bem como sua instalação básica.</p>
+<h2 id="resources">Resources</h2>
+<p><strong>C</strong>onforme dito no post anterior, resource é uma descrição de estado que:</p>
+<ul>
+<li>Descreve o estado desejado para um item de configuração</li>
+<li>Declara os passos necessários para levar o item especificado ao estado desejado</li>
+<li>Especifica o tipo de resource - por exemplo, <code>package</code>, <code>template</code> ou <code>service</code></li>
+<li>Lita detalhes adicionais (também conhecidos como propriedades de resources), conforme necessário</li>
+<li>São agrupados em <em>recipes</em>, que descrevem configurações em geral</li>
+</ul>
+<h2 id="utilizando-guardas-not_if-e-only_if">Utilizando (Guardas) not_if e only_if</h2>
+<p><strong>T</strong>odos os resources (incluindo os personalizados) no Chef compartilham um conjunto de opções comuns: ações, propriedades, condicionais, notificações e paths relativos.</p>
+<p><strong>Guards</strong></p>
+<p><strong>P</strong>ropriedades de <em>guarda</em>, ou <code>guards</code>, como são chamadas no Chef, podem ser utilizadas para avaliar o estado de um node durante a fase de execução do chef-client. Esta avaliação funciona como uma condicional e, baseando-se nos resultados da mesma, a propriedade guard é então utilizada para indicar ao chef-client se ele deve ou não continuar a execução de um resource. Uma propriedade guard aceita tanto um valor string quanto um bloco de código Ruby.</p>
+<ul>
+<li>A string é executada como um comando shell. Caso o comando retorne <code>0</code> (true), a propriedade guard é aplicada. Caso o comando retorne qualquer outro valor a propriedade guard não será aplicada.</li>
+<li>Um bloco é executado como um código Ruby que deve retornar <code>true</code> ou <code>false</code>. Da mesma forma, caso o comando retorne <code>true</code>, a propriedade guard é aplicada. Caso o comando retorne <code>false</code> a propriedade guard não será aplicada.</li>
+</ul>
+<p><strong>U</strong>ma <strong>guard</strong> é importante para garantir que um resource seja idempotente ao permitir um teste no próprio resource certificando-se de que o mesmo se encontra no estado desejado de forma que o chef-client não faça nada.</p>
+<p><strong>Atributos</strong></p>
+<p><strong>O</strong>s seguintes atributos podem ser utilizados para definir uma guard que é avaliada durante a fase de execução do chef-client:</p>
+<p><code>not_if</code> - <strong>Impede</strong> a execução de um resource quando a condição retornar <code>true</code>.</p>
+<p><code>only_if</code> - Permite a execução de um resource <strong>apenas</strong> quando a condição retornar <code>true</code>.</p>
+<h2 id="mãos-à-obra">Mãos à obra</h2>
+<p><strong>P</strong>ara simplificar seguirei utilizando a recipe utilizada no post anterior. Não sabe o que é uma recipe? <code>-&gt;</code> Novamente, caso não entenda o que estou dizendo, volte uma casa e leia o <a href="posts/chef-aautomacao-e-gerenciamento-de" rel="">post anterior</a> no qual explico o que é uma recipe, bem como cada elemento da mesma, visto que a utilizaremos aqui.</p>
+<p><strong>N</strong>ossa recipe era a seguinte:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-ruby">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">package</span> <span class="s1">&#39;apache&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">package_name</span> <span class="s1">&#39;httpd&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">action</span> <span class="ss">:install</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">service</span> <span class="s1">&#39;httpd&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">action</span> <span class="o">[</span><span class="ss">:enable</span><span class="p">,</span> <span class="ss">:start</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">file</span> <span class="s1">&#39;/var/www/html/index.html&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">content</span> <span class="s1">&#39;Hello World!&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mode</span> <span class="s1">&#39;0755&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">owner</span> <span class="s1">&#39;root&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">group</span> <span class="s1">&#39;apache&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span></span></span></code></pre></div></div>
+<p><strong>C</strong>omo primeira alteração vamos editar o arquivo <code>/etc/motd</code>. Este arquivo nada mais é do que a definição de um baner que será apresentado sempre que alguém se logar em seu servidor.</p>
+<p><strong>P</strong>or padrão, este arquivo costuma vir vazio. Este é o caso da máquina utilizada para este exemplo:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># cat /etc/motd</span></span></span></code></pre></div></div>
+<p><strong>C</strong>omeçaremos definindo o conteúdo que deverá existir em nosso arquivo <code>/etc/motd</code> incluindo um resource do tipo <code>file</code> no final de nossa recipe <code>exemplo.rb</code>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-ruby">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">package</span> <span class="s1">&#39;apache&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">package_name</span> <span class="s1">&#39;httpd&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">action</span> <span class="ss">:install</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">service</span> <span class="s1">&#39;httpd&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">action</span> <span class="o">[</span><span class="ss">:enable</span><span class="p">,</span> <span class="ss">:start</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">file</span> <span class="s1">&#39;/var/www/html/index.html&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">content</span> <span class="s1">&#39;Hello World!&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mode</span> <span class="s1">&#39;0755&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">owner</span> <span class="s1">&#39;root&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">group</span> <span class="s1">&#39;apache&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">file</span> <span class="s1">&#39;/etc/motd&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">content</span> <span class="s1">&#39;Bem Vindo!&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span></span></span></code></pre></div></div>
+<p><strong>A</strong>té aqui nenhuma novidade (caso você tenha lido de fato o post anterior ou já tenha utilizado Chef anteriormente), apenas incluímos mais um resource em nossa recipe <code>exemplo.rb</code> informando que o arquivo <code>/etc/motd</code> deve existir e que seu conteúdo deverá ser <em>Bem Vindo!</em>.</p>
+<p><strong>V</strong>alidando e executando localmente nossa recipe conforme feito anteriormente veremos que todos os demais passos ou resources serão ignorados por já estarem estarem no estado desejado (idempotência), restando apenas a inclusão do conteúdo no <code>/etc/motd</code>:</p>
+<p><strong>Validando</strong></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ruby -c exemplo.rb &amp;&amp; foodcritic exemplo.rb</span>
+</span></span><span class="line"><span class="cl">Syntax OK
+</span></span><span class="line"><span class="cl">Checking <span class="m">1</span> files
+</span></span><span class="line"><span class="cl">x
+</span></span><span class="line"><span class="cl">FC011: Missing README in markdown format: ../README.md:1
+</span></span><span class="line"><span class="cl">FC031: Cookbook without metadata.rb file: ../metadata.rb:1
+</span></span><span class="line"><span class="cl">FC071: Missing LICENSE file: ../LICENSE:1</span></span></code></pre></div></div>
+<p><strong>Executando</strong></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@kalib6 ~<span class="o">]</span><span class="c1"># chef-client --local-mode exemplo.rb</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-15T22:03:26+00:00<span class="o">]</span> WARN: No config file found or specified on <span class="nb">command</span> line, using <span class="nb">command</span> line options.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-15T22:03:26+00:00<span class="o">]</span> WARN: No cookbooks directory found at or above current directory.  Assuming /root.
+</span></span><span class="line"><span class="cl">Starting Chef Client, version 13.8.5
+</span></span><span class="line"><span class="cl">resolving cookbooks <span class="k">for</span> run list: <span class="o">[]</span>
+</span></span><span class="line"><span class="cl">Synchronizing Cookbooks:
+</span></span><span class="line"><span class="cl">Installing Cookbook Gems:
+</span></span><span class="line"><span class="cl">Compiling Cookbooks...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-15T22:03:29+00:00<span class="o">]</span> WARN: Node kalib6.test.com has an empty run list.
+</span></span><span class="line"><span class="cl">Converging <span class="m">4</span> resources
+</span></span><span class="line"><span class="cl">Recipe: @recipe_files::/root/exemplo.rb
+</span></span><span class="line"><span class="cl">  * yum_package<span class="o">[</span>apache<span class="o">]</span> action install <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * service<span class="o">[</span>httpd<span class="o">]</span> action <span class="nb">enable</span> <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * service<span class="o">[</span>httpd<span class="o">]</span> action start <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * file<span class="o">[</span>/var/www/html/index.html<span class="o">]</span> action create <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * file<span class="o">[</span>/etc/motd<span class="o">]</span> action create
+</span></span><span class="line"><span class="cl">    - update content in file /etc/motd from e3b0c4 to f13843
+</span></span><span class="line"><span class="cl">    --- /etc/motd       2018-04-15 20:51:00.411479476 +0000
+</span></span><span class="line"><span class="cl">    +++ /etc/.chef-motd20180415-1681-1p1fm7m    2018-04-15 22:03:42.142091791 +0000
+</span></span><span class="line"><span class="cl">    @@ -1 +1,2 @@
+</span></span><span class="line"><span class="cl">    +Bem Vindo!
+</span></span><span class="line"><span class="cl">    - restore selinux security context
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Running handlers:
+</span></span><span class="line"><span class="cl">Running handlers <span class="nb">complete</span>
+</span></span><span class="line"><span class="cl">Chef Client finished, 1/5 resources updated in <span class="m">15</span> seconds</span></span></code></pre></div></div>
+<p><strong>P</strong>ara termos certeza de que o nosso arquivo foi corretamente alterado&hellip;</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@kalib6 ~<span class="o">]</span><span class="c1"># cat /etc/motd</span>
+</span></span><span class="line"><span class="cl">Bem Vindo!</span></span></code></pre></div></div>
+<p><strong>N</strong>ovamente, nenhuma novidade até aqui.</p>
+<p><strong>V</strong>amos agora utilizar o tipo de resource <code>execute</code>, o qual nos permite executar um comando a cada execução do chef-client. Vale lembrar que uma das características do Chef é a idempotência, portanto o <code>execute</code> pode ser considerado uma exceção, já que o comando será executado sempre, mesmo que já tenha sido executado anteriormente. E é neste tipo de situação que os <code>guards</code> se mostram importantes.</p>
+<p><strong>C</strong>omecemos inserindo um resource do tipo <code>execute</code> em nossa recipe:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-ruby">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">package</span> <span class="s1">&#39;apache&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">package_name</span> <span class="s1">&#39;httpd&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">action</span> <span class="ss">:install</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="ss">https</span><span class="p">:</span><span class="sr">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">adam</span><span class="o">-</span><span class="nb">p</span><span class="o">/</span><span class="n">markdown</span><span class="o">-</span><span class="n">here</span><span class="o">/</span><span class="n">wiki</span><span class="o">/</span><span class="no">Markdown</span><span class="o">-</span><span class="no">Cheatsheet</span>
+</span></span><span class="line"><span class="cl"><span class="n">service</span> <span class="s1">&#39;httpd&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">action</span> <span class="o">[</span><span class="ss">:enable</span><span class="p">,</span> <span class="ss">:start</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">file</span> <span class="s1">&#39;/var/www/html/index.html&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">content</span> <span class="s1">&#39;Hello World!&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mode</span> <span class="s1">&#39;0755&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">owner</span> <span class="s1">&#39;root&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">group</span> <span class="s1">&#39;apache&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">file</span> <span class="s1">&#39;/etc/motd&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">content</span> <span class="s1">&#39;Bem Vindo!&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">execute</span> <span class="s1">&#39;meu-comando&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">command</span> <span class="s1">&#39;echo &#34; Obrigado!&#34; &gt;&gt; /etc/motd&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">only_if</span> <span class="s1">&#39;test -r /etc/motd&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span></span></span></code></pre></div></div>
+<p><strong>O</strong> que adicionamos aqui?</p>
+<ul>
+<li>Resource Type: execute (Para que possamos executar um comando)</li>
+<li>Resource Name: meu-comando (Poderíamos ter utilizado qualquer nome)</li>
+<li>Command: &rsquo;echo &quot; Obrigado!&quot; &raquo; /etc/motd&rsquo; (O comando que desejamos executar. Estou utilizando <code>echo</code> para inserir * Obrigado!* ao meu arquivo <code>/etc/motd</code>)</li>
+<li>Guard: only_if &rsquo;test -r /etc/motd&rsquo; (<code>only_if</code> implica que meu resource <em>meu-comando</em> será executado <strong>apenas</strong> caso o resultado de <code>test -r /etc/motd</code> seja positivo. <em>test -r</em> irá verificar se o arquivo <code>/etc/motd</code> existe no sistema. Caso sim, meu comando <code>echo &quot; Obrigado!&quot; &gt;&gt; /etc/motd</code> será executado conforme planejado, do contrário será ignorado)</li>
+</ul>
+<p><strong>N</strong>ós já sabemos que o arquivo existe, portanto esperamos que * Obrigado!* seja adicionada ao mesmo após execução do chef-client.</p>
+<p><strong>Verificando nosso código</strong></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@kalib6 ~<span class="o">]</span><span class="c1"># ruby -c exemplo.rb &amp;&amp; foodcritic exemplo.rb</span>
+</span></span><span class="line"><span class="cl">Syntax OK
+</span></span><span class="line"><span class="cl">Checking <span class="m">1</span> files
+</span></span><span class="line"><span class="cl">x
+</span></span><span class="line"><span class="cl">FC011: Missing README in markdown format: ../README.md:1
+</span></span><span class="line"><span class="cl">FC031: Cookbook without metadata.rb file: ../metadata.rb:1
+</span></span><span class="line"><span class="cl">FC071: Missing LICENSE file: ../LICENSE:1</span></span></code></pre></div></div>
+<p><strong>Tudo ok. Executando&hellip;</strong></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@kalib6 ~<span class="o">]</span><span class="c1"># chef-client --local-mode exemplo.rb</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-15T23:08:54+00:00<span class="o">]</span> WARN: No config file found or specified on <span class="nb">command</span> line, using <span class="nb">command</span> line options.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-15T23:08:54+00:00<span class="o">]</span> WARN: No cookbooks directory found at or above current directory.  Assuming /root.
+</span></span><span class="line"><span class="cl">Starting Chef Client, version 13.8.5
+</span></span><span class="line"><span class="cl">resolving cookbooks <span class="k">for</span> run list: <span class="o">[]</span>
+</span></span><span class="line"><span class="cl">Synchronizing Cookbooks:
+</span></span><span class="line"><span class="cl">Installing Cookbook Gems:
+</span></span><span class="line"><span class="cl">Compiling Cookbooks...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-15T23:09:03+00:00<span class="o">]</span> WARN: Node kalib6.test.com has an empty run list.
+</span></span><span class="line"><span class="cl">Converging <span class="m">5</span> resources
+</span></span><span class="line"><span class="cl">Recipe: @recipe_files::/root/exemplo.rb
+</span></span><span class="line"><span class="cl">  * yum_package<span class="o">[</span>apache<span class="o">]</span> action install <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * service<span class="o">[</span>httpd<span class="o">]</span> action <span class="nb">enable</span> <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * service<span class="o">[</span>httpd<span class="o">]</span> action start <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * file<span class="o">[</span>/var/www/html/index.html<span class="o">]</span> action create <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * file<span class="o">[</span>/etc/motd<span class="o">]</span> action create <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * execute<span class="o">[</span>meu-comando<span class="o">]</span> action run
+</span></span><span class="line"><span class="cl">    - execute <span class="nb">echo</span> <span class="s2">&#34; Obrigado!&#34;</span> &gt;&gt; /etc/motd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Running handlers:
+</span></span><span class="line"><span class="cl">Running handlers <span class="nb">complete</span>
+</span></span><span class="line"><span class="cl">Chef Client finished, 1/6 resources updated in <span class="m">31</span> seconds</span></span></code></pre></div></div>
+<p><strong>R</strong>epare que o Chef executou o comando para inserir <code> Obrigado!</code>.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@kalib6 ~<span class="o">]</span><span class="c1"># cat /etc/motd</span>
+</span></span><span class="line"><span class="cl">Bem Vindo! Obrigado!</span></span></code></pre></div></div>
+<p><strong>C</strong>onforme dito anteriormente, o resource <code>execute</code> irá executar o meu comando SEMPRE que o chef-client rodar. Vejamos o que acontece ao executar novamente o chef-client sem alterar a recipe.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@kalib6 ~<span class="o">]</span><span class="c1"># chef-client --local-mode exemplo.rb</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-15T23:18:10+00:00<span class="o">]</span> WARN: No config file found or specified on <span class="nb">command</span> line, using <span class="nb">command</span> line options.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-15T23:18:10+00:00<span class="o">]</span> WARN: No cookbooks directory found at or above current directory.  Assuming /root.
+</span></span><span class="line"><span class="cl">Starting Chef Client, version 13.8.5
+</span></span><span class="line"><span class="cl">resolving cookbooks <span class="k">for</span> run list: <span class="o">[]</span>
+</span></span><span class="line"><span class="cl">Synchronizing Cookbooks:
+</span></span><span class="line"><span class="cl">Installing Cookbook Gems:
+</span></span><span class="line"><span class="cl">Compiling Cookbooks...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-15T23:18:20+00:00<span class="o">]</span> WARN: Node kalib6.test.com has an empty run list.
+</span></span><span class="line"><span class="cl">Converging <span class="m">5</span> resources
+</span></span><span class="line"><span class="cl">Recipe: @recipe_files::/root/exemplo.rb
+</span></span><span class="line"><span class="cl">  * yum_package<span class="o">[</span>apache<span class="o">]</span> action install <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * service<span class="o">[</span>httpd<span class="o">]</span> action <span class="nb">enable</span> <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * service<span class="o">[</span>httpd<span class="o">]</span> action start <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * file<span class="o">[</span>/var/www/html/index.html<span class="o">]</span> action create <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * file<span class="o">[</span>/etc/motd<span class="o">]</span> action create
+</span></span><span class="line"><span class="cl">    - update content in file /etc/motd from 201ddf to f13843
+</span></span><span class="line"><span class="cl">    --- /etc/motd       2018-04-15 23:16:13.705005377 +0000
+</span></span><span class="line"><span class="cl">    +++ /etc/.chef-motd20180415-2432-zhtjnq     2018-04-15 23:18:42.138379629 +0000
+</span></span><span class="line"><span class="cl">    @@ -1,2 +1,2 @@
+</span></span><span class="line"><span class="cl">    -Bem Vindo! Obrigado!
+</span></span><span class="line"><span class="cl">    +Bem Vindo!
+</span></span><span class="line"><span class="cl">    - restore selinux security context
+</span></span><span class="line"><span class="cl">  * execute<span class="o">[</span>meu-comando<span class="o">]</span> action run
+</span></span><span class="line"><span class="cl">    - execute <span class="nb">echo</span> <span class="s2">&#34; Obrigado!&#34;</span> &gt;&gt; /etc/motd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Running handlers:
+</span></span><span class="line"><span class="cl">Running handlers <span class="nb">complete</span>
+</span></span><span class="line"><span class="cl">Chef Client finished, 2/6 resources updated in <span class="m">31</span> seconds</span></span></code></pre></div></div>
+<p><strong>C</strong>omo em nossa recipe temos o resource <code>file</code> que determina o conteúdo do arquivo <code>/etc/motd</code> como sendo <code>Bem Vindo!</code>, o chef percebeu que o arquivo se encontrava diferente, pois acrescentamos o <code> Obrigado!</code> no passo anterior. O arquivo foi corrigido, voltando a ter seu conteúdo original, em seguida o Chef inseriu novamente <code> Obrigado!</code>, pois assim está determinado em nossa recipe.</p>
+<p><strong>É</strong> fácil perceber isto nas linhas a seguir, retiradas do resultado de nossa última execução do chef-client:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">* file<span class="o">[</span>/etc/motd<span class="o">]</span> action create
+</span></span><span class="line"><span class="cl">  - update content in file /etc/motd from 201ddf to f13843
+</span></span><span class="line"><span class="cl">  --- /etc/motd       2018-04-15 23:16:13.705005377 +0000
+</span></span><span class="line"><span class="cl">  +++ /etc/.chef-motd20180415-2432-zhtjnq     2018-04-15 23:18:42.138379629 +0000
+</span></span><span class="line"><span class="cl">  @@ -1,2 +1,2 @@
+</span></span><span class="line"><span class="cl">  -Bem Vindo! Obrigado!
+</span></span><span class="line"><span class="cl">  +Bem Vindo!
+</span></span><span class="line"><span class="cl">  - restore selinux security context
+</span></span><span class="line"><span class="cl">* execute<span class="o">[</span>meu-comando<span class="o">]</span> action run
+</span></span><span class="line"><span class="cl">  - execute <span class="nb">echo</span> <span class="s2">&#34; Obrigado!&#34;</span> &gt;&gt; /etc/motd</span></span></code></pre></div></div>
+<p><strong>S</strong>e verificarmos nosso arquivo, veremos que ele está da mesma forma:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@kalib6 ~<span class="o">]</span><span class="c1"># cat /etc/motd</span>
+</span></span><span class="line"><span class="cl">Bem Vindo! Obrigado!</span></span></code></pre></div></div>
+<p><strong>P</strong>ara percebermos a diferença, vamos comentar as linhas do resource file <code>/etc/motd</code>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl"><span class="c1">#file &#39;/etc/motd&#39; do</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#       content &#39;Bem Vindo!&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#end</span>
+</span></span><span class="line"><span class="cl">...</span></span></code></pre></div></div>
+<p><strong>A</strong>o comentar estas linhas, nossa recipe não mais indicará que o conteúdo do arquivo <code>/etc/motd</code> deve ser <code>Bem Vindo!</code>, portanto vejamos o que acontece quando executamos novamente o chef-client.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@kalib6 ~<span class="o">]</span><span class="c1"># chef-client --local-mode exemplo.rb</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-15T23:28:32+00:00<span class="o">]</span> WARN: No config file found or specified on <span class="nb">command</span> line, using <span class="nb">command</span> line options.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-15T23:28:33+00:00<span class="o">]</span> WARN: No cookbooks directory found at or above current directory.  Assuming /root.
+</span></span><span class="line"><span class="cl">Starting Chef Client, version 13.8.5
+</span></span><span class="line"><span class="cl">resolving cookbooks <span class="k">for</span> run list: <span class="o">[]</span>
+</span></span><span class="line"><span class="cl">Synchronizing Cookbooks:
+</span></span><span class="line"><span class="cl">Installing Cookbook Gems:
+</span></span><span class="line"><span class="cl">Compiling Cookbooks...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2018-04-15T23:28:42+00:00<span class="o">]</span> WARN: Node kalib6.test.com has an empty run list.
+</span></span><span class="line"><span class="cl">Converging <span class="m">4</span> resources
+</span></span><span class="line"><span class="cl">Recipe: @recipe_files::/root/exemplo.rb
+</span></span><span class="line"><span class="cl">  * yum_package<span class="o">[</span>apache<span class="o">]</span> action install <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * service<span class="o">[</span>httpd<span class="o">]</span> action <span class="nb">enable</span> <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * service<span class="o">[</span>httpd<span class="o">]</span> action start <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * file<span class="o">[</span>/var/www/html/index.html<span class="o">]</span> action create <span class="o">(</span>up to date<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * execute<span class="o">[</span>meu-comando<span class="o">]</span> action run
+</span></span><span class="line"><span class="cl">    - execute <span class="nb">echo</span> <span class="s2">&#34; Obrigado!&#34;</span> &gt;&gt; /etc/motd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Running handlers:
+</span></span><span class="line"><span class="cl">Running handlers <span class="nb">complete</span>
+</span></span><span class="line"><span class="cl">Chef Client finished, 1/5 resources updated in <span class="m">32</span> seconds</span></span></code></pre></div></div>
+<p><strong>U</strong>ma vez que nosso arquivo <code>/etc/motd</code> já possuía o conteúdo <code>Bem Vindo! Obrigado!</code> e desta vez não tentou garantir que o conteúdo do mesmo fosse apenas <code>Bem Vindo!</code>, vejamos como ele se encontra:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@kalib6 ~<span class="o">]</span><span class="c1"># cat /etc/motd</span>
+</span></span><span class="line"><span class="cl">Bem Vindo! Obrigado!
+</span></span><span class="line"><span class="cl">Obrigado!</span></span></code></pre></div></div>
+<p><strong>C</strong>omo esperado, inserimos mais um <code> Obrigado!</code> ao arquivo. Se executarmos novamente o chef-client, estaremos acrescentando novamente um <code> Obrigado!</code> ao arquivo, pois o mesmo existe e não estamos mais tentando validar seu conteúdo.
+<strong>E</strong> se removermos manualmente o arquivo <code>/etc/motd</code>?</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@kalib6 ~<span class="o">]</span><span class="c1"># rm /etc/motd</span>
+</span></span><span class="line"><span class="cl">rm: remove regular file ‘/etc/motd’? y
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@kalib6 ~<span class="o">]</span><span class="c1"># cat /etc/motd</span>
+</span></span><span class="line"><span class="cl">cat: /etc/motd: No such file or directory</span></span></code></pre></div></div>
+<p><strong>V</strong>ejamos o que o chef-client fará:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">... <span class="o">(</span>Ignorando linhas desnecessárias<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * execute<span class="o">[</span>meu-comando<span class="o">]</span> action run <span class="o">(</span>skipped due to only_if<span class="o">)</span>
+</span></span><span class="line"><span class="cl">...</span></span></code></pre></div></div>
+<p><strong>C</strong>omo já tínhamos comentado as linhas que garantem que o <code>/etc/motd</code> existe e possui o conteúdo <code>Bem Vindo!</code>, o resource que incluiría <code> Obrigado!</code> foi ignorado, pois em nossa guard temos a condição <code>only_if</code>, que indica que o comando só será executado SE o arquivo /etc/motd existir. Para ter certeza disto, vamos verificar:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@kalib6 ~<span class="o">]</span><span class="c1"># cat /etc/motd</span>
+</span></span><span class="line"><span class="cl">cat: /etc/motd: No such file or directory</span></span></code></pre></div></div>
+<p><strong>A</strong>proveitando a situação, vamos alterar nossa recipe e utilizar <code>not_if</code> ao invés de <code>only_if</code>:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-ruby">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">package</span> <span class="s1">&#39;apache&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">package_name</span> <span class="s1">&#39;httpd&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">action</span> <span class="ss">:install</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">service</span> <span class="s1">&#39;httpd&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">action</span> <span class="o">[</span><span class="ss">:enable</span><span class="p">,</span> <span class="ss">:start</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">file</span> <span class="s1">&#39;/var/www/html/index.html&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">content</span> <span class="s1">&#39;Hello World!&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mode</span> <span class="s1">&#39;0755&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">owner</span> <span class="s1">&#39;root&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">group</span> <span class="s1">&#39;apache&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#file &#39;/etc/motd&#39; do</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#       content &#39;Bem Vindo!&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">execute</span> <span class="s1">&#39;meu-comando&#39;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="n">command</span> <span class="s1">&#39;echo &#34; Obrigado!&#34; &gt;&gt; /etc/motd&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">not_if</span> <span class="s1">&#39;test -r /etc/motd&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span></span></span></code></pre></div></div>
+<p><strong>J</strong>á sabemos que o arquivo não existe, portanto a nossa regra agora será satisfeita, visto que queremos adicionar o conteúdo <code> Obrigado!</code> APENAS caso o arquivo NÃO exista.</p>
+<p><strong>V</strong>ale lembrar que, por padrão, o comando <code>echo ' Obrigado!' &gt;&gt; /etc/motd</code> irá adicionar o conteúdo ao arquivo e, caso o mesmo não exista, ele será criado com o determinado conteúdo. Isto não é um recurso do Chef, mas sim do próprio linux/echo. Executando nosso chef-client:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">... <span class="o">(</span>Ignorando linhas desnecessárias<span class="o">)</span>
+</span></span><span class="line"><span class="cl">* execute<span class="o">[</span>meu-comando<span class="o">]</span> action run
+</span></span><span class="line"><span class="cl">  - execute <span class="nb">echo</span> <span class="s2">&#34; Obrigado!&#34;</span> &gt;&gt; /etc/motd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Running handlers:
+</span></span><span class="line"><span class="cl">Running handlers complete</span></span></code></pre></div></div>
+<p><strong>R</strong>epare que o arquivo foi criado apenas com o conteúdo <code> Obrigado!</code>, conforme descrito em nossa recipe.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@kalib6 ~<span class="o">]</span><span class="c1"># cat /etc/motd</span>
+</span></span><span class="line"><span class="cl"> Obrigado!</span></span></code></pre></div></div>
+<p><strong>C</strong>aso o chef-client seja executado novamente, nada acontecerá, uma vez que o resource atual indica que o comando APENAS deverá ser executado caso o arquivo NÃO exista.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">... <span class="o">(</span>Ignorando linhas desnecessárias<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  * execute<span class="o">[</span>meu-comando<span class="o">]</span> action run <span class="o">(</span>skipped due to not_if<span class="o">)</span>
+</span></span><span class="line"><span class="cl">...</span></span></code></pre></div></div>
+<p><strong>S</strong>imples, certo?! É importante lembrar que o Chef executará os resources na devida ordem em que forem listados na recipe, portanto é importante alinhar todas as instruções e resources de acordo com o resultado desejado.</p>
+<p><strong>H</strong>appy hacking!</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Atualizado em 2018-04-14</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Compartilhe em X" data-sharer="x" data-url="//blog.marcelocavalcante.net:1313/posts/chef-uso-de-condicionais-not/" data-title="Chef: Uso De Condicionais not_if E only_if" data-via="Marcelo_Kalib" data-hashtags="Devops,Chef"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Threads" data-sharer="threads" data-url="//blog.marcelocavalcante.net:1313/posts/chef-uso-de-condicionais-not/" data-title="Chef: Uso De Condicionais not_if E only_if"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Facebook" data-sharer="facebook" data-url="//blog.marcelocavalcante.net:1313/posts/chef-uso-de-condicionais-not/" data-hashtag="Devops"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Linkedin" data-sharer="linkedin" data-url="//blog.marcelocavalcante.net:1313/posts/chef-uso-de-condicionais-not/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Hacker News" data-sharer="hackernews" data-url="//blog.marcelocavalcante.net:1313/posts/chef-uso-de-condicionais-not/" data-title="Chef: Uso De Condicionais not_if E only_if"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Line" data-sharer="line" data-url="//blog.marcelocavalcante.net:1313/posts/chef-uso-de-condicionais-not/" data-title="Chef: Uso De Condicionais not_if E only_if"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em 微博" data-sharer="weibo" data-url="//blog.marcelocavalcante.net:1313/posts/chef-uso-de-condicionais-not/" data-title="Chef: Uso De Condicionais not_if E only_if"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Diaspora" data-sharer="diaspora" data-url="//blog.marcelocavalcante.net:1313/posts/chef-uso-de-condicionais-not/" data-title="Chef: Uso De Condicionais not_if E only_if" data-description="Chef é uma popular ferramenta de Gerenciamento de Configurações criado pela empresa de mesmo nome, Chef. Neste post veremos a utilização de condicionais em recipes com only_if e not_if."><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=%2f%2fblog.marcelocavalcante.net%3a1313%2fposts%2fchef-uso-de-condicionais-not%2f&amp;text=Chef%3a%20Uso%20De%20Condicionais%20not_if%20E%20only_if" target="_blank" title="Compartilhe em Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/devops/">Devops</a>,&nbsp;<a href="/tags/chef/">Chef</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Voltar</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/chef-aautomacao-e-gerenciamento-de/" class="prev" rel="prev" title="Chef: Automação E Gerenciamento De Configuração"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Chef: Automação E Gerenciamento De Configuração</a>
+            <a href="/posts/10-anos/" class="next" rel="next" title="10 Anos de Blog!">10 Anos de Blog!<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Possibilitado por <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Tema - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2008 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://blog.marcelocavalcante.net" target="_blank">Marcelo Cavalcante</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Voltar ao topo">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="Ver comentários">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.20.2/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+</html>

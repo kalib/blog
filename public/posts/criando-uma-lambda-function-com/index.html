@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Criando Uma Lambda Function Com Golang Que Interage Com S3 Buckets - Marcelo Cavalcante Rocha</title><meta name="Description" content="Criando uma lambda function com golang que interage com s3 buckets do AWS"><meta property="og:url" content="//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/">
+  <meta property="og:site_name" content="Marcelo Cavalcante Rocha">
+  <meta property="og:title" content="Criando Uma Lambda Function Com Golang Que Interage Com S3 Buckets">
+  <meta property="og:description" content="Criando uma lambda function com golang que interage com s3 buckets do AWS">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2021-06-27T14:38:00-04:00">
+    <meta property="article:modified_time" content="2021-06-27T14:38:00-04:00">
+    <meta property="article:tag" content="Devops">
+    <meta property="article:tag" content="AWS">
+    <meta property="article:tag" content="Lambda">
+    <meta property="article:tag" content="Golang">
+    <meta property="article:tag" content="Go">
+    <meta property="article:tag" content="Microservices">
+    <meta property="og:image" content="//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/featured-image.png">
+  <meta name="twitter:title" content="Criando Uma Lambda Function Com Golang Que Interage Com S3 Buckets">
+  <meta name="twitter:description" content="Criando uma lambda function com golang que interage com s3 buckets do AWS">
+<meta name="application-name" content="Marcelo Cavalcante">
+<meta name="apple-mobile-web-app-title" content="Marcelo Cavalcante">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/" /><link rel="prev" href="//blog.marcelocavalcante.net:1313/posts/criando-um-cluster-kubernetes-no/" /><link rel="next" href="//blog.marcelocavalcante.net:1313/posts/criando-infraestrutura-no-aws-com/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Criando Uma Lambda Function Com Golang Que Interage Com S3 Buckets",
+        "inLanguage": "pt-BR",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/\/blog.marcelocavalcante.net:1313\/posts\/criando-uma-lambda-function-com\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/criando-uma-lambda-function-com\/featured-image.png",
+                            "width":  990 ,
+                            "height":  495 
+                        }],"genre": "posts","keywords": "Devops, AWS, Lambda, Golang, Go, Microservices, Cloud","wordcount":  2085 ,
+        "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/criando-uma-lambda-function-com\/","datePublished": "2021-06-27T14:38:00-04:00","dateModified": "2021-06-27T14:38:00-04:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Marcelo Cavalcante"
+            },"description": "Criando uma lambda function com golang que interage com s3 buckets do AWS"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'auto';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categorias </a><a class="menu-item" href="/sobre/"> Quem Sou </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancelar
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categorias</a><a class="menu-item" href="/sobre/" title="">Quem Sou</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Conteúdos</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Criando Uma Lambda Function Com Golang Que Interage Com S3 Buckets</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://blog.marcelocavalcante.net" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Marcelo Cavalcante</a></span>&nbsp;<span class="post-category">incluido em <a href="/categories/tutoriais/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutoriais</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-06-27">2021-06-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2085 palavras&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutos&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/featured-image.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/featured-image.png, /posts/criando-uma-lambda-function-com/featured-image.png 1.5x, /posts/criando-uma-lambda-function-com/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/featured-image.png"
+        title="Criando uma lambda function com golang que interage com s3 buckets do AWS" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Conteúdos</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#go-ou-golang">Go ou Golang</a></li>
+    <li><a href="#lambda-functions">Lambda Functions</a></li>
+    <li><a href="#criando-a-nossa-função">Criando a nossa função</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Criando uma lambda function com golang que interage com s3 buckets do AWS</p>
+<h2 id="go-ou-golang">Go ou Golang</h2>
+<p><strong>G</strong>o, ou <a href="https://go.dev" target="_blank" rel="noopener noreffer ">Golang</a>, é uma linguagem de programação estaticamente tipificada, estrutural e com suporte nativo à concorrência. É uma linguagem compilada e desenvolvida pelo Google, mais especificamente por Robert Griesemer, Rob Pike e Ken Thompson. Go é uma linguagem sintaticamente similar ao C, com recursos de segurança para a memória, coleta de lixo, etc.</p>
+<p><strong>E</strong>xistem diversas razões pelas quais considero Golang a minha linguagem favorita, mas este não é o foco deste post. Caso tenha interesse, escrevi um outro post sobre o assunto:</p>
+<p><a href="/posts/go-ou-golang-porque-adotei/" rel="">Go Ou Golang: Porquê Adotei Go Como Minha Linguagem Favorita</a></p>
+<p><strong>E</strong>ste post também não visa ensinar o básico sobre a linguagem Go, portanto assumo que você já possua familiaridade com a linguagem. A ideia é apenas apresentar um simples caso de uso no qual Go pode ser uma excelente escolha. Implementação de microserviços (<em>microservices</em>) ou soluções <em>serverless</em>, como no caso de Lambda Functions, no AWS.</p>
+<h2 id="lambda-functions">Lambda Functions</h2>
+<p><strong>A</strong>ws Lambda é uma plataforma movida a eventos e <em>serverless</em> oferecida pelo AWS. É um serviço de computação em nuvem que executa códigos em resposta a eventos específicos e automaticamente gerencia o uso de recursos computacionais necessários para aquele código.</p>
+<p><strong>E</strong>mbora eu vá utilizar <em>AWS Lambda</em> neste exemplo, uma plataforma similar existe em quase todos os provedores de computação em nuvem (<em>Cloud</em>). No GCP (<em>Google Cloud Platform</em>), por exemplo, o serviço se chama <em>Google Functions</em>. No Microsoft Azure, se chama <em>Microsoft Azure Functions</em>, etc.</p>
+<p><strong>T</strong>odos estes serviços possuem algo em comum: Suportam múltiplas linguagens de programação. No caso do AWS as linguagens hoje (Junho, 2021) suportadas são: <em>Golang</em>, <em>Node.js</em>, <em>Python</em>, <em>Ruby</em>, <em>Java</em> e <em>.NET Core</em>.</p>
+<p><strong>A</strong> plataforma, por se tratar de uma solução <em>serverless</em>, não possui qualquer servidor ou sistema operacional que precise ser gerenciado por você. Toda a infraestrutura e camadas de SO são administradas e gerenciadas pelo seu provedor de <em>Cloud</em>. É a solução perfeita para desenvolvimento rápido quando se quer focar apenas em seu código e deixar que a plataforma de <em>Cloud</em> cuide das demais camadas.</p>
+<h2 id="criando-a-nossa-função">Criando a nossa função</h2>
+<p><strong>O</strong> primeiro passo é criarmos a nossa função no AWS e para isso devemos ir ao menu de serviços do AWS e buscar por Lambda:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/golang-lambda-1.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/golang-lambda-1.png, /posts/criando-uma-lambda-function-com/golang-lambda-1.png 1.5x, /posts/criando-uma-lambda-function-com/golang-lambda-1.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/golang-lambda-1.png"
+        title="Golang Lambda" width="950" height="430" /></p>
+<p><strong>A</strong>o clicar em Lambda você será levado a uma janela similar à seguinte. Clique em <strong>Criar função</strong> (<em>Create function</em>).</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/golang-lambda-2.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/golang-lambda-2.png, /posts/criando-uma-lambda-function-com/golang-lambda-2.png 1.5x, /posts/criando-uma-lambda-function-com/golang-lambda-2.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/golang-lambda-2.png"
+        title="Golang Lambda" width="920" height="372" /></p>
+<p><strong>N</strong>a janela de criação, daremos um nome à nossa função e selecionaremos o <em>Runtime</em> ou executor de linguagem que queremos utilizar. Utilizarei o nome <em>minhafuncaogolang</em> e escolherei o <em>Runtime</em> Golang 1.x.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/golang-lambda-3.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/golang-lambda-3.png, /posts/criando-uma-lambda-function-com/golang-lambda-3.png 1.5x, /posts/criando-uma-lambda-function-com/golang-lambda-3.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/golang-lambda-3.png"
+        title="Golang Lambda" width="940" height="800" /></p>
+<p><strong>N</strong>o topo da janela você também terá opções de criação de sua função, mas como vamos criar o nosso código completamente do zero, vamos utilizar a primeira opção, <strong>Criar do Zero</strong> (<em>Author from scratch</em>). Caso você esteja utilizando o AWS em português, o título poderá ser um pouco diferente, mas a ideia será a mesma.</p>
+<p><strong>O</strong>utro aspecto que gosto de selecionar é a região. Repare que no canto superior direito estou utilizando a região Canada Central 1 (<em>Central</em>). Por residir no Canada, esta é a região mais próxima de mim, portanto possuirá melhor performance. Embora para o exercício não vá fazer muita diferença, sinta-se livre para escolher qualquer região ou a que seja mais próxima de você.</p>
+<p><strong>N</strong>as configurações abaixo podemos optar por uma Role caso já saibamos que Role utilizaremos, mas podemos ignorar isto e deixar o padrão, para que o AWS crie uma automaticamente para nós.</p>
+<p><strong>A</strong>gora nos resta apenas clicar em <strong>Criar função</strong> (<em>Create function</em>), no botão laranja no canto inferior direito.</p>
+<p><strong>A</strong>pós alguns segundos veremos a tela de configuração e administração de nossa função (<em>function</em>).</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/golang-lambda-4.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/golang-lambda-4.png, /posts/criando-uma-lambda-function-com/golang-lambda-4.png 1.5x, /posts/criando-uma-lambda-function-com/golang-lambda-4.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/golang-lambda-4.png"
+        title="Golang Lambda" width="900" height="919" /></p>
+<p><strong>A</strong>gora que já possuímos nossa função criada, chegou a hora divertida. Vamos escrever o código de nossa função.</p>
+<p><strong>J</strong>á criei meu diretório <em>minhafuncaogolang</em> e agora criarei meu arquivo <em>main.go</em>.</p>
+<p><strong>C</strong>omo em qualquer código em Go, criaremos o nosso pacote com uma função main básica.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-go">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>A</strong>té aqui temos apenas o início básico de nosso pacote. Por padrão, o AWS lambda espera que nosso pacote possua um <em>handler</em>, o qual será um método no código de nossa função que processará eventos. Quando nossa função é invocada ou executada, o Lambda rodará o método handler. Quando o handler finaliza sua execução ou retorna uma resposta, a função volta a ficar disponível para atender a outro evento ou requisição.</p>
+<p><strong>U</strong>ma função lambda em Go requer o pacote <em>github.com/aws/aws-lambda-go/lambda</em>, portanto teremos de importá-lo também.</p>
+<p><strong>A</strong> função <em>main</em> também é necessária, e será utilizada para chamar o nosso handler. Vamos incrementar um pouco mais nosso código:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-go">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-lambda-go/lambda&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lambda</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="nx">handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">handler</span><span class="p">(</span><span class="nx">bucket</span> <span class="nx">MeuBucket</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">s3</span><span class="p">.</span><span class="nx">CreateBucketOutput</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>A</strong>gora que importamos <em>github.com/aws/aws-lambda-go/lambda</em> e criamos nosso handler que recebe um <em>bucket</em> e retorna um <em>Output</em> e um <em>error</em>, chamamos este handler a partir de nossa função main utilizando o pacote lambda fornecido pelo AWS.</p>
+<p><strong>I</strong>ndicamos que nosso handler retorna um CreateBucketOutput, o qual é padrão fornecido pela sdk Go do AWS. Mais detalhes podem ser encontrados <a href="https://docs.aws.amazon.com/sdk-for-go/api/service/s3/" target="_blank" rel="noopener noreffer ">aqui</a>.</p>
+<p><strong>J</strong>á que pretendemos utilizar o pacote <em>S3</em> fornecido pelo AWS, devemos também importá-lo em nosso código. Além disso, para trabalharmos com o AWS devemos iniciar uma sessão, portanto criaremos uma variável para nossa sessão também.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-go">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-lambda-go/lambda&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-sdk-go/aws&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-sdk-go/aws/session&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-sdk-go/service/s3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">sessaos3</span> <span class="o">*</span><span class="nx">s3</span><span class="p">.</span><span class="nx">S3</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lambda</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="nx">handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">handler</span><span class="p">(</span><span class="nx">bucket</span> <span class="nx">MeuBucket</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">s3</span><span class="p">.</span><span class="nx">CreateBucketOutput</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>C</strong>omo pretendemos criar um bucket no s3, criaremos um struct para nosso bucket, no qual passaremos um nome para o bucket que desejamos criar e uma região.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-go">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-lambda-go/lambda&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-sdk-go/aws&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-sdk-go/aws/session&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-sdk-go/service/s3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">sessaos3</span> <span class="o">*</span><span class="nx">s3</span><span class="p">.</span><span class="nx">S3</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">MeuBucket</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">NOME_BUCKET</span> <span class="kt">string</span> <span class="s">`json:&#34;bucket&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">REGIAO</span>      <span class="kt">string</span> <span class="s">`json:&#34;regiao&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lambda</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="nx">handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">handler</span><span class="p">(</span><span class="nx">bucket</span> <span class="nx">MeuBucket</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">s3</span><span class="p">.</span><span class="nx">CreateBucketOutput</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>R</strong>epare que nosso struct MeuBucket está em formato padrão json, tal como invocaríamos em uma API qualquer.</p>
+<p><strong>C</strong>om nosso struct devidamente criado é hora de darmos corpo ao nosso código e inciarmos a nossa lógica. A ideia é criar um bucket no s3, portanto vamos criar uma função chamada <em>criarBucket</em>. Nossa função receberá nosso struct bucket e iniciará a sessão AWS para o s3.</p>
+<p><strong>A</strong> nossa função <em>criarBucket</em> deverá receber os dados fornecidos em nosso struct para criar o bucket com o nome que foi passado, obviamente que validando a existência do bucket pois o AWS não permite que dois buckets existam com o mesmo nome globalmente.</p>
+<p><strong>P</strong>ara que possamos fazer estes tratamentos de erros, importaremos também os pacotes <em>errors</em> e <em>awserr</em>, que também faz parte da SDK do AWS.</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-go">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;errors&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-lambda-go/lambda&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-sdk-go/aws&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;github.com/aws/aws-sdk-go/aws/awserr&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-sdk-go/aws/session&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-sdk-go/service/s3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">sessaos3</span> <span class="o">*</span><span class="nx">s3</span><span class="p">.</span><span class="nx">S3</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">MeuBucket</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">NOME_BUCKET</span> <span class="kt">string</span> <span class="s">`json:&#34;bucket&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">REGIAO</span>      <span class="kt">string</span> <span class="s">`json:&#34;regiao&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">criarBucket</span><span class="p">(</span><span class="nx">bucket</span> <span class="nx">MeuBucket</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">s3</span><span class="p">.</span><span class="nx">CreateBucketOutput</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">sessaos3</span> <span class="p">=</span> <span class="nx">s3</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nf">Must</span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nf">NewSession</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">aws</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Region</span><span class="p">:</span> <span class="nx">aws</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">bucket</span><span class="p">.</span><span class="nx">REGIAO</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">sessaos3</span><span class="p">.</span><span class="nf">CreateBucket</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s3</span><span class="p">.</span><span class="nx">CreateBucketInput</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ACL</span><span class="p">:</span>    <span class="nx">aws</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">s3</span><span class="p">.</span><span class="nx">BucketCannedACLPublicRead</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Bucket</span><span class="p">:</span> <span class="nx">aws</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">bucket</span><span class="p">.</span><span class="nx">NOME_BUCKET</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">CreateBucketConfiguration</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">s3</span><span class="p">.</span><span class="nx">CreateBucketConfiguration</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">LocationConstraint</span><span class="p">:</span> <span class="nx">aws</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">bucket</span><span class="p">.</span><span class="nx">REGIAO</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">aerr</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">err</span><span class="p">.(</span><span class="nx">awserr</span><span class="p">.</span><span class="nx">Error</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">switch</span> <span class="nx">aerr</span><span class="p">.</span><span class="nf">Code</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">case</span> <span class="nx">s3</span><span class="p">.</span><span class="nx">ErrCodeBucketAlreadyExists</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="s">&#34;Bucket com este nome já existe!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">case</span> <span class="nx">s3</span><span class="p">.</span><span class="nx">ErrCodeBucketAlreadyOwnedByYou</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="s">&#34;Bucket com este nome já existe, e é seu!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">resp</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lambda</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="nx">handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">handler</span><span class="p">(</span><span class="nx">bucket</span> <span class="nx">MeuBucket</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">s3</span><span class="p">.</span><span class="nx">CreateBucketOutput</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>E</strong>ste bloco de código foi um pouco maior. Aqui, além de iniciarmos nossa sessão s3 também tratamos possíveis erros caso já exista um bucket com o nome que escolhemos.</p>
+<p><strong>N</strong>osso código está se utilizando da própria SDK do AWS para tratar os erros, de forma que receberemos a mensagem <em>Bucket com este nome já existe!</em> caso já exista globalmente (em alguma outra conta do AWS que não seja a sua) um bucket utilizando o nome fornecido, ou <em>Bucket com este nome já existe, e é seu!</em> caso o bucket já exista e tenha sido criado em sua conta.</p>
+<p><strong>A</strong> única coisa que nos falta é tratar nosso handler para que ele traga os devidos retornos ou resultados gerados pela nossão função <em>criarBucket</em>.</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-go">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;errors&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-lambda-go/lambda&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-sdk-go/aws&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;github.com/aws/aws-sdk-go/aws/awserr&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-sdk-go/aws/session&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/aws/aws-sdk-go/service/s3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">sessaos3</span> <span class="o">*</span><span class="nx">s3</span><span class="p">.</span><span class="nx">S3</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">MeuBucket</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">NOME_BUCKET</span> <span class="kt">string</span> <span class="s">`json:&#34;bucket&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">REGIAO</span>      <span class="kt">string</span> <span class="s">`json:&#34;regiao&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">criarBucket</span><span class="p">(</span><span class="nx">bucket</span> <span class="nx">MeuBucket</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">s3</span><span class="p">.</span><span class="nx">CreateBucketOutput</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">sessaos3</span> <span class="p">=</span> <span class="nx">s3</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nf">Must</span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nf">NewSession</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">aws</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Region</span><span class="p">:</span> <span class="nx">aws</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">bucket</span><span class="p">.</span><span class="nx">REGIAO</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">sessaos3</span><span class="p">.</span><span class="nf">CreateBucket</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s3</span><span class="p">.</span><span class="nx">CreateBucketInput</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ACL</span><span class="p">:</span>    <span class="nx">aws</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">s3</span><span class="p">.</span><span class="nx">BucketCannedACLPublicRead</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Bucket</span><span class="p">:</span> <span class="nx">aws</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">bucket</span><span class="p">.</span><span class="nx">NOME_BUCKET</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">CreateBucketConfiguration</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">s3</span><span class="p">.</span><span class="nx">CreateBucketConfiguration</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">LocationConstraint</span><span class="p">:</span> <span class="nx">aws</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">bucket</span><span class="p">.</span><span class="nx">REGIAO</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">aerr</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">err</span><span class="p">.(</span><span class="nx">awserr</span><span class="p">.</span><span class="nx">Error</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">switch</span> <span class="nx">aerr</span><span class="p">.</span><span class="nf">Code</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">case</span> <span class="nx">s3</span><span class="p">.</span><span class="nx">ErrCodeBucketAlreadyExists</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="s">&#34;Bucket com este nome já existe!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">case</span> <span class="nx">s3</span><span class="p">.</span><span class="nx">ErrCodeBucketAlreadyOwnedByYou</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="s">&#34;Bucket com este nome já existe, e é seu!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">resp</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lambda</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="nx">handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">handler</span><span class="p">(</span><span class="nx">bucket</span> <span class="nx">MeuBucket</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">s3</span><span class="p">.</span><span class="nx">CreateBucketOutput</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nf">criarBucket</span><span class="p">(</span><span class="nx">bucket</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>I</strong>sto é tudo o que precisamos retornar em nosso handler.</p>
+<p><strong>A</strong>qui já temos um código funcional e que pode ser executado com sucesso em nossa função lambda.</p>
+<p><strong>P</strong>odemos agora inicializar nosso projeto:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ go mod init minhafuncaogolang
+</span></span><span class="line"><span class="cl">go: creating new go.mod: module minhafuncaogolang
+</span></span><span class="line"><span class="cl">go: to add module requirements and sums:
+</span></span><span class="line"><span class="cl">	go mod tidy
+</span></span><span class="line"><span class="cl">➜ go get .</span></span></code></pre></div></div>
+<p><strong>C</strong>om isto os arquivos go.mod e go.sum foram criados. O próximo passo é fazermos o build/compilação do nosso código para que possámos gerar um binário e enviá-lo para o AWS.</p>
+<p><strong>C</strong>aso você esteja em uma máquina <strong>Linux</strong> ou <strong>Mac/OS X</strong>, utilize:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ <span class="nv">GOOS</span><span class="o">=</span>linux <span class="nv">GOARCH</span><span class="o">=</span>amd64 <span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">0</span> go build -o main -ldflags <span class="s1">&#39;-w&#39;</span> main.go <span class="o">&amp;&amp;</span> zip archive.zip main</span></span></code></pre></div></div>
+<p><strong>E</strong>ste comando irá fazer o build, utilizando as flags exigidas pelo AWS e compactará o seu binário em um arquivo <em>archive.zip</em>.</p>
+<p><strong>U</strong>m arquivo binário <em>main</em> será criado, juntamente com seu arquivo compactado <em>archive.zip</em>.</p>
+<p><strong>WINDOWS:</strong> Se você utiliza Windows, obviamente as coisas são um pouco mais complicadas. Você primeiramente precisará baixar uma ferramenta chamada build-lambda-zip: <em>(Eu imagino que as instruções abaixo funcionem, já que foram fornecidas pela própria Amazon, mas não possuo máquinas com Windows portanto não testei este procedimento. - <a href="https://docs.aws.amazon.com/lambda/latest/dg/golang-package.html" target="_blank" rel="noopener noreffer ">https://docs.aws.amazon.com/lambda/latest/dg/golang-package.html</a>)</em></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">go get -u github.com/aws/aws-lambda-go/cmd/build-lambda-zip</span></span></code></pre></div></div>
+<p><strong>E</strong>m seguida utilize os seguintes comandos:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜ <span class="nb">set</span> <span class="nv">GOOS</span><span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">➜ go build -o main main.go
+</span></span><span class="line"><span class="cl">➜ %USERPROFILE%<span class="se">\G</span>o<span class="se">\b</span>in<span class="se">\b</span>uild-lambda-zip.exe -output archive.zip main</span></span></code></pre></div></div>
+<p><strong>V</strong>amos agora enviar nosso código para o AWS para que possamos testar nossa função.</p>
+<p><strong>D</strong>e volta ao AWS, na página de nossa função, clique no botão de Upload, localizado na sessão de Código Fonte (<em>Source Code</em>). Selecione a opção <em>.zip file</em>.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/golang-lambda-5.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/golang-lambda-5.png, /posts/criando-uma-lambda-function-com/golang-lambda-5.png 1.5x, /posts/criando-uma-lambda-function-com/golang-lambda-5.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/golang-lambda-5.png"
+        title="Golang Lambda" width="900" height="684" /></p>
+<p><strong>S</strong>elecione seu arquivo <em>archive.zip</em> e envie-o clicando em <strong>Salvar</strong> (<em>Save</em>).</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/golang-lambda-6.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/golang-lambda-6.png, /posts/criando-uma-lambda-function-com/golang-lambda-6.png 1.5x, /posts/criando-uma-lambda-function-com/golang-lambda-6.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/golang-lambda-6.png"
+        title="Golang Lambda" width="850" height="350" /></p>
+<p><strong>A</strong>gora nossa função no AWS já possui um código funcional e podemos fazer o nosso primeiro teste.</p>
+<p><strong>A</strong> primeira coisa que faremos é mudar o nome de nossa função <em>Handler</em>. Por padrão o AWS trás o nome <em>hello</em>, portanto mudaremos para <em>main</em>, que é o nome que utilizamos. Para isso, ainda na tela de sua função, clique em <strong>Editar</strong> (<em>Edit</em>) na sessão <em>Runtime</em>.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/golang-lambda-7.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/golang-lambda-7.png, /posts/criando-uma-lambda-function-com/golang-lambda-7.png 1.5x, /posts/criando-uma-lambda-function-com/golang-lambda-7.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/golang-lambda-7.png"
+        title="Golang Lambda" width="900" height="702" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/golang-lambda-8.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/golang-lambda-8.png, /posts/criando-uma-lambda-function-com/golang-lambda-8.png 1.5x, /posts/criando-uma-lambda-function-com/golang-lambda-8.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/golang-lambda-8.png"
+        title="Golang Lambda" width="900" height="400" /></p>
+<p><strong>A</strong>ntes de executarmos um teste em si, vamos alterar a <em>role</em> que é utilizada pela função para que a mesma possua permissão de criar buckets no s3.</p>
+<p><strong>C</strong>lique na aba de <strong>Configurações</strong> (<em>Configuration</em>) e em seguida em <strong>Permissões</strong> (<em>Permissions</em>).</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/golang-lambda-11b.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/golang-lambda-11b.png, /posts/criando-uma-lambda-function-com/golang-lambda-11b.png 1.5x, /posts/criando-uma-lambda-function-com/golang-lambda-11b.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/golang-lambda-11b.png"
+        title="Golang Lambda" width="1000" height="740" /></p>
+<p><strong>C</strong>lique no nome da <em>Role</em>. A página de permissões da role será apresentada, clique em <em>Attach policies</em>.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/golang-lambda-12.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/golang-lambda-12.png, /posts/criando-uma-lambda-function-com/golang-lambda-12.png 1.5x, /posts/criando-uma-lambda-function-com/golang-lambda-12.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/golang-lambda-12.png"
+        title="Golang Lambda" width="800" height="624" /></p>
+<p><strong>E</strong>m um ambiente de produção daríamos apenas as permissões que realmente precisamos para nossa <em>Role</em>, mas para simplificar esta demonstração, busque pela policy <em>AmazonS3FullAccess</em>. Selecione-a e clique em <em>Attach policy</em> no canto inferior direito da tela.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/golang-lambda-13.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/golang-lambda-13.png, /posts/criando-uma-lambda-function-com/golang-lambda-13.png 1.5x, /posts/criando-uma-lambda-function-com/golang-lambda-13.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/golang-lambda-13.png"
+        title="Golang Lambda" width="950" height="620" /></p>
+<p><strong>A</strong>gora vamos criar um evento de teste. Voltando para a página de nossa função, clique em <strong>Teste</strong> (<em>Test</em>) e apague os campos de Input, já que não passamos ainda nenhum input para nosso código.</p>
+<p><strong>O</strong> conteúdo de nosso teste será o seguinte:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-json">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;bucket&#34;</span><span class="p">:</span> <span class="err">bucket-minhafuncaogolanglambda</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;regiao&#34;</span><span class="p">:</span> <span class="s2">&#34;ca-central-1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p><strong>S</strong>inta-se livre para utilizar o nome que desejar para seu bucket, bem como a região que preferir.</p>
+<p><strong>E</strong>m seguida clique no botão laranja <strong>Teste</strong> (<em>Test</em>).</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/golang-lambda-9.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/golang-lambda-9.png, /posts/criando-uma-lambda-function-com/golang-lambda-9.png 1.5x, /posts/criando-uma-lambda-function-com/golang-lambda-9.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/golang-lambda-9.png"
+        title="Golang Lambda" width="850" height="340" /></p>
+<p><strong>S</strong>e o seu código está exatamente igual ao meu, você provavelmente receberá um resultado com status <em>200</em>, o que significa que sua função executou com sucesso. (Caso você tenha recebido um <strong>erro</strong> significa que o seu código contém algo errado OU um bucket com o nome que você indicou já existe.)</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/golang-lambda-10.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/golang-lambda-10.png, /posts/criando-uma-lambda-function-com/golang-lambda-10.png 1.5x, /posts/criando-uma-lambda-function-com/golang-lambda-10.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/golang-lambda-10.png"
+        title="Golang Lambda" width="850" height="629" /></p>
+<p><strong>S</strong>e eu executar novamente o mesmo teste, com o mesmo nome para o bucket, desta vez teremos um erro:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/golang-lambda-11.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/golang-lambda-11.png, /posts/criando-uma-lambda-function-com/golang-lambda-11.png 1.5x, /posts/criando-uma-lambda-function-com/golang-lambda-11.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/golang-lambda-11.png"
+        title="Golang Lambda" width="850" height="629" /></p>
+<p><strong>C</strong>omo era esperado, o erro indica que o bucket já existe e é meu, pois este foi o bucket que criei em minha execução anterior. Experimente alterar o nome do bucket para algo bem óbvio e que certamente alguém já usou, por exemplo <em>teste</em>.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/golang-lambda-14.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/golang-lambda-14.png, /posts/criando-uma-lambda-function-com/golang-lambda-14.png 1.5x, /posts/criando-uma-lambda-function-com/golang-lambda-14.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/golang-lambda-14.png"
+        title="Golang Lambda" width="850" height="680" /></p>
+<p><strong>E</strong>xatamente o erro esperado. O bucket já existe, porém não é nosso.</p>
+<p><strong>O</strong>bviamente que se formos até nossa página do s3 veremos que o bucket que criamos na primeira execução estará lá:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/criando-uma-lambda-function-com/golang-lambda-15.png"
+        data-srcset="/posts/criando-uma-lambda-function-com/golang-lambda-15.png, /posts/criando-uma-lambda-function-com/golang-lambda-15.png 1.5x, /posts/criando-uma-lambda-function-com/golang-lambda-15.png 2x"
+        data-sizes="auto"
+        alt="/posts/criando-uma-lambda-function-com/golang-lambda-15.png"
+        title="Golang Lambda" width="800" height="450" /></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Atualizado em 2021-06-27</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Compartilhe em X" data-sharer="x" data-url="//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/" data-title="Criando Uma Lambda Function Com Golang Que Interage Com S3 Buckets" data-via="Marcelo_Kalib" data-hashtags="Devops,AWS,Lambda,Golang,Go,Microservices,Cloud"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Threads" data-sharer="threads" data-url="//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/" data-title="Criando Uma Lambda Function Com Golang Que Interage Com S3 Buckets"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Facebook" data-sharer="facebook" data-url="//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/" data-hashtag="Devops"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Linkedin" data-sharer="linkedin" data-url="//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Hacker News" data-sharer="hackernews" data-url="//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/" data-title="Criando Uma Lambda Function Com Golang Que Interage Com S3 Buckets"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Line" data-sharer="line" data-url="//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/" data-title="Criando Uma Lambda Function Com Golang Que Interage Com S3 Buckets"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em 微博" data-sharer="weibo" data-url="//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/" data-title="Criando Uma Lambda Function Com Golang Que Interage Com S3 Buckets"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Diaspora" data-sharer="diaspora" data-url="//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/" data-title="Criando Uma Lambda Function Com Golang Que Interage Com S3 Buckets" data-description="Criando uma lambda function com golang que interage com s3 buckets do AWS"><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=%2f%2fblog.marcelocavalcante.net%3a1313%2fposts%2fcriando-uma-lambda-function-com%2f&amp;text=Criando%20Uma%20Lambda%20Function%20Com%20Golang%20Que%20Interage%20Com%20S3%20Buckets" target="_blank" title="Compartilhe em Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/devops/">Devops</a>,&nbsp;<a href="/tags/aws/">AWS</a>,&nbsp;<a href="/tags/lambda/">Lambda</a>,&nbsp;<a href="/tags/golang/">Golang</a>,&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/microservices/">Microservices</a>,&nbsp;<a href="/tags/cloud/">Cloud</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Voltar</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/criando-um-cluster-kubernetes-no/" class="prev" rel="prev" title="Criando Um Cluster Kubernetes No Gcp Com Terraform"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Criando Um Cluster Kubernetes No Gcp Com Terraform</a>
+            <a href="/posts/criando-infraestrutura-no-aws-com/" class="next" rel="next" title="Criando Infraestrutura No Aws Com Sceptre">Criando Infraestrutura No Aws Com Sceptre<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Possibilitado por <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Tema - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2008 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://blog.marcelocavalcante.net" target="_blank">Marcelo Cavalcante</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Voltar ao topo">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="Ver comentários">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.20.2/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+</html>

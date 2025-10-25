@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Chaveamento De Interfaces De Rede - Placas Broadcom - Marcelo Cavalcante Rocha</title><meta name="Description" content="Como diria a Feiticeira (não lembro o nome real dela), não é feitiçaria, é tecnologia!"><meta property="og:url" content="//blog.marcelocavalcante.net:1313/posts/chaveamento-de-interfaces-de-rede/">
+  <meta property="og:site_name" content="Marcelo Cavalcante Rocha">
+  <meta property="og:title" content="Chaveamento De Interfaces De Rede - Placas Broadcom">
+  <meta property="og:description" content="Como diria a Feiticeira (não lembro o nome real dela), não é feitiçaria, é tecnologia!">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2010-12-29T21:38:01-05:00">
+    <meta property="article:modified_time" content="2010-12-29T21:38:01-05:00">
+    <meta property="article:tag" content="Arch Linux">
+    <meta property="article:tag" content="Impressões">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Redes">
+    <meta property="article:tag" content="Software Livre">
+    <meta property="og:image" content="//blog.marcelocavalcante.net:1313/posts/chaveamento-de-interfaces-de-rede/featured-image.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="//blog.marcelocavalcante.net:1313/posts/chaveamento-de-interfaces-de-rede/featured-image.jpg">
+  <meta name="twitter:title" content="Chaveamento De Interfaces De Rede - Placas Broadcom">
+  <meta name="twitter:description" content="Como diria a Feiticeira (não lembro o nome real dela), não é feitiçaria, é tecnologia!">
+<meta name="application-name" content="Marcelo Cavalcante">
+<meta name="apple-mobile-web-app-title" content="Marcelo Cavalcante">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="//blog.marcelocavalcante.net:1313/posts/chaveamento-de-interfaces-de-rede/" /><link rel="prev" href="//blog.marcelocavalcante.net:1313/posts/somos-menos-de-1-o/" /><link rel="next" href="//blog.marcelocavalcante.net:1313/posts/lancado-kde-4-6-sim/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Chaveamento De Interfaces De Rede - Placas Broadcom",
+        "inLanguage": "pt-BR",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/\/blog.marcelocavalcante.net:1313\/posts\/chaveamento-de-interfaces-de-rede\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/chaveamento-de-interfaces-de-rede\/featured-image.jpg",
+                            "width":  252 ,
+                            "height":  188 
+                        }],"genre": "posts","keywords": "Arch Linux, Impressões, Linux, Redes, Software Livre","wordcount":  750 ,
+        "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/chaveamento-de-interfaces-de-rede\/","datePublished": "2010-12-29T21:38:01-05:00","dateModified": "2010-12-29T21:38:01-05:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Marcelo Cavalcante"
+            },"description": "Como diria a Feiticeira (não lembro o nome real dela), não é feitiçaria, é tecnologia!"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'auto';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categorias </a><a class="menu-item" href="/sobre/"> Quem Sou </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancelar
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categorias</a><a class="menu-item" href="/sobre/" title="">Quem Sou</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Conteúdos</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Chaveamento De Interfaces De Rede - Placas Broadcom</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://blog.marcelocavalcante.net" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Marcelo Cavalcante</a></span>&nbsp;<span class="post-category">incluido em <a href="/categories/tutoriais/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutoriais</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2010-12-29">2010-12-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;750 palavras&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutos&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/chaveamento-de-interfaces-de-rede/featured-image.jpg"
+        data-srcset="/posts/chaveamento-de-interfaces-de-rede/featured-image.jpg, /posts/chaveamento-de-interfaces-de-rede/featured-image.jpg 1.5x, /posts/chaveamento-de-interfaces-de-rede/featured-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/chaveamento-de-interfaces-de-rede/featured-image.jpg"
+        title="Como diria a Feiticeira (não lembro o nome real dela), não é feitiçaria, é tecnologia!" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Conteúdos</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#introdução">Introdução</a></li>
+    <li><a href="#solução">Solução</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>C</strong>omo diria a Feiticeira (não lembro o nome real dela), não é feitiçaria, é tecnologia!</p>
+<h2 id="introdução">Introdução</h2>
+<p><strong>C</strong>omo já expliquei no outro post, tive problemas com meu notebook e por isso passei muito tempo afastado do blog. Bom, recentemente comprei outro e cá estou novamente em casa.</p>
+<p><strong>M</strong>as, como nem tudo é um mar de rosas&hellip; toda mudança trás impactos positivos e negativos.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/chaveamento-de-interfaces-de-rede/vostro3300.jpg"
+        data-srcset="/posts/chaveamento-de-interfaces-de-rede/vostro3300.jpg, /posts/chaveamento-de-interfaces-de-rede/vostro3300.jpg 1.5x, /posts/chaveamento-de-interfaces-de-rede/vostro3300.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/chaveamento-de-interfaces-de-rede/vostro3300.jpg"
+        title="Vostro 3300" width="500" height="338" /></p>
+<p><strong>A</strong> máquina escolhida foi um Dell Vostro 3300. Com certeza uma excelente máquina e que eu não deixaria de recomendar para ninguém.</p>
+<p><strong>P</strong>ara quem comprou algum Dell recentemente, ou pensou em comprar, não deve ser uma novidade que estas máquinas, em sua grande maioria, estão trazendo chipsets wireless da Broadcom, ao invés dos Intel.</p>
+<p><strong>Q</strong>uando pensei em comprar, refleti bastante sobre isto, visto que os drivers para broadcom no linux já tiveram um passado um tanto quanto nebuloso em se tratando de Wireless.</p>
+<p><strong>R</strong>esolvi encarar e não me arrependo. A performance está excelente. O driver realmente funcionou como deveria funcionar porém tive um pequeno problema.</p>
+<p><strong>U</strong>tilizo <a href="https://www.kde.org" target="_blank" rel="noopener noreffer ">KDE</a> como gerenciador de janelas em meu <a href="https://www.archlinux.org" target="_blank" rel="noopener noreffer ">ArchLinux</a> e <a href="https://wicd.sourceforge.net/" target="_blank" rel="noopener noreffer ">Wicd</a> como gerenciador de redes. Estava tudo funcionando bem mas ao reiniciar a máquina um certo dia percebo que o Wicd não havia encontrado nenhuma rede wireless. o.O</p>
+<p><strong>R</strong>einicio novamente e ele volta a encontrar. Feitiçaria? Fiquei curioso e resolvi reiniciar novamente e&hellip; funcionou. Pensei: &ldquo;Foi apenas um susto..ela devia querer descansar..&rdquo;</p>
+<p><strong>M</strong>as no dia seguinte ao ligar em casa percebi que, novamente, a interface wireless não foi encontrada pelo Wicd. Lembrei do fato anterior e reiniciei novamente. A interface continuava sem funcionar no Wicd.</p>
+<p><strong>L</strong>hes poupando dos testes que resolvi fazer para isolar o problema, descobri que as vezes a minha interface wireless estava subindo como eth0, as vezes subindo como eth1. Isso, obviamente, deixava o Wicd confuso, pois na configuração dele é necessário especificar qual será a interface wireless e qual será a wired (cabeada). Portanto, quando o notebook subia com a wireless na eth1, o Wicd funcionava numa boa, mas quando subia na eth0 o Wicd continuava tentando escanear redes wireless com a eth1, portanto não funcionava.</p>
+<p><strong>A</strong>pós algumas pesquisas descobri que este é um acontecimento comum em relação ao driver da broadcom. Este chaveamento ou swap de interfaces de rede acontece realmente de forma aleatória.</p>
+<h2 id="solução">Solução</h2>
+<p><strong>C</strong>omo resolver? Amarrando a interface ao nome, literalmente.</p>
+<p><strong>A</strong> placa começou a funcionar da forma esperada após vincular via regra o MAC da interface ao nome que eu desejava para ela. Desta forma, na hora de subir, ambas passam a subir de acordo com a regra que eu especifiquei, o que resolveu o problema pois a interface wireless passou a sempre subir com o mesmo nome, evitando que o Wicd tentasse escanear com uma interface que não existe.</p>
+<p><strong>S</strong>em mais papo furado.. mãos à obra!</p>
+<p><strong>A</strong>ntes de mais nada é necessário criar, caso você já não possua, o arquivo <em>/etc/udev/rules.d/10-network.rules</em> acrescentando o seguinte conteúdo:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">SUBSYSTEM</span><span class="o">==</span><span class="s2">&#34;net&#34;</span>, ATTR<span class="o">{</span>address<span class="o">}==</span><span class="s2">&#34;aa:bb:cc:dd:ee:ff&#34;</span>, <span class="nv">NAME</span><span class="o">=</span><span class="s2">&#34;eth0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">SUBSYSTEM</span><span class="o">==</span><span class="s2">&#34;net&#34;</span>, ATTR<span class="o">{</span>address<span class="o">}==</span><span class="s2">&#34;aa:bb:cc:dd:ee:ff&#34;</span>, <span class="nv">NAME</span><span class="o">=</span><span class="s2">&#34;eth1&#34;</span></span></span></code></pre></div></div>
+<p>o.O wtf?</p>
+<p><strong>B</strong>om, com isto você estará deixando claro para o sistema qual o nome que deverá ser atribuído para cada interface.</p>
+<p><strong>V</strong>ocê deverá apenas substituir o &ldquo;aa:bb:cc:dd:ee:ff&rdquo; e &ldquo;ff:ee:dd:cc:bb:aa&rdquo; pelos respectivos endereços MAC das interfaces.</p>
+<p><strong>O</strong> valor dos campos NAME podem ser alterados de acordo com sua vontade, por exemplo: eth0 para a cabeada e wlan0 para a wireless.</p>
+<p><strong>C</strong>aso não saiba como conseguir o endereço MAC de suas interfaces, utilize o seguinte comando:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ifconfig | grep HW</span></span></span></code></pre></div></div>
+<p><strong>I</strong>sso lhe dará um retorno parecido com o seguinte:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">eth0  Link encap:Ethernet  HWaddr **A4:BA:DB:D7:41:C0**
+</span></span><span class="line"><span class="cl">eth1  Link encap:Ethernet  HWaddr **1C:65:9D:6E:65:1B**</span></span></code></pre></div></div>
+<p><strong>O</strong>s endereços MAC são os valores que destaquei acima.</p>
+<p><strong>ATENÇÃO:</strong> Apesar de o MAC constantemente ser escrito com letras em maiúsculo como apresentado acima, no caso do arquivo 10-network.rules você deverá utilizar letras em minúsculo. Exato, o arquivo é case sensitive, portanto só funcionará desta forma.</p>
+<p><strong>C</strong>aso você receba uma saída parecida com a minha e queira se certificar de qual dos dois endereços MAC é o que realmente representa a interface wireless pode testar com os seguintes comando:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copiar para a área de transferência"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># iwlist eth0 scanning</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">e...﻿
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># iwlist eth1 scanning</span></span></span></code></pre></div></div>
+<p><strong>V</strong>ocê perceberá que terá resultados diferentes. O que retornar um scan completo de redes wireless disponíveis, obviamente, é a interface Wireless. ;]</p>
+<p><strong>A</strong>pós ter escolhido o nome que deseja para cada uma de suas interfaces pode salvar o arquivo de regra.</p>
+<p><strong>ATENÇÃO²:</strong> Certifique-se de atualizar o seu arquivo <em>/etc/rc.conf</em> para evitar que os nomes das interfaces estejam diferentes das que você criou no arquivo de regras.</p>
+<p><strong>É</strong> isto.. agora sua interface funcinoará da forma esperada.</p>
+<p><strong>A</strong>braços!</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Atualizado em 2010-12-29</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Compartilhe em X" data-sharer="x" data-url="//blog.marcelocavalcante.net:1313/posts/chaveamento-de-interfaces-de-rede/" data-title="Chaveamento De Interfaces De Rede - Placas Broadcom" data-via="Marcelo_Kalib" data-hashtags="Arch Linux,Impressões,Linux,Redes,Software Livre"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Threads" data-sharer="threads" data-url="//blog.marcelocavalcante.net:1313/posts/chaveamento-de-interfaces-de-rede/" data-title="Chaveamento De Interfaces De Rede - Placas Broadcom"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Facebook" data-sharer="facebook" data-url="//blog.marcelocavalcante.net:1313/posts/chaveamento-de-interfaces-de-rede/" data-hashtag="Arch Linux"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Linkedin" data-sharer="linkedin" data-url="//blog.marcelocavalcante.net:1313/posts/chaveamento-de-interfaces-de-rede/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Hacker News" data-sharer="hackernews" data-url="//blog.marcelocavalcante.net:1313/posts/chaveamento-de-interfaces-de-rede/" data-title="Chaveamento De Interfaces De Rede - Placas Broadcom"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Line" data-sharer="line" data-url="//blog.marcelocavalcante.net:1313/posts/chaveamento-de-interfaces-de-rede/" data-title="Chaveamento De Interfaces De Rede - Placas Broadcom"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em 微博" data-sharer="weibo" data-url="//blog.marcelocavalcante.net:1313/posts/chaveamento-de-interfaces-de-rede/" data-title="Chaveamento De Interfaces De Rede - Placas Broadcom"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Diaspora" data-sharer="diaspora" data-url="//blog.marcelocavalcante.net:1313/posts/chaveamento-de-interfaces-de-rede/" data-title="Chaveamento De Interfaces De Rede - Placas Broadcom" data-description="Como diria a Feiticeira (não lembro o nome real dela), não é feitiçaria, é tecnologia!"><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=%2f%2fblog.marcelocavalcante.net%3a1313%2fposts%2fchaveamento-de-interfaces-de-rede%2f&amp;text=Chaveamento%20De%20Interfaces%20De%20Rede%20-%20Placas%20Broadcom" target="_blank" title="Compartilhe em Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/arch-linux/">Arch Linux</a>,&nbsp;<a href="/tags/impress%C3%B5es/">Impressões</a>,&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/redes/">Redes</a>,&nbsp;<a href="/tags/software-livre/">Software Livre</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Voltar</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/somos-menos-de-1-o/" class="prev" rel="prev" title="Somos Menos De 1% - Usuários Linux Cadastrem-Se"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Somos Menos De 1% - Usuários Linux Cadastrem-Se</a>
+            <a href="/posts/lancado-kde-4-6-sim/" class="next" rel="next" title="Lançado Kde 4.6 - Sim, Claro, Se Você Usa Arch, Não Precisa Esperar">Lançado Kde 4.6 - Sim, Claro, Se Você Usa Arch, Não Precisa Esperar<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Possibilitado por <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Tema - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2008 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://blog.marcelocavalcante.net" target="_blank">Marcelo Cavalcante</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Voltar ao topo">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="Ver comentários">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.20.2/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+</html>

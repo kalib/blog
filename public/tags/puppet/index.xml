@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Puppet - Tag - Marcelo Cavalcante Rocha</title>
+        <link>//blog.marcelocavalcante.net:1313/tags/puppet/</link>
+        <description>Puppet - Tag - Marcelo Cavalcante Rocha</description>
+        <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Sat, 04 Aug 2018 13:12:15 -0500</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/puppet/" rel="self" type="application/rss+xml" /><item>
+    <title>Criando Uma Imagem Aws Ec2 Com Packer E Puppet</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/criando-uma-imagem-aws-ec2/</link>
+    <pubDate>Sat, 04 Aug 2018 13:12:15 -0500</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/criando-uma-imagem-aws-ec2/</guid>
+    <description><![CDATA[<p>Um exemplo de como utilizar a ferramenta Open Source Packer para criar uma imagem de forma automatizada para AWS EC2 com Puppet e Bash script para provisionar as configurações da imagem/vm.</p>]]></description>
+</item>
+</channel>
+</rss>

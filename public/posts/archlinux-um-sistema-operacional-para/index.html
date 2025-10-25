@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Archlinux - Um Sistema Operacional Para Hackers - Marcelo Cavalcante Rocha</title><meta name="Description" content="A resposta desta pergunta é muito relativa. Antes de mais nada devemos nos perguntar: O que mesmo é um Hacker?"><meta property="og:url" content="//blog.marcelocavalcante.net:1313/posts/archlinux-um-sistema-operacional-para/">
+  <meta property="og:site_name" content="Marcelo Cavalcante Rocha">
+  <meta property="og:title" content="Archlinux - Um Sistema Operacional Para Hackers">
+  <meta property="og:description" content="A resposta desta pergunta é muito relativa. Antes de mais nada devemos nos perguntar: O que mesmo é um Hacker?">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2009-01-06T16:38:39-04:00">
+    <meta property="article:modified_time" content="2009-01-06T16:38:39-04:00">
+    <meta property="article:tag" content="Arch Linux">
+    <meta property="article:tag" content="Impressões">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Software Livre">
+    <meta property="og:image" content="//blog.marcelocavalcante.net:1313/posts/archlinux-um-sistema-operacional-para/featured-image.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="//blog.marcelocavalcante.net:1313/posts/archlinux-um-sistema-operacional-para/featured-image.jpg">
+  <meta name="twitter:title" content="Archlinux - Um Sistema Operacional Para Hackers">
+  <meta name="twitter:description" content="A resposta desta pergunta é muito relativa. Antes de mais nada devemos nos perguntar: O que mesmo é um Hacker?">
+<meta name="application-name" content="Marcelo Cavalcante">
+<meta name="apple-mobile-web-app-title" content="Marcelo Cavalcante">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="//blog.marcelocavalcante.net:1313/posts/archlinux-um-sistema-operacional-para/" /><link rel="prev" href="//blog.marcelocavalcante.net:1313/posts/um-feliz-natal-e-um/" /><link rel="next" href="//blog.marcelocavalcante.net:1313/posts/repositorio-brasileiro-arch-linux/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Archlinux - Um Sistema Operacional Para Hackers",
+        "inLanguage": "pt-BR",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/\/blog.marcelocavalcante.net:1313\/posts\/archlinux-um-sistema-operacional-para\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/archlinux-um-sistema-operacional-para\/featured-image.jpg",
+                            "width":  400 ,
+                            "height":  407 
+                        }],"genre": "posts","keywords": "Arch Linux, Impressões, Linux, Software Livre","wordcount":  716 ,
+        "url": "\/\/blog.marcelocavalcante.net:1313\/posts\/archlinux-um-sistema-operacional-para\/","datePublished": "2009-01-06T16:38:39-04:00","dateModified": "2009-01-06T16:38:39-04:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Marcelo Cavalcante"
+            },"description": "A resposta desta pergunta é muito relativa. Antes de mais nada devemos nos perguntar: O que mesmo é um Hacker?"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'auto';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categorias </a><a class="menu-item" href="/sobre/"> Quem Sou </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Marcelo Cavalcante Rocha"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://marcelocavalcante.net/ftp/logonew.png"
+        data-srcset="https://marcelocavalcante.net/ftp/logonew.png, https://marcelocavalcante.net/ftp/logonew.png 1.5x, https://marcelocavalcante.net/ftp/logonew.png 2x"
+        data-sizes="auto"
+        alt="https://marcelocavalcante.net/ftp/logonew.png"
+        title="https://marcelocavalcante.net/ftp/logonew.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Pesquisar títulos ou conteúdos ..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Pesquisa">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Limpar">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancelar
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categorias</a><a class="menu-item" href="/sobre/" title="">Quem Sou</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Trocar tema">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Conteúdos</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Archlinux - Um Sistema Operacional Para Hackers</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://blog.marcelocavalcante.net" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Marcelo Cavalcante</a></span>&nbsp;<span class="post-category">incluido em <a href="/categories/impress%C3%B5es/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Impressões</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2009-01-06">2009-01-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;716 palavras&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutos&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/archlinux-um-sistema-operacional-para/featured-image.jpg"
+        data-srcset="/posts/archlinux-um-sistema-operacional-para/featured-image.jpg, /posts/archlinux-um-sistema-operacional-para/featured-image.jpg 1.5x, /posts/archlinux-um-sistema-operacional-para/featured-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/archlinux-um-sistema-operacional-para/featured-image.jpg"
+        title="A resposta desta pergunta é muito relativa. Antes de mais nada devemos nos perguntar: O que mesmo é um Hacker?" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Conteúdos</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#introdução">Introdução</a></li>
+    <li><a href="#arch-linux">Arch Linux</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>A resposta desta pergunta é muito relativa. Antes de mais nada devemos nos perguntar: O que mesmo é um Hacker? o.O</p>
+<h2 id="introdução">Introdução</h2>
+<p>Nos últimos 20 anos a palavra Hacker recebeu diversos tipos de atribuições bastante variadas e por isso mesmo, ainda nos dias de hoje, é difícil definir o que seria um Hacker. Apesar de existirem definições, sempre haverão divergências entre os mais diferentes pontos de vista PESSOAIS. Muitos se orgulham em se dizer um Hacker, enquanto que outros preferem negar de pés juntos por ainda ter receio do sentido errado empregado à esta palavra. De qualquer forma, por trás desta palavra existem fatos incontestáveis. Seguindo este ponto de vista, recomendo, fortemente, que se leia um outro artigo antes de dar continuidade a este. O artigo que chamei de “<a href="https://marcelokalib.blogspot.com/2008/04/cultura-hacker-tenha-tica-e-ganhars.html" target="_blank" rel="noopener noreffer ">Cultura Hacker, tenha ética e ganharás respeito</a>” é pré-requisito básico para o entender do pequeno post que se segue.</p>
+<p>Costumo identificar o Hacker naquele que, antes de mais nada, apresenta uma sede insaciável de conhecimento tecnológico. Aquele que demonstra nas redes de computadores e seu funcionamento uma fonte de busca inesgotável bem como uma profunda curiosidade de entender a forma como as coisas funcionam por trás de um programa atraindo seus olhos para inúmeras linhas de código como forma de lhe garantir, digamos assim, um fim de semana “divertido”.</p>
+<h2 id="arch-linux">Arch Linux</h2>
+<p>Sendo assim, seria o Archlinux um Sistema Operacional para Hackers? Coinscidência ou não, resolvi escrever este post pelo fato de ter sido questionado sobre isso por duas pessoas nesta mesma semana. Aqui respondo a esta pergunta de acordo com o MEU ponto de vista. (Lembrando que a resposta vai variar de acordo com o seu entendimento sobre a palavra Hacker, ok?!)</p>
+<p>Para os amantes da tecnologia e seus segredos os sistemas operacionais de código aberto sempre se mostraram um prato cheio, justamente pelo fato de você ter a liberdade de explorar seu código podendo assim entender seu funcionamento bem como adaptar de acordo com suas necessidades. Nos últimos 10 anos o Linux tem se destacado muito neste sentido ganhando cada vez mais adeptos. Sendo assim, acabaram por surgir diversos sabores, digamos assim, do Linux. Dentre elas vou destacar aqui o <a href="https://www.archlinux-br.org/" target="_blank" rel="noopener noreffer ">Archlinux</a>.</p>
+<p>O Archlinux é sim uma excelente escolha para estes famintos por conhecimento. Além das já comuns características do Linux o Arch trás algumas características próprias. Dentre elas, gostamos de dizer que, diferente de muitas distribuições Linux, o Arch não está aí para trabalhar POR você, mas sim COM você.</p>
+<p>O Arch favorece o aprendizado da tecnologia bem como das funcionalidades e potenciais reais de um sistema Linux por lhe permitir ter um acesso às configurações que são escondidas/camufladas pela grande maioria das distribuições atuais. Configurações que vão desde básicas mudanças para melhoramento de seu Desktop, bem como configurações avançadas de segurança para protocolos que venham a ser utilizados por você em sua estação de trabalho.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/archlinux-um-sistema-operacional-para/hacker21.jpg"
+        data-srcset="/posts/archlinux-um-sistema-operacional-para/hacker21.jpg, /posts/archlinux-um-sistema-operacional-para/hacker21.jpg 1.5x, /posts/archlinux-um-sistema-operacional-para/hacker21.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/archlinux-um-sistema-operacional-para/hacker21.jpg"
+        title="Hacker Archlinux" width="350" height="389" />No Arch você geralmente precisará configurar arquivos e mexer em códigos de scripts, portanto é desejável uma certa “empatia” para com a querida telinha preta, o que não exclui aqueles que querem apenas um Desktop comum e funcional. O fato de desde sua instalação necessitar de uma certa pesquisa de como o fazer, por já pedir alguns conhecimentos com, por exemplo, seu gerenciador de pacotes, o pacman, estimula o usuário a iniciar suas buscas ou googladas já de início. Um prato cheio para quem gosta de fuçar, estudar e pesquisar. Qual hacker não gosta de quebrar a cabeça e correr atrás? o.O</p>
+<p>Mas, é claro, toda distribuição possui algumas características básicas que a diferenciam das demais, portanto este post não poderia acabar com esta simples diferença, já que a cultura Hacker, dentro de meu ponto de vista, não para por aí.</p>
+<p>O senso de colaboração é bastante apurado para estes “garotos da rede”. E no que o Arch ajuda quanto a isso? Bom, particularmente já passei por várias comunidades/distribuições Linux. Dentre todas elas, sem dúvida alguma, consigo destacar o Arch como sendo a comunidade mais aberta à colaboração de novos interessados. A comunidade Arch é muito aberta e qualquer usuário do Arch percebe facilmente o quão fácil é contribuir com a distribuição, seja com tradução de documentações, desenvolvimento gráfico, desenvolvimento de código, correção, empacotamento, etc&hellip;</p>
+<p>Em meu ver, estes aspectos citados acima respondem a pergunta original. Tire suas conclusões&hellip;</p>
+<p>Abraços</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Atualizado em 2009-01-06</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Compartilhe em X" data-sharer="x" data-url="//blog.marcelocavalcante.net:1313/posts/archlinux-um-sistema-operacional-para/" data-title="Archlinux - Um Sistema Operacional Para Hackers" data-via="Marcelo_Kalib" data-hashtags="Arch Linux,Impressões,Linux,Software Livre"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Threads" data-sharer="threads" data-url="//blog.marcelocavalcante.net:1313/posts/archlinux-um-sistema-operacional-para/" data-title="Archlinux - Um Sistema Operacional Para Hackers"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Facebook" data-sharer="facebook" data-url="//blog.marcelocavalcante.net:1313/posts/archlinux-um-sistema-operacional-para/" data-hashtag="Arch Linux"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Linkedin" data-sharer="linkedin" data-url="//blog.marcelocavalcante.net:1313/posts/archlinux-um-sistema-operacional-para/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Hacker News" data-sharer="hackernews" data-url="//blog.marcelocavalcante.net:1313/posts/archlinux-um-sistema-operacional-para/" data-title="Archlinux - Um Sistema Operacional Para Hackers"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Line" data-sharer="line" data-url="//blog.marcelocavalcante.net:1313/posts/archlinux-um-sistema-operacional-para/" data-title="Archlinux - Um Sistema Operacional Para Hackers"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em 微博" data-sharer="weibo" data-url="//blog.marcelocavalcante.net:1313/posts/archlinux-um-sistema-operacional-para/" data-title="Archlinux - Um Sistema Operacional Para Hackers"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Compartilhe em Diaspora" data-sharer="diaspora" data-url="//blog.marcelocavalcante.net:1313/posts/archlinux-um-sistema-operacional-para/" data-title="Archlinux - Um Sistema Operacional Para Hackers" data-description="A resposta desta pergunta é muito relativa. Antes de mais nada devemos nos perguntar: O que mesmo é um Hacker?"><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=%2f%2fblog.marcelocavalcante.net%3a1313%2fposts%2farchlinux-um-sistema-operacional-para%2f&amp;text=Archlinux%20-%20Um%20Sistema%20Operacional%20Para%20Hackers" target="_blank" title="Compartilhe em Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/arch-linux/">Arch Linux</a>,&nbsp;<a href="/tags/impress%C3%B5es/">Impressões</a>,&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/software-livre/">Software Livre</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Voltar</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/um-feliz-natal-e-um/" class="prev" rel="prev" title="Um Feliz Natal E Um Próspero Ano Novo"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Um Feliz Natal E Um Próspero Ano Novo</a>
+            <a href="/posts/repositorio-brasileiro-arch-linux/" class="next" rel="next" title="Repositório Brasileiro Arch Linux">Repositório Brasileiro Arch Linux<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Possibilitado por <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Tema - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2008 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://blog.marcelocavalcante.net" target="_blank">Marcelo Cavalcante</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Voltar ao topo">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="Ver comentários">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.20.2/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+</html>
