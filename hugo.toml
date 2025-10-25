@@ -14,6 +14,13 @@ disqusShortname = "marcelokalib"
 [menu]
   [[menu.main]]
     weight = 1
+    identifier = "home"
+    pre = "<i class='fas fa-home'></i>"
+    name = "Home"
+    url = "/"
+    title = "Return to home page"
+  [[menu.main]]
+    weight = 1
     identifier = "posts"
     # you can add extra information before the name (HTML format is supported), such as icons
     pre = ""
