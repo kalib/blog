@@ -51,7 +51,8 @@
                 "name": "Marcelo Cavalcante"
             },"description": "Todos sabem que o Terraform é uma solucão fantástica para criar infraestrutura através de código, porém nem todos utilizam as diversas possibilidades do mesmo, como por exemplos módulos. Com módulos podemos fazer a reutilização de código para nossa infraestrutura."
     }
-    </script></head>
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
+    </head>
     <body data-header-desktop="fixed" data-header-mobile="auto"><script>
           const query = window.matchMedia('(prefers-color-scheme: dark)');
           function applyTheme() {
@@ -176,7 +177,7 @@
 <p><strong>V</strong>amos incluir uma nova tag <em>(Projeto)</em> bem como um bash script que será utilizado como <em>user_data</em>. Este bash script atualizará nossa base de repositórios e instalará o servidor web apache2, bem como habilitará o webserver no firewall padrão do Ubuntu.</p>
 <p><strong>E</strong>ste recurso <em>user_data</em> não é exatamente do Terraform, mas sim um mecanismo que o AWS nos provê para que possamos ter um script executado no momento de criação de uma instância ou VM.</p>
 <p><strong>N</strong>osso arquivo <em>variables.tf</em> do projeto <em>webserver</em> agora deverá estar assim:</p>
-<div class="code-block open" style="counter-reset: code-block -1">
+<div class="code-block" style="counter-reset: code-block -1">
     <div class="code-header language-py">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -225,7 +226,7 @@
 </span></span><span class="line hl"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
 
 <p><strong>A</strong>gora que temos nossa variável <em>user_data</em> criada, devemos inserir isto em nosso arquivo <em>main.tf</em> para que nossa instância possa utilizar este script de inicialização. Nosso <em>main.tf</em> do projeto <em>webserver</em> agora ficará assim:</p>
-<div class="code-block open" style="counter-reset: code-block -1">
+<div class="code-block" style="counter-reset: code-block -1">
     <div class="code-header language-py">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -1177,7 +1178,7 @@
 
 <p><strong>I</strong>sto é tudo o que precisamos fazer em nosso módulo <em>vm_setup</em>. Este módulo está pronto para ser reutilizado quantas vezes forem necessárias.</p>
 <p><strong>A</strong>gora que temos toda a nossa base principal de código no módulo, vamos alterar nosso projeto <em>webserver</em>. Vamos editar o arquivo <em>main.tf</em> do projeto <em>webserver</em> para que ele não possua nenhum resource ou lógica de criação. Precisaremos apenas importar o nosso módulo e informar as variáveis que precisam ser passadas por terem sido deixadas sem valores definidos no módulo:</p>
-<div class="code-block open" style="counter-reset: code-block -1">
+<div class="code-block" style="counter-reset: code-block -1">
     <div class="code-header language-py">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -2407,5 +2408,57 @@
         <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="Ver comentários">
                 <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.20.2/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.pt.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"pt","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body>
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var searchIndex;
+
+        fetch('/lunr.json')
+            .then(response => response.json())
+            .then(data => {
+                searchIndex = lunr(function () {
+                    this.field('title');
+                    this.field('content');
+                    this.field('tags');
+                    this.ref('uri');
+
+                    data.forEach(doc => {
+                        this.add(doc);
+                    });
+                });
+            });
+
+        function performSearch(query) {
+            if (searchIndex) {
+                var results = searchIndex.search(query);
+                displayResults(results);
+            }
+        }
+
+        function displayResults(results) {
+            var resultsContainer = document.getElementById('search-results');
+            resultsContainer.innerHTML = '';
+            results.forEach(result => {
+                var item = document.createElement('div');
+                item.innerHTML = `<a href="${result.ref}">${result.ref}</a>`;
+                resultsContainer.appendChild(item);
+            });
+        }
+
+        var searchInputDesktop = document.getElementById('search-input-desktop');
+        if (searchInputDesktop) {
+            searchInputDesktop.addEventListener('input', function() {
+                performSearch(searchInputDesktop.value);
+            });
+        }
+
+        var searchInputMobile = document.getElementById('search-input-mobile');
+        if (searchInputMobile) {
+            searchInputMobile.addEventListener('input', function() {
+                performSearch(searchInputMobile.value);
+            });
+        }
+    });
+</script>

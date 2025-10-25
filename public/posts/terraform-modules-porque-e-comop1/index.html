@@ -51,7 +51,8 @@
                 "name": "Marcelo Cavalcante"
             },"description": "Todos sabem que o Terraform é uma solucão fantástica para criar infraestrutura através de código, porém nem todos utilizam as diversas possibilidades do mesmo, como por exemplos módulos. Com módulos podemos fazer a reutilização de código para nossa infraestrutura."
     }
-    </script></head>
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
+    </head>
     <body data-header-desktop="fixed" data-header-mobile="auto"><script>
           const query = window.matchMedia('(prefers-color-scheme: dark)');
           function applyTheme() {
@@ -289,7 +290,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> terraform</span></span></code></pre></div></div>
 <p><strong>A</strong> forma mais simplificada de iniciar nosso projeto e criar uma simples instância Ubuntu seria criando um arquivo <em>main.tf</em> e inserindo o seguinte conteúdo no mesmo:</p>
-<div class="code-block open" style="counter-reset: code-block -1">
+<div class="code-block" style="counter-reset: code-block -1">
     <div class="code-header language-py">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -338,7 +339,7 @@
         alt="/posts/terraform-modules-porque-e-comop1/terraform_aws9.jpg"
         title="AWS IAM" width="950" height="450" /></p>
 <p><strong>D</strong>e volta ao nosso terminal, no diretório onde criamos nosso arquivo <em>main.tf</em>, vamos iniciar o terraform com <em>terraform init .</em> :</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
     <div class="code-header language-bash">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -544,7 +545,7 @@
         title="AWS IAM" width="950" height="450" /></p>
 <p><strong>T</strong>udo certo. Nossa instância foi criada e está disponível para acesso.</p>
 <p><strong>M</strong>as tudo ainda está muito simples e desorganizado. Vamos destruir a nossa infraestrutura para melhorarmos um pouco. Utilizaremos <em>terraform destroy</em> para destruir tudo o que foi criado:</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
     <div class="code-header language-bash">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -578,7 +579,7 @@
 </span></span><span class="line"><span class="cl">Destroy complete! Resources: <span class="m">1</span> destroyed.</span></span></code></pre></div></div>
 <p><strong>A</strong>ntes de mais nada, vamos organizar o código e criar algumas variáveis.</p>
 <p><strong>C</strong>omecemos criando um arquivo chamado <em>variables.tf</em> no mesmo diretório onde se encontra o arquivo main.tf e insira as seguintes variáveis nele:</p>
-<div class="code-block open" style="counter-reset: code-block -1">
+<div class="code-block" style="counter-reset: code-block -1">
     <div class="code-header language-py">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -669,7 +670,7 @@
 </span></span><span class="line"><span class="cl">    └── variables.tf</span></span></code></pre></div></div>
 <p><strong>C</strong>omo já tínhamos isolado nossas variáveis, não precisaremos tocar nos arquivos <em>main.tf</em>. Podemos alterar apenas valores das variáveis desejadas nos respectivos arquivos <em>variables.tf</em>.</p>
 <p><strong>C</strong>omeçando pelo <em>variables.tf</em> do projeto <strong>webserver</strong>, alteraremos apenas a variável de tags, que agora ficará assim:</p>
-<div class="code-block open" style="counter-reset: code-block -1">
+<div class="code-block" style="counter-reset: code-block -1">
     <div class="code-header language-py">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -705,7 +706,7 @@
 
 <p><strong>A</strong>lteramos apenas o nome da instância para <em>Ubuntu-webserver</em> e adicionamos uma tag para o <em>projeto</em>.</p>
 <p><strong>A</strong>gora faremos algo similar no arquivo <em>variables.tf</em> do projeto <strong>db</strong>, ficando assim:</p>
-<div class="code-block open" style="counter-reset: code-block -1">
+<div class="code-block" style="counter-reset: code-block -1">
     <div class="code-header language-py">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -813,5 +814,57 @@
         <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="Ver comentários">
                 <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@5.20.2/dist/lite/builds/browser.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"algoliaAppID":"","algoliaIndex":"","algoliaSearchKey":"","highlightTag":"em","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script src="https://marcelokalib.disqus.com/embed.js" defer></script><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="/lib/lunr/lunr.stemmer.support.min.js"></script><script src="/lib/lunr/lunr.pt.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"pt","maxResultLength":10,"noResultsFound":"Nenhum resultado encontrado","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body>
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var searchIndex;
+
+        fetch('/lunr.json')
+            .then(response => response.json())
+            .then(data => {
+                searchIndex = lunr(function () {
+                    this.field('title');
+                    this.field('content');
+                    this.field('tags');
+                    this.ref('uri');
+
+                    data.forEach(doc => {
+                        this.add(doc);
+                    });
+                });
+            });
+
+        function performSearch(query) {
+            if (searchIndex) {
+                var results = searchIndex.search(query);
+                displayResults(results);
+            }
+        }
+
+        function displayResults(results) {
+            var resultsContainer = document.getElementById('search-results');
+            resultsContainer.innerHTML = '';
+            results.forEach(result => {
+                var item = document.createElement('div');
+                item.innerHTML = `<a href="${result.ref}">${result.ref}</a>`;
+                resultsContainer.appendChild(item);
+            });
+        }
+
+        var searchInputDesktop = document.getElementById('search-input-desktop');
+        if (searchInputDesktop) {
+            searchInputDesktop.addEventListener('input', function() {
+                performSearch(searchInputDesktop.value);
+            });
+        }
+
+        var searchInputMobile = document.getElementById('search-input-mobile');
+        if (searchInputMobile) {
+            searchInputMobile.addEventListener('input', function() {
+                performSearch(searchInputMobile.value);
+            });
+        }
+    });
+</script>

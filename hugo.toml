@@ -61,3 +61,13 @@ disqusShortname = "marcelokalib"
     [params.page.comment.disqus]
       enable = true
       shortname = "marcelokalib"
+
+# Search config
+[params.search]
+  enable = true
+  # type of search engine ["lunr", "algolia"]
+  type = "lunr"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  page = ["HTML"]

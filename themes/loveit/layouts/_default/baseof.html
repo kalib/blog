@@ -11,6 +11,7 @@
         {{- partial "head/meta.html" . -}}
         {{- partial "head/link.html" . -}}
         {{- partial "head/seo.html" . -}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
     </head>
     <body data-header-desktop="{{ .Site.Params.header.desktopMode }}" data-header-mobile="{{ .Site.Params.header.mobileMode }}">
         {{- /* Check theme isDark before body rendering */ -}}
@@ -59,3 +60,55 @@
         {{- partial "assets.html" . -}}
     </body>
 </html>
+<!-- Script to load Lunr index and handle search -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var searchIndex;
+
+        fetch('/lunr.json')
+            .then(response => response.json())
+            .then(data => {
+                searchIndex = lunr(function () {
+                    this.field('title');
+                    this.field('content');
+                    this.field('tags');
+                    this.ref('uri');
+
+                    data.forEach(doc => {
+                        this.add(doc);
+                    });
+                });
+            });
+
+        function performSearch(query) {
+            if (searchIndex) {
+                var results = searchIndex.search(query);
+                displayResults(results);
+            }
+        }
+
+        function displayResults(results) {
+            var resultsContainer = document.getElementById('search-results');
+            resultsContainer.innerHTML = '';
+            results.forEach(result => {
+                var item = document.createElement('div');
+                item.innerHTML = `<a href="${result.ref}">${result.ref}</a>`;
+                resultsContainer.appendChild(item);
+            });
+        }
+
+        var searchInputDesktop = document.getElementById('search-input-desktop');
+        if (searchInputDesktop) {
+            searchInputDesktop.addEventListener('input', function() {
+                performSearch(searchInputDesktop.value);
+            });
+        }
+
+        var searchInputMobile = document.getElementById('search-input-mobile');
+        if (searchInputMobile) {
+            searchInputMobile.addEventListener('input', function() {
+                performSearch(searchInputMobile.value);
+            });
+        }
+    });
+</script>
