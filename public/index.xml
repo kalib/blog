@@ -4,9 +4,17 @@
         <link>//blog.marcelocavalcante.net:1313/</link>
         <description>Marcelo Cavalcante</description>
         <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
-            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Sun, 17 Dec 2023 11:51:33 -0500</lastBuildDate>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Sat, 25 Oct 2025 12:27:17 -0400</lastBuildDate>
             <atom:link href="//blog.marcelocavalcante.net:1313/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Goroutines - O que são e como utilizar</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/go-routines-o-que-sao-e-como-utilizar/</link>
+    <pubDate>Sat, 25 Oct 2025 12:27:17 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/go-routines-o-que-sao-e-como-utilizar/</guid>
+    <description><![CDATA[<p>Uma das características mais poderosas da linguagem <a href="https://go.dev/" target="_blank" rel="noopener noreffer ">Go</a> é seu modelo de concorrência nativo, centrado no conceito de <strong>goroutines</strong>. Enquanto outras linguagens dependem de bibliotecas externas ou de complexos sistemas de threads do sistema operacional, Go traz a concorrência como cidadã de primeira classe.</p>]]></description>
+</item>
+<item>
     <title>Criando Funções Lambda Facilmente Com O Framework Serverless</title>
     <link>//blog.marcelocavalcante.net:1313/posts/criando-funcoes-lambda-facilmente-com/</link>
     <pubDate>Sun, 17 Dec 2023 11:51:33 -0500</pubDate>
@@ -77,14 +85,6 @@
     <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
     <guid>//blog.marcelocavalcante.net:1313/posts/terraform-modules-porque-e-como/</guid>
     <description><![CDATA[<p>Todos sabem que o Terraform é uma solucão fantástica para criar infraestrutura através de código, porém nem todos utilizam as diversas possibilidades do mesmo, como por exemplos módulos. Com módulos podemos fazer a reutilização de código para nossa infraestrutura.</p>]]></description>
-</item>
-<item>
-    <title>Terraform Modules: Porquê E Como Trabalhar Com Módulos No Terraform - PARTE 1</title>
-    <link>//blog.marcelocavalcante.net:1313/posts/terraform-modules-porque-e-comop1/</link>
-    <pubDate>Fri, 17 May 2019 20:01:40 -0400</pubDate>
-    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
-    <guid>//blog.marcelocavalcante.net:1313/posts/terraform-modules-porque-e-comop1/</guid>
-    <description><![CDATA[<p><strong>T</strong>odos sabem o quão fantástico o Terraform é quando o assunto é criar infraestrutura de forma automática e através de código, a chamada IaC ou Infraestrutura como Código <em>(Infrastructure as Code)</em>. No entanto, nem todos se utilizam de todos os recursos ou funcionalidades que o Terraform nos disponibiliza para tornar nossa vida ainda mais fácil e nosso código mais organizado.</p>]]></description>
 </item>
 </channel>
 </rss>

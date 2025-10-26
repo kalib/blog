@@ -294,7 +294,7 @@
 <p><strong>N</strong>este arquivo temos todas as definições necessárias para criarmos o cluster, incluindo a quantidade de nodes que desejamos em nosso pool (2), as configurações de rede (vpc e subrede), as quais serão criadas em outro arquivo, o tamanho ou tipo de instância que utilizaremos para os nodes, etc.</p>
 <p><strong>N</strong>este arquivo utilizei o parâmetro <em>sensitive</em> para proteger algumas informações. Falaremos sobre ele adiante, mas basicamente ele nos ajuda a ocultar informações em nosso plan/apply.</p>
 <p><strong>A</strong>gora que temos nossa definicão de cluster, o próximo passo é criarmos as definições de vpc. Utilizaremos um arquivo chamado <em>vpc.tf</em>:</p>
-<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
     <div class="code-header language-go">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -329,7 +329,7 @@
 <p><strong>B</strong>asicamente estamos criando uma vpc e uma subrede com faixa de ip 10.10.0.0/24, a qual será utilizada para a criação do nosso cluster.</p>
 <p><strong>A</strong>gora já temos todos os recusos necessários para o nosso cluster. A única coisa que iremos adicionar será um arquivo com alguns outputs ou saídas que nos serão úteis para, por exemplo, identificarmos nosso cluster, região, projeto no GCP, etc.</p>
 <p><strong>C</strong>riaremos o arquivo <em>outputs.tf</em> com o seguinte conteúdo:</p>
-<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
     <div class="code-header language-go">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -381,7 +381,7 @@
 </span></span><span class="line"><span class="cl">- versions.tf
 </span></span><span class="line"><span class="cl">- vpc.tf</span></span></code></pre></div></div>
 <p><strong>P</strong>rimeiramente executamos <em>terraform init</em>, para que possamos iniciar nosso projeto terraformn atual, baixar os providers necessários e inicializar o nosso status:</p>
-<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
     <div class="code-header language-bash">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>

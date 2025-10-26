@@ -4,7 +4,15 @@
         <link>//blog.marcelocavalcante.net:1313/tags/golang/</link>
         <description>Golang - Tag - Marcelo Cavalcante Rocha</description>
         <generator>Hugo -- gohugo.io</generator><language>pt-BR</language><managingEditor>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</managingEditor>
-            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Sun, 27 Jun 2021 14:38:00 -0400</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/golang/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</webMaster><lastBuildDate>Sat, 25 Oct 2025 12:27:17 -0400</lastBuildDate><atom:link href="//blog.marcelocavalcante.net:1313/tags/golang/" rel="self" type="application/rss+xml" /><item>
+    <title>Goroutines - O que são e como utilizar</title>
+    <link>//blog.marcelocavalcante.net:1313/posts/go-routines-o-que-sao-e-como-utilizar/</link>
+    <pubDate>Sat, 25 Oct 2025 12:27:17 -0400</pubDate>
+    <author>marcelo@marcelocavalcante.net (Marcelo Cavalcante)</author>
+    <guid>//blog.marcelocavalcante.net:1313/posts/go-routines-o-que-sao-e-como-utilizar/</guid>
+    <description><![CDATA[<p>Uma das características mais poderosas da linguagem <a href="https://go.dev/" target="_blank" rel="noopener noreffer ">Go</a> é seu modelo de concorrência nativo, centrado no conceito de <strong>goroutines</strong>. Enquanto outras linguagens dependem de bibliotecas externas ou de complexos sistemas de threads do sistema operacional, Go traz a concorrência como cidadã de primeira classe.</p>]]></description>
+</item>
+<item>
     <title>Criando Uma Lambda Function Com Golang Que Interage Com S3 Buckets</title>
     <link>//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/</link>
     <pubDate>Sun, 27 Jun 2021 14:38:00 -0400</pubDate>

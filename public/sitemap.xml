@@ -2,24 +2,27 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
+            <loc>//blog.marcelocavalcante.net:1313/categories/</loc><lastmod>2025-10-25T12:27:17-04:00</lastmod></url><url>
+            <loc>//blog.marcelocavalcante.net:1313/tags/golang/</loc><lastmod>2025-10-25T12:27:17-04:00</lastmod></url><url>
+            <loc>//blog.marcelocavalcante.net:1313/tags/google/</loc><lastmod>2025-10-25T12:27:17-04:00</lastmod></url><url>
+            <loc>//blog.marcelocavalcante.net:1313/tags/goroutines/</loc><lastmod>2025-10-25T12:27:17-04:00</lastmod></url><url>
+            <loc>//blog.marcelocavalcante.net:1313/posts/go-routines-o-que-sao-e-como-utilizar/</loc><lastmod>2025-10-25T12:27:17-04:00</lastmod></url><url>
+            <loc>//blog.marcelocavalcante.net:1313/</loc><lastmod>2025-10-25T12:27:17-04:00</lastmod></url><url>
+            <loc>//blog.marcelocavalcante.net:1313/posts/</loc><lastmod>2025-10-25T12:27:17-04:00</lastmod></url><url>
+            <loc>//blog.marcelocavalcante.net:1313/tags/</loc><lastmod>2025-10-25T12:27:17-04:00</lastmod></url><url>
+            <loc>//blog.marcelocavalcante.net:1313/categories/tutoriais/</loc><lastmod>2025-10-25T12:27:17-04:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/tags/aws/</loc><lastmod>2023-12-17T11:51:33-05:00</lastmod></url><url>
-            <loc>//blog.marcelocavalcante.net:1313/categories/</loc><lastmod>2023-12-17T11:51:33-05:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/tags/cloud/</loc><lastmod>2023-12-17T11:51:33-05:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/tags/cloudformation/</loc><lastmod>2023-12-17T11:51:33-05:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/posts/criando-funcoes-lambda-facilmente-com/</loc><lastmod>2023-12-17T11:51:33-05:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/tags/devops/</loc><lastmod>2023-12-17T11:51:33-05:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/tags/lambda/</loc><lastmod>2023-12-17T11:51:33-05:00</lastmod></url><url>
-            <loc>//blog.marcelocavalcante.net:1313/</loc><lastmod>2023-12-17T11:51:33-05:00</lastmod></url><url>
-            <loc>//blog.marcelocavalcante.net:1313/posts/</loc><lastmod>2023-12-17T11:51:33-05:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/tags/python/</loc><lastmod>2023-12-17T11:51:33-05:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/tags/serverless/</loc><lastmod>2023-12-17T11:51:33-05:00</lastmod></url><url>
-            <loc>//blog.marcelocavalcante.net:1313/tags/</loc><lastmod>2023-12-17T11:51:33-05:00</lastmod></url><url>
-            <loc>//blog.marcelocavalcante.net:1313/categories/tutoriais/</loc><lastmod>2023-12-17T11:51:33-05:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/posts/criando-infraestrutura-no-aws-com/</loc><lastmod>2022-03-12T20:12:54-05:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/tags/sceptre/</loc><lastmod>2022-03-12T20:12:54-05:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/posts/criando-uma-lambda-function-com/</loc><lastmod>2021-06-27T14:38:00-04:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/tags/go/</loc><lastmod>2021-06-27T14:38:00-04:00</lastmod></url><url>
-            <loc>//blog.marcelocavalcante.net:1313/tags/golang/</loc><lastmod>2021-06-27T14:38:00-04:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/tags/microservices/</loc><lastmod>2021-06-27T14:38:00-04:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/tags/containers/</loc><lastmod>2021-05-15T18:39:51-04:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/posts/criando-um-cluster-kubernetes-no/</loc><lastmod>2021-05-15T18:39:51-04:00</lastmod></url><url>
@@ -166,7 +169,6 @@
             <loc>//blog.marcelocavalcante.net:1313/posts/parabens-dia-do-administrador-de/</loc><lastmod>2010-07-30T09:56:00-05:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/posts/recomendacao-bibliografica-o-simbolo-perdido/</loc><lastmod>2010-07-27T10:00:00-05:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/tags/android/</loc><lastmod>2010-07-20T14:32:05-05:00</lastmod></url><url>
-            <loc>//blog.marcelocavalcante.net:1313/tags/google/</loc><lastmod>2010-07-20T14:32:05-05:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/posts/que-tal-testar-o-android/</loc><lastmod>2010-07-20T14:32:05-05:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/posts/simples-solucao-de-backup-sbackup/</loc><lastmod>2010-07-15T14:44:33-05:00</lastmod></url><url>
             <loc>//blog.marcelocavalcante.net:1313/posts/recomendacao-bibliografica-do-mes-a/</loc><lastmod>2010-06-23T15:01:42-05:00</lastmod></url><url>
