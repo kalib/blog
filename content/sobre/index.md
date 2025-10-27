@@ -28,6 +28,8 @@ Embora trabalhe para uma empresa de Hanover, atualmente resido em **Barrie**, um
 
 Apaixonado por bons vinhos e cervejas mas, acima de tudo, por minha linda companheira que insiste em transformar meu mundo em algo mais alegre e atrativo.
 
+![Marcelo_e_Debora](/images/kalib_debby_bw1.png "Marcelo e Débora")
+
 ### Tecnologias
 
 ##### Programação
@@ -47,6 +49,9 @@ Apaixonado por bons vinhos e cervejas mas, acima de tudo, por minha linda compan
 ##### SRE/DevOps
 
 * ![Kubernetes](images/icons-kubernetes.png) Kubernetes
+* ![Helm](images/icons-helm.png) Helm
+* ![Git](images/icons-git.png) Git
+* ![Gitlab](images/icons-gitlab.png) Gitlab
 * ![Docker](images/icons-docker.png) Docker
 * ![Terraform](images/icons-terraform.png) Hashicorp Terraform
 * ![Hashicorp](images/icons-hashicorp.png) Hashicorp Packer
@@ -56,4 +61,10 @@ Apaixonado por bons vinhos e cervejas mas, acima de tudo, por minha linda compan
 * ![Prometheus](images/icons-prometheus.png) Prometheus
 * ![Elastic](images/icons-elastic.png) ElasticSearch
 * ![Jenkins](images/icons-jenkins.png) Jenkins
+* ![CircleCI](images/icons-circleci.png) CircleCI
 * ![Grafana](images/icons-grafana.png) Grafana
+* ![Kibana](images/icons-kibana.png) Kibana
+* ![Kafka](images/icons-kafka.png) Kafka
+* ![MariaDB](images/icons-mariadb.png) Mariadb
+* ![PostgreSQL](images/icons-postgresql.png) PostgreSQL
+* ![MongoDB](images/icons-mongodb.png) MongoDB
