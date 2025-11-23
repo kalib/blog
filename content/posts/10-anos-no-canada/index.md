@@ -1,6 +1,6 @@
 ---
 title: "10 Anos morando e trabalhando com tecnologia no Canadá - Quais as diferenças em relação ao Brasil"
-date: 2025-11-09T13:45:05-05:00
+date: 2025-11-23T13:45:05-05:00
 draft: false
 tags: [
 "Brasil",
